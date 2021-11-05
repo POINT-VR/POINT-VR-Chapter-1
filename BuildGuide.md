@@ -11,5 +11,7 @@
 8.) Build
 9.) Build and Run if Quest is connect via USB?
 
+To get it to run on the Oculus Device will most likely require sideloading the .apk file onto the Oculus Device. And with the Oculus device in developer mode, one should find the apk file in the unknown sources area and should be able to open it.
+
 Side Notes:
 1.) Make sure in Project Settings, under XR Management, that Oculus support is enabled.
