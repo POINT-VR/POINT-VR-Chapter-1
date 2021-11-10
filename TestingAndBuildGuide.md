@@ -1,7 +1,7 @@
 # How to get a device
 
 ## The IDEA Lab
-Any student can borrow a quest from the IDEA Lab. Here is the link to request equipment:  https://uiuc.libcal.com/equipment?lid=5488
+Any student can borrow a quest from the IDEA Lab. Here is the link to request equipment:  https://uiuc.libcal.com/equipment?lid=5488  
 The IDEA Lab also has computers, Oculus Rifts, and Oculus Quests available.
 
 # Building Guide for Unity and Oculus Devices. How to create the APK file.
