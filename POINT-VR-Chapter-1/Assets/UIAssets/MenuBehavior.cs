@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class MenuBehavior : MonoBehaviour
 {
 
@@ -15,10 +16,19 @@ public class MenuBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var board = Keyboard.current;
-        if (board == null)
+        var left = UnityEngine.InputSystem.XR.XRController.leftHand;
+        if (left == null)
+        {
             return;
-        if (board.spaceKey.isPressed)
+        }
+        /*       var board = Keyboard.current;
+               if (board == null)
+               {
+                   return;
+               }
+               if (board.spaceKey.isPressed)
+       */
+        if (left.IsPressed())
         {
             if (transform.position.y < 50) {
                 transform.Translate(Vector3.up * 150); 
