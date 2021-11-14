@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 
 public class MenuBehavior : MonoBehaviour
 {
-    public List<UnityEngine.XR.InputDevice> leftHandedControllers = new();
+    public List<UnityEngine.XR.InputDevice> leftHandedControllers;
     public UnityEngine.XR.InputDevice left;
                                // Start is called before the first frame update
     void Start()
     {
-        var desiredCharacteristics = UnityEngine.XR.InputDeviceCharacteristics.HeldInHand | UnityEngine.XR.InputDeviceCharacteristics.Left | UnityEngine.XR.InputDeviceCharacteristics.Controller;
+        UnityEngine.XR.InputDeviceCharacteristics desiredCharacteristics = UnityEngine.XR.InputDeviceCharacteristics.HeldInHand | UnityEngine.XR.InputDeviceCharacteristics.Left | UnityEngine.XR.InputDeviceCharacteristics.Controller;
         UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(desiredCharacteristics, leftHandedControllers);
         left = leftHandedControllers[0];
     }
