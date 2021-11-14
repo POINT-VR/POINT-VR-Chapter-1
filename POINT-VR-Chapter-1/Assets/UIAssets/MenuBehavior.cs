@@ -16,27 +16,28 @@ public class MenuBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var left = UnityEngine.InputSystem.XR.XRController.leftHand;
-        if (left == null)
-        {
-            return;
-        }
-     /*          var board = Keyboard.current;
+       /* 
+                var board = Keyboard.current;
                if (board == null)
                {
                    return;
                }
                if (board.spaceKey.isPressed)
-     */  
+     */
+        var left = UnityEngine.InputSystem.XR.XRController.leftHand;
+        if (left == null)
+        {
+            return;
+        }
         if (left.IsPressed())
         {
-            if (transform.position.y < -150) {
+            if (transform.position.y < 0) {
                 transform.Translate(Vector3.up * 150); 
             }
         }
         else
         {
-            if (transform.position.y > -300)
+            if (transform.position.y > -100)
             {
                 transform.Translate(Vector3.up * -150);
             }
