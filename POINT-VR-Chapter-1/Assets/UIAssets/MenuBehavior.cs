@@ -21,16 +21,16 @@ public class MenuBehavior : MonoBehaviour
         {
             return;
         }
-        /*       var board = Keyboard.current;
+     /*          var board = Keyboard.current;
                if (board == null)
                {
                    return;
                }
                if (board.spaceKey.isPressed)
-       */
+     */  
         if (left.IsPressed())
         {
-            if (transform.position.y < 50) {
+            if (transform.position.y < -150) {
                 transform.Translate(Vector3.up * 150); 
             }
         }
