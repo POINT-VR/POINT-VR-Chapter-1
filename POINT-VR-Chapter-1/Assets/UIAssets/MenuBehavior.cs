@@ -6,33 +6,32 @@ using UnityEngine.InputSystem;
 
 public class MenuBehavior : MonoBehaviour
 {
-
-    // Start is called before the first frame update
+    public List<UnityEngine.XR.InputDevice> leftHandedControllers = new();
+    public UnityEngine.XR.InputDevice left;
+                               // Start is called before the first frame update
     void Start()
     {
-
+        var desiredCharacteristics = UnityEngine.XR.InputDeviceCharacteristics.HeldInHand | UnityEngine.XR.InputDeviceCharacteristics.Left | UnityEngine.XR.InputDeviceCharacteristics.Controller;
+        UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(desiredCharacteristics, leftHandedControllers);
+        left = leftHandedControllers[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-       /* 
-                var board = Keyboard.current;
-               if (board == null)
-               {
-                   return;
-               }
-               if (board.spaceKey.isPressed)
-     */
-        var left = UnityEngine.InputSystem.XR.XRController.leftHand;
-        if (left == null)
+        /* 
+                 var board = Keyboard.current;
+                if (board == null)
+                {
+                    return;
+                }
+                if (board.spaceKey.isPressed)
+      */
+        if (left.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out bool triggerValue) && triggerValue)
         {
-            return;
-        }
-        if (left.IsPressed())
-        {
-            if (transform.position.y < 0) {
-                transform.Translate(Vector3.up * 150); 
+            if (transform.position.y < 0)
+            {
+                transform.Translate(Vector3.up * 150);
             }
         }
         else
