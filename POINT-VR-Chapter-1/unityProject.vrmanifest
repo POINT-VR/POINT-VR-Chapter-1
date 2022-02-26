@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.pointvrchapter1.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\Roger\\Desktop\\POINT-VR-Chapter-1\\POINT-VR-Chapter-1\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "POINT-VR-Chapter-1 [Testing]"
+        }
+      }
+    }
+  ]
+}
