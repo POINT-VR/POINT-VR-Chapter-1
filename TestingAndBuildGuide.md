@@ -36,24 +36,3 @@ Other Guides: https://uploadvr.com/sideloading-quest-how-to/ , https://sidequest
 3.) If on a Windows PC, download the Oculus Drivers: https://developer.oculus.com/downloads/package/oculus-go-adb-drivers/.   
 4.) Connect Quest headset to via USB cable  
 5.) Once the Quest is connected to your PC or phone, enable Developer Mode and reboot the device  
-
-# How to test Unity project with Oculus Quest 2 and Virtual Display
-For those who have already purchased Virtual Display and wanted to test a project wirelessly.  
-This only works for Windows.  
-Refer to this thread for more information: https://forum.unity.com/threads/unity-editor-and-virtual-desktop.881449/#post-6422274  
-
-1.) Install SteamVR (if you have not)  
-2.) Also install SideQuest and Virtual Display on your PC  
-3.) Locate your Virtual Desktop folder (it should look similar to this: C:\Program Files\Virtual Desktop Streamer\VirtualDesktop.Streamer.exe)  
-4.) Locate your Unity Editor folder (it should look similar to this: C:\Program Files\Unity\Hub\Editor\2019.4.20f1\Editor\Unity.exe)  
-5.) Locate your POINT-VR Project folder. (it should look similar to this: C:\Users\POINT-VR-Chapter-1)  
-**WARNING:** It is **VERY** important that your project folder location does not contain any whitespace. Otherwise it would not work. If your location happens to have whitespace in it (such as C:\Users\Your Name\POINT-VR-Chapter-1), I suggest moving POINT-VR-Chapter-1 folder to C:\Users.  
-6.) Open Command Prompt and type in your command with the following syntax: "Virtual Dekstop Streamer Exe Path" "Unity Editor executable path" -projectpath "Unity project path -useHub -hubIPC -cloudEnvironment production"  
-  So your command should look something like this: 
-```
-"C:\Program Files\Virtual Desktop Streamer\VirtualDesktop.Streamer.exe" "C:\Program Files\Unity\Hub\Editor\2019.4.20f1\Editor\Unity.exe" -projectpath "C:\Users\POINT-VR-Chapter-1 -useHub -hubIPC -cloudEnvironment production"
-```
-  It should open the Unity project directly. If it opens the Unity Hub, then you did something wrong.  
-7.) Open Virtual Desktop in your Quest 2 and launch SteamVR.  
-8.) Hit play in your Unity project and begin testing. 
-  
