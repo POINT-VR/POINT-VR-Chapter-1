@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 
 public class ToggleBehavior : MonoBehaviour
 {
+    public bool visibleOnStart;
     public InputActionReference toggleReference = null;
     private void Start()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(visibleOnStart);
     }
     private void Awake()
     {
