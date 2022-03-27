@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -472,14 +472,16 @@ MonoBehaviour:
       m_Calls: []
   m_SelectActionTrigger: 0
   m_HideControllerOnSelect: 0
-  m_PlayAudioClipOnSelectEntered: 0
-  m_AudioClipForOnSelectEntered: {fileID: 0}
-  m_PlayAudioClipOnSelectExited: 0
-  m_AudioClipForOnSelectExited: {fileID: 0}
-  m_PlayAudioClipOnHoverEntered: 1
+  m_PlayAudioClipOnSelectEntered: 1
+  m_AudioClipForOnSelectEntered: {fileID: 8300000, guid: 4e2e74504a83fbd438147cfda37cf3d0,
+    type: 3}
+  m_PlayAudioClipOnSelectExited: 1
+  m_AudioClipForOnSelectExited: {fileID: 8300000, guid: aa9e211c83b607f479bd7772eb56a98c,
+    type: 3}
+  m_PlayAudioClipOnHoverEntered: 0
   m_AudioClipForOnHoverEntered: {fileID: 8300000, guid: 918ee1b51fd32d748a66d520586569ba,
     type: 3}
-  m_PlayAudioClipOnHoverExited: 1
+  m_PlayAudioClipOnHoverExited: 0
   m_AudioClipForOnHoverExited: {fileID: 8300000, guid: d53053a416c413d40ae35d3b3d2c8277,
     type: 3}
   m_PlayHapticsOnSelectEntered: 0
@@ -1135,14 +1137,18 @@ MonoBehaviour:
       m_Calls: []
   m_SelectActionTrigger: 0
   m_HideControllerOnSelect: 0
-  m_PlayAudioClipOnSelectEntered: 0
-  m_AudioClipForOnSelectEntered: {fileID: 0}
-  m_PlayAudioClipOnSelectExited: 0
-  m_AudioClipForOnSelectExited: {fileID: 0}
+  m_PlayAudioClipOnSelectEntered: 1
+  m_AudioClipForOnSelectEntered: {fileID: 8300000, guid: 4e2e74504a83fbd438147cfda37cf3d0,
+    type: 3}
+  m_PlayAudioClipOnSelectExited: 1
+  m_AudioClipForOnSelectExited: {fileID: 8300000, guid: aa9e211c83b607f479bd7772eb56a98c,
+    type: 3}
   m_PlayAudioClipOnHoverEntered: 0
-  m_AudioClipForOnHoverEntered: {fileID: 0}
+  m_AudioClipForOnHoverEntered: {fileID: 8300000, guid: 918ee1b51fd32d748a66d520586569ba,
+    type: 3}
   m_PlayAudioClipOnHoverExited: 0
-  m_AudioClipForOnHoverExited: {fileID: 0}
+  m_AudioClipForOnHoverExited: {fileID: 8300000, guid: d53053a416c413d40ae35d3b3d2c8277,
+    type: 3}
   m_PlayHapticsOnSelectEntered: 0
   m_HapticSelectEnterIntensity: 0
   m_HapticSelectEnterDuration: 0
