@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="439"
+   height="195"
+   viewBox="0 0 116.15208 51.593751"
+   version="1.1"
+   id="svg8">
+  <defs
+     id="defs2">
+    <rect
+       x="6.9490077"
+       y="6.0135644"
+       width="102.76513"
+       height="39.689525"
+       id="rect840" />
+  </defs>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke:#91d836;stroke-width:0.202202;stroke-opacity:0.638614"
+       id="rect833"
+       width="116.29121"
+       height="51.538448"
+       x="-0.018979764"
+       y="0.096798763" />
+    <rect
+       style="fill:#ffffff;stroke:#91d836;stroke-width:0.218326;stroke-opacity:0.638614"
+       id="rect835"
+       width="110.23502"
+       height="45.910286"
+       x="3.1651711"
+       y="2.9666862" />
+  </g>
+  <g
+     id="layer2">
+    <text
+       xml:space="preserve"
+       id="text838"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:0;font-family:sans-serif;white-space:pre;shape-inside:url(#rect840);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="translate(0,1.3363477)"
+       x="50.123734"
+       y="0"><tspan
+         x="7.9260043"
+         y="15.02547"><tspan
+           dx="0 0 0 0 0 0.1852068 -0.18520689 0 0 0.18520871 -0.1852088 0 0 0 0 0.18520918 -0.18520498 0 0 0.18521109"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;letter-spacing:-0.357188px;word-spacing:-0.185208px;text-anchor:middle">Point and press the </tspan></tspan><tspan
+         x="10.373952"
+         y="27.372695"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0.18520632 -0.1852088 0 0 0 0 0 0.18520632"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;letter-spacing:-0.357188px;word-spacing:-0.185208px;text-anchor:middle">locomotion button </tspan></tspan><tspan
+         x="13.312067"
+         y="39.71992"><tspan
+           dx="0 0 0.18520871 -0.1852088 0 0 0 0.18520728 -0.1852088"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;letter-spacing:-0.357188px;word-spacing:-0.185208px;text-anchor:middle">to move forward.</tspan></tspan></text>
+  </g>
+</svg>
