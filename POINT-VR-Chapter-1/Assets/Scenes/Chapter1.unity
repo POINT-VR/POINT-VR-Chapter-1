@@ -5353,7 +5353,7 @@ MonoBehaviour:
   m_SmoothMovement: 0
   m_FollowTightness: 10
   m_SnapThresholdDistance: 10
-  m_Reticle: {fileID: 0}
+  m_Reticle: {fileID: 125956, guid: 73ac470d3d909d645a6c89a4664b6849, type: 3}
   m_StopLineAtFirstRaycastHit: 1
 --- !u!120 &1814658392
 LineRenderer:
