@@ -2,15 +2,15 @@
 
 ## Building for the First Time
 
-1 ) Open Unity Hub
-2 ) Go to Installs
-3 ) Go to version 2019.4.20f1, the version used for our project
-4 ) Add modules
-5 ) Make sure that Android Build Support is checked
-6 ) Expand the dropdown under Android Build Support
-7 ) Ensure that Android SDK & NDK Tools and OpenJDK are checked
-8 ) Install these if necessary
-9 ) Open the project in the editor
+1) Open Unity Hub
+2) Go to Installs
+3) Go to version 2019.4.20f1, the version used for our project
+4) Add modules
+5) Make sure that Android Build Support is checked
+6) Expand the dropdown under Android Build Support
+7) Ensure that Android SDK & NDK Tools and OpenJDK are checked
+8) Install these if necessary
+9) Open the project in the editor
 10) Open Build Settings (File->Build Settings...)
 11) Under Platform, select Android
 12) Click the button on the bottom right of the build window to Switch Platform
