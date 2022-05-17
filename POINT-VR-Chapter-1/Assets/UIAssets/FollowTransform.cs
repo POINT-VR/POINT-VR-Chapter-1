@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class FollowTransform : MonoBehaviour
 {
+    /// <summary>
+    /// The GameObject that this will be oriented towards.
+    /// </summary>
     [SerializeField] private Transform lookAt;
+    /// <summary>
+    /// The GameObject that this will be transformed towards.
+    /// </summary>
     [SerializeField] private Transform transformToFollow;
+    /// <summary>
+    /// The speed that this follows at.
+    /// </summary>
     [SerializeField] private float followSpeed;
     private Transform _thisTransform;
     void Start()
@@ -13,7 +22,9 @@ public class FollowTransform : MonoBehaviour
         _thisTransform = transform;
     }
 
-
+    /// <summary>
+    /// Every update, this faces and transforms the UI.
+    /// </summary>
     void Update()
     {
         _thisTransform.LookAt(lookAt, Vector3.up);

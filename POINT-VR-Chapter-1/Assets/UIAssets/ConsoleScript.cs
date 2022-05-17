@@ -12,6 +12,9 @@ public class ConsoleScript : MonoBehaviour
     {
         objectToMutate.text = startingText + '\n';
     }
+    /// <summary>
+    /// Public function that can append a string to the console.
+    /// </summary>
     public void Log(string s)
     {
         objectToMutate.text = objectToMutate.text.Clone() + s + '\n';

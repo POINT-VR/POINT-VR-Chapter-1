@@ -13,7 +13,6 @@ public class ToggleBehavior : MonoBehaviour
     {
         toggleReference.action.started += Toggle;
     }
-
     private void Toggle(InputAction.CallbackContext ctx)
     {
         bool isActive = !gameObject.activeSelf;
