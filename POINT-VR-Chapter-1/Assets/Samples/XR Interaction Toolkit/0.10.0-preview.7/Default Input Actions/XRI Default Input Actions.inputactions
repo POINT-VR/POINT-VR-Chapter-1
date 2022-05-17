@@ -99,6 +99,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "UI Menu",
+                    "type": "Button",
+                    "id": "6f655872-eeb6-4bff-b11a-2a2c94ef63c8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Haptic Device",
                     "type": "PassThrough",
                     "id": "664a62b0-e178-421d-b3f8-014eec01591d",
@@ -172,17 +181,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "b34c79c1-ab5e-4851-87ac-abc43705eae0",
-                    "path": "<OculusTouchController>{LeftHand}/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Generic XR Controller",
-                    "action": "UI Press",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "79634234-07c9-488b-98bd-7d83eb6895c5",
@@ -345,6 +343,28 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Haptic Device",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e410ac97-188f-4839-8971-8b2dfc916888",
+                    "path": "<OculusTouchController>{LeftHand}/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "UI Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "923bc5ba-f767-472b-879b-926ec182c290",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "UI Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
