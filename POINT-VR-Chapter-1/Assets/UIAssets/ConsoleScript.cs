@@ -14,54 +14,22 @@ public class ConsoleScript : MonoBehaviour
 
     void Start()
     {
-        objectToMutate.text = startingText + '\n';
+        Clear();
     }
     /// <summary>
     /// Public function that can append a string to the console.
     /// </summary>
-
     public void Log(string s)
     {
         objectToMutate.text = objectToMutate.text.Clone() + s + '\n';
-        // TODO: Need a way to clear the console text. If there is too much text it overfills
     }
 
-    /// Appends the current controller input to the string s
-    public void ControlInput()
+    /// <summary>
+    /// Public function that clears the console.
+    /// </summary>
+    public void Clear()
     {
-        var gamepad = Gamepad.current;
-        string s;
-
-        if (gamepad == null)
-            s = "No gamepad connected"; // No gamepad connected.
-
-        // Temp to see if it prints out to screen and how often
-        s = "Hi";
-
-        /// Get Controller Input - TODO
-
-        // Want to access XRI LeftHand  and XRI RightHand (possible XRI HMD too)
-        // via the XRI Default Input Actions.inputactions
-
-        // Breaks the system
-        //if (gamepad.rightTrigger.wasPressedThisFrame)
-        //    s = "rightTrigger";
-
-        /// Convert to readable string - TODO
-
-        /// Avoids multiple same texts from being printed to the screen
-        if (updatingText == s)
-            return;
-        else
-            updatingText = s;
-
-        // Output to Log
-        Log(updatingText);
+        objectToMutate.text = startingText + '\n';
     }
 
-    void Update()
-    {
-        // Function prints out Controller Inputs to console
-        ControlInput();
-    }
 }
