@@ -37,6 +37,9 @@ public class ConsoleScript : MonoBehaviour
 
         /// Get Controller Input - TODO
 
+        // Want to access XRI LeftHand  and XRI RightHand (possible XRI HMD too)
+        // via the XRI Default Input Actions.inputactions
+
         // Breaks the system
         //if (gamepad.rightTrigger.wasPressedThisFrame)
         //    s = "rightTrigger";
