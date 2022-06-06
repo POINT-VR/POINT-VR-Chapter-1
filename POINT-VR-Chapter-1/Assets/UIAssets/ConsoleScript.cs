@@ -32,6 +32,9 @@ public class ConsoleScript : MonoBehaviour
         var gamepad = Gamepad.current;
         string s;
 
+        if (gamepad == null)
+            s = "No gamepad connected"; // No gamepad connected.
+
         // Temp to see if it prints out to screen and how often
         s = "Hi";
 
