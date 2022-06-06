@@ -1,26 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR.Interaction.Toolkit; // Don't know if we need this package
-using UnityEngine.InputSystem;
 
 public class ConsoleScript : MonoBehaviour
 {
     public string startingText;
-    public string updatingText;
     [SerializeField]
     public Text objectToMutate;
-
+    private int lines;
     void Start()
     {
         Clear();
     }
     /// <summary>
-    /// Public function that can append a string to the console.
+    /// Public function that can append a string to the console. Clears every 7 lines.
     /// </summary>
     public void Log(string s)
     {
+        lines++;
+        if (lines % 7 == 0)
+        {
+            Clear();
+        }
         objectToMutate.text = objectToMutate.text.Clone() + s + '\n';
     }
 
@@ -29,6 +29,7 @@ public class ConsoleScript : MonoBehaviour
     /// </summary>
     public void Clear()
     {
+        lines = 1;
         objectToMutate.text = startingText + '\n';
     }
 
