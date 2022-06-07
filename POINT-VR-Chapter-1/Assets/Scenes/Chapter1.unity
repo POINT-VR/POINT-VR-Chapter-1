@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
+  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4539,7 +4539,8 @@ MonoBehaviour:
   m_InteractionLayers:
     m_Bits: 4294967295
   m_SelectMode: 0
-  m_CustomReticle: {fileID: 100006, guid: e61c6399d5478fc4bbfbdb7ccc35cca1, type: 3}
+  m_CustomReticle: {fileID: 919132149155446097, guid: 70ab84d77ebafc8408d0ac1c20a9dc06,
+    type: 3}
   m_FirstHoverEntered:
     m_PersistentCalls:
       m_Calls: []
