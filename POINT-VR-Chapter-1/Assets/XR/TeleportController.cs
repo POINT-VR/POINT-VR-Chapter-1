@@ -1,20 +1,33 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System;
 
 public class TeleportController : MonoBehaviour
 {
-    public GameObject controller;
-    public GameObject teleporter;
-    public InputActionReference teleportationReference;
-    public UnityEvent teleportActivate;
-    public UnityEvent teleportCancel;
-    private void Start()
+    public InputActionReference teleportationReference, teleportCancelReference;
+    public UnityEvent teleporting;
+    public bool inTeleportMode;
+    private void OnEnable()
     {
+        teleportationReference.action.Enable();
         teleportationReference.action.performed += TeleportModeActivate;
-        teleportationReference.action.canceled += TeleportModeDeactivate;
+        teleportationReference.action.canceled += TeleportNow;
+        teleportCancelReference.action.Enable();
+        teleportCancelReference.action.started += TeleportModeCancel;
     }
-    private void TeleportModeActivate(InputAction.CallbackContext ctx) => teleportActivate.Invoke();
-    private void TeleportModeDeactivate(InputAction.CallbackContext ctx) => Invoke("Cancel", .1f);
-    void Cancel() => teleportCancel.Invoke();
+    private void OnDisable()
+    {
+        teleportationReference.action.Disable();
+        teleportationReference.action.performed -= TeleportModeActivate;
+        teleportationReference.action.canceled -= TeleportNow;
+        teleportCancelReference.action.Disable();
+        teleportCancelReference.action.started -= TeleportModeCancel;
+    }
+    private void TeleportModeActivate(InputAction.CallbackContext ctx) => inTeleportMode = true;
+    private void TeleportNow(InputAction.CallbackContext ctx) { 
+        teleporting.Invoke();
+        inTeleportMode = false;
+    }
+    private void TeleportModeCancel(InputAction.CallbackContext ctx) => inTeleportMode = false;
 }
