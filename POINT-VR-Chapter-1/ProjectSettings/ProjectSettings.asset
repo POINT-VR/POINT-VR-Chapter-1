@@ -206,6 +206,7 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 4814008871340846074, guid: 7c600385b2e0246499112b5f537d1007, type: 2}
   - {fileID: 11400000, guid: 2eac5b88f02ba704abc6cff84097461a, type: 2}
   - {fileID: 0}
@@ -265,7 +266,7 @@ PlayerSettings:
   CreateWallpaper: 0
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
-  StripUnusedMeshComponents: 1
+  StripUnusedMeshComponents: 0
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
   iOSTargetOSVersionString: 10.0
