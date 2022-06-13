@@ -795,6 +795,8 @@ MonoBehaviour:
   teleporter: {fileID: 611107130}
   teleportationReference: {fileID: 1263111715868034790, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
+  cancellationReference: {fileID: 737890489006591557, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
   teleportActivate:
     m_PersistentCalls:
       m_Calls:
@@ -2166,6 +2168,8 @@ MonoBehaviour:
   controller: {fileID: 2008835647}
   teleporter: {fileID: 1814658389}
   teleportationReference: {fileID: -8061240218431744966, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  cancellationReference: {fileID: 2307464322626738743, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   teleportActivate:
     m_PersistentCalls:
@@ -7320,7 +7324,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_SelectAction:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Select
       m_Type: 0
