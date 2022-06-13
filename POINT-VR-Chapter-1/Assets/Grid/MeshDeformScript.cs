@@ -11,7 +11,7 @@ public class MeshDeformScript : MonoBehaviour
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
-    public InputActionReference deformReference = null;
+    public InputActionReference positionReference = null;
 
     void Start()
     {
@@ -24,25 +24,15 @@ public class MeshDeformScript : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void FixedUpdate()
     {
-        deformReference.action.started += Deform;
-    }
-
-    private void Deform(InputAction.CallbackContext ctx)
-    {
-        pullingPosition = (Vector3) ctx.ReadValueAsObject();
+        pullingPosition = positionReference.action.ReadValue<Vector3>();
         for (int i = 0; i < displacedVertices.Length; i++)
         {
             UpdateVertex(i);
         }
         deformingMesh.vertices = displacedVertices;
         deformingMesh.RecalculateNormals();
-    }
-
-    private void OnDestroy()
-    {
-        deformReference.action.started -= Deform;
     }
 
     void UpdateVertex(int i)
