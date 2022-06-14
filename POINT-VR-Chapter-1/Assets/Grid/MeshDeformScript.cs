@@ -38,7 +38,7 @@ public class MeshDeformScript : MonoBehaviour
             }        
         }
         deformingMesh.vertices = displacedVertices;
-        deformingMesh.RecalculateNormals();
+    //    deformingMesh.RecalculateNormals();
     }
 
     void UpdateVertex(int i, Vector3 direction)
