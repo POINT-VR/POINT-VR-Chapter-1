@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 public class MeshDeformScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    float power = 5f;
+    public float power  = 5f; // strength of the mesh deformation
+    public float cutoff = 1f; // radius of region affected by mesh deformation
+    [SerializeField]
     Vector3 pullingPosition;
     Mesh deformingMesh;
     Vector3[] originalVertices;
@@ -29,15 +31,18 @@ public class MeshDeformScript : MonoBehaviour
         pullingPosition = positionReference.action.ReadValue<Vector3>();
         for (int i = 0; i < displacedVertices.Length; i++)
         {
-            UpdateVertex(i);
+            Vector3 direction = originalVertices[i] - pullingPosition;
+            if (direction.sqrMagnitude < cutoff)
+            {
+                UpdateVertex(i, direction);
+            }        
         }
         deformingMesh.vertices = displacedVertices;
         deformingMesh.RecalculateNormals();
     }
 
-    void UpdateVertex(int i)
+    void UpdateVertex(int i, Vector3 direction)
     {
-        Vector3 direction = originalVertices[i] - pullingPosition;
         float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude)*(direction.sqrMagnitude));
         displacedVertices[i] = direction.normalized * distance;
     }

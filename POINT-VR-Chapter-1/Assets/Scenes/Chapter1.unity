@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
+  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -314,6 +314,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 3D grid Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 655548465819431582, guid: ea96cc2f56038604fbfdc8ecfbe84317,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 655548465819431582, guid: ea96cc2f56038604fbfdc8ecfbe84317,
         type: 3}
@@ -4150,6 +4155,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162443252700387795, guid: 01c007ab9ed36d34c9bafe5a56c0baf9,
+        type: 3}
+      propertyPath: power
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162443252700387795, guid: 01c007ab9ed36d34c9bafe5a56c0baf9,
+        type: 3}
+      propertyPath: cutoff
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162443252700387795, guid: 01c007ab9ed36d34c9bafe5a56c0baf9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5162443252700387795, guid: 01c007ab9ed36d34c9bafe5a56c0baf9,
         type: 3}
