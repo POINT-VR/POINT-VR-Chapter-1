@@ -4,8 +4,6 @@ using UnityEngine.Events;
 
 public class TeleportController : MonoBehaviour
 {
-    public GameObject controller;
-    public GameObject teleporter;
     public InputActionReference teleportationReference, cancellationReference;
     public UnityEvent teleportActivate;
     public UnityEvent teleportCancel;
