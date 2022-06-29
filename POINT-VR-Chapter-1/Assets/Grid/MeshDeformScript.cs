@@ -43,7 +43,9 @@ public class MeshDeformScript : MonoBehaviour
 
     void UpdateVertex(int i, Vector3 direction)
     {
-        float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude)*(direction.sqrMagnitude));
+        float distance = 5.0f ;
+        //float distance = -(float)direction.sqrMagnitude + (float)1.0;
+        //float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude)*(direction.sqrMagnitude));
         displacedVertices[i] = direction.normalized * distance;
     }
 }
