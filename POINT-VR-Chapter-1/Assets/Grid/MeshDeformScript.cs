@@ -13,7 +13,8 @@ public class MeshDeformScript : MonoBehaviour
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
-    public InputActionReference positionReference = null;
+    public InputActionReference positionReference = null; // Controller
+    public GameObject sphereObject = null; // Sphere Mesh Deformation
 
     void Start()
     {
@@ -28,7 +29,9 @@ public class MeshDeformScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        pullingPosition = positionReference.action.ReadValue<Vector3>();
+        //pullingPosition = positionReference.action.ReadValue<Vector3>(); // Removed controller mesh deformation
+        pullingPosition = sphereObject.transform.position;
+        
         for (int i = 0; i < displacedVertices.Length; i++)
         {
             Vector3 direction = originalVertices[i] - pullingPosition;
@@ -43,9 +46,9 @@ public class MeshDeformScript : MonoBehaviour
 
     void UpdateVertex(int i, Vector3 direction)
     {
-        float distance = 5.0f ;
+        //float distance = 5.0f ;
         //float distance = -(float)direction.sqrMagnitude + (float)1.0;
-        //float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude)*(direction.sqrMagnitude));
+        float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude)*(direction.sqrMagnitude));
         displacedVertices[i] = direction.normalized * distance;
     }
 }

@@ -289,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 64981084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.3783795, y: 0.0058443192, z: 1.8653289}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 5
   m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
+  m_ThrowOnDetach: 0
   m_ThrowSmoothingDuration: 0.25
   m_ThrowSmoothingCurve:
     serializedVersion: 2
@@ -4490,6 +4490,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5162443252700387795, guid: 01c007ab9ed36d34c9bafe5a56c0baf9,
         type: 3}
+      propertyPath: sphereObject
+      value: 
+      objectReference: {fileID: 64981084}
+    - target: {fileID: 5162443252700387795, guid: 01c007ab9ed36d34c9bafe5a56c0baf9,
+        type: 3}
       propertyPath: deformReference
       value: 
       objectReference: {fileID: 3286401898038372283, guid: da2b439d1a2de5c46a4f428f8cf4fe19,
@@ -4498,8 +4503,7 @@ PrefabInstance:
         type: 3}
       propertyPath: positionReference
       value: 
-      objectReference: {fileID: -2024308242397127297, guid: c348712bda248c246b8c49b3db54643f,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5432967434579256448, guid: 01c007ab9ed36d34c9bafe5a56c0baf9,
         type: 3}
       propertyPath: m_Name
