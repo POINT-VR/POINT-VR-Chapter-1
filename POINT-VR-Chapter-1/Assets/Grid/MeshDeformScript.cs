@@ -19,7 +19,7 @@ public class MeshDeformScript : MonoBehaviour
     void Start()
     {
         deformingMesh = GetComponent<MeshFilter>().mesh;
-        originalVertices = deformingMesh.vertices;
+        originalVertices = deformingMesh.vertices; // Initializing this here might create a bug once the grid can move
         displacedVertices = new Vector3[originalVertices.Length];
         for (int i = 0; i < originalVertices.Length; i++)
         {
@@ -36,16 +36,10 @@ public class MeshDeformScript : MonoBehaviour
         {
             Vector3 direction = originalVertices[i] - pullingPosition;
 
-            // TEST: The below code should do the same as the code above
-            //Vector3 direction;
-            //direction[0] = originalVertices[i][0] - pullingPosition[0]; // x - horizontal
-            //direction[3] = originalVertices[i][2] - pullingPosition[2]; // z - horizontal
-            //direction[1] = originalVertices[i][1] - pullingPosition[1]; // vertical
-
             if (direction.sqrMagnitude < cutoff)
             {
-                // UpdateVertex(i, direction); // What mesh deformation we want to do
-                displacedVertices[i] = pullingPosition; // Test: Make the grid snap to the sphere location 
+                UpdateVertex(i, direction); // What mesh deformation we want to do
+                //displacedVertices[i] = pullingPosition; // Test: Make the grid snap to the sphere location 
             }        
             else 
             {
@@ -59,8 +53,8 @@ public class MeshDeformScript : MonoBehaviour
     void UpdateVertex(int i, Vector3 direction)
     {
         // float distance = (float)direction.sqrMagnitude;
-        direction[1] = -direction[1]; // flip the vertical direction
+        //direction[1] = -direction[1]; // flip the vertical direction
         //float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude)*(direction.sqrMagnitude));
-        displacedVertices[i] = direction.normalized * power;
+        displacedVertices[i] = direction.normalized; //* distance;
     }
 }
