@@ -38,7 +38,7 @@ public class MeshDeformScript : MonoBehaviour
 
             if (direction.sqrMagnitude < cutoff)
             {
-                UpdateVertex(i, direction); // What mesh deformation we want to do
+                UpdateVertex(i, direction, pullingPosition); // What mesh deformation we want to do
                 //displacedVertices[i] = pullingPosition; // Test: Make the grid snap to the sphere location 
             }        
             else 
@@ -50,11 +50,9 @@ public class MeshDeformScript : MonoBehaviour
         deformingMesh.RecalculateNormals();
     }
 
-    void UpdateVertex(int i, Vector3 direction)
+    void UpdateVertex(int i, Vector3 direction, Vector3 pullingPosition)
     {
-        // float distance = (float)direction.sqrMagnitude;
-        //direction[1] = -direction[1]; // flip the vertical direction
-        //float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude)*(direction.sqrMagnitude));
-        displacedVertices[i] = direction.normalized; //* distance;
+        float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude)*(direction.sqrMagnitude));
+        displacedVertices[i] = originalVertices[i] - (distance * direction);
     }
 }
