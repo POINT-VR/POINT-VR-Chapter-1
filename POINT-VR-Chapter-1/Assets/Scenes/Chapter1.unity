@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4725,7 +4725,7 @@ GameObject:
   - component: {fileID: 1337579477}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7680,11 +7680,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91616b439a36c049a504794f6c87616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transformToDeformAround: {fileID: 555405752}
   power: 2
   cutoff: 15
-  pullingPosition: {x: 0, y: 0, z: 0}
-  positionReference: {fileID: 0}
-  sphereObject: {fileID: 64981084}
+  sleepDistance: 8
 --- !u!4 &5214644479875617716
 Transform:
   m_ObjectHideFlags: 0

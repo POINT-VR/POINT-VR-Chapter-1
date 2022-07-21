@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class ConsoleScript : MonoBehaviour
 {
     public string startingText;
-    [SerializeField]
     public Text objectToMutate;
     private int lines;
     void Start()
