@@ -36,10 +36,10 @@ public class MeshDeformScript : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 pullingPosition = transformToDeformAround.position;
-        if ((gameObject.transform.position - pullingPosition).magnitude > sleepDistance)
+     /*   if ((gameObject.transform.position - pullingPosition).magnitude > sleepDistance)
         {
             return; //saves resources if the transform is too far from the mesh
-        }
+        } */
         for (int i = 0; i < displacedVertices.Length; i++)
         {
             Vector3 direction = originalVertices[i] - pullingPosition;
