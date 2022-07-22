@@ -10,11 +10,11 @@ public class MeshDeformScript : MonoBehaviour
     // <summary
     // Strength of the mesh deformation
     // </summary>
-    public float power  = 5f;
+    public float power;
     // <summary
     // Radius of region affected by mesh deformation
     // </summary>
-    public float cutoff = 1f;
+    public float cutoff;
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
