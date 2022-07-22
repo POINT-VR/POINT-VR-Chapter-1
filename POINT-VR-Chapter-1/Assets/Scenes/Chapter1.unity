@@ -7584,7 +7584,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8670656245710696111}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e91616b439a36c049a504794f6c87616, type: 3}
   m_Name: 
@@ -7592,7 +7592,6 @@ MonoBehaviour:
   transformToDeformAround: {fileID: 555405752}
   power: 5
   cutoff: 1
-  sleepDistance: 9
 --- !u!23 &2238537408855711818
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7674,7 +7673,6 @@ MonoBehaviour:
   transformToDeformAround: {fileID: 64981088}
   power: 2
   cutoff: 15
-  sleepDistance: 8
 --- !u!4 &5214644479875617716
 Transform:
   m_ObjectHideFlags: 0

@@ -15,10 +15,6 @@ public class MeshDeformScript : MonoBehaviour
     // Radius of region affected by mesh deformation
     // </summary>
     public float cutoff = 1f;
-    // <summary>
-    // The distance at which this will not attempt to deform to save resources
-    // </summary>
-    public float sleepDistance = 0f;
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
@@ -36,10 +32,6 @@ public class MeshDeformScript : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 pullingPosition = transformToDeformAround.position;
-     /*   if ((gameObject.transform.position - pullingPosition).magnitude > sleepDistance)
-        {
-            return; //saves resources if the transform is too far from the mesh
-        } */
         for (int i = 0; i < displacedVertices.Length; i++)
         {
             Vector3 direction = originalVertices[i] - pullingPosition;
