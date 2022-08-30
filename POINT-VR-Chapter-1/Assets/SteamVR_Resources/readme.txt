@@ -1,0 +1,1 @@
+This folder contains assets from the SteamVR package that we would ideally replace with our own assets soon.
