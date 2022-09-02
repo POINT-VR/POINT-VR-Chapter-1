@@ -3,24 +3,32 @@ using UnityEngine.UI;
 
 public class ConsoleScript : MonoBehaviour
 {
+    /// <summary>
+    /// What the console will reset to when it is cleared
+    /// </summary>
     public string startingText;
-    public Text objectToMutate;
+    /// <summary>
+    /// Number of lines printed until the console is wiped
+    /// </summary>
+    [SerializeField] int lineCap;
+    private Text text;
     private int lines;
     void Start()
     {
+        text = GetComponent<Text>();
         Clear();
     }
     /// <summary>
-    /// Public function that can append a string to the console. Clears every 7 lines.
+    /// Public function that can append a string to the console. Clears every lineCap lines.
     /// </summary>
     public void Log(string s)
     {
         lines++;
-        if (lines % 7 == 0)
+        if (lines % lineCap == 0)
         {
             Clear();
         }
-        objectToMutate.text = objectToMutate.text.Clone() + s + '\n';
+        text.text = text.text.Clone() + s + '\n';
     }
 
     /// <summary>
@@ -29,7 +37,7 @@ public class ConsoleScript : MonoBehaviour
     public void Clear()
     {
         lines = 1;
-        objectToMutate.text = startingText + '\n';
+        text.text = startingText + '\n';
     }
 
 }
