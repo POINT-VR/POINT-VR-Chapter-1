@@ -7,14 +7,18 @@ public class MeshDeformScript : MonoBehaviour
     // </summary>
     public Transform transformToDeformAround;
     [Header("Other Constants")]
-    // <summary
+    // <summary>
     // Strength of the mesh deformation
     // </summary>
     public float power;
-    // <summary
+    // <summary>
     // Radius of region affected by mesh deformation
     // </summary>
     public float cutoff;
+    // <summary>
+    // Mass of the object doing deformation
+    // </summary>
+    float mass = transformToDeformAround.GetComponent<Rigidbody>().mass; 
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
@@ -37,7 +41,7 @@ public class MeshDeformScript : MonoBehaviour
             Vector3 direction = originalVertices[i] - pullingPosition;
             if (direction.sqrMagnitude < cutoff)
             {
-                float distance = (power * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude) * (direction.sqrMagnitude));
+                float distance = (power * mass * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude) * (direction.sqrMagnitude));
                 displacedVertices[i] = originalVertices[i] - (distance * direction); //The mesh deforms here
             }        
             else 
