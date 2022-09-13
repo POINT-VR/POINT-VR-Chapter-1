@@ -6,6 +6,10 @@ public class MeshDeformScript : MonoBehaviour
     // We will derive the position from which to pull based on a transform present in the scene
     // </summary>
     public Transform transformToDeformAround;
+    // <summary>
+    // We will get the mass from the Rigidbody component.
+    // </summary>
+    public Rigidbody MassToDeformAround;
     [Header("Other Constants")]
     // <summary>
     // Strength of the mesh deformation
@@ -18,7 +22,8 @@ public class MeshDeformScript : MonoBehaviour
     // <summary>
     // Mass of the object doing deformation
     // </summary>
-    float mass = transformToDeformAround.GetComponent<Rigidbody>().mass; 
+    
+    float mass; 
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
@@ -27,6 +32,7 @@ public class MeshDeformScript : MonoBehaviour
         deformingMesh = GetComponent<MeshFilter>().mesh;
         originalVertices = deformingMesh.vertices;
         displacedVertices = new Vector3[originalVertices.Length];
+        mass = MassToDeformAround.mass;
         for (int i = 0; i < originalVertices.Length; i++)
         {
             displacedVertices[i] = originalVertices[i];
