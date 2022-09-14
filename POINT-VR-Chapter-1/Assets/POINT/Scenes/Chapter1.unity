@@ -575,11 +575,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64bcc75600573ee409240d6458e195c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObject: {fileID: 0}
+  cameraObject: {fileID: 7151936475986266780}
   color:
     serializedVersion: 2
     rgba: 4294967295
-  rotationSpeed: 0.1
+  rotationSpeed: 1
 --- !u!212 &1412231517
 SpriteRenderer:
   m_ObjectHideFlags: 0
