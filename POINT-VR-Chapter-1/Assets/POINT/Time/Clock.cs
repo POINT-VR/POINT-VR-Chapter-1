@@ -1,32 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(SpriteRenderer))]
 public class Clock : MonoBehaviour
 {
-    [SerializeField] private Camera cameraObject = null;
-    private SpriteRenderer spriteComponent = null;
-    private float rotationMultiplier = 10.0f;
-    private float zAngle = 0.0f;
-
-    public Color32 color = new Color32(255, 255, 255, 255);
-    public float rotationSpeed = 0.0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        spriteComponent = this.transform.GetComponent<SpriteRenderer>();
-        spriteComponent.hideFlags = HideFlags.HideInInspector;
+    /// <summary>
+    /// The camera transform that this sprite will face
+    /// </summary>
+    [SerializeField] Transform cameraObject;
+    /// <summary>
+    /// The multiplier affecting this sprite's rotation speed
+    /// </summary>
+    [SerializeField] float rotationMultiplier;
+    /// <summary>
+    /// The speed at which this sprite rotates. Other scripts can read and write to this.
+    /// </summary>
+    public float rotationSpeed;
+    /// <summary>
+    /// The current color of this clock sprite. Other scripts can read and write to this.
+    /// </summary>
+    public Color32 Color { 
+        get { 
+            return GetComponent<SpriteRenderer>().color;
+        }
+        set { 
+            GetComponent<SpriteRenderer>().color = value;
+        }
     }
-
-    // Update is called once per frame
+    private float zAngle = 0.0f;
     void Update()
     {
-        spriteComponent.color = color;
-
-        this.transform.LookAt(cameraObject.transform);
-
-        zAngle += rotationSpeed * rotationMultiplier * Time.deltaTime;
-        this.transform.Rotate(0.0f, 0.0f, zAngle);
+        transform.LookAt(cameraObject);
+        zAngle += rotationSpeed * rotationMultiplier * Time.deltaTime; //Can (rotationSpeed * rotationMultiplier) be combined into a single argument?
+        transform.Rotate(0.0f, 0.0f, zAngle);
     }
 }

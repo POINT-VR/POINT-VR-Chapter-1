@@ -9,7 +9,7 @@ public class MeshDeformScript : MonoBehaviour
     // <summary>
     // We will get the mass from the Rigidbody component.
     // </summary>
-    public Rigidbody MassToDeformAround;
+    public Rigidbody massToDeformAround;
     [Header("Other Constants")]
     // <summary>
     // Strength of the mesh deformation
@@ -22,7 +22,6 @@ public class MeshDeformScript : MonoBehaviour
     // <summary>
     // Mass of the object doing deformation
     // </summary>
-    
     float mass; 
     Mesh deformingMesh;
     Vector3[] originalVertices;
@@ -32,7 +31,7 @@ public class MeshDeformScript : MonoBehaviour
         deformingMesh = GetComponent<MeshFilter>().mesh;
         originalVertices = deformingMesh.vertices;
         displacedVertices = new Vector3[originalVertices.Length];
-        mass = MassToDeformAround.mass;
+        mass = massToDeformAround.mass;
         for (int i = 0; i < originalVertices.Length; i++)
         {
             displacedVertices[i] = originalVertices[i];
