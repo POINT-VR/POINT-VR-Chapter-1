@@ -12,9 +12,11 @@ public class TurnController : MonoBehaviour
     /// How quickly the player turns
     /// </summary>
     [SerializeField] float increment;
+    private bool actuatedLastFrame;
     void OnEnable()
     {
         turnReference.action.Enable();
+        actuatedLastFrame = false;
     }
     void OnDisable()
     {
@@ -22,6 +24,19 @@ public class TurnController : MonoBehaviour
     }
     void Update()
     {
-       transform.Rotate(Vector3.up, Math.Sign(turnReference.action.ReadValue<Vector2>().x) * increment);
+        int direction = Math.Sign(turnReference.action.ReadValue<Vector2>().x);
+        if (direction != 0)
+        {
+            if (actuatedLastFrame)
+            {
+                return;
+            }
+            transform.Rotate(Vector3.up, direction * increment);
+            actuatedLastFrame = true;
+        }
+        else
+        {
+            actuatedLastFrame = false;
+        }
     }
 }
