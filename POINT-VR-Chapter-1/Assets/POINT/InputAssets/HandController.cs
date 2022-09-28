@@ -25,6 +25,10 @@ public class HandController : MonoBehaviour
     /// </summary>
     [SerializeField] HandController otherHand;
     /// <summary>
+    /// The audio that plays when this hand teleports
+    /// </summary>
+    [SerializeField] AudioClip teleportAudio;
+    /// <summary>
     /// The mask used to detect the floor
     /// </summary>
     [Header("Raycast Masks")]
@@ -193,13 +197,15 @@ public class HandController : MonoBehaviour
             Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask);
             if (hit.point != Vector3.zero) //Raycast detected the floor: teleport
             {
+                GetComponent<AudioSource>().PlayOneShot(teleportAudio);
                 playerTransform.position = hit.point + 0.1f * Vector3.up;
             }
         }
         else //Not in teleport mode and user presses select: raycast checks for UI (UICollider or Slider) and interacts with it
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f)) //UI was detected: interact with it
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected: interact with it
             {
+                GetComponent<AudioSource>().PlayScheduled(0);
                 UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
                 if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
                 {
