@@ -1,51 +1,38 @@
 using UnityEngine;
-
+[RequireComponent(typeof(AudioSource))]
 public class AudioMetronome : MonoBehaviour
 {
     /// <summary>
-    /// The audio that will be played to represent a "tick" of the metronome
+    /// The time between each metronome "tick". Other scripts can read and write to this.
     /// </summary>
-    [SerializeField] private AudioClip metronomeSound;
+    public float TimeInterval
+    {
+        get { return timeInterval; }
+        set { timeInterval = Mathf.Clamp(value, 0.1f, 5.0f); }
+    }
+    /// <summary>
+    /// The time between each metronome "tick". Editor only.
+    /// </summary>
+    [Range(0.1f, 5.0f)]
+    [SerializeField] float timeInterval;
     /// <summary>
     /// Whether the metronome is being played. Other scripts can read and write to this.
     /// </summary>
-    public bool playMetronome = true;
-    /// <summary>
-    /// The time between each metronome "tick". Other scripts can read and write to this.
-    /// </summary>
-    [Range(0.1f, 5.0f)]
-    public float timeInterval = 1.0f;
-    private AudioSource audioSource = null;
-    private float lastTickTime = 0.0f;
-
-    private void OnValidate()
+    public bool IsPlayingMetronome
     {
-        if (audioSource == null)
-        {
-            audioSource = this.transform.GetComponent<AudioSource>();
-            if (audioSource == null)
-            {
-                this.gameObject.AddComponent<AudioSource>();
-            }
-        }
-        audioSource.clip = metronomeSound;
+        get { return audioSource.enabled; }
+        set { audioSource.enabled = value; }
     }
-    void Start()
+    private AudioSource audioSource;
+    private float lastTickTime;
+    void Awake()
     {
-        if (audioSource == null)
-        {
-            audioSource = this.transform.GetComponent<AudioSource>();
-            if (audioSource == null)
-            {
-                this.gameObject.AddComponent<AudioSource>();
-            }
-        }
-        audioSource.hideFlags = HideFlags.HideInInspector;
+        audioSource = GetComponent<AudioSource>();
+        lastTickTime = 0f;
     }
-
     void Update()
     {
-        if (playMetronome && Time.time >= lastTickTime + timeInterval)
+        if (Time.time >= lastTickTime + timeInterval)
         {
             audioSource.Play();
             lastTickTime = Time.time;
