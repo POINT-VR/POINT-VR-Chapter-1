@@ -18,38 +18,45 @@ public class MeshDeformScript : MonoBehaviour
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
+    readonly float thickness = 0.02f;
     void Start()
     {
         deformingMesh = GetComponent<MeshFilter>().mesh;
-        originalVertices = deformingMesh.vertices;
-        displacedVertices = new Vector3[originalVertices.Length];
+        displacedVertices = (Vector3[]) deformingMesh.vertices.Clone();
+        originalVertices = new Vector3[displacedVertices.Length/8];
         for (int i = 0; i < originalVertices.Length; i++)
         {
-            displacedVertices[i] = originalVertices[i];
+            originalVertices[i] = displacedVertices[8*i + 1];
         }
     }
 
     private void FixedUpdate()
     {
-        for (int i = 0; i < displacedVertices.Length; i++)
+        for (int i = 1; i < displacedVertices.Length; i += 8)
         {
-            Vector3 currentPosition = originalVertices[i];
+            Vector3 currentPosition = originalVertices[(i-1)/8];
             for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
             {
                 Vector3 direction = currentPosition - rigidbodiesToDeformAround[j].transform.position;
                 float distance = (power * rigidbodiesToDeformAround[j].mass * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude) * (direction.sqrMagnitude));
                 currentPosition -= distance * direction;
             }
-            displacedVertices[i] = currentPosition; //The mesh deforms here
+            displacedVertices[i - 1] = currentPosition - new Vector3(thickness, 0f, 0f);
+            displacedVertices[i] = currentPosition;
+            displacedVertices[i + 1] = currentPosition - new Vector3(thickness, thickness, 0f);
+            displacedVertices[i + 2] = currentPosition - new Vector3(0f, thickness, 0f);
+            displacedVertices[i + 3] = currentPosition - new Vector3(thickness, 0f, thickness);
+            displacedVertices[i + 4] = currentPosition - new Vector3(0f, 0f, thickness);
+            displacedVertices[i + 5] = currentPosition - new Vector3(thickness, thickness, thickness);
+            displacedVertices[i + 6] = currentPosition - new Vector3(0f, thickness, thickness);
             // cutoff code is archived here for now. note that the cutoff variable has been commented out as well.
- //           if (direction.sqrMagnitude < cutoff)
- //           {
- //           }        
- //           else 
- //           {
- //               displacedVertices[i] = originalVertices[i]; // Reset Grid Position to the inital grid
- //           }
-
+            //           if (direction.sqrMagnitude < cutoff)
+            //           {
+            //           }        
+            //           else 
+            //           {
+            //               displacedVertices[i] = originalVertices[i]; // Reset Grid Position to the inital grid
+            //           }
         }
         deformingMesh.vertices = displacedVertices;
         deformingMesh.RecalculateNormals();
