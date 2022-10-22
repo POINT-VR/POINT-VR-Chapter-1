@@ -3,13 +3,9 @@
 public class MeshDeformScript : MonoBehaviour
 {
     // <summary>
-    // We will derive the position from which to pull based on a transform present in the scene
+    // We will get the masses from the Rigidbody components
     // </summary>
-    public Transform transformToDeformAround;
-    // <summary>
-    // We will get the mass from the Rigidbody component.
-    // </summary>
-    public Rigidbody massToDeformAround;
+    public Rigidbody[] rigidbodiesToDeformAround;
     [Header("Other Constants")]
     // <summary>
     // Strength of the mesh deformation
@@ -18,11 +14,7 @@ public class MeshDeformScript : MonoBehaviour
     // <summary>
     // Radius of region affected by mesh deformation
     // </summary>
-    public float cutoff;
-    // <summary>
-    // Mass of the object doing deformation
-    // </summary>
-    float mass; 
+    // public float cutoff;
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
@@ -31,7 +23,6 @@ public class MeshDeformScript : MonoBehaviour
         deformingMesh = GetComponent<MeshFilter>().mesh;
         originalVertices = deformingMesh.vertices;
         displacedVertices = new Vector3[originalVertices.Length];
-        mass = massToDeformAround.mass;
         for (int i = 0; i < originalVertices.Length; i++)
         {
             displacedVertices[i] = originalVertices[i];
@@ -40,19 +31,25 @@ public class MeshDeformScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 pullingPosition = transformToDeformAround.position;
         for (int i = 0; i < displacedVertices.Length; i++)
         {
-            Vector3 direction = originalVertices[i] - pullingPosition;
-            if (direction.sqrMagnitude < cutoff)
+            Vector3 currentPosition = originalVertices[i];
+            for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
             {
-                float distance = (power * mass * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude) * (direction.sqrMagnitude));
-                displacedVertices[i] = originalVertices[i] - (distance * direction); //The mesh deforms here
-            }        
-            else 
-            {
-                displacedVertices[i] = originalVertices[i]; // Reset Grid Position to the very inital grid
+                Vector3 direction = currentPosition - rigidbodiesToDeformAround[j].transform.position;
+                float distance = (power * rigidbodiesToDeformAround[j].mass * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude) * (direction.sqrMagnitude));
+                currentPosition -= distance * direction;
             }
+            displacedVertices[i] = currentPosition; //The mesh deforms here
+            // cutoff code is archived here for now. note that the cutoff variable has been commented out as well.
+ //           if (direction.sqrMagnitude < cutoff)
+ //           {
+ //           }        
+ //           else 
+ //           {
+ //               displacedVertices[i] = originalVertices[i]; // Reset Grid Position to the inital grid
+ //           }
+
         }
         deformingMesh.vertices = displacedVertices;
         deformingMesh.RecalculateNormals();

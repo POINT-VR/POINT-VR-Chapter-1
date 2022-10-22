@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7833,7 +7833,6 @@ GameObject:
   - component: {fileID: 2882876734351513144}
   - component: {fileID: 1812614448354013868}
   - component: {fileID: 9107133040290610250}
-  - component: {fileID: 9107133040290610251}
   m_Layer: 0
   m_Name: Optimal Grid
   m_TagString: Untagged
@@ -7853,26 +7852,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91616b439a36c049a504794f6c87616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformToDeformAround: {fileID: 64981088}
-  massToDeformAround: {fileID: 64981090}
+  rigidbodiesToDeformAround:
+  - {fileID: 64981090}
+  - {fileID: 340497268}
   power: 1
-  cutoff: 1000
---- !u!114 &9107133040290610251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9107133040290610249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91616b439a36c049a504794f6c87616, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformToDeformAround: {fileID: 340497272}
-  massToDeformAround: {fileID: 340497268}
-  power: 1
-  cutoff: 1000
 --- !u!1 &9165822379892622253
 GameObject:
   m_ObjectHideFlags: 0
