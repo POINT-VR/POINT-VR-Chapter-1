@@ -38,7 +38,6 @@ public class MeshDeformScript : MonoBehaviour
             for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
             {
                 Vector3 direction = currentPosition - rigidbodiesToDeformAround[j].transform.position;
-                //float distance = (power * rigidbodiesToDeformAround[j].mass * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude) * (direction.sqrMagnitude));
                 float distance = power * (1f - Mathf.Sqrt( 1f  - (1f*rigidbodiesToDeformAround[j].mass)/direction.magnitude  ) );
                 if (float.IsNaN(distance))
                 {
@@ -48,14 +47,7 @@ public class MeshDeformScript : MonoBehaviour
             }
             displacedVertices[i] = currentPosition;
 
-            // cutoff code is archived here for now. note that the cutoff variable has been commented out as well.
-            //           if (direction.sqrMagnitude < cutoff)
-            //           {
-            //           }        
-            //           else 
-            //           {
-            //               displacedVertices[i] = originalVertices[i]; // Reset Grid Position to the inital grid
-            //           }
+
         }
         deformingMesh.vertices = displacedVertices;
         deformingMesh.RecalculateNormals();
