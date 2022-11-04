@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 [RequireComponent(typeof(MeshRenderer))]
 public class MeshDeformScript : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class MeshDeformScript : MonoBehaviour
     Mesh deformingMesh;
     Vector3[] originalVertices;
     Vector3[] displacedVertices;
-    readonly float thickness = 0.02f;
     void Start()
     {
         deformingMesh = GetComponent<MeshFilter>().mesh;
@@ -38,7 +38,12 @@ public class MeshDeformScript : MonoBehaviour
             for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
             {
                 Vector3 direction = currentPosition - rigidbodiesToDeformAround[j].transform.position;
-                float distance = (power * rigidbodiesToDeformAround[j].mass * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude) * (direction.sqrMagnitude));
+                //float distance = (power * rigidbodiesToDeformAround[j].mass * direction.sqrMagnitude) / (1f + (direction.sqrMagnitude) * (direction.sqrMagnitude));
+                float distance = power * (1f - Mathf.Sqrt( 1f  - (1f*rigidbodiesToDeformAround[j].mass)/direction.magnitude  ) );
+                if (float.IsNaN(distance))
+                {
+                    distance = power * 1f; // If the sqrt above is negative, this gets called.
+                }
                 currentPosition -= distance * direction;
             }
             displacedVertices[i] = currentPosition;
