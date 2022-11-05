@@ -38,15 +38,17 @@ public class MeshDeformScript : MonoBehaviour
             for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
             {
                 Vector3 direction = currentPosition - rigidbodiesToDeformAround[j].transform.position;
-                float distance = power * (1f - Mathf.Sqrt( 1f  - (1f*rigidbodiesToDeformAround[j].mass)/direction.magnitude  ) );
-                if (float.IsNaN(distance))
+
+                float distance = power * 1f;
+
+                if ( ((1f*rigidbodiesToDeformAround[j].mass) <= direction.magnitude) ) // If the sqrt above is negative, this gets called.
                 {
-                    distance = power * 1f; // If the sqrt above is negative, this gets called.
+                    distance = power * (1f - Mathf.Sqrt( 1f  - (1f*rigidbodiesToDeformAround[j].mass)/direction.magnitude  ) );
                 }
+
                 currentPosition -= distance * direction;
             }
             displacedVertices[i] = currentPosition;
-
 
         }
         deformingMesh.vertices = displacedVertices;
