@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 [RequireComponent(typeof(MeshRenderer))]
 public class MeshDeformScript : MonoBehaviour
 {
@@ -48,7 +47,7 @@ public class MeshDeformScript : MonoBehaviour
                 {
                     distance = power * (1f - Mathf.Sqrt(1f - rigidbodiesToDeformAround[j].mass / direction.magnitude));
                 }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
+                totalDisplacement += distance * direction / rigidbodiesToDeformAround.Length; //Displacement from each mass is calculated independently, but combined by vector addition
             }
             displacedVertices[i] = originalVertices[i] - totalDisplacement; //Store the final displacement calculation for this vertex
         }
