@@ -32,26 +32,27 @@ public class MeshDeformScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        for (int i = 0; i < displacedVertices.Length; i ++)
+        Vector3[] massPositions = new Vector3[rigidbodiesToDeformAround.Length];
+        for (int j = 0; j < rigidbodiesToDeformAround.Length; j++) //Puts the mass positions on the stack ahead of time
         {
-            Vector3 currentPosition = originalVertices[i];
+            massPositions[j] = rigidbodiesToDeformAround[j].transform.position;
+        }
+        for (int i = 0; i < displacedVertices.Length; i++)
+        {
+            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
             for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
             {
-                Vector3 direction = currentPosition - rigidbodiesToDeformAround[j].transform.position;
-
-                float distance = power * 1f;
-
-                if ( ((1f*rigidbodiesToDeformAround[j].mass) <= direction.magnitude) ) // If the sqrt above is negative, this gets called.
+                Vector3 direction = originalVertices[i] - massPositions[j];
+                float distance = power;
+                if (rigidbodiesToDeformAround[j].mass < direction.magnitude) //Displacement would not yield a complex number: deform at damped power
                 {
-                    distance = power * (1f - Mathf.Sqrt( 1f  - (1f*rigidbodiesToDeformAround[j].mass)/direction.magnitude  ) );
+                    distance = power * (1f - Mathf.Sqrt(1f - rigidbodiesToDeformAround[j].mass / direction.magnitude));
                 }
-
-                currentPosition -= distance * direction;
+                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
             }
-            displacedVertices[i] = currentPosition;
-
+            displacedVertices[i] = originalVertices[i] - totalDisplacement; //Store the final displacement calculation for this vertex
         }
-        deformingMesh.vertices = displacedVertices;
+        deformingMesh.vertices = displacedVertices; //This is where the grid actually applies all of the calculations
         deformingMesh.RecalculateNormals();
     }
 }
