@@ -14,7 +14,7 @@ public class MeshDeformScript : MonoBehaviour
     // <summary>
     // Strength of the mesh deformation
     // </summary>
-    public float power;
+    // public float power;
     // <summary>
     // Radius of region affected by mesh deformation
     // </summary>
@@ -42,10 +42,10 @@ public class MeshDeformScript : MonoBehaviour
             for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
             {
                 Vector3 direction = originalVertices[i] - massPositions[j];
-                float distance = power;
+                float distance = 1f;
                 if (rigidbodiesToDeformAround[j].mass < direction.magnitude) //Displacement would not yield a complex number: deform at damped power
                 {
-                    distance = power * (1f - Mathf.Sqrt(1f - rigidbodiesToDeformAround[j].mass / direction.magnitude));
+                    distance = (1f - Mathf.Sqrt(1f - rigidbodiesToDeformAround[j].mass / direction.magnitude));
                 }
                 totalDisplacement += distance * direction / rigidbodiesToDeformAround.Length; //Displacement from each mass is calculated independently, but combined by vector addition
             }
