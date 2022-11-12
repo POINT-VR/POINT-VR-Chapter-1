@@ -536,6 +536,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1412231518}
     m_Modifications:
+    - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
+        type: 3}
+      propertyPath: timeIntervalMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
+        type: 3}
+      propertyPath: rigidbodiesToDeformAround.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
+        type: 3}
+      propertyPath: rigidbodiesToDeformAround.Array.data[0]
+      value: 
+      objectReference: {fileID: 64981090}
     - target: {fileID: 8248188717145690769, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: m_Name
@@ -781,9 +796,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64bcc75600573ee409240d6458e195c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbodiesToDeformAround:
+  - {fileID: 64981090}
   cameraObject: {fileID: 7151936475986266779}
-  rotationMultiplier: 10
-  rotationSpeed: 1
+  rotationMultiplier: 50
 --- !u!212 &1412231517
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -2,22 +2,22 @@
 [RequireComponent(typeof(MeshRenderer))]
 public class MeshDeformScript : MonoBehaviour
 {
-    // <summary>
-    // Generic MeshDeformScipt. Should work on any Grid Model.
-    // </summary>
+    /// <summary>
+    /// Generic MeshDeformScipt. Should work on any Grid Model.
+    /// </summary>
 
-    // <summary>
-    // We will get the masses from the Rigidbody components
-    // </summary>
+    /// <summary>
+    /// We will get the masses from the Rigidbody components
+    /// </summary>
     public Rigidbody[] rigidbodiesToDeformAround;
     [Header("Other Constants")]
-    // <summary>
-    // Strength of the mesh deformation
-    // </summary>
+    /// <summary>
+    /// Strength of the mesh deformation
+    /// </summary>
     // public float power;
-    // <summary>
-    // Radius of region affected by mesh deformation
-    // </summary>
+    /// <summary>
+    /// Radius of region affected by mesh deformation
+    /// </summary>
     // public float cutoff;
     Mesh deformingMesh;
     Vector3[] originalVertices;
