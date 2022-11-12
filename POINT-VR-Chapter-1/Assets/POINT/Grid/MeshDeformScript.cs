@@ -43,7 +43,7 @@ public class MeshDeformScript : MonoBehaviour
             {
                 Vector3 direction = originalVertices[i] - massPositions[j];
                 float distance = 1f;
-                if (rigidbodiesToDeformAround[j].mass < direction.magnitude) //Displacement would not yield a complex number: deform at damped power
+                if (2*rigidbodiesToDeformAround[j].mass < direction.magnitude) //Displacement would not yield a complex number: deform at damped power
                 {
                     distance = (1f - Mathf.Sqrt(1f - 2*rigidbodiesToDeformAround[j].mass / direction.magnitude));
                 }
