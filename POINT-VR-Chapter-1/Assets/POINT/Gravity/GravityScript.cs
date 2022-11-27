@@ -11,14 +11,15 @@ public class GravityScript : MonoBehaviour
     /// </summary>
     public Rigidbody[] rigidbodiesThatAttract;
     
+    /// <summary>
+    /// Mass object that the script is attached to
+    /// </summary>
     public Rigidbody massObject;
     //[Header("Other Constants")]
-    private bool colliding;
 
     void Start()
     {
         massObject = GetComponent<Rigidbody>(); // This is the massobject that will experience gravity
-        Collider coll = GetComponent<Collider>();
     }
 
     void OnCollisionEnter(Collision coll)

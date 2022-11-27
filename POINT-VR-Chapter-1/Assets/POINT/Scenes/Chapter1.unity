@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbodiesThatAttract:
   - {fileID: 340497268}
-  massObject: {fileID: 0}
+  massObject: {fileID: 64981090}
 --- !u!54 &64981090
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 340497270}
   - component: {fileID: 340497269}
   - component: {fileID: 340497268}
+  - component: {fileID: 340497273}
   m_Layer: 9
   m_Name: Mesh Sphere 2
   m_TagString: Untagged
@@ -513,6 +514,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &340497273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340497267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a430a9b4250b6a48a28184307eba09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbodiesThatAttract:
+  - {fileID: 64981090}
+  massObject: {fileID: 340497268}
 --- !u!1 &486635219
 GameObject:
   m_ObjectHideFlags: 0
