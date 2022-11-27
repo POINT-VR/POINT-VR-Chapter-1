@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 64981086}
   - component: {fileID: 64981085}
   - component: {fileID: 64981090}
+  - component: {fileID: 64981089}
   m_Layer: 9
   m_Name: Mesh Sphere
   m_TagString: Untagged
@@ -209,12 +210,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64981084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 1.88}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &64981089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64981084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a430a9b4250b6a48a28184307eba09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbodiesThatAttract:
+  - {fileID: 340497268}
+  massObject: {fileID: 0}
 --- !u!54 &64981090
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -230,7 +246,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1 &137240484
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +438,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &340497269
 SphereCollider:
   m_ObjectHideFlags: 0

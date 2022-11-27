@@ -11,12 +11,19 @@ public class GravityScript : MonoBehaviour
     /// </summary>
     public Rigidbody[] rigidbodiesThatAttract;
     
-    Rigidbody massObject;
+    public Rigidbody massObject;
     //[Header("Other Constants")]
+    private bool colliding;
 
     void Start()
     {
         massObject = GetComponent<Rigidbody>(); // This is the massobject that will experience gravity
+        Collider coll = GetComponent<Collider>();
+    }
+
+    void OnCollisionEnter(Collision coll)
+    {
+        massObject.velocity = Vector3.zero;
     }
 
     private void FixedUpdate()
@@ -33,7 +40,7 @@ public class GravityScript : MonoBehaviour
             otherMassPositions[i] = rigidbodiesThatAttract[i].transform.position;
             Vector3 direction = otherMassPositions[i] - massPosition;
             float distance = 1f;
-            if (2*rigidbodiesThatAttract[i].mass < direction.magnitude) //Displacement would not yield a complex number: deform at damped power
+            if (2*massObject.mass < direction.magnitude) //Displacement would not yield a complex number: deform at damped power
             {
                 distance = (1f - Mathf.Sqrt(1f - 2*massObject.mass / direction.magnitude));
             }
@@ -41,6 +48,6 @@ public class GravityScript : MonoBehaviour
         }
 
         // Move Mass Object
-        massObject.AddForce(force, ForceMode.Acceleration);
+        massObject.AddForce(force, ForceMode.Force);
     }
 }
