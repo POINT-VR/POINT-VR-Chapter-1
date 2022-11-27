@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
-public class MeshDeformScript : MonoBehaviour
+public class GravityScript : MonoBehaviour
 {
     /// <summary>
     /// Generic GravityScipt. Should work on any Mass Objects with a Collider.
@@ -9,34 +9,38 @@ public class MeshDeformScript : MonoBehaviour
     /// <summary>
     /// We will get the masses from the Rigidbody components
     /// </summary>
-    public Rigidbody[] rigidbodiesToDeformAround;
-    [Header("Other Constants")]
+    public Rigidbody[] rigidbodiesThatAttract;
+    
+    Rigidbody massObject;
+    //[Header("Other Constants")]
 
     void Start()
     {
-        
+        massObject = GetComponent<Rigidbody>(); // This is the massobject that will experience gravity
     }
 
     private void FixedUpdate()
     {
-        Vector3[] massPositions = new Vector3[rigidbodiesToDeformAround.Length];
-        for (int i = 0; i < rigidbodiesToDeformAround.Length; i++) //Puts the mass positions on the stack ahead of time
+        Vector3 massPosition = massObject.transform.position;
+
+        Vector3[] otherMassPositions = new Vector3[rigidbodiesThatAttract.Length];
+
+        Vector3 force = Vector3.zero;
+
+        for (int i = 0; i < rigidbodiesThatAttract.Length; i++) //Puts the mass positions on the stack ahead of time
         {
-            massPositions[i] = rigidbodiesToDeformAround[i].transform.position;
-
-            for (int j = 0; j < rigidbodiesToDeformAround.Length; j++) // Gets the Forces acting on a mass object i
+            
+            otherMassPositions[i] = rigidbodiesThatAttract[i].transform.position;
+            Vector3 direction = otherMassPositions[i] - massPosition;
+            float distance = 1f;
+            if (2*rigidbodiesThatAttract[i].mass < direction.magnitude) //Displacement would not yield a complex number: deform at damped power
             {
-                if (i == j) // No self force for mass object
-                {
-                    continue;
-                }
-
-                
-
+                distance = (1f - Mathf.Sqrt(1f - 2*massObject.mass / direction.magnitude));
             }
-
-            // Move Mass Object i
-
+            force += distance * direction / rigidbodiesThatAttract.Length; //Displacement from each mass is calculated independently, but combined by vector addition   
         }
+
+        // Move Mass Object
+        massObject.AddForce(force, ForceMode.Acceleration);
     }
 }
