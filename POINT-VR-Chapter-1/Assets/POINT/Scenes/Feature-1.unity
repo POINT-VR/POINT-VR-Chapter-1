@@ -410,7 +410,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206314747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.27, y: 1.43, z: 2.998}
+  m_LocalPosition: {x: 2.093, y: 1.43, z: 2.998}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -573,9 +573,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 7151936475986266780}
-  depth: 5
-  width: 3
-  step_size: 2
+  depth: 7
+  width: 7
+  step_size: 1
+  size: 0.1
   objs: []
   rigidbodiesToDeformAround:
   - {fileID: 64981090}

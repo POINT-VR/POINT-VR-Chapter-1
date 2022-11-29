@@ -10,6 +10,7 @@ public class GridGenerator : MonoBehaviour
     public int depth;
     public int width;
     public int step_size;
+    public float size;
     public List<GameObject> objs;
     private bool is_show;
     public Rigidbody[] rigidbodiesToDeformAround;
@@ -54,7 +55,7 @@ public class GridGenerator : MonoBehaviour
                 {
                     GameObject obj = Instantiate(prefab);
                     obj.transform.parent = transform;
-                    obj.transform.localScale = obj.transform.localScale * 0.2f;
+                    obj.transform.localScale = obj.transform.localScale * size;
                     obj.transform.position = transform.position + mainCamera.transform.forward * (d + 1) * step_size
                         + mainCamera.transform.right * (i + 1) * step_size + mainCamera.transform.up * (j + 1) * step_size;
 
@@ -114,8 +115,13 @@ public class GridGenerator : MonoBehaviour
                 }
                 totalDisplacement += distance * direction / rigidbodiesToDeformAround.Length; //Displacement from each mass is calculated independently, but combined by vector addition
             }
-            objs[i].transform.position = objs[i].transform.position - totalDisplacement; //Store the final displacement calculation for this vertex
-            // objs[i].transform.position = objs[i].transform.position * 10f;
+            int dd = (int)(i / (2 * width) / (2 * width));
+            int ii = (int)((i - dd * (2 * width) * (2 * width)) / (2 * width));
+            int jj = (int)(i - dd * (2 * width) * (2 * width) - ii * (2 * width));
+            Vector3 org_pos = transform.position + mainCamera.transform.forward * (dd + 1) * step_size
+                        + mainCamera.transform.right * (ii - width + 1) * step_size + mainCamera.transform.up * (jj - width + 1) * step_size;
+            // objs[i].transform.position = org_pos;
+            objs[i].transform.position = org_pos - totalDisplacement; //Store the final displacement calculation for this vertex
         }
     }
 
