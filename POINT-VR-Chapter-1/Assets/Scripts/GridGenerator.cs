@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+// using UnityEditor;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -16,26 +16,26 @@ public class GridGenerator : MonoBehaviour
     public Rigidbody[] rigidbodiesToDeformAround;
 
 
-    [CustomEditor(typeof(GridGenerator))]
-    private class ObjectBuilderEditor : Editor
-    {
+    // [CustomEditor(typeof(GridGenerator))]
+    // private class ObjectBuilderEditor : Editor
+    // {
 
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
+    //     public override void OnInspectorGUI()
+    //     {
+    //         DrawDefaultInspector();
 
-            GridGenerator gridGreater = (GridGenerator)target;
-            if (GUILayout.Button("Create Grid"))
-            {
-                gridGreater.CreateGrid();
-            }
-            if (GUILayout.Button("Delete Grid"))
-            {
-                gridGreater.DeleteGrid();
-            }
+    //         GridGenerator gridGreater = (GridGenerator)target;
+    //         if (GUILayout.Button("Create Grid"))
+    //         {
+    //             gridGreater.CreateGrid();
+    //         }
+    //         if (GUILayout.Button("Delete Grid"))
+    //         {
+    //             gridGreater.DeleteGrid();
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
     public void CreateGrid()
     {
