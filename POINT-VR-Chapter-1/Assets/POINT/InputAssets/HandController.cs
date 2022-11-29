@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class HandController : MonoBehaviour
 {
+   [SerializeField] GridGenerator generator;
     /// <summary>
     /// The GameObject that is the parent to all hardware devices
     /// </summary>
@@ -254,6 +255,7 @@ public class HandController : MonoBehaviour
 
     private void StartPulling(InputAction.CallbackContext obj)
     {
-        pulling = true;
+        // pulling = true;
+        generator.CreateGrid();
     }
 }

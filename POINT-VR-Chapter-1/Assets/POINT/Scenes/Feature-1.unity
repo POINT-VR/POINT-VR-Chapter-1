@@ -1298,6 +1298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dbebc1a1af97841af77dd432832253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generator: {fileID: 862994365}
   playerTransform: {fileID: 486635220}
   reticle: {fileID: 1246677076129307621}
   laser: {fileID: 7151936475916822652}
@@ -4608,6 +4609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dbebc1a1af97841af77dd432832253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generator: {fileID: 0}
   playerTransform: {fileID: 486635220}
   reticle: {fileID: 6080438201830630304}
   laser: {fileID: 7151936477274391483}
