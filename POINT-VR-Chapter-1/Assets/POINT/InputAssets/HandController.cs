@@ -79,7 +79,7 @@ public class HandController : MonoBehaviour
     /// The square of the minimum distance maintained between a pulled object and the hand
     /// </summary>
     [SerializeField] float squaredMinPullDistance;
-    private bool teleportMode, holdingSlider, pulling;
+    private bool teleportMode, holdingSlider, pulling, gravEnabled;
     private Transform previousParentTransform, grabbingTransform;
     private Color laserColor;
     private Collider lastColliderHit;
@@ -169,7 +169,13 @@ public class HandController : MonoBehaviour
             return;
         }
         grabbingTransform.SetParent(previousParentTransform);
+        GravityScript grav = grabbingTransform.GetComponent<GravityScript>();
+        if (grav != null)
+        {
+            grav.enabled = gravEnabled;
+        }
         grabbingTransform = null;
+
     }
     private void Released(InputAction.CallbackContext ctx)
     {
@@ -189,6 +195,12 @@ public class HandController : MonoBehaviour
         }
         previousParentTransform = grabbingTransform.parent;
         grabbingTransform.SetParent(transform);
+        GravityScript grav = grabbingTransform.GetComponent<GravityScript>();
+        if (grav != null)
+        {
+            gravEnabled = grav.enabled;
+            grav.enabled = false;
+        }
     }
     private void Select(InputAction.CallbackContext ctx)
     { 
