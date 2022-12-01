@@ -200,6 +200,7 @@ public class HandController : MonoBehaviour
         {
             gravEnabled = grav.enabled;
             grav.enabled = false;
+            grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed objects velocity to zero
         }
     }
     private void Select(InputAction.CallbackContext ctx)
