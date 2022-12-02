@@ -554,11 +554,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862994363}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0205374, y: 0.33800742, z: 0.0014035404}
+  m_LocalPosition: {x: 1.0205374, y: 0.4380074, z: 0.0014035404}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7151936476346997271}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &862994365
 MonoBehaviour:
@@ -573,10 +573,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 7151936475986266780}
-  depth: 7
-  width: 7
-  step_size: 1
-  size: 0.1
+  radius: 5
+  density: 2
+  size: 0.05
   objs: []
   rigidbodiesToDeformAround:
   - {fileID: 64981090}
@@ -1298,7 +1297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dbebc1a1af97841af77dd432832253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generator: {fileID: 862994365}
+  generator: {fileID: 0}
   playerTransform: {fileID: 486635220}
   reticle: {fileID: 1246677076129307621}
   laser: {fileID: 7151936475916822652}
@@ -5937,7 +5936,6 @@ Transform:
   - {fileID: 1924158360520569011}
   - {fileID: 6110002473896075630}
   - {fileID: 7151936475986266779}
-  - {fileID: 862994364}
   m_Father: {fileID: 486635220}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

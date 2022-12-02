@@ -7,57 +7,57 @@ using UnityEngine;
 public class GridGenerator : MonoBehaviour
 {
     public Camera mainCamera;
-    public int depth;
-    public int width;
-    public int step_size;
+    public int radius;
+    public int density;
     public float size;
     public List<GameObject> objs;
     private bool is_show;
     public Rigidbody[] rigidbodiesToDeformAround;
 
+    /*
+    [CustomEditor(typeof(GridGenerator))]
+    private class ObjectBuilderEditor : Editor
+    {
 
-    // [CustomEditor(typeof(GridGenerator))]
-    // private class ObjectBuilderEditor : Editor
-    // {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
 
-    //     public override void OnInspectorGUI()
-    //     {
-    //         DrawDefaultInspector();
+            GridGenerator gridGreater = (GridGenerator)target;
+            if (GUILayout.Button("Create Grid"))
+            {
+                gridGreater.CreateGrid();
+            }
+            if (GUILayout.Button("Delete Grid"))
+            {
+                gridGreater.DeleteGrid();
+            }
 
-    //         GridGenerator gridGreater = (GridGenerator)target;
-    //         if (GUILayout.Button("Create Grid"))
-    //         {
-    //             gridGreater.CreateGrid();
-    //         }
-    //         if (GUILayout.Button("Delete Grid"))
-    //         {
-    //             gridGreater.DeleteGrid();
-    //         }
-
-    //     }
-    // }
+        }
+    }
+    */
 
     public void CreateGrid()
     {
-        // vertices = new GameObject[depth * 2 * width * 2 * width];
+        // vertices = new GameObject[radius * 2 * radius * 2 * radius];
         if (is_show)
         {
             return;
         }
 
-        GameObject prefab = (GameObject)Resources.Load("Vec");
+        GameObject prefab = (GameObject)Resources.Load("Vec2");
 
-        for (int d = 0; d < depth; d++)
+        for (int d = -radius; d < radius; d++)
         {
-            for (int i = -width; i < width; i++)
+            for (int i = -radius; i < radius; i++)
             {
-                for (int j = -width; j < width; j++)
+                for (int j = -radius; j < radius; j++)
                 {
                     GameObject obj = Instantiate(prefab);
                     obj.transform.parent = transform;
                     obj.transform.localScale = obj.transform.localScale * size;
-                    obj.transform.position = transform.position + mainCamera.transform.forward * (d + 1) * step_size
-                        + mainCamera.transform.right * (i + 1) * step_size + mainCamera.transform.up * (j + 1) * step_size;
+                    obj.transform.position = mainCamera.transform.position + new Vector3(1, 0, 0) * (d + 1) * density
+                        + new Vector3(0, 1, 0) * (i + 1) * density + new Vector3(0, 0, 1) * (j + 1) * density;
 
                     objs.Add(obj);
                 }
@@ -115,13 +115,16 @@ public class GridGenerator : MonoBehaviour
                 }
                 totalDisplacement += distance * direction / rigidbodiesToDeformAround.Length; //Displacement from each mass is calculated independently, but combined by vector addition
             }
-            int dd = (int)(i / (2 * width) / (2 * width));
-            int ii = (int)((i - dd * (2 * width) * (2 * width)) / (2 * width));
-            int jj = (int)(i - dd * (2 * width) * (2 * width) - ii * (2 * width));
-            Vector3 org_pos = transform.position + mainCamera.transform.forward * (dd + 1) * step_size
-                        + mainCamera.transform.right * (ii - width + 1) * step_size + mainCamera.transform.up * (jj - width + 1) * step_size;
-            // objs[i].transform.position = org_pos;
+            
+            Vector3 org_pos;
+            int dd = (int)(i / (2 * radius * 2 * radius));
+            int ii = (int)((i - dd * (2 * radius * 2 * radius)) / (2 * radius));
+            int jj = (int)(i - dd * (2 * radius * 2 * radius) - ii * (2 * radius));
+            org_pos = mainCamera.transform.position + new Vector3(1, 0, 0) * (dd + 1 - radius) * density
+                        + new Vector3(0, 1, 0) * (ii + 1 - radius) * density + new Vector3(0, 0, 1) * (jj + 1 - radius) * density;
+
             objs[i].transform.position = org_pos - totalDisplacement; //Store the final displacement calculation for this vertex
+            // objs[i].transform.position = objs[i].transform.position * 10f;
         }
     }
 
