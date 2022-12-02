@@ -925,6 +925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbodiesToDeformAround:
   - {fileID: 64981090}
+  - {fileID: 340497268}
   cameraObject: {fileID: 7151936475986266779}
   rotationMultiplier: 200
 --- !u!212 &1412231517
@@ -1024,6 +1025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbodiesToDeformAround:
   - {fileID: 64981090}
+  - {fileID: 340497268}
   cameraObject: {fileID: 7151936475986266779}
   rotationMultiplier: 200
 --- !u!212 &1461951988

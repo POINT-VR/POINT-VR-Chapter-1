@@ -43,22 +43,25 @@ public class Clock : MonoBehaviour
     void Update()
     {
         Vector3[] massPositions = new Vector3[rigidbodiesToDeformAround.Length];
+        float totalRotationSpeed = 0.0f;
+
         for (int j = 0; j < rigidbodiesToDeformAround.Length; j++) //Puts the mass positions on the stack ahead of time
         {
             massPositions[j] = rigidbodiesToDeformAround[j].transform.position;
-        }
+            Vector3 direction = originalPosition - massPositions[j];
 
-        Vector3 direction = originalPosition - massPositions[0];
+            float rotation = 0.0f;
 
-        float rotationSpeed = 0.0f;
-        
-        if (2*rigidbodiesToDeformAround[0].mass < direction.magnitude)
-        {
-            rotationSpeed = Mathf.Sqrt(1f - 2*rigidbodiesToDeformAround[0].mass / direction.magnitude);
+            if (2*rigidbodiesToDeformAround[j].mass < direction.magnitude)
+            {
+                rotation = Mathf.Sqrt(1f - 2*rigidbodiesToDeformAround[j].mass / direction.magnitude);
+            }
+
+            totalRotationSpeed += rotation; //Displacement from each mass is calculated
         }
 
         transform.LookAt(cameraObject);
-        zAngle += rotationSpeed * rotationMultiplier * Time.deltaTime; //Can (rotationSpeed * rotationMultiplier) be combined into a single argument?
+        zAngle += totalRotationSpeed * rotationMultiplier * Time.deltaTime; //Can (rotationSpeed * rotationMultiplier) be combined into a single argument?
         transform.Rotate(0.0f, 0.0f, zAngle);
     }
 }

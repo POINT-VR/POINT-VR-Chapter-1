@@ -53,21 +53,27 @@ public class AudioMetronome : MonoBehaviour
     void Update()
     {
         Vector3[] massPositions = new Vector3[rigidbodiesToDeformAround.Length];
+        
+        float totalTimeInterval = 1.0f;
+
         for (int j = 0; j < rigidbodiesToDeformAround.Length; j++) //Puts the mass positions on the stack ahead of time
         {
             massPositions[j] = rigidbodiesToDeformAround[j].transform.position;
-        }
+            Vector3 direction = originalPosition - massPositions[j];
 
-        Vector3 direction = originalPosition - massPositions[0];
+            float timeInterval = 100000.0f;
 
-        float timeInterval = 10000.0f;
-        
-        if (2*rigidbodiesToDeformAround[0].mass < direction.magnitude)
-        {
-            timeInterval = 1.0f/Mathf.Sqrt(1f - 2*rigidbodiesToDeformAround[0].mass / direction.magnitude);
-        }
+            if (2*rigidbodiesToDeformAround[j].mass < direction.magnitude)
+            {
+                timeInterval = 1.0f/Mathf.Sqrt(1f - 2*rigidbodiesToDeformAround[j].mass / direction.magnitude);
+            }
 
-        if (Time.time >= lastTickTime + timeInterval*timeIntervalMultiplier)
+            totalTimeInterval += timeInterval; //Displacement from each mass is calculated
+        }   
+
+        totalTimeInterval = totalTimeInterval / (rigidbodiesToDeformAround.Length + 1) ; 
+
+        if (Time.time >= lastTickTime + totalTimeInterval*timeIntervalMultiplier)
         {
             audioSource.Play();
             lastTickTime = Time.time;
