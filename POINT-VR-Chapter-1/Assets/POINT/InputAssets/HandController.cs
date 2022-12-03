@@ -245,13 +245,13 @@ public class HandController : MonoBehaviour
         Slider activeSlider = hit.collider.gameObject.GetComponent<Slider>();
         if (activeSlider != null) //Collider is a slider: proceeds to interact with slider. 
         {
-            if (activeSlider.transform.InverseTransformPoint(hit.point).x > activeSlider.transform.InverseTransformPoint(activeSlider.handleRect.position).x) //Raycast lands to the right of handle: handle moves right
+            RectTransform sliderRect = activeSlider.transform as RectTransform;
+            if (sliderRect != null)
             {
-                activeSlider.value += sliderIncrement;
-            }
-            else //Raycast lands to the left of handle: handle moves left
-            {
-                activeSlider.value -= sliderIncrement;
+                float sliderWidth = sliderRect.rect.width;
+                // If the width is more than 0, set slider value to be the ratio of the raycast x-coordinate over the width of the slider (clamped to between 0.0f and 1.0f)
+                // Otherwise, set value to 0.0f (to avoid division by 0)
+                activeSlider.value = (sliderWidth > 0) ? (Mathf.Clamp(((activeSlider.transform.InverseTransformPoint(hit.point).x + sliderRect.anchoredPosition.x) / sliderWidth), 0.0f, 1.0f)) : 0.0f;
             }
             holdingSlider = true;
         }
