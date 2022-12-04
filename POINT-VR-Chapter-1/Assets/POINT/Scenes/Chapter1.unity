@@ -1986,6 +1986,17 @@ MonoBehaviour:
           m_StringArgument: Intialize
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 340497274}
+        m_MethodName: SendMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Intialize
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &347936251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6636,6 +6647,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 64981091}
+        m_MethodName: SendMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Intialize
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 340497274}
@@ -11783,7 +11805,6 @@ GameObject:
   - component: {fileID: 6448471601441069894}
   - component: {fileID: 7518804523028447186}
   - component: {fileID: 1088906716573790520}
-  - component: {fileID: 1088906716573790521}
   m_Layer: 0
   m_Name: 3D Grid Three Cuts
   m_TagString: Untagged
@@ -11806,19 +11827,6 @@ MonoBehaviour:
   rigidbodiesToDeformAround:
   - {fileID: 64981090}
   - {fileID: 340497268}
---- !u!114 &1088906716573790521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088906716573790519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91616b439a36c049a504794f6c87616, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbodiesToDeformAround: []
 --- !u!23 &1812614448354013868
 MeshRenderer:
   m_ObjectHideFlags: 0
