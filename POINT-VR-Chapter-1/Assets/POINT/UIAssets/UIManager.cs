@@ -4,12 +4,16 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    const float ACTIVE_BUTTON_FONT_SIZE = 64.0f;
-    const float INACTIVE_BUTTON_FONT_SIZE = 48.0f;
-    [SerializeField] private Sprite subtitleToggleSelected = null;
-    [SerializeField] private Sprite subtitleToggleUnselected = null;
+    // Constants
+    private const float ACTIVE_BUTTON_FONT_SIZE = 64.0f;
+    private const float INACTIVE_BUTTON_FONT_SIZE = 48.0f;
     private Color32 ACTIVE_BUTTON_COLOR = new Color32(255, 255, 255, 255);
     private Color32 INACTIVE_BUTTON_COLOR = new Color32(123, 231, 255, 127);
+
+    [SerializeField] private Sprite subtitleToggleSelected = null;
+    [SerializeField] private Sprite subtitleToggleUnselected = null;
+    [SerializeField] private AudioSource[] functionalAudio = null;
+    [SerializeField] private AudioSource[] aestheticAudio = null;
 
     /// <summary>
     /// Activates corresponding menu and automatically deactivates all other menus
@@ -74,6 +78,30 @@ public class UIManager : MonoBehaviour
                     imageComponent.sprite = (i == toggle.transform.GetSiblingIndex()) ? subtitleToggleSelected : subtitleToggleUnselected;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Adjusts all functional audio (labelled as "Narration") volume to new value according to the slider that calls this method
+    /// </summary>
+    /// <param name="newVolume"></param>
+    public void AdjustFunctionalAudioVolume(float newVolume)
+    {
+        foreach (AudioSource audioSource in functionalAudio)
+        {
+            audioSource.volume = newVolume;
+        }
+    }
+
+    /// <summary>
+    /// Adjusts all aesthetic audio (labelled as "Background") volume to new value according to the slider that calls this method
+    /// </summary>
+    /// <param name="newVolume"></param>
+    public void AdjustAestheticAudioVolume(float newVolume)
+    {
+        foreach (AudioSource audioSource in aestheticAudio)
+        {
+            audioSource.volume = newVolume;
         }
     }
 }
