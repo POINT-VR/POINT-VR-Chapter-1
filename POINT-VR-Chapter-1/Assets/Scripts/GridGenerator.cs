@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-// using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -10,11 +10,12 @@ public class GridGenerator : MonoBehaviour
     public int radius;
     public int density;
     public float size;
-    public List<GameObject> objs;
-    private bool is_show;
     public Rigidbody[] rigidbodiesToDeformAround;
+    [HideInInspector]
+    public List<GameObject> objs;
+    [HideInInspector]
+    public bool is_show;
 
-    /*
     [CustomEditor(typeof(GridGenerator))]
     private class ObjectBuilderEditor : Editor
     {
@@ -35,7 +36,6 @@ public class GridGenerator : MonoBehaviour
 
         }
     }
-    */
 
     public void CreateGrid()
     {

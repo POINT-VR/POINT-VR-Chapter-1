@@ -256,6 +256,12 @@ public class HandController : MonoBehaviour
     private void StartPulling(InputAction.CallbackContext obj)
     {
         // pulling = true;
-        generator.CreateGrid();
+        if (generator.is_show)
+        {
+            generator.DeleteGrid();
+        }
+        else {
+            generator.CreateGrid();
+        }
     }
 }

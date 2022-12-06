@@ -575,7 +575,7 @@ MonoBehaviour:
   mainCamera: {fileID: 7151936475986266780}
   radius: 5
   density: 2
-  size: 0.05
+  size: 0.1
   objs: []
   rigidbodiesToDeformAround:
   - {fileID: 64981090}
