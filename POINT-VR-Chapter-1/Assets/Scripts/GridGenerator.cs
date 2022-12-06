@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+// using UnityEditor;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -16,6 +16,7 @@ public class GridGenerator : MonoBehaviour
     [HideInInspector]
     public bool is_show;
 
+    /*
     [CustomEditor(typeof(GridGenerator))]
     private class ObjectBuilderEditor : Editor
     {
@@ -36,6 +37,7 @@ public class GridGenerator : MonoBehaviour
 
         }
     }
+    */
 
     public void CreateGrid()
     {
