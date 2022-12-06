@@ -47,7 +47,7 @@ public class GridGenerator : MonoBehaviour
             return;
         }
 
-        GameObject prefab = (GameObject)Resources.Load("Vec2");
+        GameObject prefab = (GameObject)Resources.Load("Vec");
 
         for (int d = -radius; d < radius; d++)
         {
@@ -126,7 +126,6 @@ public class GridGenerator : MonoBehaviour
                         + new Vector3(0, 1, 0) * (ii + 1 - radius) * density + new Vector3(0, 0, 1) * (jj + 1 - radius) * density;
 
             objs[i].transform.position = org_pos - totalDisplacement; //Store the final displacement calculation for this vertex
-            // objs[i].transform.position = objs[i].transform.position * 10f;
         }
     }
 
