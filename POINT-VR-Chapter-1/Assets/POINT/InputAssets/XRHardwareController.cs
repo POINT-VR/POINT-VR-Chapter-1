@@ -50,7 +50,7 @@ public class XRHardwareController : MonoBehaviour
     /// </summary>
     public void VibrateHand()
     {
-        // inputDevice.SendImpulse(0.15f, 0.05f);
+        inputDevice.SendImpulse(0.15f, 0.05f);
     }
     private void OnDisable()
     {

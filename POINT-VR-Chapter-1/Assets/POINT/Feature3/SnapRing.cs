@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 public class SnapRing : MonoBehaviour
 {
     // hold current colliding objects inside the trigger
-    private Rigidbody collidingObject = null;
+    public Rigidbody collidingObject = null;
     // a snap position
     private Transform snapPosition;
     [SerializeField] private InputActionReference rightGrabReference;
