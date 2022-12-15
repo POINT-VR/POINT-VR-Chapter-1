@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.0069632446, g: 0.0068257754, b: 0.007311784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2462,7 +2462,6 @@ GameObject:
   - component: {fileID: 1411692890}
   - component: {fileID: 1411692889}
   - component: {fileID: 1411692894}
-  - component: {fileID: 1411692895}
   m_Layer: 0
   m_Name: Optimal Grid
   m_TagString: Untagged
@@ -2570,19 +2569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00f00d0d8fb470fb68084586be9a558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deformScript: {fileID: 1411692890}
---- !u!114 &1411692895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411692888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd75c020e0ad87468a0a3baecf5e967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  deformScript: {fileID: 0}
 --- !u!1 &1417754822
 GameObject:
   m_ObjectHideFlags: 0
@@ -11095,6 +11082,7 @@ GameObject:
   - component: {fileID: 1239157778865674270}
   - component: {fileID: 8536262396110198525}
   - component: {fileID: 8536262396110198524}
+  - component: {fileID: 8536262396110198526}
   m_Layer: 0
   m_Name: Curvy-Grid-3cut
   m_TagString: Untagged
@@ -11123,11 +11111,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8536262396110198523}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 7.0200005, y: 4.0200005, z: 7.0200005}
   m_Center: {x: -3.5, y: 2, z: -3.5}
+--- !u!114 &8536262396110198526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8536262396110198523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00f00d0d8fb470fb68084586be9a558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deformScript: {fileID: 8536262396110198524}
 --- !u!1 &8576311041253683163
 GameObject:
   m_ObjectHideFlags: 0
