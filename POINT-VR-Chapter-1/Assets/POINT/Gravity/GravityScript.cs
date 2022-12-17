@@ -16,6 +16,7 @@ public class GravityScript : MonoBehaviour
     /// </summary>
     public Rigidbody massObject;
     //[Header("Other Constants")]
+    public float power = 1f;
 
     void Start()
     {
@@ -39,13 +40,12 @@ public class GravityScript : MonoBehaviour
         {
             
             otherMassPositions[i] = rigidbodiesThatAttract[i].transform.position;
-            Vector3 direction = otherMassPositions[i] - massPosition;
-            float distance = 1f;
-            if (2*massObject.mass < direction.magnitude) //Displacement would not yield a complex number: deform at damped power
-            {
-                distance = (1f - Mathf.Sqrt(1f - 2*massObject.mass / direction.magnitude));
-            }
-            force += distance * direction / rigidbodiesThatAttract.Length; //Displacement from each mass is calculated independently, but combined by vector addition   
+            Vector3 direction = otherMassPositions[i] - massPosition; 
+
+            // Newtonian Gravitational Force
+            float mag = power*massObject.mass*rigidbodiesThatAttract[i].mass / direction.sqrMagnitude;
+
+            force += mag * direction / rigidbodiesThatAttract.Length; //Displacement from each mass is calculated independently, but combined by vector addition   
         }
 
         // Move Mass Object
