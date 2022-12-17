@@ -43,7 +43,12 @@ public class XRHardwareController : MonoBehaviour
     /// </summary>
     public void VibrateHand()
     {
+#if UNITY_EDITOR //Do not vibrate hand in the editor or else this floods the console with errors
+        return;
+#endif
+#pragma warning disable CS0162 // Unreachable code detected
         inputDevice.SendImpulse(0.15f, 0.05f);
+#pragma warning restore CS0162 // Unreachable code detected
     }
     private void OnDisable()
     {
