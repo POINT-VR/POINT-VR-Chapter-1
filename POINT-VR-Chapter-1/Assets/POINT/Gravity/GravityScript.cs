@@ -25,7 +25,6 @@ public class GravityScript : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
-        massObject.velocity = Vector3.zero;
     }
 
     private void FixedUpdate()
