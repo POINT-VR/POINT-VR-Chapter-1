@@ -21,6 +21,10 @@ public class TimerUI : MonoBehaviour
 
     private Vector3 originalPosition;
     private TextMeshProUGUI textMeshProObject;
+
+    /// <summary>
+    /// The should specific the monospace width if mspace is used.
+    /// </summary>
     private float charWidth = 0.7f;
 
     void Start()
