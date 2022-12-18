@@ -62,7 +62,6 @@ public class TimerUI : MonoBehaviour
         float counter = zAngle/360.0f;
         string counterStr = counter.ToString("N1"); // 2 decimal precision 
         
-        //textMeshProObject.SetText($"<mspace={charWidth}em>{counterStr}"); // Tags don't work?
-        textMeshProObject.SetText($"{counterStr}");
+        textMeshProObject.SetText($"<mspace={charWidth}em>{counterStr}");
     }
 }
