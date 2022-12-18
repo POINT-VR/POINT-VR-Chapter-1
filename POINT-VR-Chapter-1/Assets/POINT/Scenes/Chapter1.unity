@@ -1825,6 +1825,8 @@ MonoBehaviour:
   - {fileID: 340497268}
   cameraObject: {fileID: 676191958}
   rotationMultiplier: 200
+  power: 1.3
+  cutoff: 4
 --- !u!1 &307858856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4510,6 +4512,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
         type: 3}
+      propertyPath: power
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
+        type: 3}
+      propertyPath: cutoff
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
+        type: 3}
       propertyPath: timeIntervalMultiplier
       value: 1
       objectReference: {fileID: 0}
@@ -4536,7 +4548,7 @@ PrefabInstance:
     - target: {fileID: 8248188717145690770, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8248188717145690770, guid: f99002b6176478346b071914492bac93,
         type: 3}
@@ -5033,6 +5045,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1239081941}
     m_Modifications:
+    - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
+        type: 3}
+      propertyPath: power
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
+        type: 3}
+      propertyPath: cutoff
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: timeIntervalMultiplier
@@ -7493,6 +7515,8 @@ MonoBehaviour:
   - {fileID: 340497268}
   cameraObject: {fileID: 676191958}
   rotationMultiplier: 200
+  power: 1.3
+  cutoff: 4
 --- !u!212 &1239081943
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8290,6 +8314,8 @@ MonoBehaviour:
   - {fileID: 340497268}
   cameraObject: {fileID: 676191958}
   rotationMultiplier: 200
+  power: 1.3
+  cutoff: 4
 --- !u!212 &1412231517
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12566,6 +12592,8 @@ MonoBehaviour:
   - {fileID: 340497268}
   cameraObject: {fileID: 676191958}
   rotationMultiplier: 200
+  power: 1.3
+  cutoff: 4
 --- !u!114 &2110158754
 MonoBehaviour:
   m_ObjectHideFlags: 0

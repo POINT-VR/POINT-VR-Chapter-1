@@ -30,6 +30,12 @@ public class AudioMetronome : MonoBehaviour
     //[SerializeField] float timeInterval;
 
     /// <summary>
+    /// Power of the time dilation, strength of the dilation vs direction.magnitude. (0, 1.5] range for reccomended values.
+    /// </summary>
+    public float power = 1f;
+    public float cutoff = 5f;
+
+    /// <summary>
     /// Whether the metronome is being played. Other scripts can read and write to this.
     /// </summary>
     public bool IsPlayingMetronome
@@ -54,24 +60,39 @@ public class AudioMetronome : MonoBehaviour
     {
         Vector3[] massPositions = new Vector3[rigidbodiesToDeformAround.Length];
         
-        float totalTimeInterval = 1.0f;
+        float totalTimeInterval = 0.0f;
+        float nMass = rigidbodiesToDeformAround.Length;
 
         for (int j = 0; j < rigidbodiesToDeformAround.Length; j++) //Puts the mass positions on the stack ahead of time
         {
             massPositions[j] = rigidbodiesToDeformAround[j].transform.position;
             Vector3 direction = originalPosition - massPositions[j];
+            float r = direction.magnitude;
 
             float timeInterval = 100000.0f;
 
-            if (2*rigidbodiesToDeformAround[j].mass < direction.magnitude)
+            if (!rigidbodiesToDeformAround[j].gameObject.activeSelf)
             {
-                timeInterval = 1.0f/Mathf.Sqrt(1f - 2*rigidbodiesToDeformAround[j].mass / direction.magnitude);
+                nMass -= 1;
+                continue;
+            }
+
+            if (r > cutoff)
+            {
+                totalTimeInterval += 1.0f;
+                continue;
+            }
+
+            float p = power*2*rigidbodiesToDeformAround[j].mass;
+            if (p < r)
+            {
+                timeInterval = 1.0f / Mathf.Sqrt(1f - ( p / r ) );
             }
 
             totalTimeInterval += timeInterval; //Displacement from each mass is calculated
         }   
 
-        totalTimeInterval = totalTimeInterval / (rigidbodiesToDeformAround.Length + 1) ; 
+        totalTimeInterval /= nMass;
 
         if (Time.time >= lastTickTime + totalTimeInterval*timeIntervalMultiplier)
         {
