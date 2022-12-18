@@ -122,6 +122,11 @@ public class HandController : MonoBehaviour
         {
             grabbingTransform.position += pullSpeed * (transform.position - grabbingTransform.position).normalized;
         }
+
+        if ( (!pulling) && (grabbingTransform != null) ) // Holding an object
+        {
+            grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed objects velocity to zero
+        }
         RaycastHit hit;
         if (teleportMode) // Teleport mode: fires a raycast that places the reticle
         {
@@ -200,7 +205,6 @@ public class HandController : MonoBehaviour
         {
             gravEnabled = grav.enabled;
             grav.enabled = false;
-            grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed objects velocity to zero
         }
     }
     private void Select(InputAction.CallbackContext ctx)
