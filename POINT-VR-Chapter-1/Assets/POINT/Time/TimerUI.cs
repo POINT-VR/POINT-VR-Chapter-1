@@ -27,7 +27,7 @@ public class TimerUI : MonoBehaviour
     {
         originalPosition  = GetComponent<Transform>().transform.position;
 
-        textMeshProObject = GameObject.Find("Time Counter Text").GetComponent<TextMeshProUGUI>();
+        textMeshProObject = this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
     }
 
     private float zAngle = 0.0f;
@@ -58,7 +58,7 @@ public class TimerUI : MonoBehaviour
         float counter = zAngle/360.0f;
         string counterStr = counter.ToString("N1"); // 2 decimal precision 
         
-        //textMeshProObject.SetText($"<mspace={charWidth}em>{counterStr}");
+        //textMeshProObject.SetText($"<mspace={charWidth}em>{counterStr}"); // Tags don't work?
         textMeshProObject.SetText($"{counterStr}");
     }
 }
