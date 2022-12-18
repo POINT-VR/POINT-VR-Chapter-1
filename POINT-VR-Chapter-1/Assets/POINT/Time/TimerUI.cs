@@ -56,8 +56,9 @@ public class TimerUI : MonoBehaviour
 
         zAngle += totalRotationSpeed * rotationMultiplier * Time.deltaTime; //Can (rotationSpeed * rotationMultiplier) be combined into a single argument?
         float counter = zAngle/360.0f;
-        string counterStr = counter.ToString("N2"); // 2 decimal precision 
+        string counterStr = counter.ToString("N1"); // 2 decimal precision 
         
-        textMeshProObject.SetText($"<mspace={charWidth}em>{counterStr}");
+        //textMeshProObject.SetText($"<mspace={charWidth}em>{counterStr}");
+        textMeshProObject.SetText($"{counterStr}");
     }
 }
