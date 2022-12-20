@@ -53,7 +53,7 @@ public class TimerUI : MonoBehaviour
             Vector3 direction = originalPosition - massPositions[j];
             float r = direction.magnitude;
 
-            float rotation = 1f;
+            float rotation = 1.0f;
 
             if (!rigidbodiesToDeformAround[j].gameObject.activeSelf)
             {
@@ -85,9 +85,9 @@ public class TimerUI : MonoBehaviour
         transform.LookAt(cameraObject);
         transform.Rotate(0.0f, 180.0f, 0.0f);
 
-        zAngle += totalRotationSpeed * rotationMultiplier * Time.deltaTime; //Can (rotationSpeed * rotationMultiplier) be combined into a single argument?
+        zAngle += totalRotationSpeed * rotationMultiplier * Time.deltaTime;
         float counter = zAngle/360.0f;
-        string counterStr = counter.ToString("N1"); // 2 decimal precision 
+        string counterStr = counter.ToString("N1"); // 1 decimal precision 
         
         textMeshProObject.SetText($"<mspace={charWidth}em>{counterStr}");
     }
