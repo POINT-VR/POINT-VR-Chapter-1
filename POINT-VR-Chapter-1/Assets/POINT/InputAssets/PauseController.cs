@@ -8,6 +8,14 @@ public class PauseController : MonoBehaviour
     /// </summary>
     [SerializeField] InputActionReference toggleReference;
     /// <summary>
+    /// The distance that the menu spawns away from the camera
+    /// </summary>
+    [SerializeField] Transform mainCamera;
+    /// <summary>
+    /// The distance that the menu spawns away from the camera
+    /// </summary>
+    [SerializeField] float distanceFromCamera;
+    /// <summary>
     /// The pause menu that is only visible while the game is paused
     /// </summary>
     [Header("Specific objects affected by pausing")]
@@ -59,6 +67,9 @@ public class PauseController : MonoBehaviour
                 g.SetActive(gamePaused);
             }
         }
+        Vector3 xzForward = new Vector3(mainCamera.forward.x, 0.0f, mainCamera.forward.z);
+        transform.position = mainCamera.position + (xzForward.normalized * distanceFromCamera);
+        transform.rotation = mainCamera.rotation;
         gamePaused = !gamePaused;
         menu.SetActive(gamePaused);
     }
