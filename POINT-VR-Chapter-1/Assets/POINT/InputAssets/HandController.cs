@@ -83,6 +83,7 @@ public class HandController : MonoBehaviour
     private Transform previousParentTransform, grabbingTransform;
     private Color laserColor;
     private Collider lastColliderHit;
+    private Vector3 grabbingTransformVelocity, grabbingTransformPositionPrev = Vector3.zero;
     private void OnEnable()
     {
         selectReference.action.Enable();
@@ -126,6 +127,10 @@ public class HandController : MonoBehaviour
         if ( (!pulling) && (grabbingTransform != null) ) // Holding an object
         {
             grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed objects velocity to zero
+
+            // Stores the velocity of the grabbing transform while its grabbed
+            grabbingTransformVelocity = grabbingTransform.position - grabbingTransformPositionPrev;
+            grabbingTransformPositionPrev = grabbingTransform.position;
         }
         RaycastHit hit;
         if (teleportMode) // Teleport mode: fires a raycast that places the reticle
@@ -179,6 +184,9 @@ public class HandController : MonoBehaviour
         {
             grav.enabled = gravEnabled;
         }
+        // Add velocity to grabbed object.
+        grabbingTransform.GetComponent<Rigidbody>().velocity = 5*grabbingTransformVelocity;
+
         grabbingTransform = null;
 
     }
