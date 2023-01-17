@@ -2,12 +2,111 @@
 [RequireComponent(typeof(MeshFilter))]
 public class GridScript : MonoBehaviour
 {
+    /// <summary>
+    /// We will get the masses from the Rigidbody components
+    /// </summary>
+    public Rigidbody[] rigidbodiesToDeformAround;
     Mesh deformingMesh;
     float thickness = 0.02f;
     int size_z = 8;
     int size_x = 8;
     int size_y = 5; //Produces a 7 x 7 x 4 grid
     int divisions = 3;
+    private void FixedUpdate()
+    {
+        Vector3[] displaced = new Vector3[size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1)]; 
+        Vector3[] massPositions = new Vector3[rigidbodiesToDeformAround.Length];
+        for (int j = 0; j < rigidbodiesToDeformAround.Length; j++) //Puts the mass positions on the stack ahead of time
+        {
+            massPositions[j] = rigidbodiesToDeformAround[j].transform.position;
+        }
+        for (int i = 0; i < size_z * size_y * size_x * 8; i+=8)
+        {
+            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+            for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
+            {
+                Vector3 direction = IndexToPos(i) - massPositions[j];
+                float doubleMass = 2 * rigidbodiesToDeformAround[j].mass;
+                float distance = 1f;
+                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
+                {
+                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
+                }
+                totalDisplacement += distance * direction / rigidbodiesToDeformAround.Length; //Displacement from each mass is calculated independently, but combined by vector addition
+            }
+            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+            displaced[i] = d;
+            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
+            displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
+            displaced[i + 3] = d + new Vector3(thickness, 0f, thickness);
+            displaced[i + 4] = d + new Vector3(0f, thickness, 0f);
+            displaced[i + 5] = d + new Vector3(0f, thickness, thickness);
+            displaced[i + 6] = d + new Vector3(thickness, thickness, 0f);
+            displaced[i + 7] = d + new Vector3(thickness, thickness, thickness);
+        }
+        for (int i = size_z * size_y * size_x * 8; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i += 4)
+        {
+            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+            for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
+            {
+                Vector3 direction = IndexToPos(i) - massPositions[j];
+                float doubleMass = 2 * rigidbodiesToDeformAround[j].mass;
+                float distance = 1f;
+                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
+                {
+                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
+                }
+                totalDisplacement += distance * direction / rigidbodiesToDeformAround.Length; //Displacement from each mass is calculated independently, but combined by vector addition
+            }
+            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+            displaced[i] = d;
+            displaced[i + 1] = d + new Vector3(thickness, 0f, 0f);
+            displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
+            displaced[i + 3] = d + new Vector3(thickness, thickness, 0f);
+        }
+        for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i += 4)
+        {
+            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+            for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
+            {
+                Vector3 direction = IndexToPos(i) - massPositions[j];
+                float doubleMass = 2 * rigidbodiesToDeformAround[j].mass;
+                float distance = 1f;
+                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
+                {
+                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
+                }
+                totalDisplacement += distance * direction / rigidbodiesToDeformAround.Length; //Displacement from each mass is calculated independently, but combined by vector addition
+            }
+            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+            displaced[i] = d;
+            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
+            displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
+            displaced[i + 3] = d + new Vector3(0f, thickness, thickness);
+        }
+        for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1); i += 4)
+        {
+            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+            for (int j = 0; j < rigidbodiesToDeformAround.Length; j++)
+            {
+                Vector3 direction = IndexToPos(i) - massPositions[j];
+                float doubleMass = 2 * rigidbodiesToDeformAround[j].mass;
+                float distance = 1f;
+                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
+                {
+                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
+                }
+                totalDisplacement += distance * direction / rigidbodiesToDeformAround.Length; //Displacement from each mass is calculated independently, but combined by vector addition
+            }
+            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+            displaced[i] = d;
+            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
+            displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
+            displaced[i + 3] = d + new Vector3(thickness, 0f, thickness);
+        }
+        deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
+        deformingMesh.RecalculateNormals();
+    }
     void Start()
     {
            deformingMesh = GetComponent<MeshFilter>().mesh;
