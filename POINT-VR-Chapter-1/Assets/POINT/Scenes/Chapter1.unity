@@ -10117,7 +10117,7 @@ MonoBehaviour:
   grabDistance: 8
   pullSpeed: 0.015
   squaredMinPullDistance: 3
-  squaredMaxPushDistance: 63
+  squaredMaxPushDistance: 48
 --- !u!1 &1651183049
 GameObject:
   m_ObjectHideFlags: 0
@@ -10454,7 +10454,7 @@ MonoBehaviour:
   grabDistance: 8
   pullSpeed: 0.015
   squaredMinPullDistance: 3
-  squaredMaxPushDistance: 63
+  squaredMaxPushDistance: 48
 --- !u!4 &1745685544
 Transform:
   m_ObjectHideFlags: 0

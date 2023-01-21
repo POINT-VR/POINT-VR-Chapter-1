@@ -83,7 +83,7 @@ public class HandController : MonoBehaviour
     /// The square of the maximum distance maintained between a pushed object and the hand
     /// </summary>
     [SerializeField] float squaredMaxPushDistance;
-    private bool pushing, holdingSlider, pulling, gravEnabled;
+    private bool pushing, holdingSlider, pulling, gravEnabled, teleportMode;
     private Transform previousParentTransform, grabbingTransform;
     private Color laserColor;
     private Collider lastColliderHit;
@@ -139,16 +139,15 @@ public class HandController : MonoBehaviour
             grabbingTransformVelocity = grabbingTransform.position - grabbingTransformPositionPrev;
             grabbingTransformPositionPrev = grabbingTransform.position;
         }
-        RaycastHit hit;
         // Fires a raycast that places the reticle
-        Physics.Raycast(transform.position, transform.forward, out hit, teleportationDistance, floorMask);
-        if (hit.point != Vector3.zero) //Raycast found the floor: place reticle
+        Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask);
+        if (teleportMode && hit.point != Vector3.zero) //In teleport mode and raycast found the floor: place reticle
         { 
             reticle.SetActive(true);
             reticle.transform.position = hit.point;
             reticle.transform.LookAt(new Vector3(playerTransform.position.x, 0f, playerTransform.position.z));
         }
-        else //Raycast was not able to find the floor: hides the reticle
+        else //Not in teleport mode or raycast was not able to find the floor: hides the reticle
         {
             reticle.SetActive(false);
         }
@@ -220,13 +219,7 @@ public class HandController : MonoBehaviour
     }
     private void Select(InputAction.CallbackContext ctx)
     { 
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
-        {
-            GetComponent<AudioSource>().PlayOneShot(teleportAudio);
-            playerTransform.position = hit.point + 0.1f * Vector3.up;
-            return;
-        }
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI was detected: interact with it
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected: interact with it
         {
             GetComponent<AudioSource>().PlayScheduled(0);
             UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
@@ -236,10 +229,17 @@ public class HandController : MonoBehaviour
             }
             CheckSlider(hit);
         }
+        teleportMode = true;
     }
     private void Unselect(InputAction.CallbackContext ctx)
     {
         holdingSlider = false;
+        teleportMode = false;
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
+        {
+            GetComponent<AudioSource>().PlayOneShot(teleportAudio);
+            playerTransform.position = hit.point + 0.1f * Vector3.up;
+        }
     }
     private void StopPushing(InputAction.CallbackContext ctx)
     {
