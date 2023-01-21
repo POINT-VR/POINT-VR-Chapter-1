@@ -53,7 +53,7 @@ public class HandController : MonoBehaviour
     /// <summary>
     /// The input reference used to enable/disable teleport mode
     /// </summary>
-    [SerializeField] InputActionReference teleportModeReference;
+    [SerializeField] InputActionReference pushingReference;
     /// <summary>
     /// The input reference used to pull an object closer to the hand
     /// </summary>
@@ -79,7 +79,11 @@ public class HandController : MonoBehaviour
     /// The square of the minimum distance maintained between a pulled object and the hand
     /// </summary>
     [SerializeField] float squaredMinPullDistance;
-    private bool teleportMode, holdingSlider, pulling, gravEnabled;
+    /// <summary>
+    /// The square of the maximum distance maintained between a pushed object and the hand
+    /// </summary>
+    [SerializeField] float squaredMaxPushDistance;
+    private bool pushing, holdingSlider, pulling, gravEnabled;
     private Transform previousParentTransform, grabbingTransform;
     private Color laserColor;
     private Collider lastColliderHit;
@@ -88,17 +92,17 @@ public class HandController : MonoBehaviour
     {
         selectReference.action.Enable();
         grabReference.action.Enable();
-        teleportModeReference.action.Enable();
+        pushingReference.action.Enable();
         selectReference.action.started += Select;
         selectReference.action.canceled += Unselect;
         grabReference.action.started += Grab;
         grabReference.action.canceled += Released;
-        teleportModeReference.action.started += TeleportModeActivate;
-        teleportModeReference.action.canceled += TeleportModeCancel;
+        pushingReference.action.started += StartPushing;
+        pushingReference.action.canceled += StopPushing;
         pullingReference.action.Enable();
         pullingReference.action.started += StartPulling;
         pullingReference.action.canceled += StopPulling;
-        teleportMode = false;
+        pushing = false;
         previousParentTransform = null;
         laserColor = laser.material.color;
     }
@@ -106,13 +110,13 @@ public class HandController : MonoBehaviour
     {
         selectReference.action.Disable();
         grabReference.action.Disable();
-        teleportModeReference.action.Disable();
+        pushingReference.action.Disable();
         selectReference.action.started -= Select;
         selectReference.action.canceled -= Unselect;
         grabReference.action.started -= Grab;
         grabReference.action.canceled -= Released; 
-        teleportModeReference.action.started -= TeleportModeActivate;
-        teleportModeReference.action.canceled -= TeleportModeCancel;
+        pushingReference.action.started -= StartPushing;
+        pushingReference.action.canceled -= StopPushing;
         pullingReference.action.Disable();
         pullingReference.action.started -= StartPulling;
         pullingReference.action.canceled -= StopPulling;
@@ -123,8 +127,11 @@ public class HandController : MonoBehaviour
         {
             grabbingTransform.position += pullSpeed * (transform.position - grabbingTransform.position).normalized;
         }
-
-        if ( (!pulling) && (grabbingTransform != null) ) // Holding an object
+        else if (pushing && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude < squaredMaxPushDistance) // object being pushed: push
+        {
+            grabbingTransform.position -= pullSpeed * (transform.position - grabbingTransform.position).normalized;
+        }
+        if ( (!pulling) && (grabbingTransform != null) && (!pushing) ) // Holding an object
         {
             grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed objects velocity to zero
 
@@ -133,23 +140,19 @@ public class HandController : MonoBehaviour
             grabbingTransformPositionPrev = grabbingTransform.position;
         }
         RaycastHit hit;
-        if (teleportMode) // Teleport mode: fires a raycast that places the reticle
-        {
-            Physics.Raycast(transform.position, transform.forward, out hit, teleportationDistance, floorMask);
-            if (hit.point != Vector3.zero) //Raycast found the floor: place reticle
-            {
-                reticle.SetActive(true);
-                reticle.transform.position = hit.point;
-                reticle.transform.LookAt(new Vector3(playerTransform.position.x, 0f, playerTransform.position.z));
-            }
-            else //Raycast was not able to find the floor: hides the reticle
-            {
-                reticle.SetActive(false);
-            }
-            return;
+        // Fires a raycast that places the reticle
+        Physics.Raycast(transform.position, transform.forward, out hit, teleportationDistance, floorMask);
+        if (hit.point != Vector3.zero) //Raycast found the floor: place reticle
+        { 
+            reticle.SetActive(true);
+            reticle.transform.position = hit.point;
+            reticle.transform.LookAt(new Vector3(playerTransform.position.x, 0f, playerTransform.position.z));
         }
-        //Not in teleport mode: hides the reticle, searches for UI
-        reticle.SetActive(false);
+        else //Raycast was not able to find the floor: hides the reticle
+        {
+            reticle.SetActive(false);
+        }
+        //Searches for UI
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI found: turn this green
         {
             if (hit.collider != lastColliderHit) //did not hit the same collider as in the previous frame: haptic feedback
@@ -217,40 +220,35 @@ public class HandController : MonoBehaviour
     }
     private void Select(InputAction.CallbackContext ctx)
     { 
-        if (teleportMode) // Teleport mode and user presses select: raycast checks for a floor and tries to teleport the user to it
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
         {
-            Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask);
-            if (hit.point != Vector3.zero) //Raycast detected the floor: teleport
-            {
-                GetComponent<AudioSource>().PlayOneShot(teleportAudio);
-                playerTransform.position = hit.point + 0.1f * Vector3.up;
-            }
+            GetComponent<AudioSource>().PlayOneShot(teleportAudio);
+            playerTransform.position = hit.point + 0.1f * Vector3.up;
+            return;
         }
-        else //Not in teleport mode and user presses select: raycast checks for UI (UICollider or Slider) and interacts with it
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI was detected: interact with it
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected: interact with it
+            GetComponent<AudioSource>().PlayScheduled(0);
+            UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
+            if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
             {
-                GetComponent<AudioSource>().PlayScheduled(0);
-                UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
-                if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
-                {
-                    activeUICollider.OnCast.Invoke();
-                }
-                CheckSlider(hit);
+                activeUICollider.OnCast.Invoke();
             }
+            CheckSlider(hit);
         }
     }
     private void Unselect(InputAction.CallbackContext ctx)
     {
         holdingSlider = false;
     }
-    private void TeleportModeCancel(InputAction.CallbackContext ctx)
+    private void StopPushing(InputAction.CallbackContext ctx)
     {
-        teleportMode = false;
+        pushing = false;
     }
-    private void TeleportModeActivate(InputAction.CallbackContext ctx)
+    private void StartPushing(InputAction.CallbackContext ctx)
     {
-        teleportMode = true;
+        pushing = true;
+        pulling = false;
     }
     private void CheckSlider(RaycastHit hit)
     {
@@ -280,5 +278,6 @@ public class HandController : MonoBehaviour
     private void StartPulling(InputAction.CallbackContext obj)
     {
         pulling = true;
+        pushing = false;
     }
 }
