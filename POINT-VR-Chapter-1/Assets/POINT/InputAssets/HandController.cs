@@ -229,16 +229,19 @@ public class HandController : MonoBehaviour
             }
             CheckSlider(hit);
         }
-        teleportMode = true;
+        else
+        {
+            teleportMode = true;
+        }
     }
     private void Unselect(InputAction.CallbackContext ctx)
     {
         holdingSlider = false;
-        teleportMode = false;
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
+        if (teleportMode && Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
         {
             GetComponent<AudioSource>().PlayOneShot(teleportAudio);
             playerTransform.position = hit.point + 0.1f * Vector3.up;
+            teleportMode = false;
         }
     }
     private void StopPushing(InputAction.CallbackContext ctx)
