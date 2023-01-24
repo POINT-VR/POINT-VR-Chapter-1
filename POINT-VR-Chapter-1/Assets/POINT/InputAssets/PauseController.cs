@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-
+/// <summary>
+/// The script that manages pausing and bringing up the menu. Should be attached to the player.
+/// </summary>
 public class PauseController : MonoBehaviour
 {
     /// <summary>

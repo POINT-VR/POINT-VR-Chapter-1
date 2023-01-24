@@ -2,7 +2,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.XR;
-
+/// <summary>
+/// This script should be attached to the GameObject that is meant to represent a physical hardware device in-game.
+/// </summary>
 public class XRHardwareController : MonoBehaviour
 {
     /// <summary>

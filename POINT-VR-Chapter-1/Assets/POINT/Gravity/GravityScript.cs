@@ -1,53 +1,40 @@
 ﻿using UnityEngine;
+/// <summary>
+/// Generic GravityScipt. Should work on any Mass Objects with a Collider.
+/// </summary>
 [RequireComponent(typeof(MeshRenderer))]
 public class GravityScript : MonoBehaviour
-{
-    /// <summary>
-    /// Generic GravityScipt. Should work on any Mass Objects with a Collider.
-    /// </summary>
-
+{   
     /// <summary>
     /// We will get the masses from the Rigidbody components
     /// </summary>
-    public Rigidbody[] rigidbodiesThatAttract;
-    
+    [SerializeField] Rigidbody[] rigidbodiesThatAttract;
     /// <summary>
     /// Mass object that the script is attached to
     /// </summary>
-    public Rigidbody massObject;
-    //[Header("Other Constants")]
-    public float power = 1f;
+    private Rigidbody massObject;
+    /// <summary>
+    /// The coefficient of the magnitude of force
+    /// </summary>
+    [SerializeField] float power;
 
     void Start()
     {
         massObject = GetComponent<Rigidbody>(); // This is the massobject that will experience gravity
     }
 
-    void OnCollisionEnter(Collision coll)
-    {
-    }
-
     private void FixedUpdate()
     {
-        Vector3 massPosition = massObject.transform.position;
-
-        Vector3[] otherMassPositions = new Vector3[rigidbodiesThatAttract.Length];
-
+        Vector3 massPosition = transform.position;
         Vector3 force = Vector3.zero;
-
-        for (int i = 0; i < rigidbodiesThatAttract.Length; i++) //Puts the mass positions on the stack ahead of time
+        for (int i = 0; i < rigidbodiesThatAttract.Length; i++)
         {
-            
-            otherMassPositions[i] = rigidbodiesThatAttract[i].transform.position;
-            Vector3 direction = otherMassPositions[i] - massPosition; 
-
+            Vector3 direction = rigidbodiesThatAttract[i].transform.position - massPosition; 
             // Newtonian Gravitational Force
             float mag = power*massObject.mass*rigidbodiesThatAttract[i].mass / direction.sqrMagnitude;
-
-            force += mag * direction / rigidbodiesThatAttract.Length; //Displacement from each mass is calculated independently, but combined by vector addition   
+            force += mag * direction; //Displacement from each mass is calculated independently, but combined by vector addition   
         }
-
         // Move Mass Object
-        massObject.AddForce(force, ForceMode.Force);
+        massObject.AddForce(force / rigidbodiesThatAttract.Length, ForceMode.Force);
     }
 }

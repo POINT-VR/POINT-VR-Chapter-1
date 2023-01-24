@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-
+/// <summary>
+/// A special component that stores a UnityEvent to be used when the hand's raycast finds the GameObject this is attached to.
+/// </summary>
 public class UICollider : MonoBehaviour
 {
     /// <summary>

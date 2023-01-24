@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+/// <summary>
+/// This simulates the player's hands in-game.
+/// </summary>
 public class HandController : MonoBehaviour
 {
     /// <summary>
@@ -87,7 +89,7 @@ public class HandController : MonoBehaviour
     private Transform previousParentTransform, grabbingTransform;
     private Color laserColor;
     private Collider lastColliderHit;
-    private Vector3 grabbingTransformVelocity, grabbingTransformPositionPrev = Vector3.zero;
+    private Vector3 grabbingTransformVelocity, grabbingTransformPositionPrev;
     private void OnEnable()
     {
         selectReference.action.Enable();
@@ -131,10 +133,8 @@ public class HandController : MonoBehaviour
         {
             grabbingTransform.position -= pullSpeed * (transform.position - grabbingTransform.position).normalized;
         }
-        if ( (!pulling) && (grabbingTransform != null) && (!pushing) ) // Holding an object
+        if (grabbingTransform != null) // Holding an object
         {
-            grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed objects velocity to zero
-
             // Stores the velocity of the grabbing transform while its grabbed
             grabbingTransformVelocity = grabbingTransform.position - grabbingTransformPositionPrev;
             grabbingTransformPositionPrev = grabbingTransform.position;
@@ -210,6 +210,7 @@ public class HandController : MonoBehaviour
         }
         previousParentTransform = grabbingTransform.parent;
         grabbingTransform.SetParent(transform);
+        grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed object's velocity to zero
         GravityScript grav = grabbingTransform.GetComponent<GravityScript>();
         if (grav != null)
         {
@@ -217,6 +218,10 @@ public class HandController : MonoBehaviour
             grav.enabled = false;
         }
     }
+    /// <summary>
+    /// Runs when the user starts holding down the trigger.
+    /// </summary>
+    /// <param name="ctx"></param>
     private void Select(InputAction.CallbackContext ctx)
     { 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected: interact with it
@@ -234,6 +239,10 @@ public class HandController : MonoBehaviour
             teleportMode = true;
         }
     }
+    /// <summary>
+    /// Runs when the user releases the trigger.
+    /// </summary>
+    /// <param name="ctx"></param>
     private void Unselect(InputAction.CallbackContext ctx)
     {
         holdingSlider = false;
@@ -253,6 +262,10 @@ public class HandController : MonoBehaviour
         pushing = true;
         pulling = false;
     }
+    /// <summary>
+    /// Checks if the raycast hit was against a slider and acts on the slider if so
+    /// </summary>
+    /// <param name="hit"></param>
     private void CheckSlider(RaycastHit hit)
     {
         Slider activeSlider = hit.collider.gameObject.GetComponent<Slider>();

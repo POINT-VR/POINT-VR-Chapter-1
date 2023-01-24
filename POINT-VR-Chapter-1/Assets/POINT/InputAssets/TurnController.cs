@@ -1,7 +1,9 @@
 ﻿using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
-
+/// <summary>
+/// This script will rotate a GameObject by a specified number of degrees.
+/// </summary>
 public class TurnController : MonoBehaviour
 {
     /// <summary>
