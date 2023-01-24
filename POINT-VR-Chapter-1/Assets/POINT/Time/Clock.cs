@@ -81,7 +81,7 @@ public class Clock : MonoBehaviour
             totalRotationSpeed += rotation; //Displacement from each mass is calculated
         }
 
-        totalRotationSpeed = totalRotationSpeed / nMass;
+        totalRotationSpeed /= nMass;
 
         transform.LookAt(cameraObject);
         zAngle += totalRotationSpeed * rotationMultiplier * Time.deltaTime;

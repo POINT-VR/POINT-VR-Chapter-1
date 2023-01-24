@@ -31,7 +31,7 @@ public class TimerUI : MonoBehaviour
     /// <summary>
     /// The should specific the monospace width if mspace is used.
     /// </summary>
-    private float charWidth = 0.7f;
+    readonly private float charWidth = 0.7f;
 
     void Start()
     {
@@ -80,7 +80,7 @@ public class TimerUI : MonoBehaviour
             totalRotationSpeed += rotation; //Displacement from each mass is calculated
         }
 
-        totalRotationSpeed = totalRotationSpeed / nMass;
+        totalRotationSpeed /= nMass;
 
         transform.LookAt(cameraObject);
         transform.Rotate(0.0f, 180.0f, 0.0f);

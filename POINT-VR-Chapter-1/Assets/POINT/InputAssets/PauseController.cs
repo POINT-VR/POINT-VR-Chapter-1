@@ -21,6 +21,14 @@ public class PauseController : MonoBehaviour
     [Header("Specific objects affected by pausing")]
     [SerializeField] GameObject menu;
     /// <summary>
+    /// The UI container
+    /// </summary>
+    [SerializeField] GameObject uiContainer;
+    /// <summary>
+    /// The Gripnotice
+    /// </summary>
+    [SerializeField] GameObject gripNotice;
+    /// <summary>
     /// Necessary for dropping objects on game pause
     /// </summary>
     [SerializeField] HandController leftHand, rightHand;
@@ -45,6 +53,7 @@ public class PauseController : MonoBehaviour
 
     private void Toggle(InputAction.CallbackContext ctx)
     {
+        gripNotice.SetActive(false);
         rightHand.Release();
         leftHand.Release();
         laserLeft.localScale = new Vector3(laserLeft.localScale.x, gamePaused ? laserSize : reducedLaserSize, laserLeft.localScale.z);
@@ -67,11 +76,17 @@ public class PauseController : MonoBehaviour
                 g.SetActive(gamePaused);
             }
         }
-        Vector3 xzForward = new Vector3(mainCamera.forward.x, 0.0f, mainCamera.forward.z);
-        transform.position = mainCamera.position + (xzForward.normalized * distanceFromCamera);
-        transform.rotation = mainCamera.rotation;
         gamePaused = !gamePaused;
         menu.SetActive(gamePaused);
+        if (gamePaused)
+        {
+            uiContainer.transform.SetParent(transform);
+        }
+        else
+        {
+            uiContainer.transform.SetParent(mainCamera);
+            uiContainer.transform.SetPositionAndRotation(mainCamera.position + mainCamera.forward * distanceFromCamera, mainCamera.rotation);
+        }
     }
     private void OnDestroy()
     {

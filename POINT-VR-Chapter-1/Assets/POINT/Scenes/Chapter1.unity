@@ -2218,7 +2218,7 @@ GameObject:
   - component: {fileID: 347936249}
   m_Layer: 5
   m_Name: Scene 1
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2725,9 +2725,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggleReference: {fileID: 4068349929249546255, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
-  mainCamera: {fileID: 0}
-  distanceFromCamera: 0
+  mainCamera: {fileID: 676191958}
+  distanceFromCamera: 1.25
   menu: {fileID: 1585591142}
+  uiContainer: {fileID: 1959276382}
+  gripNotice: {fileID: 1250124434}
   leftHand: {fileID: 1745685543}
   rightHand: {fileID: 1620489865}
   laserRight: {fileID: 1772584845}
@@ -6314,7 +6316,7 @@ GameObject:
   - component: {fileID: 1067560769}
   m_Layer: 5
   m_Name: Scene 3
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7262,7 +7264,7 @@ GameObject:
   - component: {fileID: 1220050631}
   m_Layer: 5
   m_Name: Scene 2
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,11 +7,11 @@ public class GridScript : MonoBehaviour
     /// </summary>
     public Rigidbody[] rigidbodiesToDeformAround;
     Mesh deformingMesh;
-    float thickness = 0.02f;
-    int size_z = 8;
-    int size_x = 8;
-    int size_y = 5; //Produces a 7 x 7 x 4 grid
-    int divisions = 3;
+    readonly float thickness = 0.02f;
+    readonly int size_z = 8;
+    readonly int size_x = 8;
+    readonly int size_y = 5; //Produces a 7 x 7 x 4 grid
+    readonly int divisions = 3;
     private void FixedUpdate()
     {
         Vector3[] displaced = new Vector3[size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1)]; 
