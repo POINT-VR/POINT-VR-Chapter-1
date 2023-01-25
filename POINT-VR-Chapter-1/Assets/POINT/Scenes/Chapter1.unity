@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
+  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2299,7 +2299,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863763}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -2321,7 +2321,7 @@ MonoBehaviour:
           m_StringArgument: Intialize
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863767}
         m_MethodName: SendMessage
         m_Mode: 5
         m_Arguments:
@@ -2343,7 +2343,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863761}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -5338,7 +5338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   massObject: {fileID: 754863762}
-  intialPos: {x: 2, y: 1, z: 2}
+  intialPos: {x: 4, y: 1, z: 2}
 --- !u!4 &754863768
 Transform:
   m_ObjectHideFlags: 0
@@ -5347,7 +5347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754863761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 1, z: 4}
+  m_LocalPosition: {x: 4, y: 1, z: 2}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6396,7 +6396,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863761}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -6418,7 +6418,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863763}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -6440,7 +6440,7 @@ MonoBehaviour:
           m_StringArgument: Intialize
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863767}
         m_MethodName: SendMessage
         m_Mode: 5
         m_Arguments:
@@ -7333,7 +7333,7 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863763}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -7366,7 +7366,7 @@ MonoBehaviour:
           m_StringArgument: Intialize
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863767}
         m_MethodName: SendMessage
         m_Mode: 5
         m_Arguments:
@@ -7388,7 +7388,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 754863761}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
