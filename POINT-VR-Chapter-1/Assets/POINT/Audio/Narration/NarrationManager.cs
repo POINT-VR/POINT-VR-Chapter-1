@@ -18,11 +18,6 @@ public class NarrationManager : MonoBehaviour
     [SerializeField]
     private GameObject subtitleObject = null;
 
-    private void Start()
-    {
-        PlayClipWithSubtitles("Narration_test");
-    }
-
     /// <summary>
     /// This function plays an audio clip (whose name WITHOUT the file type is the parameter) and activates
     /// the corresponding subtitles in a .vtt file with the SAME name (minus file extension).
