@@ -3431,8 +3431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f9af8fd5592e7488d351fea59a1f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderPath: Assets/POINT/Audio/Narration/Resources/
   subtitleObject: {fileID: 1508526991}
+  volumeScale: 3
 --- !u!1 &689092732
 GameObject:
   m_ObjectHideFlags: 0
