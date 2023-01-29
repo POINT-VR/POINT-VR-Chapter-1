@@ -71,6 +71,8 @@ public class PauseController : MonoBehaviour
         transform.position = mainCamera.position + (xzForward.normalized * distanceFromCamera);
         transform.rotation = mainCamera.rotation;
         gamePaused = !gamePaused;
+        Time.timeScale = gamePaused ? 0.0f : 1.0f;
+        AudioListener.pause = gamePaused;
         menu.SetActive(gamePaused);
     }
     private void OnDestroy()
