@@ -250,8 +250,8 @@ public class HandController : MonoBehaviour
         {
             GetComponent<AudioSource>().PlayOneShot(teleportAudio);
             playerTransform.position = hit.point + 0.1f * Vector3.up;
-            teleportMode = false;
         }
+        teleportMode = false;
     }
     private void StopPushing(InputAction.CallbackContext ctx)
     {

@@ -82,7 +82,7 @@ public class PauseController : MonoBehaviour
         menu.SetActive(gamePaused);
         if (gamePaused)
         {
-            uiContainer.transform.SetParent(transform);
+            uiContainer.transform.SetParent(transform.parent);
         }
         else
         {
