@@ -3933,6 +3933,8 @@ MonoBehaviour:
   rigidbodiesToDeformAround: []
   cameraObject: {fileID: 0}
   rotationMultiplier: 200
+  power: 1
+  cutoff: 5
 --- !u!212 &869671992
 SpriteRenderer:
   m_ObjectHideFlags: 0
