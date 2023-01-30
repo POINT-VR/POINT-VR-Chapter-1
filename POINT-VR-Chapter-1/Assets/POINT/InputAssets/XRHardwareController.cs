@@ -24,8 +24,12 @@ public class XRHardwareController : MonoBehaviour
     /// The input reference reading this hardware's rotation in the real world
     /// </summary>
     [SerializeField] InputActionReference rotationReference;
+    /// <summary>
+    /// The height of the player in the game world.
+    /// </summary>
     private float playerHeight;
     private XRControllerWithRumble inputDevice;
+    private static Vector3 offset;
     private void OnEnable()
     {
         playerHeight = transform.position.y;
@@ -75,7 +79,12 @@ public class XRHardwareController : MonoBehaviour
     private void UpdateHardware()
     {
         //Syncs up the hardware gameobjects in the simulation with the hardware in the real world
-        transform.localPosition = positionReference.action.ReadValue<Vector3>() + Vector3.up * playerHeight;
+        Vector3 pos = positionReference.action.ReadValue<Vector3>();
+        if (hardwareType == Hardware.Headset && (pos-offset).sqrMagnitude > playerHeight * playerHeight) //Player has walked away: recenters the simulation
+        {
+            offset = pos;
+        }
+        transform.localPosition = pos - offset + Vector3.up * playerHeight;
         transform.localRotation = rotationReference.action.ReadValue<Quaternion>();
     }
 }
