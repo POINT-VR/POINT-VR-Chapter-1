@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class NarrationManager : MonoBehaviour
 {
     // Constants
-    private const string DEFAULT_SUBTITLE_LANGUAGE = "Disabled"; // "Disabled" being no subtitles by default
+    private const string DEFAULT_SUBTITLE_LANGUAGE = "English";
 
     /// <summary>
     /// The GameObject with a TextMeshPro component to display the subtitles
