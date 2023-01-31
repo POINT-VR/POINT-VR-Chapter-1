@@ -97,5 +97,16 @@ public class PauseController : MonoBehaviour
         toggleReference.action.Disable();
         toggleReference.action.started -= Toggle;
     }
-
+    private void OnApplicationFocus(bool focus)
+    {
+#if UNITY_EDITOR // Running this in the Unity Editor will make debugging impossible
+        return;
+#endif
+#pragma warning disable CS0162 // Unreachable code detected
+        if (!focus && !gamePaused)
+        {
+            Toggle(new InputAction.CallbackContext());
+        }
+#pragma warning restore CS0162 // Unreachable code detected
+    }
 }
