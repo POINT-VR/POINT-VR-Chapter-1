@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
+  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4744,6 +4744,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 640190560}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &640190562 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8248188717145690771, guid: f99002b6176478346b071914492bac93,
+    type: 3}
+  m_PrefabInstance: {fileID: 640190560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &660540716
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,7 +4852,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1585591144}
+        m_MethodName: AdjustFunctionalAudioVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &676191957
 GameObject:
   m_ObjectHideFlags: 0
@@ -5286,6 +5303,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f99002b6176478346b071914492bac93, type: 3}
+--- !u!82 &719088862 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8248188717145690771, guid: f99002b6176478346b071914492bac93,
+    type: 3}
+  m_PrefabInstance: {fileID: 719088861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &721654651
 GameObject:
   m_ObjectHideFlags: 0
@@ -6077,7 +6100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 537f8fe53f9e62149912de6b1eeff99b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2fd5d1cc5aefbbb44970df4510cf7729, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6510,7 +6533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2fd5d1cc5aefbbb44970df4510cf7729, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 537f8fe53f9e62149912de6b1eeff99b, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7614,7 +7637,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1585591144}
+        m_MethodName: AdjustAestheticAudioVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1220050629
 GameObject:
   m_ObjectHideFlags: 0
@@ -8204,6 +8238,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 420184139}
+        m_MethodName: PlayClipWithSubtitles
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Narration_test
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!65 &1250124438
@@ -9955,8 +10000,12 @@ MonoBehaviour:
     type: 3}
   functionalAudio:
   - {fileID: 420184140}
+  - {fileID: 640190562}
+  - {fileID: 719088862}
   aestheticAudio:
   - {fileID: 676191960}
+  - {fileID: 1745685545}
+  - {fileID: 1620489864}
 --- !u!114 &1585591145
 MonoBehaviour:
   m_ObjectHideFlags: 0
