@@ -79,6 +79,8 @@ public class PauseController : MonoBehaviour
             }
         }
         gamePaused = !gamePaused;
+        Time.timeScale = gamePaused ? 0.0f : 1.0f;
+        AudioListener.pause = gamePaused;
         menu.SetActive(gamePaused);
         if (gamePaused)
         {

@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     private Color32 ACTIVE_BUTTON_COLOR = new Color32(255, 255, 255, 255);
     private Color32 INACTIVE_BUTTON_COLOR = new Color32(123, 231, 255, 127);
 
+    [SerializeField] NarrationManager narrationManager = null;
+
     [SerializeField] private Sprite subtitleToggleSelected = null;
     [SerializeField] private Sprite subtitleToggleUnselected = null;
     [SerializeField] private AudioSource[] functionalAudio = null;
@@ -65,7 +67,7 @@ public class UIManager : MonoBehaviour
     /// Toggles on selected toggle (i.e. radio button) and switches off everything else
     /// </summary>
     /// <param name="toggle"></param>
-    public void ActivateToggle(GameObject toggle)
+    public void ActivateLanguageToggle(GameObject toggle)
     {
         Transform parent = toggle.transform.parent?.transform;
         if (parent != null)
@@ -75,7 +77,15 @@ public class UIManager : MonoBehaviour
                 Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
                 if (imageComponent != null)
                 {
-                    imageComponent.sprite = (i == toggle.transform.GetSiblingIndex()) ? subtitleToggleSelected : subtitleToggleUnselected;
+                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
+                    {
+                        imageComponent.sprite = subtitleToggleSelected;
+                        narrationManager.SubtitlesLanguage = toggle.GetComponentInChildren<TMP_Text>().text;
+                    }
+                    else
+                    {
+                        imageComponent.sprite = subtitleToggleUnselected;
+                    }
                 }
             }
         }
