@@ -252,6 +252,17 @@
                 },
                 {
                     "name": "",
+                    "id": "6e4ee116-361c-4275-8a93-9fe6d4a6cbf3",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ce40b17c-b88d-4cd2-99af-2e9f63ce6441",
                     "path": "<XRController>{LeftHand}/primaryButton",
                     "interactions": "",
@@ -496,11 +507,33 @@
                 },
                 {
                     "name": "",
+                    "id": "1d3037ec-d355-49f0-bf1e-77b4aa969e2e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "97fc1ec4-b840-4cc4-8399-e940593aa590",
                     "path": "<XRController>{RightHand}/triggerPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43399444-4977-4d56-9e56-50ea4150137f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -518,6 +551,17 @@
                 },
                 {
                     "name": "",
+                    "id": "524b27ba-5f26-4eb9-a977-d3e2e7c78dbf",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pull",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3e8cef5d-d11e-43e4-85ba-94e984e7a798",
                     "path": "<XRController>{RightHand}/secondaryButton",
                     "interactions": "",
@@ -529,11 +573,33 @@
                 },
                 {
                     "name": "",
+                    "id": "e082ad3d-2ae2-4e1b-ad4a-da35774aca5e",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Push",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "22531d62-0281-4cf2-818f-ac7eb5fdb44e",
                     "path": "<XRController>{RightHand}/thumbstick",
                     "interactions": "",
                     "processors": "ScaleVector2(x=0)",
                     "groups": "Generic XR Controller",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9dd50bca-8b75-4a17-ac8f-28d5f86ab1ba",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -8464,6 +8464,7 @@ GameObject:
   - component: {fileID: 685732246913176618}
   - component: {fileID: 685732246913176616}
   - component: {fileID: 685732246913176623}
+  - component: {fileID: 4628402554684673264}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8647,6 +8648,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4628402554684673264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685732246913176612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b26b70a3e9b244282eae5b4966a565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorPlayerRotatationOverride: {fileID: -5108982575841247716, guid: 3ebf7d7b5d8065d4a92b1c8b49f21f22,
+    type: 3}
+  sensY: 1
+  sensX: 1
 --- !u!1 &685732246929129159
 GameObject:
   m_ObjectHideFlags: 0
@@ -11680,6 +11697,7 @@ GameObject:
   - component: {fileID: 7359212537532628312}
   - component: {fileID: 2305387635105007749}
   - component: {fileID: 1993693436745722574}
+  - component: {fileID: 7112442839731638073}
   m_Layer: 2
   m_Name: RightHand
   m_TagString: Player
@@ -11804,6 +11822,21 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.01693492, y: 0.009676155, z: 0.07572872}
     m_Extent: {x: 0.0666367, y: 0.08070943, z: 0.10342223}
   m_DirtyAABB: 0
+--- !u!114 &7112442839731638073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718096105564601552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab067ae942150d458a8943a87be44d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delta: 0.05
+  motionReference: {fileID: -1329410256514294962, guid: 3ebf7d7b5d8065d4a92b1c8b49f21f22,
+    type: 3}
 --- !u!1 &3759497290745788629
 GameObject:
   m_ObjectHideFlags: 0
