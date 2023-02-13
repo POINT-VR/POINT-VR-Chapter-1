@@ -13,7 +13,7 @@ public class UICollider : MonoBehaviour
     /// What should happen when this UI element is clicked via the raycaster?
     /// </summary>
     [SerializeField] UnityEvent onCast;
-    private void Awake()
+    private void Start()
     {
         OnCast = onCast;
     }

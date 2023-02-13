@@ -45,7 +45,7 @@ public class PauseController : MonoBehaviour
     private bool gamePaused;
     private float laserSize;
     private GameObject[] disabledObjects;
-    private void Awake()
+    private void OnEnable()
     {
         toggleReference.action.Enable();
         toggleReference.action.started += Toggle;
@@ -92,7 +92,7 @@ public class PauseController : MonoBehaviour
             uiContainer.transform.SetPositionAndRotation(mainCamera.position + mainCamera.forward * distanceFromCamera, mainCamera.rotation);
         }
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         toggleReference.action.Disable();
         toggleReference.action.started -= Toggle;

@@ -145,7 +145,7 @@ public class HandController : MonoBehaviour
         { 
             reticle.SetActive(true);
             reticle.transform.position = hit.point;
-            reticle.transform.LookAt(new Vector3(playerTransform.position.x, 0f, playerTransform.position.z));
+            reticle.transform.LookAt(new Vector3(playerTransform.parent.position.x, 0f, playerTransform.parent.position.z));
         }
         else //Not in teleport mode or raycast was not able to find the floor: hides the reticle
         {
@@ -249,7 +249,7 @@ public class HandController : MonoBehaviour
         if (teleportMode && Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
         {
             GetComponent<AudioSource>().PlayOneShot(teleportAudio);
-            playerTransform.position = hit.point + 0.1f * Vector3.up;
+            playerTransform.parent.position = hit.point;
         }
         teleportMode = false;
     }
