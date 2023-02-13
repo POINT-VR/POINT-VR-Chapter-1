@@ -58,8 +58,10 @@ public class AxisScript : MonoBehaviour
         XBody.transform.localScale = new Vector3(1,scale.x,1);
         YBody.transform.localScale = new Vector3(1, scale.y, 1);
         ZBody.transform.localScale = new Vector3(1, scale.z, 1);
+
+
         XAxis.transform.localPosition = new Vector3(scale.x/4 - (1 / (float)5.5), ((float)0.146)+0, 0);
-        YAxis.transform.localPosition = new Vector3(0, ((float)0.159)+scale.y/4-(1/ (float)5.5), 0);
+        YAxis.transform.localPosition = new Vector3(0, ((float)0.146)+scale.y/4-(1/ (float)5.5), 0);
         ZAxis.transform.localPosition = new Vector3(0,((float)0.146) + 0, scale.z/4 - (1 / (float)5.5));
         //XBody.transform.localScale = scale;
         //YBody.transform.localScale = scale;
