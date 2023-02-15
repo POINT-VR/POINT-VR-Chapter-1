@@ -2864,14 +2864,14 @@ MonoBehaviour:
   subtitleObject: {fileID: 200854331}
   volumeScale: 3
   latinFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
-  arabicFont: {fileID: 11400000, guid: 6fc38ac968f0d8a45aef435c6f6a39d4, type: 2}
-  bengaliFont: {fileID: 11400000, guid: bf18a0705aede31439f3c02562bc2cab, type: 2}
+  arabicFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
+  bengaliFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
   hindiFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
-  japaneseFont: {fileID: 11400000, guid: fa987150cb67b01448b74efefc7d5196, type: 2}
-  koreanFont: {fileID: 11400000, guid: c3d6b9a9e6470564b8bb5231df145427, type: 2}
-  chineseFont: {fileID: 11400000, guid: fa987150cb67b01448b74efefc7d5196, type: 2}
+  japaneseFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
+  koreanFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
+  chineseFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
   russianFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
-  teluguFont: {fileID: 11400000, guid: 2f1909fda4c7510488433d56b91da809, type: 2}
+  teluguFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
 --- !u!82 &420184140
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7022,8 +7022,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Subtitles appear here
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
+  m_sharedMaterial: {fileID: -9070402161357421099, guid: cccebb56e08497443ae4756fc5c84445,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8990,7 +8991,7 @@ MonoBehaviour:
 
     (Current)'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10655,7 +10656,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Scene 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -12811,7 +12812,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Scene 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

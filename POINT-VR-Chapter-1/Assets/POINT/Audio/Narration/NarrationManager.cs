@@ -120,8 +120,7 @@ public class NarrationManager : MonoBehaviour
             subtitleText.font = currentFont;
             subtitleObject.SetActive(true);
             subtitleText.text = output;
-            subtitleText.ForceMeshUpdate();
-            subtitleBackground.rectTransform.sizeDelta = new Vector2(subtitleText.renderedWidth, subtitleText.renderedHeight);
+            subtitleBackground.rectTransform.sizeDelta = new Vector2(subtitleText.preferredWidth, subtitleText.preferredHeight);
         }
         else
         {
