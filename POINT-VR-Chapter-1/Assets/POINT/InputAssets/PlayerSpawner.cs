@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 public class PlayerSpawner : MonoBehaviour
 {
     /// <summary>
@@ -9,9 +8,5 @@ public class PlayerSpawner : MonoBehaviour
     private void Awake()
     {
         Instantiate(player, transform);
-    }
-    public void ChangeScene(int scene)
-    {
-        SceneManager.LoadScene(scene);
     }
 }

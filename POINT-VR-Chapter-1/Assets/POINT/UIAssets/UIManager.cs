@@ -81,6 +81,7 @@ public class UIManager : MonoBehaviour
                     {
                         imageComponent.sprite = subtitleToggleSelected;
                         narrationManager.SubtitlesLanguage = toggle.GetComponentInChildren<TMP_Text>().text;
+                        GameManager.Instance.languageSelected = (GameManager.Language)i;
                     }
                     else
                     {
