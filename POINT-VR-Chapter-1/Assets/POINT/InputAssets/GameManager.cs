@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     }
     public static GameManager Instance { get; private set; }
     public enum Language { Disabled, English };
-    public Language languageSelected; //Language is stored separately. This variable can be modified directly.
+    ///Language is stored separately. This variable can be modified directly.
+    public Language languageSelected; 
     PlayerData data;
     private void Awake()
     {

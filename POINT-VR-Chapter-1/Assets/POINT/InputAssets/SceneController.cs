@@ -7,6 +7,8 @@ public class SceneController : MonoBehaviour
     [SerializeField] GameObject gripNotice;
     [SerializeField] Slider functional;
     [SerializeField] Slider aesthetic;
+    [SerializeField] UIManager uiManager;
+    [SerializeField] Transform toggleBase;
     private void Start()
     {
         GameManager.PlayerData data = GameManager.Instance.GetData();
@@ -14,6 +16,8 @@ public class SceneController : MonoBehaviour
         gripNotice.SetActive(data.gripNoticeEnabled);
         functional.value = data.functionalVolume;
         aesthetic.value = data.aestheticVolume;
+        uiManager.ActivateLanguageToggle(toggleBase.GetChild((int)GameManager.Instance.languageSelected).gameObject);
+        music.mute = false;
     }
     public void ChangeScene(int scene)
     {

@@ -47,6 +47,8 @@ MonoBehaviour:
   gripNotice: {fileID: 7621421585614459648}
   functional: {fileID: 7621421585174838461}
   aesthetic: {fileID: 7621421585582774261}
+  uiManager: {fileID: 7621421585278829306}
+  toggleBase: {fileID: 7621421586122636177}
 --- !u!1 &7621421584179137201
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,7 +3510,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -3801,17 +3803,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7621421584263393753}
-        m_MethodName: PlayClipWithSubtitles
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Narration_test
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7621421585112757254
