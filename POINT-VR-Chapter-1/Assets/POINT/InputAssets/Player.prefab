@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6021770485897201560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3590275744770584969}
+  - component: {fileID: 7821670598243568877}
+  m_Layer: 0
+  m_Name: SceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3590275744770584969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021770485897201560}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7621421584263393754}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7821670598243568877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021770485897201560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e1c611898c1b242bb1f1b8d0686347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 7621421585056264010}
+  gripNotice: {fileID: 7621421585614459648}
+  functional: {fileID: 7621421585174838461}
+  aesthetic: {fileID: 7621421585582774261}
 --- !u!1 &7621421584179137201
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +539,6 @@ GameObject:
   - component: {fileID: 7621421584263393755}
   - component: {fileID: 7621421584263393753}
   - component: {fileID: 7621421584263393758}
-  - component: {fileID: 1797407321569618835}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -511,6 +557,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3590275744770584969}
   - {fileID: 7621421584706830787}
   - {fileID: 7621421585112757255}
   - {fileID: 7621421585056264004}
@@ -675,22 +722,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1797407321569618835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7621421584263393749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e1c611898c1b242bb1f1b8d0686347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 0}
-  gripNotice: {fileID: 0}
-  functional: {fileID: 0}
-  aesthetic: {fileID: 0}
 --- !u!1 &7621421584273497036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1775,7 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3628631203363201956}
+      - m_Target: {fileID: 7821670598243568877}
         m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
@@ -1959,7 +1990,7 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3628631203363201956}
+      - m_Target: {fileID: 7821670598243568877}
         m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
@@ -2375,7 +2406,7 @@ Transform:
   - {fileID: 7621421586125766074}
   - {fileID: 7621421585073359380}
   m_Father: {fileID: 7621421584263393754}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7621421584706830813
 MonoBehaviour:
@@ -3380,7 +3411,7 @@ Transform:
   - {fileID: 7621421585919909581}
   - {fileID: 7621421584564157102}
   m_Father: {fileID: 7621421584263393754}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &7621421585056264005
 Camera:
@@ -3815,7 +3846,7 @@ Transform:
   - {fileID: 7621421586253252373}
   - {fileID: 7621421585654123920}
   m_Father: {fileID: 7621421584263393754}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7621421585112757252
 MonoBehaviour:
@@ -4609,7 +4640,6 @@ GameObject:
   - component: {fileID: 7621421585229476729}
   - component: {fileID: 7621421585229476735}
   - component: {fileID: 7621421585229476734}
-  - component: {fileID: 3628631203363201956}
   m_Layer: 5
   m_Name: SceneSelect
   m_TagString: Untagged
@@ -4672,22 +4702,6 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
---- !u!114 &3628631203363201956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7621421585229476728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e1c611898c1b242bb1f1b8d0686347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 0}
-  gripNotice: {fileID: 0}
-  functional: {fileID: 0}
-  aesthetic: {fileID: 0}
 --- !u!1 &7621421585277036057
 GameObject:
   m_ObjectHideFlags: 0
@@ -4859,8 +4873,6 @@ MonoBehaviour:
     type: 3}
   functionalAudio:
   - {fileID: 7621421584263393758}
-  - {fileID: 0}
-  - {fileID: 0}
   aestheticAudio:
   - {fileID: 7621421585056264010}
   - {fileID: 7621421586125766075}
@@ -9811,7 +9823,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7621421586292587665}
   - component: {fileID: 7621421586292587670}
-  - component: {fileID: 9070252633285717862}
   m_Layer: 5
   m_Name: ScenesMenu
   m_TagString: Untagged
@@ -9850,19 +9861,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7621421586292587664}
   m_CullTransparentMesh: 0
---- !u!114 &9070252633285717862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7621421586292587664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e1c611898c1b242bb1f1b8d0686347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 7621421585056264010}
-  gripNotice: {fileID: 7621421585614459648}
-  functional: {fileID: 7621421585174838461}
-  aesthetic: {fileID: 7621421585582774261}

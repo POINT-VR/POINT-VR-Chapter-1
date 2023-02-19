@@ -7,7 +7,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] GameObject gripNotice;
     [SerializeField] Slider functional;
     [SerializeField] Slider aesthetic;
-    private void Awake()
+    private void Start()
     {
         GameManager.PlayerData data = GameManager.Instance.GetData();
         music.time = data.musicTime;
