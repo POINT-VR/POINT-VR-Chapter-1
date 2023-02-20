@@ -129,20 +129,14 @@ public class UIManager : MonoBehaviour
         Transform parent = toggle.transform.parent?.transform;
         if (parent != null)
         {
-            for (int i = 0; i < parent.childCount; i++)
+            parent.GetChild(0).GetComponentInChildren<Image>().sprite = floorMeshRenderer.enabled ? toggleUnselected : toggleSelected;
+            parent.GetChild(1).GetComponentInChildren<Image>().sprite = floorMeshRenderer.enabled ? toggleSelected : toggleUnselected;
+
+            Transform grandparent = parent.transform.parent?.transform;
+            if (grandparent != null)
             {
-                Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
-                if (imageComponent != null)
-                {
-                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
-                    {
-                        imageComponent.sprite = toggleSelected;
-                    }
-                    else
-                    {
-                        imageComponent.sprite = toggleUnselected;
-                    }
-                }
+                // Show disclaimer if floor is on, and hide if floor is off
+                grandparent.GetChild(grandparent.childCount - 1).gameObject.SetActive(floorMeshRenderer.enabled);
             }
         }
     }
