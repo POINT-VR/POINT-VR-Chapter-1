@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0068936315, g: 0.0067525106, b: 0.0071824407, a: 1}
+  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -738,6 +738,7 @@ GameObject:
   - component: {fileID: 64981085}
   - component: {fileID: 64981090}
   - component: {fileID: 64981089}
+  - component: {fileID: 64981092}
   m_Layer: 9
   m_Name: Mass Sphere
   m_TagString: Untagged
@@ -864,6 +865,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   massObject: {fileID: 64981090}
   intialPos: {x: 2, y: 1, z: 2}
+--- !u!114 &64981092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64981084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9ac6eed61350546b91d45ce5fe988d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 1.6
+  floor: {fileID: 1337579476}
+  squaredMaxDistance: 61
 --- !u!1 &70691634
 GameObject:
   m_ObjectHideFlags: 0
@@ -6315,6 +6331,7 @@ GameObject:
   - component: {fileID: 754863764}
   - component: {fileID: 754863762}
   - component: {fileID: 754863763}
+  - component: {fileID: 754863769}
   m_Layer: 9
   m_Name: Mass Sphere 2
   m_TagString: Untagged
@@ -6441,6 +6458,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &754863769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754863761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9ac6eed61350546b91d45ce5fe988d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 1.6
+  floor: {fileID: 1337579476}
+  squaredMaxDistance: 61
 --- !u!1 &787569686
 GameObject:
   m_ObjectHideFlags: 0
@@ -9434,7 +9466,7 @@ MeshRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 2
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
