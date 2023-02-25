@@ -9,6 +9,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] Slider aesthetic;
     [SerializeField] UIManager uiManager;
     [SerializeField] Transform toggleBase;
+    [SerializeField] PauseController pause;
     private void Start()
     {
         GameManager.PlayerData data = GameManager.Instance.GetData();
@@ -27,6 +28,7 @@ public class SceneController : MonoBehaviour
         data.functionalVolume = functional.value;
         data.aestheticVolume = aesthetic.value;
         GameManager.Instance.SetData(data);
+        pause.Unpause();
         SceneManager.LoadScene(scene);
     }
 }

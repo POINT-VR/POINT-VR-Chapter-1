@@ -109,4 +109,11 @@ public class PauseController : MonoBehaviour
         }
 #pragma warning restore CS0162 // Unreachable code detected
     }
+    public void Unpause()
+    {
+        if (gamePaused)
+        {
+            Toggle(new InputAction.CallbackContext());
+        }
+    }
 }

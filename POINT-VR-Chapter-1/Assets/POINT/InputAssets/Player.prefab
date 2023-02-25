@@ -49,6 +49,7 @@ MonoBehaviour:
   aesthetic: {fileID: 7621421585582774261}
   uiManager: {fileID: 7621421585278829306}
   toggleBase: {fileID: 7621421586122636177}
+  pause: {fileID: 7621421584263393755}
 --- !u!1 &7621421584179137201
 GameObject:
   m_ObjectHideFlags: 0
