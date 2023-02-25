@@ -14,7 +14,7 @@ public class GridScript : MonoBehaviour
     readonly int size_z = 8;
     readonly int size_x = 8;
     readonly int size_y = 5; //Produces a 7 x 7 x 4 grid
-    readonly int divisions = 3;
+    readonly int divisions = 5;
     private void FixedUpdate()
     {
         Vector3[] displaced = new Vector3[size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1)]; 
