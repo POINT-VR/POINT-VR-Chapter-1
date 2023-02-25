@@ -10,12 +10,15 @@ public class UIManager : MonoBehaviour
     private Color32 ACTIVE_BUTTON_COLOR = new Color32(255, 255, 255, 255);
     private Color32 INACTIVE_BUTTON_COLOR = new Color32(123, 231, 255, 127);
 
-    [SerializeField] NarrationManager narrationManager = null;
-
-    [SerializeField] private Sprite subtitleToggleSelected = null;
-    [SerializeField] private Sprite subtitleToggleUnselected = null;
+    [SerializeField] private Sprite toggleSelected = null;
+    [SerializeField] private Sprite toggleUnselected = null;
+    [Header("Volume Adjustments")]
     [SerializeField] private AudioSource[] functionalAudio = null;
     [SerializeField] private AudioSource[] aestheticAudio = null;
+    [Header("Subtitles")]
+    [SerializeField] NarrationManager narrationManager = null;
+    [Header("Floor")]
+    [SerializeField] private MeshRenderer floorMeshRenderer = null;
 
     /// <summary>
     /// Activates corresponding menu and automatically deactivates all other menus
@@ -64,34 +67,6 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Toggles on selected toggle (i.e. radio button) and switches off everything else
-    /// </summary>
-    /// <param name="toggle"></param>
-    public void ActivateLanguageToggle(GameObject toggle)
-    {
-        Transform parent = toggle.transform.parent?.transform;
-        if (parent != null)
-        {
-            for (int i = 0; i < parent.childCount; i++)
-            {
-                Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
-                if (imageComponent != null)
-                {
-                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
-                    {
-                        imageComponent.sprite = subtitleToggleSelected;
-                        narrationManager.SubtitlesLanguage = toggle.GetComponentInChildren<TMP_Text>().text;
-                    }
-                    else
-                    {
-                        imageComponent.sprite = subtitleToggleUnselected;
-                    }
-                }
-            }
-        }
-    }
-
-    /// <summary>
     /// Adjusts all functional audio (labelled as "Narration") volume to new value according to the slider that calls this method
     /// </summary>
     /// <param name="newVolume"></param>
@@ -112,6 +87,57 @@ public class UIManager : MonoBehaviour
         foreach (AudioSource audioSource in aestheticAudio)
         {
             audioSource.volume = newVolume;
+        }
+    }
+
+    /// <summary>
+    /// Toggles on selected toggle (i.e. radio button) and switches off everything else
+    /// </summary>
+    /// <param name="toggle"></param>
+    public void ActivateLanguageToggle(GameObject toggle)
+    {
+        Transform parent = toggle.transform.parent?.transform;
+        if (parent != null)
+        {
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
+                if (imageComponent != null)
+                {
+                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
+                    {
+                        imageComponent.sprite = toggleSelected;
+                        narrationManager.SubtitlesLanguage = toggle.GetComponentInChildren<TMP_Text>().text;
+                    }
+                    else
+                    {
+                        imageComponent.sprite = toggleUnselected;
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Toggles whether the floor is visible (translucent blue) or invisible (default)
+    /// </summary>
+    /// <param name="toggle"></param>
+    public void ActivateFloorToggle(GameObject toggle)
+    {
+        floorMeshRenderer.enabled = toggle.GetComponentInChildren<TMP_Text>().text.Equals("On");
+
+        Transform parent = toggle.transform.parent?.transform;
+        if (parent != null)
+        {
+            parent.GetChild(0).GetComponentInChildren<Image>().sprite = floorMeshRenderer.enabled ? toggleUnselected : toggleSelected;
+            parent.GetChild(1).GetComponentInChildren<Image>().sprite = floorMeshRenderer.enabled ? toggleSelected : toggleUnselected;
+
+            Transform grandparent = parent.transform.parent?.transform;
+            if (grandparent != null)
+            {
+                // Show disclaimer if floor is on, and hide if floor is off
+                grandparent.GetChild(grandparent.childCount - 1).gameObject.SetActive(floorMeshRenderer.enabled);
+            }
         }
     }
 }

@@ -85,7 +85,7 @@ public class HandController : MonoBehaviour
     /// The square of the maximum distance maintained between a pushed object and the hand
     /// </summary>
     [SerializeField] float squaredMaxPushDistance;
-    private bool pushing, holdingSlider, pulling, gravEnabled, teleportMode;
+    private bool pushing, holdingSlider, holdingScrollbar, pulling, gravEnabled, teleportMode;
     private Transform previousParentTransform, grabbingTransform;
     private Color laserColor;
     private Collider lastColliderHit;
@@ -164,6 +164,10 @@ public class HandController : MonoBehaviour
             {
                 CheckSlider(hit);
             }
+            if (holdingScrollbar)
+            {
+                CheckScrollbar(hit);
+            }
         }
         else // UI not found: return the laser to its normal color
         {
@@ -233,6 +237,7 @@ public class HandController : MonoBehaviour
                 activeUICollider.OnCast.Invoke();
             }
             CheckSlider(hit);
+            CheckScrollbar(hit);
         }
         else
         {
@@ -284,6 +289,30 @@ public class HandController : MonoBehaviour
         else //Raycast did not find a slider: this hand is not holding a slider
         {
             holdingSlider = false;
+        }
+    }
+    /// <summary>
+    /// Checks if the raycast hit was against a scrollbar and acts on the scrollbar if so
+    /// </summary>
+    /// <param name="hit"></param>
+    private void CheckScrollbar(RaycastHit hit)
+    {
+        Scrollbar activeScrollbar = hit.collider.gameObject.GetComponent<Scrollbar>();
+        Debug.Log(hit.collider.gameObject);
+        if (activeScrollbar != null) //Collider is a scrollbar: proceeds to interact with scrollbar. 
+        {
+            RectTransform scrollbarRect = activeScrollbar.transform as RectTransform;
+            if (scrollbarRect != null)
+            {
+                float scrollbarHeight = scrollbarRect.rect.height;
+                // Similar calculation to slider, but with y-coordinates instead of x
+                activeScrollbar.value = (scrollbarHeight > 0) ? (Mathf.Clamp(((activeScrollbar.transform.InverseTransformPoint(hit.point).y + scrollbarRect.anchoredPosition.y) / scrollbarHeight), 0.0f, 1.0f)) : 0.0f;
+            }
+            holdingScrollbar = true;
+        }
+        else //Raycast did not find a scrollbar: this hand is not holding a scrollbar
+        {
+            holdingScrollbar = false;
         }
     }
     private void StopPulling(InputAction.CallbackContext obj)
