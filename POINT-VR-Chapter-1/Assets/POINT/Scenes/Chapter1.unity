@@ -4745,6 +4745,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8248188717145690771, guid: f99002b6176478346b071914492bac93,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4457c73e860f0fd418a2b64216ab0e46, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f99002b6176478346b071914492bac93, type: 3}
 --- !u!4 &640190561 stripped
@@ -5310,6 +5315,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8248188717145690771, guid: f99002b6176478346b071914492bac93,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e27e0b54cc580304c8a3cebb7a3f6f7d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f99002b6176478346b071914492bac93, type: 3}
 --- !u!82 &719088862 stripped
@@ -9992,11 +10002,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed008e93cfcc60e45a0d4af53ee7aa86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  narrationManager: {fileID: 420184139}
-  subtitleToggleSelected: {fileID: 21300000, guid: 537f8fe53f9e62149912de6b1eeff99b,
-    type: 3}
-  subtitleToggleUnselected: {fileID: 21300000, guid: 2fd5d1cc5aefbbb44970df4510cf7729,
-    type: 3}
+  toggleSelected: {fileID: 0}
+  toggleUnselected: {fileID: 0}
   functionalAudio:
   - {fileID: 420184140}
   - {fileID: 640190562}
@@ -10005,6 +10012,8 @@ MonoBehaviour:
   - {fileID: 676191960}
   - {fileID: 1745685545}
   - {fileID: 1620489864}
+  narrationManager: {fileID: 420184139}
+  floorMeshRenderer: {fileID: 0}
 --- !u!114 &1585591145
 MonoBehaviour:
   m_ObjectHideFlags: 0
