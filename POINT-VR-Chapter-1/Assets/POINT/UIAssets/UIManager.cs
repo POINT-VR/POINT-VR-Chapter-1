@@ -17,8 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private AudioSource[] aestheticAudio = null;
     [Header("Subtitles")]
     [SerializeField] NarrationManager narrationManager = null;
-    [Header("Floor")]
-    [SerializeField] private MeshRenderer floorMeshRenderer = null;
+    //[Header("Floor")]
+    //[SerializeField] MeshRenderer floorMeshRenderer;
 
     /// <summary>
     /// Activates corresponding menu and automatically deactivates all other menus
@@ -123,7 +123,7 @@ public class UIManager : MonoBehaviour
     /// Toggles whether the floor is visible (translucent blue) or invisible (default)
     /// </summary>
     /// <param name="toggle"></param>
-    public void ActivateFloorToggle(GameObject toggle)
+    /*public void ActivateFloorToggle(GameObject toggle)
     {
         floorMeshRenderer.enabled = toggle.GetComponentInChildren<TMP_Text>().text.Equals("On");
 
@@ -140,5 +140,5 @@ public class UIManager : MonoBehaviour
                 grandparent.GetChild(grandparent.childCount - 1).gameObject.SetActive(floorMeshRenderer.enabled);
             }
         }
-    }
+    } */
 }

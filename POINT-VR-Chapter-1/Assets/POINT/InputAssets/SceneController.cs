@@ -22,11 +22,13 @@ public class SceneController : MonoBehaviour
     }
     public void ChangeScene(int scene)
     {
-        GameManager.PlayerData data;
-        data.musicTime = music.time;
-        data.gripNoticeEnabled = gripNotice.activeSelf;
-        data.functionalVolume = functional.value;
-        data.aestheticVolume = aesthetic.value;
+        GameManager.PlayerData data = new GameManager.PlayerData
+        {
+            musicTime = music.time,
+            gripNoticeEnabled = gripNotice.activeSelf,
+            functionalVolume = functional.value,
+            aestheticVolume = aesthetic.value
+        };
         GameManager.Instance.SetData(data);
         pause.Unpause();
         SceneManager.LoadScene(scene);

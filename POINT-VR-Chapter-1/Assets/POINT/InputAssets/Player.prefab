@@ -1412,8 +1412,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 685732245830625035}
-        m_MethodName: ActivateFloorToggle
-        m_Mode: 2
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 685732245365327310}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -4124,14 +4124,11 @@ MonoBehaviour:
   toggleUnselected: {fileID: 21300000, guid: 2fd5d1cc5aefbbb44970df4510cf7729, type: 3}
   functionalAudio:
   - {fileID: 685732246913176623}
-  - {fileID: 0}
-  - {fileID: 0}
   aestheticAudio:
   - {fileID: 685732246657436347}
   - {fileID: 685732245587941450}
   - {fileID: 685732245462803179}
   narrationManager: {fileID: 685732246913176616}
-  floorMeshRenderer: {fileID: 0}
 --- !u!1 &685732245864587167
 GameObject:
   m_ObjectHideFlags: 0
@@ -5764,7 +5761,7 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 685732246166091505}
+      - m_Target: {fileID: 685732246913176612}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -5773,17 +5770,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 685732246913176616}
-        m_MethodName: PlayClipWithSubtitles
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Narration_test
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &685732246166091511
@@ -7519,7 +7505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3305dc29428f4db4f8ab3e6a12c844df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 685732246913176623}
+  music: {fileID: 685732246657436347}
   gripNotice: {fileID: 685732246166091505}
   functional: {fileID: 685732246474119500}
   aesthetic: {fileID: 685732246135386628}
@@ -8017,7 +8003,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -8995,8 +8981,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 685732245830625035}
-        m_MethodName: ActivateFloorToggle
-        m_Mode: 2
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 685732246835440931}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
