@@ -5,18 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/POINT/Scenes/Chapter1.unity
-    guid: cba65344138f4f044a710c9523d640b1
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/POINT/Scenes/Floor_UIScroll.unity
+    path: Assets/POINT/Scenes/Chapter1.unity
     guid: a45d530fc4c16c64abfb4ee6372cfe0a
+  - enabled: 1
+    path: Assets/POINT/Scenes/Chapter2.unity
+    guid: 254dd1d17b2dd344d9cd1ef7ff566c96
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2eac5b88f02ba704abc6cff84097461a,
       type: 2}

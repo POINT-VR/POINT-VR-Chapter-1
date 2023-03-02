@@ -10,9 +10,9 @@ public class Clock : MonoBehaviour
     /// </summary>
     public Rigidbody[] rigidbodiesToDeformAround;
     /// <summary>
-    /// The camera transform that this sprite will face
+    /// The camera transform that this sprite will face. This is now assigned in Start().
     /// </summary>
-    [SerializeField] Transform cameraObject;
+    Transform cameraObject;
     /// <summary>
     /// The multiplier affecting this sprite's rotation speed
     /// </summary>
@@ -37,6 +37,7 @@ public class Clock : MonoBehaviour
     void Start()
     {
         originalPosition  = transform.position;
+        cameraObject = Camera.allCameras[0].transform;
     }
     void Update()
     {
