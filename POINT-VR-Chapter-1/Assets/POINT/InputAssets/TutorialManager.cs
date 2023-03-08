@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TMP_Text versionText;
     [SerializeField] private Image controlsImage;
     [SerializeField] private GameObject massSphere;
+    [SerializeField] private InputActionReference leftPushingReference;
+    [SerializeField] private InputActionReference leftPullingReference;
+    [SerializeField] private InputActionReference rightPushingReference;
+    [SerializeField] private InputActionReference rightPullingReference;
     [Header("Controls Graphics")]
     [SerializeField] private Sprite teleportationSprite;
     [SerializeField] private Sprite grabSprite;
@@ -30,6 +35,15 @@ public class TutorialManager : MonoBehaviour
     private TMP_Text instructions = null;
     private Camera currentCamera = null;
     private GameObject player = null;
+    private bool pushed = false, pulled = false;
+
+    private void OnDisable()
+    {
+        leftPushingReference.action.started -= Pushed;
+        leftPullingReference.action.started -= Pulled;
+        rightPushingReference.action.started -= Pushed;
+        rightPullingReference.action.started -= Pulled;
+    }
 
     void Start()
     {
@@ -55,6 +69,10 @@ public class TutorialManager : MonoBehaviour
         this.GetComponent<Canvas>().worldCamera = currentCamera;
         player = currentCamera.transform.parent.gameObject;
         player.GetComponent<PauseController>().enabled = false;
+        leftPushingReference.action.started += Pushed;
+        leftPullingReference.action.started += Pulled;
+        rightPushingReference.action.started += Pushed;
+        rightPullingReference.action.started += Pulled;
 
         yield break;
     }
@@ -102,24 +120,24 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForPushPull()
     {
-        bool pushed = false, pulled = false;
-        Vector3 previousPosition = massSphere.transform.position;
-        yield return new WaitUntil(() => {
-            if (Vector3.Distance(player.transform.position, massSphere.transform.position) > Vector3.Distance(player.transform.position, previousPosition))
-            {
-                pushed = true;
-            } else if (Vector3.Distance(player.transform.position, massSphere.transform.position) < Vector3.Distance(player.transform.position, previousPosition))
-            {
-                pulled = true;
-            }
-            previousPosition = massSphere.transform.position;
-            return pushed && pulled;
-        });
+        pushed = false;
+        pulled = false;
+        yield return new WaitUntil(() => pushed && pulled);
 
         // Menu tutorial
         controlsImage.sprite = menuSprite;
         instructions.text = menuText;
 
         yield break;
+    }
+
+    private void Pushed(InputAction.CallbackContext obj)
+    {
+        pushed = true;
+    }
+
+    private void Pulled(InputAction.CallbackContext obj)
+    {
+        pulled = true;
     }
 }
