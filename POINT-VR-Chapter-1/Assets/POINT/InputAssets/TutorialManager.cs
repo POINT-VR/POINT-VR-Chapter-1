@@ -45,7 +45,7 @@ public class TutorialManager : MonoBehaviour
         rightPullingReference.action.started -= Pulled;
     }
 
-    void Start()
+    private void Start()
     {
         if (controlsImage != null)
         {
@@ -59,16 +59,25 @@ public class TutorialManager : MonoBehaviour
         versionText.text = "Version: " + Application.version;
     }
 
+    private void Update()
+    {
+        if (currentCamera != null)
+        {
+            this.transform.LookAt(currentCamera.transform);
+            this.transform.Rotate(0, 180, 0);
+        }
+    }
+
     IEnumerator WaitForPlayerSpawn()
     {
         yield return new WaitUntil(() => Camera.current != null);
 
         // Start menu initialization
         currentCamera = Camera.current;
-        this.transform.SetParent(currentCamera.transform, false);
         this.GetComponent<Canvas>().worldCamera = currentCamera;
         player = currentCamera.transform.parent.gameObject;
         player.GetComponent<PauseController>().enabled = false;
+        this.transform.SetParent(player.transform.parent, false);
         leftPushingReference.action.started += Pushed;
         leftPullingReference.action.started += Pulled;
         rightPushingReference.action.started += Pushed;
@@ -133,11 +142,17 @@ public class TutorialManager : MonoBehaviour
 
     private void Pushed(InputAction.CallbackContext obj)
     {
-        pushed = true;
+        if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null)
+        {
+            pushed = true;
+        }
     }
 
     private void Pulled(InputAction.CallbackContext obj)
     {
-        pulled = true;
+        if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null)
+        {
+            pulled = true;
+        }
     }
 }
