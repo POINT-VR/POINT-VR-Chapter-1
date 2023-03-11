@@ -86,7 +86,7 @@ public class HandController : MonoBehaviour
     /// </summary>
     [SerializeField] float squaredMaxPushDistance;
     private bool pushing, holdingSlider, holdingScrollbar, pulling, gravEnabled, teleportMode;
-    private Transform previousParentTransform, grabbingTransform;
+    private Transform previousParentTransform, grabbingTransform, lastGrabHit;
     private Color laserColor;
     private Collider lastColliderHit;
     private Vector3 grabbingTransformVelocity, grabbingTransformPositionPrev;
@@ -151,7 +151,7 @@ public class HandController : MonoBehaviour
         {
             reticle.SetActive(false);
         }
-        //Searches for UI
+        //Searches for UI or grabbable
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI found: turn this green
         {
             if (hit.collider != lastColliderHit) //did not hit the same collider as in the previous frame: haptic feedback
@@ -169,10 +169,27 @@ public class HandController : MonoBehaviour
                 CheckScrollbar(hit);
             }
         }
-        else // UI not found: return the laser to its normal color
+        else if (grabbingTransform != null || Physics.Raycast(transform.position, transform.forward, out hit, grabDistance, grabMask)) //grabbable found or is holding something: turn this cyan
+        {
+            if (hit.transform != lastGrabHit && grabbingTransform == null) //did not hit the same collider as in the previous frame: haptic feedback
+            {
+                hardwareController.VibrateHand();
+            }
+            laser.material.color = Color.magenta;
+            if (grabbingTransform != null)
+            {
+                lastGrabHit = grabbingTransform;
+            }
+            else
+            {
+                lastGrabHit = hit.transform;
+            }
+        }
+        else // UI or grabbable not found: return the laser to its normal color
         {
             laser.material.color = laserColor;
             lastColliderHit = null;
+            lastGrabHit = null;
         }
     }
     /// <summary>

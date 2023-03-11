@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
             data.musicTime = 0;
-            data.gripNoticeEnabled = true;
+            data.gripNoticeEnabled = false;
             data.functionalVolume = 1;
             data.aestheticVolume = 1;
         }
