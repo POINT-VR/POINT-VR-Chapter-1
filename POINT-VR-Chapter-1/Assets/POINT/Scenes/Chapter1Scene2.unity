@@ -1436,13 +1436,13 @@ PrefabInstance:
     - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: rigidbodiesToDeformAround.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: rigidbodiesToDeformAround.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 754863762}
     - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: rigidbodiesToDeformAround.Array.data[1]
@@ -1546,13 +1546,13 @@ PrefabInstance:
     - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: rigidbodiesToDeformAround.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: rigidbodiesToDeformAround.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 754863762}
     - target: {fileID: 8248188717145690768, guid: f99002b6176478346b071914492bac93,
         type: 3}
       propertyPath: rigidbodiesToDeformAround.Array.data[1]
