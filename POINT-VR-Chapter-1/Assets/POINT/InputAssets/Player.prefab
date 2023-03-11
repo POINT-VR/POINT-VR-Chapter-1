@@ -1850,7 +1850,7 @@ MonoBehaviour:
     type: 3}
   teleportationDistance: 25
   sliderIncrement: 0.02
-  grabDistance: 8
+  grabDistance: 12
   pullSpeed: 0.015
   squaredMinPullDistance: 3
   squaredMaxPushDistance: 48
@@ -2640,7 +2640,7 @@ MonoBehaviour:
     type: 3}
   teleportationDistance: 25
   sliderIncrement: 0.02
-  grabDistance: 8
+  grabDistance: 12
   pullSpeed: 0.015
   squaredMinPullDistance: 3
   squaredMaxPushDistance: 48

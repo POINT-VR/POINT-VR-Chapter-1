@@ -89,7 +89,7 @@ public class HandController : MonoBehaviour
     private Transform previousParentTransform, grabbingTransform, lastGrabHit;
     private Color laserColor;
     private Collider lastColliderHit;
-    private Vector3 grabbingTransformVelocity, grabbingTransformPositionPrev;
+    private Vector3 grabbingTransformVelocity, grabbingTransformPositionPrev, velocityPrev;
     private void OnEnable()
     {
         selectReference.action.Enable();
@@ -136,6 +136,7 @@ public class HandController : MonoBehaviour
         if (grabbingTransform != null) // Holding an object
         {
             // Stores the velocity of the grabbing transform while its grabbed
+            velocityPrev = grabbingTransformVelocity;
             grabbingTransformVelocity = grabbingTransform.position - grabbingTransformPositionPrev;
             grabbingTransformPositionPrev = grabbingTransform.position;
         }
@@ -208,8 +209,7 @@ public class HandController : MonoBehaviour
             grav.enabled = gravEnabled;
         }
         // Add velocity to grabbed object.
-        grabbingTransform.GetComponent<Rigidbody>().velocity = 5*grabbingTransformVelocity;
-
+        grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*(grabbingTransformVelocity + velocityPrev);
         grabbingTransform = null;
 
     }
@@ -232,6 +232,9 @@ public class HandController : MonoBehaviour
         previousParentTransform = grabbingTransform.parent;
         grabbingTransform.SetParent(transform);
         grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed object's velocity to zero
+        velocityPrev = Vector3.zero;
+        grabbingTransformVelocity = Vector3.zero;
+        grabbingTransformPositionPrev = hit.transform.position;
         GravityScript grav = grabbingTransform.GetComponent<GravityScript>();
         if (grav != null)
         {
