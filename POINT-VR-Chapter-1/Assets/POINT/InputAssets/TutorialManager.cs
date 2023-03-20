@@ -20,15 +20,18 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private InputActionReference leftPullingReference;
     [SerializeField] private InputActionReference rightPushingReference;
     [SerializeField] private InputActionReference rightPullingReference;
+    [SerializeField] InputActionReference turnReference;
     [Header("Controls Graphics")]
     [SerializeField] private Sprite teleportationSprite;
     [SerializeField] private Sprite grabSprite;
     [SerializeField] private Sprite pushPullSprite;
+    [SerializeField] private Sprite turnSprite;
     [SerializeField] private Sprite menuSprite;
     [Header("Instructions Text")]
     [SerializeField] private string teleportationText;
     [SerializeField] private string grabText;
     [SerializeField] private string pushPullText;
+    [SerializeField] private string turnText;
     [SerializeField] private string menuText;
 
 
@@ -36,7 +39,7 @@ public class TutorialManager : MonoBehaviour
     private TMP_Text instructions = null;
     private Camera currentCamera = null;
     private GameObject player = null;
-    private bool pushed = false, pulled = false;
+    private bool pushed = false, pulled = false, turned = false;
 
     private void OnDisable()
     {
@@ -44,6 +47,7 @@ public class TutorialManager : MonoBehaviour
         leftPullingReference.action.started -= Pulled;
         rightPushingReference.action.started -= Pushed;
         rightPullingReference.action.started -= Pulled;
+        turnReference.action.started -= Turned;
     }
 
     private void Start()
@@ -84,6 +88,7 @@ public class TutorialManager : MonoBehaviour
         leftPullingReference.action.started += Pulled;
         rightPushingReference.action.started += Pushed;
         rightPullingReference.action.started += Pulled;
+        turnReference.action.started += Turned;
 
         yield break;
     }
@@ -135,6 +140,20 @@ public class TutorialManager : MonoBehaviour
         pulled = false;
         yield return new WaitUntil(() => pushed && pulled);
 
+        // Snap Turn tutorial
+        controlsImage.sprite = turnSprite;
+        instructions.text = turnText;
+
+        StartCoroutine(WaitForTurn());
+
+        yield break;
+    }
+
+    IEnumerator WaitForTurn()
+    {
+        turned = true; // Change to false once turn checking is figured out
+        yield return new WaitUntil(() => turned );
+
         // Activate Scene Select
         controlsImage.gameObject.SetActive(false);
         SceneUIContainer.SetActive(true);
@@ -142,6 +161,7 @@ public class TutorialManager : MonoBehaviour
 
         yield break;
     }
+
 
     private void Pushed(InputAction.CallbackContext obj)
     {
@@ -156,6 +176,14 @@ public class TutorialManager : MonoBehaviour
         if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null)
         {
             pulled = true;
+        }
+    }
+
+    private void Turned(InputAction.CallbackContext obj)
+    {
+        if ( turnReference.action.ReadValue<Vector2>().x == 0)
+        {
+            turned = true;
         }
     }
 }
