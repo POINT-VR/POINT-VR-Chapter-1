@@ -15,7 +15,7 @@ public class BoundaryController : MonoBehaviour
         float minX = floor.position.x - unityDefaultPlaneSize * floor.localScale.x;
         if (Mathf.Abs(Mathf.Clamp(transform.position.x, minX, maxX) - transform.position.x) < tol)
         {
-            x = intialPos.x;
+            x = 0;
         }
         else
         {
@@ -25,7 +25,7 @@ public class BoundaryController : MonoBehaviour
         float minY = floor.position.y;
         if (Mathf.Abs(Mathf.Clamp(transform.position.y, minY, maxY) - transform.position.y) < tol)
         {
-            y = intialPos.y;
+            y = 0;
         }
         else
         {
@@ -35,7 +35,7 @@ public class BoundaryController : MonoBehaviour
         float minZ = floor.position.z - unityDefaultPlaneSize * floor.localScale.z;
         if (Mathf.Abs(Mathf.Clamp(transform.position.z, minZ, maxZ) - transform.position.z) < tol)
         {
-            z = intialPos.z;
+            z = 0;
         }
         else
         {
@@ -43,7 +43,7 @@ public class BoundaryController : MonoBehaviour
         }
         if (Vector3.SqrMagnitude(new Vector3(x, y, z)) > squaredMaxDistance)
         {
-            transform.position = floor.up + floor.position;
+            transform.position = intialPos; //floor.up + floor.position;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }

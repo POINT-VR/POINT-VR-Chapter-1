@@ -28,6 +28,7 @@ public class GridScript : MonoBehaviour
         for (int i = 0; i < size_z * size_y * size_x * 8; i+=8)
         {
             Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+            float totalDistance = 0f;
             for (int j = 0; j < masses.Length; j++)
             {
                 Vector3 direction = IndexToPos(i) - massPositions[j];
@@ -38,8 +39,13 @@ public class GridScript : MonoBehaviour
                     distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
                 }
                 totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
+                totalDistance += distance;
             }
-            Vector3 d = IndexToPos(i) - totalDisplacement / masses.Length; //Store the final displacement calculation for this vertex
+            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+            if (totalDistance > 1) // Normalizes the final displacement
+            {
+                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
+            }
             displaced[i] = d;
             displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
             displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
@@ -52,6 +58,7 @@ public class GridScript : MonoBehaviour
         for (int i = size_z * size_y * size_x * 8; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i += 4)
         {
             Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+            float totalDistance = 0f;
             for (int j = 0; j < masses.Length; j++)
             {
                 Vector3 direction = IndexToPos(i) - massPositions[j];
@@ -62,8 +69,13 @@ public class GridScript : MonoBehaviour
                     distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
                 }
                 totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
+                totalDistance += distance;
             }
-            Vector3 d = IndexToPos(i) - totalDisplacement / masses.Length; //Store the final displacement calculation for this vertex
+            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+            if (totalDistance > 1) // Normalizes the final displacement
+            {
+                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
+            }
             displaced[i] = d;
             displaced[i + 1] = d + new Vector3(thickness, 0f, 0f);
             displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
@@ -72,6 +84,7 @@ public class GridScript : MonoBehaviour
         for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i += 4)
         {
             Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+            float totalDistance = 0f;
             for (int j = 0; j < masses.Length; j++)
             {
                 Vector3 direction = IndexToPos(i) - massPositions[j];
@@ -82,8 +95,13 @@ public class GridScript : MonoBehaviour
                     distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
                 }
                 totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
+                totalDistance += distance;
             }
-            Vector3 d = IndexToPos(i) - totalDisplacement / masses.Length; //Store the final displacement calculation for this vertex
+            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+            if (totalDistance > 1) // Normalizes the final displacement
+            {
+                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
+            }
             displaced[i] = d;
             displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
             displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
@@ -92,6 +110,7 @@ public class GridScript : MonoBehaviour
         for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1); i += 4)
         {
             Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+            float totalDistance = 0f;
             for (int j = 0; j < masses.Length; j++)
             {
                 Vector3 direction = IndexToPos(i) - massPositions[j];
@@ -102,8 +121,13 @@ public class GridScript : MonoBehaviour
                     distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
                 }
                 totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
+                totalDistance += distance;
             }
-            Vector3 d = IndexToPos(i) - totalDisplacement / masses.Length; //Store the final displacement calculation for this vertex
+            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+            if (totalDistance > 1) // Normalizes the final displacement
+            {
+                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
+            }
             displaced[i] = d;
             displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
             displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
