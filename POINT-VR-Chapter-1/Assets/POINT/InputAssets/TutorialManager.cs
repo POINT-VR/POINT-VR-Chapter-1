@@ -15,6 +15,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TMP_Text versionText;
     [SerializeField] private Image controlsImage;
     [SerializeField] private GameObject massSphere;
+    [SerializeField] private GameObject SceneUIContainer;
     [SerializeField] private InputActionReference leftPushingReference;
     [SerializeField] private InputActionReference leftPullingReference;
     [SerializeField] private InputActionReference rightPushingReference;
@@ -55,6 +56,7 @@ public class TutorialManager : MonoBehaviour
 
         StartCoroutine(WaitForPlayerSpawn());
         massSphere.SetActive(false);
+        SceneUIContainer.SetActive(false);
         versionText.transform.parent.gameObject.SetActive(true);
         versionText.text = "Version: " + Application.version;
     }
@@ -133,8 +135,9 @@ public class TutorialManager : MonoBehaviour
         pulled = false;
         yield return new WaitUntil(() => pushed && pulled);
 
-        // Menu tutorial
-        controlsImage.sprite = menuSprite;
+        // Activate Scene Select
+        controlsImage.gameObject.SetActive(false);
+        SceneUIContainer.SetActive(true);
         instructions.text = menuText;
 
         yield break;
