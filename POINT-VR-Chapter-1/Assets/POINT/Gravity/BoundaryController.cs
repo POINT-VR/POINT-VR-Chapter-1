@@ -5,6 +5,7 @@ public class BoundaryController : MonoBehaviour
     [SerializeField] float height;
     [SerializeField] Transform floor;
     [SerializeField] float squaredMaxDistance;
+    [SerializeField] Vector3 intialPos;
     readonly int unityDefaultPlaneSize = 5;
     readonly float tol = 1e-3f;
     private void Update()
@@ -14,7 +15,7 @@ public class BoundaryController : MonoBehaviour
         float minX = floor.position.x - unityDefaultPlaneSize * floor.localScale.x;
         if (Mathf.Abs(Mathf.Clamp(transform.position.x, minX, maxX) - transform.position.x) < tol)
         {
-            x = 0;
+            x = intialPos.x;
         }
         else
         {
@@ -24,7 +25,7 @@ public class BoundaryController : MonoBehaviour
         float minY = floor.position.y;
         if (Mathf.Abs(Mathf.Clamp(transform.position.y, minY, maxY) - transform.position.y) < tol)
         {
-            y = 0;
+            y = intialPos.y;
         }
         else
         {
@@ -34,7 +35,7 @@ public class BoundaryController : MonoBehaviour
         float minZ = floor.position.z - unityDefaultPlaneSize * floor.localScale.z;
         if (Mathf.Abs(Mathf.Clamp(transform.position.z, minZ, maxZ) - transform.position.z) < tol)
         {
-            z = 0;
+            z = intialPos.z;
         }
         else
         {

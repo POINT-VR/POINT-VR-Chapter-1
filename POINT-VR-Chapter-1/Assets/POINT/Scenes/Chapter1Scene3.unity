@@ -414,6 +414,7 @@ MonoBehaviour:
   height: 1.6
   floor: {fileID: 1337579476}
   squaredMaxDistance: 61
+  intialPos: {x: 9, y: 1, z: 2}
 --- !u!1 &160445310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,6 +1886,7 @@ MonoBehaviour:
   height: 1.6
   floor: {fileID: 1337579476}
   squaredMaxDistance: 61
+  intialPos: {x: 11, y: 1, z: 2}
 --- !u!1 &787569686
 GameObject:
   m_ObjectHideFlags: 0
