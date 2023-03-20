@@ -135,6 +135,9 @@ public class HandController : MonoBehaviour
         }
         if (grabbingTransform != null) // Holding an object
         {
+            // Prevents the GrabbedTransform from being pushed by other objects
+            grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; 
+
             // Stores the velocity of the grabbing transform while its grabbed
             velocityPrev = grabbingTransformVelocity;
             grabbingTransformVelocity = grabbingTransform.position - grabbingTransformPositionPrev;
