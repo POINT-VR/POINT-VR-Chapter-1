@@ -8,7 +8,7 @@ public class AxisMaster : MonoBehaviour
     public Vector3 scale = new Vector3(1,1,1);
     private AxisScript axisScript;
     private Vector3 scaleInitial;
-    public Vector3 scaleFinal = new Vector3(4.0f, 2.0f, 9.0f);
+    public Vector3 scaleFinal;
     private float t = 0.0f;
 
     public float speed = 0.05f;
@@ -21,11 +21,11 @@ public class AxisMaster : MonoBehaviour
         
     }
 
-   // public void scaleAxes(Vector3 scale)
-   // {
+    public void scaleAxes()
+   {
     //    scaleFinal = scale;
-    //    t = 0.0f;
-   // }
+        t = 0.0f;
+   }
 
     // Update is called once per frame
     void FixedUpdate()
