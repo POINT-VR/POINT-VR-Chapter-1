@@ -34,11 +34,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="739.98874"
-     inkscape:cy="636.62941"
+     inkscape:zoom="1"
+     inkscape:cx="892.57889"
+     inkscape:cy="507.48909"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer11"
+     inkscape:current-layer="g1473"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:snap-page="true"
@@ -78,7 +78,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1159,7 +1159,7 @@
      style="display:inline">
     <text
        xml:space="preserve"
-       style="font-size:12.7px;line-height:1.25;font-family:Medio;-inkscape-font-specification:Medio;text-align:center;text-anchor:middle;display:inline;stroke-width:0.264583;fill:#000000;fill-opacity:1;"
+       style="font-size:12.7px;line-height:1.25;font-family:Medio;-inkscape-font-specification:Medio;text-align:center;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke-width:0.264583"
        x="226.76837"
        y="164.07904"
        id="text1585-4-4"><tspan
@@ -1167,7 +1167,7 @@
          id="tspan1583-7-6"
          x="226.76837"
          y="164.07904"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:'Space Grotesk';-inkscape-font-specification:'Space Grotesk Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583;">PUSH OBJECT</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:'Space Grotesk';-inkscape-font-specification:'Space Grotesk Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583">PULL OBJECT</tspan></text>
     <path
        style="display:inline;fill:none;stroke:#ff6767;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 111.31776,151.16764 0.52917,8.95917 h 70.78371"
@@ -1186,7 +1186,7 @@
      style="display:inline">
     <text
        xml:space="preserve"
-       style="font-size:12.7px;line-height:1.25;font-family:Medio;-inkscape-font-specification:Medio;text-align:center;text-anchor:middle;display:inline;stroke-width:0.264583;fill:#000000;fill-opacity:1;"
+       style="font-size:12.7px;line-height:1.25;font-family:Medio;-inkscape-font-specification:Medio;text-align:center;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke-width:0.264583"
        x="226.41911"
        y="89.465363"
        id="text1585-8"><tspan
@@ -1194,7 +1194,7 @@
          id="tspan1583-5"
          x="226.41911"
          y="89.465363"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.7px;font-family:'Space Grotesk';-inkscape-font-specification:'Space Grotesk Semi-Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583;">PULL OBJECT</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.7px;font-family:'Space Grotesk';-inkscape-font-specification:'Space Grotesk Semi-Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583">PUSH OBJECT</tspan></text>
     <path
        style="display:inline;fill:none;stroke:#5abdeb;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 129.83954,142.18739 V 84.996001 h 52.7911"
