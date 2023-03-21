@@ -122,7 +122,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Push",
+                    "name": "Pull",
                     "type": "Button",
                     "id": "adb5538e-ed43-45a6-9fde-e8c65df2ce98",
                     "expectedControlType": "Button",
@@ -130,7 +130,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Pull",
+                    "name": "Push",
                     "type": "Button",
                     "id": "0e511220-7865-41a2-a70c-653595094e6d",
                     "expectedControlType": "Button",
@@ -201,7 +201,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
-                    "action": "Push",
+                    "action": "Pull",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -212,7 +212,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
-                    "action": "Pull",
+                    "action": "Push",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -255,7 +255,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Push",
+                    "name": "Pull",
                     "type": "Button",
                     "id": "b725cd7d-25cc-437f-ba23-334068454e37",
                     "expectedControlType": "Button",
@@ -263,7 +263,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Pull",
+                    "name": "Push",
                     "type": "Button",
                     "id": "9d3de6d2-c573-43dd-97f0-d293eb3d3e0d",
                     "expectedControlType": "Button",
@@ -323,7 +323,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
-                    "action": "Push",
+                    "action": "Pull",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -334,7 +334,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
-                    "action": "Pull",
+                    "action": "Push",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
