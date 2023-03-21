@@ -6,10 +6,11 @@
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
-/[Bb]uilds/
+#/[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
-
+# TextMeshPro should not update anymore
+/Assets/TextMesh Pro/
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
@@ -52,7 +53,6 @@ ExportedObj/
 sysinfo.txt
 
 # Builds
-*.apk
 *.aab
 *.unitypackage
 

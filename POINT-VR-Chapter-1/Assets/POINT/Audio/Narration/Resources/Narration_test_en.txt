@@ -1,0 +1,14 @@
+WEBVTT
+
+00:00.000 --> 00:07.000
+In front of you, you should see a 3D grid that represents our three-dimensional space.
+
+00:07.000 --> 00:10.000
+Now look around you until you find a clock.
+
+00:10.000 --> 00:15.000
+This clock allows us to visualize our fourth dimension, time.
+
+00:15.000 --> 00:22.000
+Together, the shape of the grid and the ticking of the clock represents space-time.
+
