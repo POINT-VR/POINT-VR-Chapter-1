@@ -10,28 +10,28 @@ public class TutorialManager : MonoBehaviour
     /// <summary>
     /// The maximum distance between the player and the sphere during the teleportation tutorial, below which the grab tutorial will be triggered.
     /// </summary>
-    [SerializeField] private float thresholdDistanceToSphere;
+    [SerializeField] private float thresholdDistanceToTeleportZone;
     [Header("References")]
     [SerializeField] private TMP_Text versionText;
     [SerializeField] private Image controlsImage;
     [SerializeField] private GameObject massSphere;
+    [SerializeField] private GameObject teleportZone;
     [SerializeField] private GameObject SceneUIContainer;
     [SerializeField] private InputActionReference leftPushingReference;
     [SerializeField] private InputActionReference leftPullingReference;
     [SerializeField] private InputActionReference rightPushingReference;
     [SerializeField] private InputActionReference rightPullingReference;
-    [SerializeField] InputActionReference turnReference;
     [Header("Controls Graphics")]
     [SerializeField] private Sprite teleportationSprite;
+    [SerializeField] private Sprite turnSprite;
     [SerializeField] private Sprite grabSprite;
     [SerializeField] private Sprite pushPullSprite;
-    [SerializeField] private Sprite turnSprite;
     [SerializeField] private Sprite menuSprite;
     [Header("Instructions Text")]
     [SerializeField] private string teleportationText;
+    [SerializeField] private string turnText;
     [SerializeField] private string grabText;
     [SerializeField] private string pushPullText;
-    [SerializeField] private string turnText;
     [SerializeField] private string menuText;
 
 
@@ -39,7 +39,7 @@ public class TutorialManager : MonoBehaviour
     private TMP_Text instructions = null;
     private Camera currentCamera = null;
     private GameObject player = null;
-    private bool pushed = false, pulled = false, turned = false;
+    private bool pushed = false, pulled = false;
 
     private void OnDisable()
     {
@@ -47,7 +47,6 @@ public class TutorialManager : MonoBehaviour
         leftPullingReference.action.started -= Pulled;
         rightPushingReference.action.started -= Pushed;
         rightPullingReference.action.started -= Pulled;
-        turnReference.action.started -= Turned;
     }
 
     private void Start()
@@ -60,6 +59,7 @@ public class TutorialManager : MonoBehaviour
 
         StartCoroutine(WaitForPlayerSpawn());
         massSphere.SetActive(false);
+        teleportZone.SetActive(false);
         SceneUIContainer.SetActive(false);
         versionText.transform.parent.gameObject.SetActive(true);
         versionText.text = "Version: " + Application.version;
@@ -88,7 +88,6 @@ public class TutorialManager : MonoBehaviour
         leftPullingReference.action.started += Pulled;
         rightPushingReference.action.started += Pushed;
         rightPullingReference.action.started += Pulled;
-        turnReference.action.started += Turned;
 
         yield break;
     }
@@ -100,6 +99,9 @@ public class TutorialManager : MonoBehaviour
         versionText.transform.parent.gameObject.SetActive(false); // deactivate start menu
         controlsImage.gameObject.SetActive(true); // activate controls graphics
         massSphere.SetActive(true);
+        teleportZone.SetActive(true);
+        float teleportRingScale = (2 * thresholdDistanceToTeleportZone) / teleportZone.GetComponent<SpriteRenderer>().size.x;
+        teleportZone.transform.localScale = new Vector3(teleportRingScale, teleportRingScale, teleportRingScale);
 
         // Teleportation tutorial
         controlsImage.sprite = teleportationSprite;
@@ -110,7 +112,23 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForTeleport()
     {
-        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, massSphere.transform.position) <= thresholdDistanceToSphere);
+        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone.transform.position) <= thresholdDistanceToTeleportZone);
+
+        // Turn tutorial
+        teleportZone.SetActive(false);
+        controlsImage.sprite = turnSprite;
+        instructions.text = turnText;
+
+        StartCoroutine(WaitForTurn());
+
+        yield break;
+    }
+
+    IEnumerator WaitForTurn()
+    {
+        float initialRotation = player.transform.rotation.y;
+
+        yield return new WaitUntil(() => player.transform.rotation.y != initialRotation);
 
         // Grab tutorial
         controlsImage.sprite = grabSprite;
@@ -140,20 +158,6 @@ public class TutorialManager : MonoBehaviour
         pulled = false;
         yield return new WaitUntil(() => pushed && pulled);
 
-        // Snap Turn tutorial
-        controlsImage.sprite = turnSprite;
-        instructions.text = turnText;
-
-        StartCoroutine(WaitForTurn());
-
-        yield break;
-    }
-
-    IEnumerator WaitForTurn()
-    {
-        turned = true; // Change to false once turn checking is figured out
-        yield return new WaitUntil(() => turned );
-
         // Activate Scene Select
         controlsImage.gameObject.SetActive(false);
         SceneUIContainer.SetActive(true);
@@ -161,7 +165,6 @@ public class TutorialManager : MonoBehaviour
 
         yield break;
     }
-
 
     private void Pushed(InputAction.CallbackContext obj)
     {
@@ -176,14 +179,6 @@ public class TutorialManager : MonoBehaviour
         if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null)
         {
             pulled = true;
-        }
-    }
-
-    private void Turned(InputAction.CallbackContext obj)
-    {
-        if ( turnReference.action.ReadValue<Vector2>().x == 0)
-        {
-            turned = true;
         }
     }
 }
