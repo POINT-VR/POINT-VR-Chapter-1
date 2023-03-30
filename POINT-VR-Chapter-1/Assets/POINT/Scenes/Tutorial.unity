@@ -1108,6 +1108,7 @@ MonoBehaviour:
   thresholdDistanceToTeleportZone: 3
   versionText: {fileID: 2008795748}
   controlsImage: {fileID: 509032888}
+  floor: {fileID: 1337579472}
   massSphere: {fileID: 64981084}
   teleportZone: {fileID: 1543835802}
   SceneUIContainer: {fileID: 1312207646}
@@ -1125,7 +1126,8 @@ MonoBehaviour:
   grabSprite: {fileID: 21300000, guid: 722b1a3479f7dcb45865bc5723025263, type: 3}
   pushPullSprite: {fileID: 21300000, guid: 2794dcc9276180f458bd4f06cb95a104, type: 3}
   menuSprite: {fileID: 21300000, guid: 5bce63427ab351e4e9b962dfbe84291f, type: 3}
-  teleportationText: Try teleporting to that ring in the distance!
+  teleportationText: Try pointing at the floor and teleporting to that ring in the
+    distance!
   turnText: In addition to turning your head, you can use the joysticks to rotate
     your view.
   grabText: This sphere is a grabbable object, try picking it up.
