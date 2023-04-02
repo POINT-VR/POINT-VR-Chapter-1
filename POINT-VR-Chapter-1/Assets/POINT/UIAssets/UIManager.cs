@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,15 +11,32 @@ public class UIManager : MonoBehaviour
     private Color32 ACTIVE_BUTTON_COLOR = new Color32(255, 255, 255, 255);
     private Color32 INACTIVE_BUTTON_COLOR = new Color32(123, 231, 255, 127);
 
+    [Header("Sprites")]
     [SerializeField] private Sprite toggleSelected = null;
     [SerializeField] private Sprite toggleUnselected = null;
     [Header("Volume Adjustments")]
-    [SerializeField] private AudioSource[] functionalAudio = null;
-    [SerializeField] private AudioSource[] aestheticAudio = null;
+    [SerializeField] private List<AudioSource> functionalAudio = null;
+    [SerializeField] private List<AudioSource> aestheticAudio = null;
     [Header("Subtitles")]
     [SerializeField] NarrationManager narrationManager = null;
-    //[Header("Floor")]
-    //[SerializeField] MeshRenderer floorMeshRenderer;
+
+    // Cache
+    private GameObject floor = null;
+
+    private void Start()
+    {
+        floor = (Resources.FindObjectsOfTypeAll(typeof(MeshCollider))[0] as MeshCollider).gameObject; // only known method to find Floor after it is inactive; would be preferable to use Layer or Tag to isolate, but this does not seem to be possible if the floor in inactive
+    }
+
+    public void AddToFunctionalAudio (AudioSource audioSource)
+    {
+        functionalAudio.Add(audioSource);
+    }
+
+    public void AddToAestheticAudio(AudioSource audioSource)
+    {
+        aestheticAudio.Add(audioSource);
+    }
 
     /// <summary>
     /// Activates corresponding menu and automatically deactivates all other menus
@@ -26,7 +44,7 @@ public class UIManager : MonoBehaviour
     /// <param name="menu"></param>
     public void ActivateMenu(GameObject menu)
     {
-        Transform parent = menu.transform.parent?.transform;
+        Transform parent = menu.transform.parent;
         if (parent != null)
         {
             for (int i = 0; i < parent.childCount; i++)
@@ -43,23 +61,27 @@ public class UIManager : MonoBehaviour
     /// <param name="button"></param>
     public void ActivateButton(GameObject button)
     {
-        Transform parent = button.transform.parent?.transform;
+        Transform parent = button.transform.parent;
         if (parent != null)
         {
             for (int i = 0; i < parent.childCount; i++)
             {
-                TextMeshProUGUI textComponent = parent.GetChild(i).GetChild(0)?.GetComponent<TextMeshProUGUI>();
-                if (textComponent != null)
+                Transform buttonTransform = parent.GetChild(i).GetChild(0);
+                if (buttonTransform != null)
                 {
-                    if (i == button.transform.GetSiblingIndex())
+                    TextMeshProUGUI textComponent = buttonTransform.GetComponent<TextMeshProUGUI>();
+                    if (textComponent != null)
                     {
-                        textComponent.fontSize = ACTIVE_BUTTON_FONT_SIZE;
-                        textComponent.color = ACTIVE_BUTTON_COLOR;
-                    }
-                    else
-                    {
-                        textComponent.fontSize = INACTIVE_BUTTON_FONT_SIZE;
-                        textComponent.color = INACTIVE_BUTTON_COLOR;
+                        if (i == button.transform.GetSiblingIndex())
+                        {
+                            textComponent.fontSize = ACTIVE_BUTTON_FONT_SIZE;
+                            textComponent.color = ACTIVE_BUTTON_COLOR;
+                        }
+                        else
+                        {
+                            textComponent.fontSize = INACTIVE_BUTTON_FONT_SIZE;
+                            textComponent.color = INACTIVE_BUTTON_COLOR;
+                        }
                     }
                 }
             }
@@ -96,7 +118,7 @@ public class UIManager : MonoBehaviour
     /// <param name="toggle"></param>
     public void ActivateLanguageToggle(GameObject toggle)
     {
-        Transform parent = toggle.transform.parent?.transform;
+        Transform parent = toggle.transform.parent;
         if (parent != null)
         {
             for (int i = 0; i < parent.childCount; i++)
@@ -107,8 +129,7 @@ public class UIManager : MonoBehaviour
                     if (i == toggle.transform.GetSiblingIndex()) // selected toggle
                     {
                         imageComponent.sprite = toggleSelected;
-                        narrationManager.SubtitlesLanguage = toggle.GetComponentInChildren<TMP_Text>().text;
-                        GameManager.Instance.languageSelected = (GameManager.Language)i;
+                        narrationManager.SubtitlesLanguage = GameManager.Instance.languageSelected = (GameManager.Language)i;
                     }
                     else
                     {
@@ -120,25 +141,32 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Toggles whether the floor is visible (translucent blue) or invisible (default)
+    /// Toggles whether the floor is visible (translucent) or invisible (default)
     /// </summary>
     /// <param name="toggle"></param>
-    /*public void ActivateFloorToggle(GameObject toggle)
+    public void ActivateFloorToggle(GameObject toggle)
     {
-        floorMeshRenderer.enabled = toggle.GetComponentInChildren<TMP_Text>().text.Equals("On");
-
-        Transform parent = toggle.transform.parent?.transform;
-        if (parent != null)
+        if (floor != null)
         {
-            parent.GetChild(0).GetComponentInChildren<Image>().sprite = floorMeshRenderer.enabled ? toggleUnselected : toggleSelected;
-            parent.GetChild(1).GetComponentInChildren<Image>().sprite = floorMeshRenderer.enabled ? toggleSelected : toggleUnselected;
-
-            Transform grandparent = parent.transform.parent?.transform;
-            if (grandparent != null)
+            MeshRenderer floorMeshRenderer = floor.GetComponent<MeshRenderer>();
+            if (floorMeshRenderer != null)
             {
-                // Show disclaimer if floor is on, and hide if floor is off
-                grandparent.GetChild(grandparent.childCount - 1).gameObject.SetActive(floorMeshRenderer.enabled);
+                floorMeshRenderer.enabled = toggle.GetComponentInChildren<TMP_Text>().text.Equals("On");
+
+                Transform parent = toggle.transform.parent;
+                if (parent != null)
+                {
+                    parent.GetChild(0).GetComponentInChildren<Image>().sprite = floorMeshRenderer.enabled ? toggleUnselected : toggleSelected;
+                    parent.GetChild(1).GetComponentInChildren<Image>().sprite = floorMeshRenderer.enabled ? toggleSelected : toggleUnselected;
+
+                    Transform grandparent = parent.transform.parent;
+                    if (grandparent != null)
+                    {
+                        // Show disclaimer if floor is on, and hide if floor is off
+                        grandparent.GetChild(grandparent.childCount - 1).gameObject.SetActive(floorMeshRenderer.enabled);
+                    }
+                }
             }
         }
-    } */
+    }
 }

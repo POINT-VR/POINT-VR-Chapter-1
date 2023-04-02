@@ -1413,8 +1413,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 685732245830625035}
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: ActivateFloorToggle
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 685732245365327310}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -9023,8 +9023,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 685732245830625035}
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: ActivateFloorToggle
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 685732246835440931}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
