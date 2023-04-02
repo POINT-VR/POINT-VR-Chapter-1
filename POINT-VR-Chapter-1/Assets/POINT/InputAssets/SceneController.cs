@@ -10,6 +10,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] Transform toggleBase;
     [SerializeField] PauseController pause;
+    private bool floorEnabled;
     private void Start()
     {
         GameManager.PlayerData data = GameManager.Instance.GetData();
@@ -19,6 +20,8 @@ public class SceneController : MonoBehaviour
         aesthetic.value = data.aestheticVolume;
         uiManager.ActivateLanguageToggle(toggleBase.GetChild((int)GameManager.Instance.languageSelected).gameObject);
         music.mute = false;
+        floorEnabled = data.floorRendered;
+        uiManager.ActivateFloorToggle(floorEnabled);
     }
     public void ChangeScene(int scene)
     {
@@ -27,10 +30,15 @@ public class SceneController : MonoBehaviour
             musicTime = music.time,
             gripNoticeEnabled = gripNotice.activeSelf,
             functionalVolume = functional.value,
-            aestheticVolume = aesthetic.value
+            aestheticVolume = aesthetic.value,
+            floorRendered = floorEnabled
         };
         GameManager.Instance.SetData(data);
         pause.Unpause();
         SceneManager.LoadScene(scene);
+    }
+    public void UpdateFloor(bool enabled)
+    {
+        floorEnabled = enabled;
     }
 }

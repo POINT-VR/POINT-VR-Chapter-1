@@ -19,15 +19,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<AudioSource> aestheticAudio = null;
     [Header("Subtitles")]
     [SerializeField] NarrationManager narrationManager = null;
-
-    // Cache
-    private GameObject floor = null;
-
-    private void Start()
-    {
-        floor = (Resources.FindObjectsOfTypeAll(typeof(MeshCollider))[0] as MeshCollider).gameObject; // only known method to find Floor after it is inactive; would be preferable to use Layer or Tag to isolate, but this does not seem to be possible if the floor in inactive
-    }
-
+    [Header("Floor Toggle Parent")]
+    [SerializeField] GameObject floorToggles;
     public void AddToFunctionalAudio (AudioSource audioSource)
     {
         functionalAudio.Add(audioSource);
@@ -146,6 +139,7 @@ public class UIManager : MonoBehaviour
     /// <param name="toggle"></param>
     public void ActivateFloorToggle(GameObject toggle)
     {
+        GameObject floor = (Resources.FindObjectsOfTypeAll(typeof(MeshCollider))[0] as MeshCollider).gameObject; // only known method to find Floor after it is inactive; would be preferable to use Layer or Tag to isolate, but this does not seem to be possible if the floor in inactive
         if (floor != null)
         {
             MeshRenderer floorMeshRenderer = floor.GetComponent<MeshRenderer>();
@@ -167,6 +161,17 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+    public void ActivateFloorToggle(bool enabled)
+    {
+        if (enabled)
+        {
+            ActivateFloorToggle(floorToggles.transform.GetChild(1).gameObject);
+        }
+        else
+        {
+            ActivateFloorToggle(floorToggles.transform.GetChild(0).gameObject);
         }
     }
 }
