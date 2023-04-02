@@ -26,7 +26,7 @@
                     "type": "Value",
                     "id": "6185cca5-3be5-4308-8d8c-d089cd3fbede",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "interactions": ""
                 }
             ],
@@ -58,7 +58,7 @@
                     "id": "76882d8f-396b-40b9-986f-3cc3072a00e4",
                     "path": "<XRController>{LeftHand}/thumbstick",
                     "interactions": "",
-                    "processors": "StickDeadzone(max=1)",
+                    "processors": "ScaleVector2(y=0)",
                     "groups": "Generic XR Controller",
                     "action": "Turn",
                     "isComposite": false,
@@ -69,7 +69,7 @@
                     "id": "60acdae8-c528-4c7d-b37a-b74be7e847fc",
                     "path": "<XRController>{RightHand}/thumbstick",
                     "interactions": "",
-                    "processors": "StickDeadzone(max=1)",
+                    "processors": "ScaleVector2(y=0)",
                     "groups": "Generic XR Controller",
                     "action": "Turn",
                     "isComposite": false,
