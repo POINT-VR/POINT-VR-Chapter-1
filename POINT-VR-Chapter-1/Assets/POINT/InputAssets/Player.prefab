@@ -1844,9 +1844,9 @@ MonoBehaviour:
     type: 3}
   grabReference: {fileID: 2103644638705186478, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
-  pushingReference: {fileID: 6274207502737436746, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+  pushingReference: {fileID: 7109928901819384079, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
-  pullingReference: {fileID: 7109928901819384079, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+  pullingReference: {fileID: 6274207502737436746, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
   teleportationDistance: 25
   sliderIncrement: 0.02
@@ -2634,9 +2634,9 @@ MonoBehaviour:
     type: 3}
   grabReference: {fileID: -451690285215278443, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
-  pushingReference: {fileID: -6034992073922347324, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+  pushingReference: {fileID: 5492603852644030702, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
-  pullingReference: {fileID: 5492603852644030702, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+  pullingReference: {fileID: -6034992073922347324, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
   teleportationDistance: 25
   sliderIncrement: 0.02

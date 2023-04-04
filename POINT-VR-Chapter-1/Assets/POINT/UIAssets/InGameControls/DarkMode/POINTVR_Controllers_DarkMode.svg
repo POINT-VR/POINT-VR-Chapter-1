@@ -15,7 +15,7 @@
    id="svg8"
    inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
    sodipodi:docname="POINTVR_Controllers_DarkMode.svg"
-   inkscape:export-filename="C:\Users\mirei\Documents\Inkscape\InGameControls\Controls_Menu_DarkMode.png"
+   inkscape:export-filename="C:\Users\mirei\Documents\Inkscape\InGameControls\Controls_Full_DarkMode.png"
    inkscape:export-xdpi="143.13499"
    inkscape:export-ydpi="143.13499">
   <defs
@@ -34,9 +34,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="419.22239"
-     inkscape:cy="676.82552"
+     inkscape:zoom="1"
+     inkscape:cx="873.12464"
+     inkscape:cy="558.49818"
      inkscape:document-units="mm"
      inkscape:current-layer="g1473"
      inkscape:document-rotation="0"
@@ -1167,7 +1167,7 @@
          id="tspan1583-7-6"
          x="226.76837"
          y="164.07904"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:'Space Grotesk';-inkscape-font-specification:'Space Grotesk Bold';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">PUSH OBJECT</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:'Space Grotesk';-inkscape-font-specification:'Space Grotesk Bold';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">PULL OBJECT</tspan></text>
     <path
        style="display:inline;fill:none;stroke:#ff4d4d;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 111.31776,151.16764 0.52917,8.95917 h 70.78371"
@@ -1194,7 +1194,7 @@
          id="tspan1583-5"
          x="226.41911"
          y="89.465363"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.7px;font-family:'Space Grotesk';-inkscape-font-specification:'Space Grotesk Semi-Bold';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">PULL OBJECT</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.7px;font-family:'Space Grotesk';-inkscape-font-specification:'Space Grotesk Semi-Bold';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">PUSH OBJECT</tspan></text>
     <path
        style="display:inline;fill:none;stroke:#0086c4;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 129.83954,142.18739 V 84.996001 h 52.7911"

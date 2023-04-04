@@ -25,6 +25,8 @@ public class Clock : MonoBehaviour
     /// The maximum absolute magnitude at which a displacement will be calculated.
     /// </summary>
     [SerializeField] float cutoff;
+    private AudioSource audioSource;
+    private float lastZAngle = 0.0f;
     private Vector3 originalPosition;
     /// <summary>
     /// The current color of this clock sprite. Other scripts can read and write to this.
@@ -33,11 +35,20 @@ public class Clock : MonoBehaviour
         get { return GetComponent<SpriteRenderer>().color; }
         set { GetComponent<SpriteRenderer>().color = value; }
     }
+    /// <summary>
+    /// Whether or not the metronome is being played. Other scripts can read and write to this.
+    /// </summary>
+    public bool IsPlayingMetronome
+    {
+        get { return audioSource.enabled; }
+        set { audioSource.enabled = value; }
+    }
     private float zAngle = 0.0f;
     void Start()
     {
         originalPosition  = transform.position;
         cameraObject = Camera.allCameras[0].transform;
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -75,5 +86,10 @@ public class Clock : MonoBehaviour
         transform.LookAt(cameraObject);
         zAngle += totalRotationSpeed * rotationMultiplier * Time.deltaTime;
         transform.Rotate(0.0f, 0.0f, zAngle);
+        if ((zAngle % 360) < (lastZAngle % 360))
+        {
+            audioSource.Play();
+        }
+        lastZAngle = zAngle;
     }
 }
