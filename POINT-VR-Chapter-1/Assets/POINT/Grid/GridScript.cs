@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Threading;
 /// <summary>
 /// Script that replaces a MeshFilter mesh with that of a the ZYX-ordered junction-based grid.
 /// This grid can then deform in response to the movement of assigned rigidbodies.
@@ -30,6 +31,9 @@ public class GridScript : MonoBehaviour
         public Vector3 position;
         public float mass;
     }
+    /// <summary>
+    /// Calculates the displacement each FixedUpdate.
+    /// </summary>
     private void FixedUpdate()
     {
         Vector3[] displaced = new Vector3[size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1)]; 
@@ -42,6 +46,8 @@ public class GridScript : MonoBehaviour
                 position = rigidbodiesToDeformAround[j].position
             };
         }
+        Thread t = new Thread(() => ThreadRoutine(displaced, masses));
+        t.Start();
         for (int i = 0; i < size_z * size_y * size_x * 8; i+=8)
         {
             Vector3 disp = GetDisplacementForVertex(masses, i);
@@ -57,6 +63,17 @@ public class GridScript : MonoBehaviour
             displaced[i + 6] = new Vector3(xNew, yNew, disp.z);
             displaced[i + 7] = new Vector3(xNew, yNew, zNew);
         }
+        t.Join();
+        deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
+        deformingMesh.RecalculateNormals();
+    }
+    /// <summary>
+    /// The worker thread is in charge of the subjunctions.
+    /// </summary>
+    /// <param name="displaced">The list of vertices to displace</param>
+    /// <param name="masses">The list of masses</param>
+    private void ThreadRoutine(Vector3[] displaced, Mass[] masses)
+    {
         for (int i = size_z * size_y * size_x * 8; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i += 4)
         {
             Vector3 disp = GetDisplacementForVertex(masses, i);
@@ -87,8 +104,6 @@ public class GridScript : MonoBehaviour
             displaced[i + 2] = new Vector3(xNew, disp.y, disp.z);
             displaced[i + 3] = new Vector3(xNew, disp.y, zNew);
         }
-        deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
-        deformingMesh.RecalculateNormals();
     }
     /// <summary>
     /// Calculates the new position of the vertex at index i after it deforms due to masses.
