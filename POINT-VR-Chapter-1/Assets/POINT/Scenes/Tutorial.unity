@@ -866,7 +866,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click with Trigger for
+  m_text: Press with Trigger for
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c05c57be7bc3494da0c26626d70c868, type: 2}
   m_sharedMaterial: {fileID: -3600680322368273387, guid: 5c05c57be7bc3494da0c26626d70c868,
@@ -1335,6 +1335,7 @@ MonoBehaviour:
   turnSprite: {fileID: 21300000, guid: 0ad073e87b735384a863c98babe1b6de, type: 3}
   grabSprite: {fileID: 21300000, guid: 722b1a3479f7dcb45865bc5723025263, type: 3}
   pushPullSprite: {fileID: 21300000, guid: 2794dcc9276180f458bd4f06cb95a104, type: 3}
+  overSprite: {fileID: 0}
   menuSprite: {fileID: 21300000, guid: 5bce63427ab351e4e9b962dfbe84291f, type: 3}
   teleportationText: Try pointing at the floor and teleporting to that ring in the
     distance!
@@ -1342,6 +1343,7 @@ MonoBehaviour:
     your view.
   grabText: This sphere is a grabbable object, try picking it up.
   pushPullText: You can also pull and push objects when grabbing them.
+  overText: 'The tutorial is now over, please tell the instructor. '
   menuText: When you are ready, look around for a blue button saying "Scene 1" and
     press it with the trigger.
 --- !u!114 &1270109314
@@ -1755,7 +1757,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click to Start
+  m_text: Press to Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: deb1c246ee0737a42a1131c7f3cbbc50, type: 2}
   m_sharedMaterial: {fileID: 5355465875007194742, guid: deb1c246ee0737a42a1131c7f3cbbc50,

@@ -27,12 +27,14 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Sprite turnSprite;
     [SerializeField] private Sprite grabSprite;
     [SerializeField] private Sprite pushPullSprite;
+    [SerializeField] private Sprite overSprite;
     [SerializeField] private Sprite menuSprite;
     [Header("Instructions Text")]
     [SerializeField] private string teleportationText;
     [SerializeField] private string turnText;
     [SerializeField] private string grabText;
     [SerializeField] private string pushPullText;
+    [SerializeField] private string overText;
     [SerializeField] private string menuText;
 
 
@@ -164,9 +166,10 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => pushed && pulled);
 
         // Activate Scene Select
-        controlsImage.gameObject.SetActive(false);
+        controlsImage.sprite = overSprite;
+        controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
+        instructions.text = overText;
         SceneUIContainer.SetActive(true);
-        instructions.text = menuText;
 
         yield break;
     }
