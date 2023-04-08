@@ -36,49 +36,56 @@ public class GridScript : MonoBehaviour
         Mass[] masses = new Mass[rigidbodiesToDeformAround.Length];
         for (int j = 0; j < masses.Length; j++) //Prefetches the mass positions and values into one cache block ahead of time and organizes them into structs
         {
-            Mass m = new Mass
+            masses[j] = new Mass
             {
                 mass = rigidbodiesToDeformAround[j].mass,
                 position = rigidbodiesToDeformAround[j].position
             };
-            masses[j] = m;
-            
         }
         for (int i = 0; i < size_z * size_y * size_x * 8; i+=8)
         {
-            Vector3 d = GetDisplacementForVertex(masses, i);
-            displaced[i] = d;
-            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
-            displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
-            displaced[i + 3] = d + new Vector3(thickness, 0f, thickness);
-            displaced[i + 4] = d + new Vector3(0f, thickness, 0f);
-            displaced[i + 5] = d + new Vector3(0f, thickness, thickness);
-            displaced[i + 6] = d + new Vector3(thickness, thickness, 0f);
-            displaced[i + 7] = d + new Vector3(thickness, thickness, thickness);
+            Vector3 disp = GetDisplacementForVertex(masses, i);
+            float xNew = disp.x + thickness;
+            float yNew = disp.y + thickness;
+            float zNew = disp.z + thickness;
+            displaced[i] = disp;
+            displaced[i + 1] = new Vector3(disp.x, disp.y, zNew);
+            displaced[i + 2] = new Vector3(xNew, disp.y, disp.z);
+            displaced[i + 3] = new Vector3(xNew, disp.y, zNew);
+            displaced[i + 4] = new Vector3(disp.x, yNew, disp.z);
+            displaced[i + 5] = new Vector3(disp.x, yNew, zNew);
+            displaced[i + 6] = new Vector3(xNew, yNew, disp.z);
+            displaced[i + 7] = new Vector3(xNew, yNew, zNew);
         }
         for (int i = size_z * size_y * size_x * 8; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i += 4)
         {
-            Vector3 d = GetDisplacementForVertex(masses, i);
-            displaced[i] = d;
-            displaced[i + 1] = d + new Vector3(thickness, 0f, 0f);
-            displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
-            displaced[i + 3] = d + new Vector3(thickness, thickness, 0f);
+            Vector3 disp = GetDisplacementForVertex(masses, i);
+            float xNew = disp.x + thickness;
+            float yNew = disp.y + thickness;
+            displaced[i] = disp;
+            displaced[i + 1] = new Vector3(xNew, disp.y, disp.z);
+            displaced[i + 2] = new Vector3(disp.x, yNew, disp.z);
+            displaced[i + 3] = new Vector3(xNew, yNew, disp.z);
         }
         for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i += 4)
         {
-            Vector3 d = GetDisplacementForVertex(masses, i);
-            displaced[i] = d;
-            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
-            displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
-            displaced[i + 3] = d + new Vector3(0f, thickness, thickness);
+            Vector3 disp = GetDisplacementForVertex(masses, i);
+            float yNew = disp.y + thickness;
+            float zNew = disp.z + thickness;
+            displaced[i] = disp;
+            displaced[i + 1] = new Vector3(disp.x, disp.y, zNew);
+            displaced[i + 2] = new Vector3(disp.x, yNew, disp.z);
+            displaced[i + 3] = new Vector3(disp.x, yNew, zNew);
         }
         for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1); i += 4)
         {
-            Vector3 d = GetDisplacementForVertex(masses, i);
-            displaced[i] = d;
-            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
-            displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
-            displaced[i + 3] = d + new Vector3(thickness, 0f, thickness);
+            Vector3 disp = GetDisplacementForVertex(masses, i);
+            float xNew = disp.x + thickness;
+            float zNew = disp.z + thickness;
+            displaced[i] = disp;
+            displaced[i + 1] = new Vector3(disp.x, disp.y, zNew);
+            displaced[i + 2] = new Vector3(xNew, disp.y, disp.z);
+            displaced[i + 3] = new Vector3(xNew, disp.y, zNew);
         }
         deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
         deformingMesh.RecalculateNormals();
