@@ -182,11 +182,11 @@ public class GridScript : MonoBehaviour
         if (i < numJunction) //Vertex i is in a junction
         {
             int junction = i / 8; //8 Vertices in a junction
-            int xz = junction % (size_x * size_z); //Position on the xz-plane
-            int x = xz / size_z;
             int y = junction / (size_x * size_z);
-            int z = xz % size_z;
-            switch (i % 8) //Axis priority: Z (forward), X (right), Y (up)
+            int xz = junction - y * (size_x * size_z); //Position on the xz-plane
+            int x = xz / size_z;
+            int z = xz - x * size_z;
+            switch (i & 7) //Axis priority: Z (forward), X (right), Y (up)
             {
                 case 0: return new Vector3(x - s, y - s, z - s); 
                 case 1: return new Vector3(x - s, y - s, z + s);
@@ -202,13 +202,13 @@ public class GridScript : MonoBehaviour
         { //Vertex i is in a z-variant direction
             int j = i - numJunction; //Index not accounting for junctions
             int xy = j / (4 * divisions * (size_z - 1)); //Position on the xy-plane
-            int x = xy % size_x;
             int y = xy / size_x;
-            int k = j % (4 * divisions * (size_z - 1)); //Position within the z-bar
+            int x = xy - y * size_x;
+            int k = j - xy * (4 * divisions * (size_z - 1)); //Position within the z-bar
             int g = k / (4 * divisions); //Which "group" the vertex is in
-            int h = k % (4 * divisions); //Position within the "group"
+            int h = k - g * (4 * divisions); //Position within the "group"
             float z = g + ((h / 4) + 1) / (divisions + 1f);
-            switch (j % 4)
+            switch (j & 3)
             {
                 case 0: return new Vector3(x - s, y - s, z);
                 case 1: return new Vector3(x + s, y - s, z);
@@ -220,13 +220,13 @@ public class GridScript : MonoBehaviour
         { //Vertex i is in an x-variant direction
             int j = (i - numJunction) - numZ; //Index not accounting for junctions or direction Z
             int yz = j / (4 * divisions * (size_x - 1)); //Position on the yz-plane
-            int z = yz % size_z;
             int y = yz / size_z;
-            int k = j % (4 * divisions * (size_x - 1)); //Position within the x-bar
+            int z = yz - y * size_z;
+            int k = j - yz * (4 * divisions * (size_x - 1)); //Position within the x-bar
             int g = k / (4 * divisions); //Which "group" the vertex is in
-            int h = k % (4 * divisions); //Position within the "group"
+            int h = k - g * (4 * divisions); //Position within the "group"
             float x = g + ((h / 4) + 1) / (divisions + 1f);
-            switch (j % 4)
+            switch (j & 3)
             {
                 case 0: return new Vector3(x, y - s, z - s);
                 case 1: return new Vector3(x, y - s, z + s);
@@ -238,13 +238,13 @@ public class GridScript : MonoBehaviour
         { //Vertex i is in an x-variant direction
             int j = ((i - numJunction) - numZ) - numX; //Index not accounting for junctions or the other directions
             int xy = j / (4 * divisions * (size_y - 1)); //Position on the xy-plane
-            int z = xy % size_z;
             int x = xy / size_z;
-            int k = j % (4 * divisions * (size_y - 1)); //Position within the y-bar
+            int z = xy - x * size_z;
+            int k = j - xy * (4 * divisions * (size_y - 1)); //Position within the y-bar
             int g = k / (4 * divisions); //Which "group" the vertex is in
-            int h = k % (4 * divisions); //Position within the "group"
+            int h = k - g * (4 * divisions); //Position within the "group"
             float y = g + ((h / 4) + 1) / (divisions + 1f);
-            switch (j % 4)
+            switch (j & 3)
             {
                 case 0: return new Vector3(x - s, y, z - s);
                 case 1: return new Vector3(x - s, y, z + s);
