@@ -22,37 +22,31 @@ public class GridScript : MonoBehaviour
     /// The number of subjunctions on each "bar".
     /// </summary>
     readonly int divisions = 5;
+    /// <summary>
+    /// This struct is used to simplify the mass-position calculation and make memory use more compact
+    /// </summary>
+    struct Mass
+    {
+        public Vector3 position;
+        public float mass;
+    }
     private void FixedUpdate()
     {
         Vector3[] displaced = new Vector3[size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1)]; 
-        Vector3[] massPositions = new Vector3[rigidbodiesToDeformAround.Length];
-        float[] masses = new float[rigidbodiesToDeformAround.Length];
-        for (int j = 0; j < masses.Length; j++) //Prefetches the mass positions and values into one cache block ahead of time
+        Mass[] masses = new Mass[rigidbodiesToDeformAround.Length];
+        for (int j = 0; j < masses.Length; j++) //Prefetches the mass positions and values into one cache block ahead of time and organizes them into structs
         {
-            massPositions[j] = rigidbodiesToDeformAround[j].transform.position;
-            masses[j] = rigidbodiesToDeformAround[j].mass;
+            Mass m = new Mass
+            {
+                mass = rigidbodiesToDeformAround[j].mass,
+                position = rigidbodiesToDeformAround[j].position
+            };
+            masses[j] = m;
+            
         }
         for (int i = 0; i < size_z * size_y * size_x * 8; i+=8)
         {
-            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
-            float totalDistance = 0f;
-            for (int j = 0; j < masses.Length; j++)
-            {
-                Vector3 direction = IndexToPos(i) - massPositions[j];
-                float doubleMass = 2 * masses[j];
-                float distance = 1f;
-                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
-                {
-                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
-                }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
-                totalDistance += distance;
-            }
-            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
-            if (totalDistance > 1) // Normalizes the final displacement
-            {
-                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
-            }
+            Vector3 d = GetDisplacementForVertex(masses, i);
             displaced[i] = d;
             displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
             displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
@@ -64,25 +58,7 @@ public class GridScript : MonoBehaviour
         }
         for (int i = size_z * size_y * size_x * 8; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i += 4)
         {
-            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
-            float totalDistance = 0f;
-            for (int j = 0; j < masses.Length; j++)
-            {
-                Vector3 direction = IndexToPos(i) - massPositions[j];
-                float doubleMass = 2 * masses[j];
-                float distance = 1f;
-                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
-                {
-                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
-                }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
-                totalDistance += distance;
-            }
-            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
-            if (totalDistance > 1) // Normalizes the final displacement
-            {
-                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
-            }
+            Vector3 d = GetDisplacementForVertex(masses, i);
             displaced[i] = d;
             displaced[i + 1] = d + new Vector3(thickness, 0f, 0f);
             displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
@@ -90,25 +66,7 @@ public class GridScript : MonoBehaviour
         }
         for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i += 4)
         {
-            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
-            float totalDistance = 0f;
-            for (int j = 0; j < masses.Length; j++)
-            {
-                Vector3 direction = IndexToPos(i) - massPositions[j];
-                float doubleMass = 2 * masses[j];
-                float distance = 1f;
-                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
-                {
-                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
-                }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
-                totalDistance += distance;
-            }
-            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
-            if (totalDistance > 1) // Normalizes the final displacement
-            {
-                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
-            }
+            Vector3 d = GetDisplacementForVertex(masses, i);
             displaced[i] = d;
             displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
             displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
@@ -116,25 +74,7 @@ public class GridScript : MonoBehaviour
         }
         for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1); i += 4)
         {
-            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
-            float totalDistance = 0f;
-            for (int j = 0; j < masses.Length; j++)
-            {
-                Vector3 direction = IndexToPos(i) - massPositions[j];
-                float doubleMass = 2 * masses[j];
-                float distance = 1f;
-                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
-                {
-                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
-                }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
-                totalDistance += distance;
-            }
-            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
-            if (totalDistance > 1) // Normalizes the final displacement
-            {
-                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
-            }
+            Vector3 d = GetDisplacementForVertex(masses, i);
             displaced[i] = d;
             displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
             displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
@@ -142,6 +82,35 @@ public class GridScript : MonoBehaviour
         }
         deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
         deformingMesh.RecalculateNormals();
+    }
+    /// <summary>
+    /// Calculates the new position of the vertex at index i after it deforms due to masses.
+    /// </summary>
+    /// <param name="masses"> The list of structs detailing each mass and its position </param>
+    /// <param name="i"> The index of the specified vertex </param>
+    /// <returns> The deformed position of the vertex </returns>
+    private Vector3 GetDisplacementForVertex(Mass[] masses, int i)
+    {
+        Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+        float totalDistance = 0f;
+        for (int j = 0; j < masses.Length; j++)
+        {
+            Vector3 direction = IndexToPos(i) - masses[j].position;
+            float doubleMass = 2 * masses[j].mass;
+            float distance = 1f;
+            if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
+            {
+                distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
+            }
+            totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
+            totalDistance += distance;
+        }
+        Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+        if (totalDistance > 1) // Normalizes the final displacement
+        {
+            d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
+        }
+        return d;
     }
     /// <summary>
     /// This replaces the attached mesh with the grid.
