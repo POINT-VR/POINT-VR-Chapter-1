@@ -46,9 +46,27 @@ public class GridScript : MonoBehaviour
                 position = rigidbodiesToDeformAround[j].position
             };
         }
-        Thread t = new Thread(() => ThreadRoutine(displaced, masses));
+        int midpoint = ((displaced.Length / 2 - 1) | 7) + 1; //Increments of 8 only
+        Thread t = new Thread(() => ThreadRoutine(displaced, masses, midpoint, displaced.Length));
         t.Start();
-        for (int i = 0; i < size_z * size_y * size_x * 8; i+=8)
+        ThreadRoutine(displaced, masses, 0, midpoint);
+        t.Join();
+        deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
+        deformingMesh.RecalculateNormals();
+    }
+    /// <summary>
+    /// This parallelizable function writes into the displacement vector for each vertex in response to the masses.
+    /// Ensure the bounds for each thread do not overlap.
+    /// </summary>
+    /// <param name="displaced">The list of vertices to write to</param>
+    /// <param name="masses">The list of masses to deform in response to</param>
+    /// <param name="inclusive">The lower bound of vertex indices</param>
+    /// <param name="exclusive">The upper bound of vertex indices</param>
+    private void ThreadRoutine(Vector3[] displaced, Mass[] masses, int inclusive, int exclusive)
+    {
+        int i = inclusive;
+        int upper = Mathf.Min(size_z * size_y * size_x * 8, exclusive);
+        for (; i < upper; i += 8) //8-Junction case
         {
             Vector3 disp = GetDisplacementForVertex(masses, i);
             float xNew = disp.x + thickness;
@@ -63,18 +81,8 @@ public class GridScript : MonoBehaviour
             displaced[i + 6] = new Vector3(xNew, yNew, disp.z);
             displaced[i + 7] = new Vector3(xNew, yNew, zNew);
         }
-        t.Join();
-        deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
-        deformingMesh.RecalculateNormals();
-    }
-    /// <summary>
-    /// The worker thread is in charge of the subjunctions.
-    /// </summary>
-    /// <param name="displaced">The list of vertices to displace</param>
-    /// <param name="masses">The list of masses</param>
-    private void ThreadRoutine(Vector3[] displaced, Mass[] masses)
-    {
-        for (int i = size_z * size_y * size_x * 8; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i += 4)
+        upper = Mathf.Min(size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y, exclusive);
+        for (; i < upper; i += 4) //Z-Variant 4-subjunction case
         {
             Vector3 disp = GetDisplacementForVertex(masses, i);
             float xNew = disp.x + thickness;
@@ -84,7 +92,8 @@ public class GridScript : MonoBehaviour
             displaced[i + 2] = new Vector3(disp.x, yNew, disp.z);
             displaced[i + 3] = new Vector3(xNew, yNew, disp.z);
         }
-        for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i += 4)
+        upper = Mathf.Min(size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y, exclusive);
+        for (; i < upper; i += 4) //X-Variant 4-subjunction case
         {
             Vector3 disp = GetDisplacementForVertex(masses, i);
             float yNew = disp.y + thickness;
@@ -94,7 +103,8 @@ public class GridScript : MonoBehaviour
             displaced[i + 2] = new Vector3(disp.x, yNew, disp.z);
             displaced[i + 3] = new Vector3(disp.x, yNew, zNew);
         }
-        for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1); i += 4)
+        upper = Mathf.Min(size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1), exclusive);
+        for (; i < upper; i += 4) //Y-Variant 4-subjunction case
         {
             Vector3 disp = GetDisplacementForVertex(masses, i);
             float xNew = disp.x + thickness;
