@@ -1413,11 +1413,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 685732245830625035}
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: ActivateFloorToggle
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 685732245365327310}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 685732246532709863}
+        m_MethodName: UpdateFloor
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4130,6 +4141,7 @@ MonoBehaviour:
   - {fileID: 685732245587941450}
   - {fileID: 685732245462803179}
   narrationManager: {fileID: 685732246913176616}
+  floorToggles: {fileID: 685732246020707043}
 --- !u!1 &685732245864587167
 GameObject:
   m_ObjectHideFlags: 0
@@ -9023,11 +9035,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 685732245830625035}
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: ActivateFloorToggle
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 685732246835440931}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 685732246532709863}
+        m_MethodName: UpdateFloor
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

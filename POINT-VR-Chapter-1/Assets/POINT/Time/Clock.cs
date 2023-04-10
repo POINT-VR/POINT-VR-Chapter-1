@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 /// <summary>
 /// Manages the rotation of the clock sprites.
@@ -46,9 +47,10 @@ public class Clock : MonoBehaviour
     private float zAngle = 0.0f;
     void Start()
     {
-        originalPosition  = transform.position;
+        originalPosition = transform.position;
         cameraObject = Camera.allCameras[0].transform;
         audioSource = GetComponent<AudioSource>();
+        StartCoroutine(WaitForPlayerSpawn());
     }
     void Update()
     {
@@ -68,7 +70,7 @@ public class Clock : MonoBehaviour
                 totalRotationSpeed += rotation; //Displacement from each mass is calculated
                 continue;
             }
-            float p = power*2*rigidbodiesToDeformAround[j].mass;
+            float p = power * 2 * rigidbodiesToDeformAround[j].mass;
             if (p < r)
             {
                 rotation = Mathf.Sqrt(1f - ( p / r ) );
@@ -91,5 +93,12 @@ public class Clock : MonoBehaviour
             audioSource.Play();
         }
         lastZAngle = zAngle;
+    }
+
+    IEnumerator WaitForPlayerSpawn()
+    {
+        yield return new WaitUntil(() => Camera.current != null);
+        Camera.current.transform.GetComponentInChildren<UIManager>(true).AddToFunctionalAudio(audioSource); // add clock audio to functional audio for sliders
+        yield break;
     }
 }
