@@ -1859,8 +1859,10 @@ MonoBehaviour:
     type: 3}
   pullingReference: {fileID: 6274207502737436746, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
+  scrollReference: {fileID: 1567168941263133478, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+    type: 3}
   teleportationDistance: 25
-  sliderIncrement: 0.02
+  scrollIncrement: 0.3
   grabDistance: 12
   pullSpeed: 0.015
   squaredMinPullDistance: 3
@@ -2649,8 +2651,10 @@ MonoBehaviour:
     type: 3}
   pullingReference: {fileID: -6034992073922347324, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
+  scrollReference: {fileID: -4214473621842328233, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+    type: 3}
   teleportationDistance: 25
-  sliderIncrement: 0.02
+  scrollIncrement: 0.3
   grabDistance: 12
   pullSpeed: 0.015
   squaredMinPullDistance: 3
@@ -3737,6 +3741,7 @@ GameObject:
   - component: {fileID: 685732245769217517}
   - component: {fileID: 685732245769217523}
   - component: {fileID: 685732245769217516}
+  - component: {fileID: 8903682448951323796}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -3803,6 +3808,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &8903682448951323796
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685732245769217518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 680, y: 640, z: 1}
+  m_Center: {x: 251.77, y: -290.3, z: 1}
 --- !u!1 &685732245770028008
 GameObject:
   m_ObjectHideFlags: 0

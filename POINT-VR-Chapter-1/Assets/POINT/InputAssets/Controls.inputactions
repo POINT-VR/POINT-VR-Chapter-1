@@ -136,6 +136,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "a8add19a-efff-4781-9a14-347b29624871",
+                    "expectedControlType": "Vector2",
+                    "processors": "StickDeadzone",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -215,6 +223,17 @@
                     "action": "Push",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33220146-5284-4f93-8146-caec7ee58d28",
+                    "path": "<XRController>{LeftHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=0)",
+                    "groups": "Generic XR Controller",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -268,6 +287,14 @@
                     "id": "9d3de6d2-c573-43dd-97f0-d293eb3d3e0d",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "cf3af79f-47f6-4def-9d39-413134a03c0e",
+                    "expectedControlType": "Vector2",
+                    "processors": "StickDeadzone",
                     "interactions": ""
                 }
             ],
@@ -335,6 +362,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Push",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22531d62-0281-4cf2-818f-ac7eb5fdb44e",
+                    "path": "<XRController>{RightHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=0)",
+                    "groups": "Generic XR Controller",
+                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
