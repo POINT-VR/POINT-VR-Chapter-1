@@ -109,7 +109,7 @@ public class HandController : MonoBehaviour
         pullingReference.action.started += StartPulling;
         pullingReference.action.canceled += StopPulling;
         scrollReference.action.Enable();
-        scrollReference.action.started += Scroll;
+        scrollReference.action.performed += Scroll;
         pushing = false;
         previousParentTransform = null;
         laserColor = laser.material.color;
@@ -129,7 +129,7 @@ public class HandController : MonoBehaviour
         pullingReference.action.started -= StartPulling;
         pullingReference.action.canceled -= StopPulling;
         scrollReference.action.Disable();
-        scrollReference.action.started -= Scroll;
+        scrollReference.action.performed -= Scroll;
     }
     private void Update()
     {
