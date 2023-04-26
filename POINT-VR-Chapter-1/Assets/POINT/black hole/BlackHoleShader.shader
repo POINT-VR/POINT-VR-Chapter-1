@@ -58,29 +58,29 @@ Shader "Unlit/NewUnlitShader"
             fixed4 frag (v2f i) : SV_Target
             {
                 //project normal vectors onto view vector
-                float3 project = dot(-i.norm,i.view)*i.view;
+                float3 project = dot(i.norm,i.view)*i.view;
                 //subtract project out, gives vectors pointing inwards, relative to how far away from center
-                float b =length(-i.norm-project);
+                float b =length(i.norm-project);
                 //deflection function
-                float d = 1.0f/pow(b+0.94f,10);//deflection
+                float d = 1.0f/pow(b+0.8f,10);//deflection
                 //o.worldRefl=d;
                 //build function to rotate view vector
                 float3 axis=normalize(cross(i.view,i.norm));
-                float s = sin(d*1.1f);
-                float c = cos(d*1.1f);
+                float s = sin(d*1.0f);
+                float c = cos(d*1.0f);
                 float oc = 1.0 - c;
                 float3x3 rotmat = float3x3(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,
                 oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,
                 oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c);
-                float3 outvector=mul(rotmat,-i.view);
+                float3 outvector=mul(rotmat,i.view);
 
                 //get skybox data from rotated vector
-                half4 skyData = UNITY_SAMPLE_TEXCUBE(unity_SpecCube0, outvector);
+                half4 skyData = UNITY_SAMPLE_TEXCUBE(unity_SpecCube0, -outvector);
                 half3 skyColor=DecodeHDR(skyData,unity_SpecCube0_HDR);
                 fixed4 co = 0;
                 co.rgb=skyColor;
                 //if close to center, just draw the black hole.
-                if(b<.3f){
+                if(b<.1f){
                     co.rgb=0;
                 }
                 //c.rgb = i.worldRefl;
