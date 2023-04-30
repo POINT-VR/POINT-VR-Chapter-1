@@ -61,14 +61,18 @@ public class HandController : MonoBehaviour
     /// </summary>
     [SerializeField] InputActionReference pullingReference;
     /// <summary>
+    /// The input reference used to scroll through the UI
+    /// </summary>
+    [SerializeField] InputActionReference scrollReference;
+    /// <summary>
     /// The maximum distance a player can teleport 
     /// </summary>
     [Header("Constants")]
     [SerializeField] float teleportationDistance;
     /// <summary>
-    /// The increment by which a player can move a UI slider
+    /// The increment by which UI menu scroll changes on up/down joystick movement
     /// </summary>
-    [SerializeField] float sliderIncrement;
+    [SerializeField] float scrollIncrement;
     /// <summary>
     /// The maximum distance at which a player can grab objects
     /// </summary>
@@ -104,6 +108,8 @@ public class HandController : MonoBehaviour
         pullingReference.action.Enable();
         pullingReference.action.started += StartPulling;
         pullingReference.action.canceled += StopPulling;
+        scrollReference.action.Enable();
+        scrollReference.action.performed += Scroll;
         pushing = false;
         previousParentTransform = null;
         laserColor = laser.material.color;
@@ -122,6 +128,8 @@ public class HandController : MonoBehaviour
         pullingReference.action.Disable();
         pullingReference.action.started -= StartPulling;
         pullingReference.action.canceled -= StopPulling;
+        scrollReference.action.Disable();
+        scrollReference.action.performed -= Scroll;
     }
     private void Update()
     {
@@ -162,7 +170,7 @@ public class HandController : MonoBehaviour
             {
                 hardwareController.VibrateHand();
             }
-            laser.material.color = Color.green;
+            laser.material.color = (hit.collider.GetComponent<ScrollRect>() == null) ? Color.green : laserColor;
             lastColliderHit = hit.collider;
             if (holdingSlider)
             {
@@ -321,7 +329,6 @@ public class HandController : MonoBehaviour
     private void CheckScrollbar(RaycastHit hit)
     {
         Scrollbar activeScrollbar = hit.collider.gameObject.GetComponent<Scrollbar>();
-        Debug.Log(hit.collider.gameObject);
         if (activeScrollbar != null) //Collider is a scrollbar: proceeds to interact with scrollbar. 
         {
             RectTransform scrollbarRect = activeScrollbar.transform as RectTransform;
@@ -347,5 +354,23 @@ public class HandController : MonoBehaviour
     {
         pulling = true;
         pushing = false;
+    }
+
+    private void Scroll(InputAction.CallbackContext obj)
+    {
+        if (obj.action.ReadValue<Vector2>().y != 0 && Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected
+        {
+            ScrollRect scrollRect = hit.collider.gameObject.GetComponentInParent<ScrollRect>();
+            Debug.Log(hit.collider.gameObject);
+            if (scrollRect != null) // collider is scrollable
+            {
+                Scrollbar scrollbarVertical = scrollRect.verticalScrollbar;
+                if (scrollbarVertical != null)
+                {
+                    float valueChange = obj.action.ReadValue<Vector2>().y > 0 ? scrollIncrement : -scrollIncrement;
+                    scrollbarVertical.value = Mathf.Clamp(scrollbarVertical.value + valueChange, 0.0f, 1.0f);
+                }
+            }
+        }
     }
 }
