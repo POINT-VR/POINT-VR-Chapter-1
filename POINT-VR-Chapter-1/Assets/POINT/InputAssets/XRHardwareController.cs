@@ -36,8 +36,15 @@ public class XRHardwareController : MonoBehaviour
         positionReference.action.Enable();
         rotationReference.action.Enable();
         inputDevice = null;
+        
+    }
+    
+    public void ReConnect()
+    {
         foreach (InputDevice device in InputSystem.devices) //Iterate over all connected devices
         { 
+            //print all devices
+            print(device.name);
             if ((device.usages.Contains(CommonUsages.LeftHand) && hardwareType == Hardware.LeftHand) || (device.usages.Contains(CommonUsages.RightHand) && hardwareType == Hardware.RightHand))
             { //The device's common usage (controller hand) matches the hardware this represents: store the input device.
                 inputDevice = (XRControllerWithRumble) device;
@@ -63,6 +70,10 @@ public class XRHardwareController : MonoBehaviour
     }
     void Update()
     {
+        // if (inputDevice==null)
+        // {
+        //     ReConnect();
+        // }
         if (hardwareType == Hardware.Headset) //The headset will not update in Update()
         {
             return;
