@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,9 +15,13 @@ public class SnapRing : MonoBehaviour
     private Transform snapPosition;
     [SerializeField] private InputActionReference rightGrabReference;
     [SerializeField] private InputActionReference leftGrabReference;
-    
+
+    private Camera currentCamera = null;
+    private GameObject player = null;
+
     private void Start()
     {
+        StartCoroutine(WaitForPlayerSpawn());
         // Get the snap position
         snapPosition = transform.GetChild(0);
         rightGrabReference.action.canceled += OnPlayerRelease;
@@ -60,6 +64,14 @@ public class SnapRing : MonoBehaviour
         collidingObject = null;
     }
     
-    
+    IEnumerator WaitForPlayerSpawn()
+    {
+        yield return new WaitUntil(() => Camera.current != null);
+
+        // Start menu initialization
+        //currentCamera = Camera.current;
+        //player = currentCamera.transform.parent.gameObject;
+        yield break;
+    }
 
 }

@@ -8,7 +8,7 @@ namespace POINT.Feature3
     {
         public SnapRing snapRingPrefab;
         List<SnapRing> snapRings = new List<SnapRing>();
-        public int snapRingCount = 5;
+        public int snapRingCount = 6; // Should be 5 but for some reason last snapRing has no MeshRenderer
         public float Padding = 0.2f;
         private float snapRingZWidth = 1f;
         [SerializeField] XRHardwareController hardwareController;
@@ -23,12 +23,13 @@ namespace POINT.Feature3
             for (int i = 0; i < snapRingCount; i++)
             {
                 SnapRing snapRing = Instantiate(snapRingPrefab, transform);
+                //snapRing.GetComponent<MeshRenderer>().enabled = true;
                 snapRing.transform.localPosition = new Vector3(0, 0, currentZ);
                 snapRings.Add(snapRing);
                 currentZ += snapRingZWidth + Padding;
             }
             snapRingPrefab.gameObject.SetActive(false);
-            
+            //snapRings[4].GetComponent<MeshRenderer>().enabled = true;
             
         }
         [ContextMenu("Sort")]
@@ -44,9 +45,9 @@ namespace POINT.Feature3
                 {
                     // debug warning 
                     // only vibrate hand if it is apk use Macro
-                    # if UNITY_ANDROID && !UNITY_EDITOR
-                    hardwareController.VibrateHand();
-                    #endif
+                    //# if UNITY_ANDROID && !UNITY_EDITOR
+                    //hardwareController.VibrateHand();
+                    //#endif
                     return false;
                 }
                 masses.Add(snapRing.collidingObject.mass);
