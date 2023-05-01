@@ -6,7 +6,7 @@ using UnityEngine;
 public class Constrains : MonoBehaviour
 {
     List<Rigidbody> spheres = new List<Rigidbody>();
-    public MeshDeformScript deformScript;
+    public GridScript deformScript;
 
     private void OnTriggerEnter(Collider other)
     {
