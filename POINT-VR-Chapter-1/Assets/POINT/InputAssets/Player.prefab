@@ -1424,7 +1424,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 685732246532709863}
-        m_MethodName: UpdateFloor
+        m_MethodName: set_FloorVisibility
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9064,7 +9064,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 685732246532709863}
-        m_MethodName: UpdateFloor
+        m_MethodName: set_FloorVisibility
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
