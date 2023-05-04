@@ -220,7 +220,7 @@ public class HandController : MonoBehaviour
             grav.enabled = gravEnabled;
         }
         // Add velocity to grabbed object.
-        grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*(grabbingTransformVelocity + velocityPrev);
+        grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*hardwareController.Velocity; //2.5f*(grabbingTransformVelocity + velocityPrev);
         grabbingTransform = null;
 
     }
