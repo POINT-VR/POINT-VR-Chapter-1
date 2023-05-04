@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.XR;
 /// <summary>
 /// This script should be attached to the GameObject that is meant to represent a physical hardware device in-game.
 /// </summary>
@@ -30,6 +31,12 @@ public class XRHardwareController : MonoBehaviour
     private float playerHeight;
     // This represents a controller that can receive haptic feedback
     private XRControllerWithRumble inputDevice;
+    // The reference used to get the device's velocity
+    private UnityEngine.XR.InputDevice velocityDevice;
+    /// <summary>
+    /// Reads the hardware device's velocity
+    /// </summary>
+    public Vector3 Velocity { get { velocityDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceVelocity, out Vector3 velocity); return velocity; } }
     // This is the distance the headset has travelled from where the player began playing the simulation.
     // In the intended/most common use case, this should be equal to Vector3.zero
     private static Vector3 offset;
@@ -42,12 +49,24 @@ public class XRHardwareController : MonoBehaviour
         positionReference.action.Enable();
         rotationReference.action.Enable();
         inputDevice = null;
-        foreach (InputDevice device in InputSystem.devices) //Iterate over all connected devices
+        foreach (UnityEngine.InputSystem.InputDevice device in InputSystem.devices) //Iterate over all connected devices
         { 
-            if ((device.usages.Contains(CommonUsages.LeftHand) && hardwareType == Hardware.LeftHand) || (device.usages.Contains(CommonUsages.RightHand) && hardwareType == Hardware.RightHand))
+            if ((device.usages.Contains(UnityEngine.InputSystem.CommonUsages.LeftHand) && hardwareType == Hardware.LeftHand) || (device.usages.Contains(UnityEngine.InputSystem.CommonUsages.RightHand) && hardwareType == Hardware.RightHand))
             { //The device's common usage (controller hand) matches the hardware this represents: store the input device.
                 inputDevice = (XRControllerWithRumble) device;
             }
+        }
+        switch (hardwareType)
+        {
+            case Hardware.Headset:
+                velocityDevice = InputDevices.GetDeviceAtXRNode(XRNode.Head);
+                break;
+            case Hardware.LeftHand:
+                velocityDevice = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+                break;
+            case Hardware.RightHand:
+                velocityDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+                break;
         }
     }
     /// <summary>
