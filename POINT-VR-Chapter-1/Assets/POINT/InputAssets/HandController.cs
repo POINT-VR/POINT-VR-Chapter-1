@@ -163,6 +163,7 @@ public class HandController : MonoBehaviour
         else //Not in teleport mode or raycast was not able to find the floor: hides the reticle
         {
             reticle.SetActive(false);
+            transform.GetComponent<Animator>().SetBool("isPointing", false);
         }
         //Searches for UI or grabbable
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI found: turn this green
@@ -206,14 +207,12 @@ public class HandController : MonoBehaviour
             {
                 lastGrabHit = hit.transform;
             }
-            transform.GetComponent<Animator>().SetBool("isPointing", false);
         }
         else // UI or grabbable not found: return the laser to its normal color
         {
             laser.material.color = laserColor;
             lastColliderHit = null;
             lastGrabHit = null;
-            transform.GetComponent<Animator>().SetBool("isPointing", false);
         }
     }
     /// <summary>
@@ -301,6 +300,7 @@ public class HandController : MonoBehaviour
             playerTransform.parent.position = hit.point;
         }
         teleportMode = false;
+        transform.GetComponent<Animator>().SetBool("isPointing", false);
     }
     private void StopPushing(InputAction.CallbackContext ctx)
     {
