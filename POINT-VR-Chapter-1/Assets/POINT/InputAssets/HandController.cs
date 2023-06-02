@@ -158,10 +158,12 @@ public class HandController : MonoBehaviour
             reticle.SetActive(true);
             reticle.transform.position = hit.point;
             reticle.transform.LookAt(new Vector3(playerTransform.parent.position.x, 0f, playerTransform.parent.position.z));
+            transform.GetComponent<Animator>().SetBool("isPointing", true);
         }
         else //Not in teleport mode or raycast was not able to find the floor: hides the reticle
         {
             reticle.SetActive(false);
+            transform.GetComponent<Animator>().SetBool("isPointing", false);
         }
         //Searches for UI or grabbable
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI found: turn this green
@@ -170,7 +172,16 @@ public class HandController : MonoBehaviour
             {
                 hardwareController.VibrateHand();
             }
-            laser.material.color = (hit.collider.GetComponent<ScrollRect>() == null) ? Color.green : laserColor;
+            if (hit.collider.GetComponent<ScrollRect>() == null)
+            {
+                laser.material.color = Color.green;
+                transform.GetComponent<Animator>().SetBool("isPointing", true);
+            }
+            else
+            {
+                laser.material.color = laserColor;
+                transform.GetComponent<Animator>().SetBool("isPointing", false);
+            }
             lastColliderHit = hit.collider;
             if (holdingSlider)
             {
@@ -222,7 +233,7 @@ public class HandController : MonoBehaviour
         // Add velocity to grabbed object.
         grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*hardwareController.Velocity; //2.5f*(grabbingTransformVelocity + velocityPrev);
         grabbingTransform = null;
-
+        transform.GetComponent<Animator>().SetBool("isGrabbing", false);
     }
     private void Released(InputAction.CallbackContext ctx)
     {
@@ -252,6 +263,7 @@ public class HandController : MonoBehaviour
             gravEnabled = grav.enabled;
             grav.enabled = false;
         }
+        transform.GetComponent<Animator>().SetBool("isGrabbing", true);
     }
     /// <summary>
     /// Runs when the user starts holding down the trigger.
@@ -288,15 +300,18 @@ public class HandController : MonoBehaviour
             playerTransform.parent.position = hit.point;
         }
         teleportMode = false;
+        transform.GetComponent<Animator>().SetBool("isPointing", false);
     }
     private void StopPushing(InputAction.CallbackContext ctx)
     {
         pushing = false;
+        transform.GetComponent<Animator>().SetFloat("pushPull", 0.0f);
     }
     private void StartPushing(InputAction.CallbackContext ctx)
     {
         pushing = true;
         pulling = false;
+        transform.GetComponent<Animator>().SetFloat("pushPull", 1.0f);
     }
     /// <summary>
     /// Checks if the raycast hit was against a slider and acts on the slider if so
@@ -348,12 +363,14 @@ public class HandController : MonoBehaviour
     private void StopPulling(InputAction.CallbackContext obj)
     {
         pulling = false;
+        transform.GetComponent<Animator>().SetFloat("pushPull", 0.0f);
     }
 
     private void StartPulling(InputAction.CallbackContext obj)
     {
         pulling = true;
         pushing = false;
+        transform.GetComponent<Animator>().SetFloat("pushPull", -1.0f);
     }
 
     private void Scroll(InputAction.CallbackContext obj)
