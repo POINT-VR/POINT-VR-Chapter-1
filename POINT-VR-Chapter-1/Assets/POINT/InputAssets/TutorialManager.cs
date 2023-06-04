@@ -16,7 +16,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Image controlsImage;
     [SerializeField] private GameObject floor;
     [SerializeField] private GameObject massSphere;
-    [SerializeField] private GameObject teleportZone;
+    [SerializeField] private GameObject teleportZone1;
+    [SerializeField] private GameObject teleportZone2;
+    [SerializeField] private GameObject teleportZone3;
     [SerializeField] private GameObject SceneUIContainer;
     [SerializeField] private InputActionReference leftPushingReference;
     [SerializeField] private InputActionReference leftPullingReference;
@@ -63,7 +65,9 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(WaitForPlayerSpawn());
         floor.SetActive(false); // deactivate floor to prevent teleporting before tutorial start
         massSphere.SetActive(false);
-        teleportZone.SetActive(false);
+        teleportZone1.SetActive(false);
+        teleportZone2.SetActive(false);
+        teleportZone3.SetActive(false);
         SceneUIContainer.SetActive(false);
         versionText.transform.parent.gameObject.SetActive(true);
         versionText.text = "Version: " + Application.version;
@@ -86,7 +90,10 @@ public class TutorialManager : MonoBehaviour
         currentCamera = Camera.current;
         this.GetComponent<Canvas>().worldCamera = currentCamera;
         player = currentCamera.transform.parent.gameObject;
-        player.GetComponent<PauseController>().enabled = false;
+
+        // player.GetComponent<PauseController>().enabled = false; // This should disable pausing, but it currently soft locks the player from continueing
+                                                               // TODO: Disable the Oculus pause to bring up the UI menu
+
         player.GetComponent<TurnController>().enabled = false;
         this.transform.SetParent(player.transform.parent, false);
         leftPushingReference.action.started += Pushed;
@@ -106,29 +113,17 @@ public class TutorialManager : MonoBehaviour
         controlsImage.gameObject.SetActive(true); // activate controls graphics
         floor.SetActive(true); // activate floor for teleportation
         massSphere.SetActive(true);
-        teleportZone.SetActive(true);
-        float teleportRingScale = (2 * thresholdDistanceToTeleportZone) / teleportZone.GetComponent<SpriteRenderer>().size.x;
-        teleportZone.transform.localScale = new Vector3(teleportRingScale, teleportRingScale, teleportRingScale);
-
-        // Teleportation tutorial
-        controlsImage.sprite = teleportationSprite;
-        instructions.text = teleportationText;
-        
-        StartCoroutine(WaitForTeleport());
-    }
-
-    IEnumerator WaitForTeleport()
-    {
-        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone.transform.position) <= thresholdDistanceToTeleportZone);
+        teleportZone1.SetActive(true);
+        float teleportRingScale = (2 * thresholdDistanceToTeleportZone) / teleportZone1.GetComponent<SpriteRenderer>().size.x;
+        teleportZone1.transform.localScale = new Vector3(teleportRingScale, teleportRingScale, teleportRingScale);
+        teleportZone2.transform.localScale = new Vector3(teleportRingScale/2, teleportRingScale/2, teleportRingScale/2);
+        teleportZone3.transform.localScale = new Vector3(teleportRingScale/3, teleportRingScale/3, teleportRingScale/3);
 
         // Turn tutorial
-        teleportZone.SetActive(false);
         controlsImage.sprite = turnSprite;
         instructions.text = turnText;
-
+        
         StartCoroutine(WaitForTurn());
-
-        yield break;
     }
 
     IEnumerator WaitForTurn()
@@ -136,6 +131,29 @@ public class TutorialManager : MonoBehaviour
         float initialRotation = player.transform.rotation.y;
 
         yield return new WaitUntil(() => player.transform.rotation.y != initialRotation);
+
+        // Teleportation tutorial
+        controlsImage.sprite = teleportationSprite;
+        instructions.text = teleportationText;
+
+        StartCoroutine(WaitForTeleport());
+
+        yield break;
+    }
+
+    IEnumerator WaitForTeleport()
+    {
+        // 3 teleport rings of increasing precision to achieve
+        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone1.transform.position) <= thresholdDistanceToTeleportZone);
+
+        teleportZone1.SetActive(false);
+        teleportZone2.SetActive(true);
+        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone2.transform.position) <= thresholdDistanceToTeleportZone/2);
+
+        teleportZone2.SetActive(false);
+        teleportZone3.SetActive(true);
+        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone3.transform.position) <= thresholdDistanceToTeleportZone/3);
+        teleportZone3.SetActive(false);
 
         // Grab tutorial
         controlsImage.sprite = grabSprite;
