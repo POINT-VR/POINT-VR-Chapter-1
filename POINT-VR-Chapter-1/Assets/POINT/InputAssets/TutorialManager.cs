@@ -167,6 +167,8 @@ public class TutorialManager : MonoBehaviour
     IEnumerator WaitForGrab()
     {
         yield return new WaitUntil(() => massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null);
+
+        //TODO: If this function works as intended, delete below
         /**
         // Push and pull tutorial
         controlsImage.sprite = pushPullSprite;
