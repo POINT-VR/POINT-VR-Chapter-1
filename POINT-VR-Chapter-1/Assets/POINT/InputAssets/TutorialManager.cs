@@ -167,12 +167,18 @@ public class TutorialManager : MonoBehaviour
     IEnumerator WaitForGrab()
     {
         yield return new WaitUntil(() => massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null);
-
+        /**
         // Push and pull tutorial
         controlsImage.sprite = pushPullSprite;
         instructions.text = pushPullText;
 
-        StartCoroutine(WaitForPushPull());
+        StartCoroutine(WaitForPushPull());**/
+
+        // Activate Scene Select
+        controlsImage.sprite = overSprite;
+        controlsImage.GetComponent<Image>().color = new Color32(255, 255, 255, 0); // Makes image transparent, need to undone to controls image later
+        instructions.text = overText;
+        SceneUIContainer.SetActive(true);
 
         yield break;
     }
