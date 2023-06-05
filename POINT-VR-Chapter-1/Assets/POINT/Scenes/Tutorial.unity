@@ -1236,9 +1236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Scene 1
-
-'
+  m_text: "Next Scene \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c05c57be7bc3494da0c26626d70c868, type: 2}
   m_sharedMaterial: {fileID: -3600680322368273387, guid: 5c05c57be7bc3494da0c26626d70c868,
@@ -1459,7 +1457,7 @@ MonoBehaviour:
     your view.
   grabText: This sphere is a grabbable object, try picking it up.
   pushPullText: You can also pull and push objects when grabbing them.
-  overText: 'The tutorial is now over, please tell the instructor. '
+  overText: 'The tutorial is now over, please let the demo assistant know. '
   menuText: When you are ready, look around for a blue button saying "Scene 1" and
     press it with the trigger.
 --- !u!114 &1270109314
