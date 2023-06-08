@@ -1964,7 +1964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2488,42 +2488,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1275810949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9c99a9bef009b488a973512afb0ddc, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a7a09e6f29c75d41bbd66437f23c843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thresholdDistanceToTeleportZone: 3
-  versionText: {fileID: 0}
+  SceneUIContainer: {fileID: 1312207646}
   controlsImage: {fileID: 978969239}
-  floor: {fileID: 0}
-  massSphere: {fileID: 0}
-  teleportZone1: {fileID: 0}
-  teleportZone2: {fileID: 0}
-  teleportZone3: {fileID: 0}
-  SceneUIContainer: {fileID: 0}
-  leftPushingReference: {fileID: -6034992073922347324, guid: a54d6349e0e4d404fa09e1c0531de6d0,
-    type: 3}
-  leftPullingReference: {fileID: 5492603852644030702, guid: a54d6349e0e4d404fa09e1c0531de6d0,
-    type: 3}
-  rightPushingReference: {fileID: 6274207502737436746, guid: a54d6349e0e4d404fa09e1c0531de6d0,
-    type: 3}
-  rightPullingReference: {fileID: 7109928901819384079, guid: a54d6349e0e4d404fa09e1c0531de6d0,
-    type: 3}
-  teleportationSprite: {fileID: 21300000, guid: 315625fd46915454288c3cedb866d290,
-    type: 3}
-  turnSprite: {fileID: 21300000, guid: 0ad073e87b735384a863c98babe1b6de, type: 3}
-  grabSprite: {fileID: 21300000, guid: 722b1a3479f7dcb45865bc5723025263, type: 3}
-  pushPullSprite: {fileID: 21300000, guid: 2794dcc9276180f458bd4f06cb95a104, type: 3}
-  overSprite: {fileID: 0}
-  menuSprite: {fileID: 21300000, guid: 5bce63427ab351e4e9b962dfbe84291f, type: 3}
-  teleportationText: Try pointing at the floor and teleporting to the rings in the
-    distance!
-  turnText: In addition to turning your head, you can use the joysticks to rotate
-    your view.
-  grabText: This sphere is a grabbable object, try picking it up.
-  pushPullText: You can also pull and push objects when grabbing them.
-  overText: 'The tutorial is now over, please let the demo assistant know. '
-  menuText: When you are ready, look around for a blue button saying "Scene 1" and
-    press it with the trigger.
+  instructionText: This is Scene 1
+  waitPeriod: 30
 --- !u!114 &1275810951
 MonoBehaviour:
   m_ObjectHideFlags: 0

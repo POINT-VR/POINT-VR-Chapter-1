@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlayerUIManager : MonoBehaviour
 {
 
     [Header("References")]
-    [SerializeField] private TMP_Text versionText;
     [SerializeField] private GameObject SceneUIContainer;
+    [SerializeField] private Image controlsImage;
     [Header("Instructions Text")]
-    [SerializeField] private string teleportationText;
-    [SerializeField] private string turnText;
+    [SerializeField] private string instructionText;
+    /**[SerializeField] private string turnText;
     [SerializeField] private string grabText;
     [SerializeField] private string pushPullText;
     [SerializeField] private string overText;
-    [SerializeField] private string menuText;
+    [SerializeField] private string menuText;**/
+    [Header("Instructions Timer")]
+    [SerializeField] private int waitPeriod;
 
     // Cache
     private TMP_Text instructions = null;
@@ -47,6 +51,14 @@ public class PlayerUIManager : MonoBehaviour
         this.GetComponent<Canvas>().worldCamera = currentCamera;
         player = currentCamera.transform.parent.gameObject;
 
+        StartCoroutine(WaitUntilTime());
+
+        yield break;
+    }
+    IEnumerator WaitUntilTime()
+    {
+        instructions.text = instructionText;
+        yield return new WaitForSeconds(waitPeriod);
 
         yield break;
     }
