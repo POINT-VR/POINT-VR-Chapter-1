@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0068936315, g: 0.0067525106, b: 0.0071824407, a: 1}
+  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2727,7 +2727,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneUIContainer: {fileID: 1312207646}
   controlsImage: {fileID: 1528118149}
-  instructionText: This is Scene 2
+  instructionText: This is Scene 2. There are now two masses that gravitationally
+    attract each other. Interact with the grid and clocks while holding the mass
+    sphere.
   waitPeriod: 10
 --- !u!114 &1478958195
 MonoBehaviour:
