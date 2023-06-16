@@ -28,6 +28,11 @@ public class PlayerUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (controlsImage != null)
+        {
+            instructions = controlsImage.GetComponentInChildren<TMP_Text>();
+            controlsImage.gameObject.SetActive(false);
+        }
         instructions = controlsImage.GetComponentInChildren<TMP_Text>();
         StartCoroutine(WaitForPlayerSpawn());
     }
@@ -50,6 +55,9 @@ public class PlayerUIManager : MonoBehaviour
         currentCamera = Camera.current;
         this.GetComponent<Canvas>().worldCamera = currentCamera;
         player = currentCamera.transform.parent.gameObject;
+        this.transform.SetParent(player.transform.parent, false);
+
+
 
         StartCoroutine(WaitUntilTime());
 
@@ -58,8 +66,9 @@ public class PlayerUIManager : MonoBehaviour
     IEnumerator WaitUntilTime()
     {
         instructions.text = instructionText;
+        controlsImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(waitPeriod);
-
+        controlsImage.gameObject.SetActive(false);
         yield break;
     }
 }

@@ -2494,7 +2494,7 @@ MonoBehaviour:
   SceneUIContainer: {fileID: 1312207646}
   controlsImage: {fileID: 978969239}
   instructionText: This is Scene 1
-  waitPeriod: 30
+  waitPeriod: 10
 --- !u!114 &1275810951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2562,7 +2562,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275810949}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.25}
   m_LocalScale: {x: 0.0017, y: 0.0017, z: 0.0017}
   m_Children:
