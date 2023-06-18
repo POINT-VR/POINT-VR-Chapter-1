@@ -147,9 +147,9 @@
                 },
                 {
                     "name": "HighlightThumbstick",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "49cda788-0635-4ded-b153-181c9fb22715",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
                     "interactions": ""
                 },
@@ -286,7 +286,7 @@
                 {
                     "name": "",
                     "id": "2b32c8fc-7fac-4176-aca0-6c08cdcb5cb5",
-                    "path": "<XRController>{LeftHand}/thumbstickClicked",
+                    "path": "<XRController>{LeftHand}/thumbstick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -413,9 +413,9 @@
                 },
                 {
                     "name": "HighlightThumbstick",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "e7bbac95-4bb0-4425-b3e5-ee74813b7ee4",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
                     "interactions": ""
                 },
@@ -596,7 +596,7 @@
                 {
                     "name": "",
                     "id": "7426760d-f16e-4606-9c44-16c2ec4398d1",
-                    "path": "<XRController>{RightHand}/thumbstickClicked",
+                    "path": "<XRController>{RightHand}/thumbstick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
