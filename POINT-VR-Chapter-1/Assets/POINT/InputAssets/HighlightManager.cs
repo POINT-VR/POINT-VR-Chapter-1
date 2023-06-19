@@ -19,6 +19,8 @@ public class HighlightManager : MonoBehaviour
     [SerializeField] private GameObject trigger;
     [SerializeField] private GameObject grip;
 
+    private Transform cameraTransform;
+
     private void OnEnable()
     {
         thumbstickReference.action.Enable();
@@ -60,5 +62,16 @@ public class HighlightManager : MonoBehaviour
         triggerReference.action.canceled -= (ctx) => { trigger.SetActive(false); };
         gripReference.action.started -= (ctx) => { grip.SetActive(true); };
         gripReference.action.canceled -= (ctx) => { grip.SetActive(false); };
+    }
+
+    private void Update()
+    {
+        if (cameraTransform != null)
+        {
+            this.transform.LookAt(cameraTransform);
+        } else if (Camera.current != null)
+        {
+            cameraTransform = Camera.current.transform;
+        }
     }
 }
