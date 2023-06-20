@@ -147,10 +147,10 @@
                 },
                 {
                     "name": "HighlightThumbstick",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "49cda788-0635-4ded-b153-181c9fb22715",
-                    "expectedControlType": "Vector2",
-                    "processors": "StickDeadzone",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -286,9 +286,9 @@
                 {
                     "name": "",
                     "id": "2b32c8fc-7fac-4176-aca0-6c08cdcb5cb5",
-                    "path": "<XRController>{LeftHand}/thumbstick",
+                    "path": "<XRController>{LeftHand}/thumbstickClicked",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone",
                     "groups": "Generic XR Controller",
                     "action": "HighlightThumbstick",
                     "isComposite": false,
@@ -413,10 +413,10 @@
                 },
                 {
                     "name": "HighlightThumbstick",
-                    "type": "Value",
-                    "id": "e7bbac95-4bb0-4425-b3e5-ee74813b7ee4",
-                    "expectedControlType": "Vector2",
-                    "processors": "StickDeadzone",
+                    "type": "Button",
+                    "id": "d34029bc-7170-4550-9206-f3b9285c28aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -595,10 +595,10 @@
                 },
                 {
                     "name": "",
-                    "id": "7426760d-f16e-4606-9c44-16c2ec4398d1",
-                    "path": "<XRController>{RightHand}/thumbstick",
+                    "id": "b588aa2f-bc49-454e-9e20-fffa4febca81",
+                    "path": "<XRController>{RightHand}/thumbstickClicked",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone",
                     "groups": "Generic XR Controller",
                     "action": "HighlightThumbstick",
                     "isComposite": false,

@@ -88,7 +88,7 @@ RectTransform:
   m_GameObject: {fileID: 467514636868432727}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8758846212175900810}
   m_RootOrder: 4
@@ -10368,7 +10368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c3359bd4a3720747a0d5cb64cf0264c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thumbstickReference: {fileID: 8380205178208652348, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+  thumbstickReference: {fileID: -2714995421058190471, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
   secondaryBtnReference: {fileID: 7610991897840728675, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
@@ -10756,7 +10756,7 @@ RectTransform:
   m_GameObject: {fileID: 2171292361695309546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4963171683623566905}
   m_RootOrder: 4
@@ -11098,7 +11098,7 @@ RectTransform:
   m_GameObject: {fileID: 3401291131260378140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4963171683623566905}
   m_RootOrder: 6
@@ -11778,7 +11778,7 @@ RectTransform:
   m_GameObject: {fileID: 4156170250931198611}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8758846212175900810}
   m_RootOrder: 1
@@ -11852,7 +11852,7 @@ RectTransform:
   m_GameObject: {fileID: 4181891010355586543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8758846212175900810}
   m_RootOrder: 2
@@ -11956,7 +11956,7 @@ RectTransform:
   m_GameObject: {fileID: 4496921008813169022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8758846212175900810}
   m_RootOrder: 5
@@ -12301,6 +12301,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4536663319639415867}
+        m_MethodName: set_IsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9126992730143753165}
+        m_MethodName: set_IsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4919049516186917454
 GameObject:
   m_ObjectHideFlags: 0
@@ -12407,7 +12429,7 @@ RectTransform:
   m_GameObject: {fileID: 4940347277880944171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8758846212175900810}
   m_RootOrder: 0
@@ -12767,7 +12789,7 @@ RectTransform:
   m_GameObject: {fileID: 5541771564404571186}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8758846212175900810}
   m_RootOrder: 6
@@ -12903,7 +12925,7 @@ RectTransform:
   m_GameObject: {fileID: 6439123387992303144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4963171683623566905}
   m_RootOrder: 1
@@ -12977,7 +12999,7 @@ RectTransform:
   m_GameObject: {fileID: 6440790982927389021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4963171683623566905}
   m_RootOrder: 2
@@ -13237,6 +13259,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4536663319639415867}
+        m_MethodName: set_IsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 9126992730143753165}
+        m_MethodName: set_IsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &7239393994439434471
 GameObject:
   m_ObjectHideFlags: 0
@@ -13299,7 +13343,7 @@ RectTransform:
   m_GameObject: {fileID: 7615509889688950092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8758846212175900810}
   m_RootOrder: 3
@@ -13447,7 +13491,7 @@ RectTransform:
   m_GameObject: {fileID: 7921119316900711103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4963171683623566905}
   m_RootOrder: 0
@@ -13583,7 +13627,7 @@ RectTransform:
   m_GameObject: {fileID: 8497980834577645317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4963171683623566905}
   m_RootOrder: 5
@@ -13657,7 +13701,7 @@ RectTransform:
   m_GameObject: {fileID: 8536403090282044914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4963171683623566905}
   m_RootOrder: 3

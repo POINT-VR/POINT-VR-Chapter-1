@@ -19,6 +19,14 @@ public class HighlightManager : MonoBehaviour
     [SerializeField] private GameObject trigger;
     [SerializeField] private GameObject grip;
 
+    private bool isActive = true;
+    public bool IsActive
+    {
+        set
+        {
+            isActive = value;
+        }
+    }
     private Transform cameraTransform;
 
     private void OnEnable()
@@ -29,7 +37,7 @@ public class HighlightManager : MonoBehaviour
         startBtnReference.action.Enable();
         triggerReference.action.Enable();
         gripReference.action.Enable();
-        thumbstickReference.action.performed += (ctx) => { thumbstick.SetActive(true); } ;
+        thumbstickReference.action.started += (ctx) => { thumbstick.SetActive(true); } ;
         thumbstickReference.action.canceled += (ctx) => { thumbstick.SetActive(false); };
         secondaryBtnReference.action.started += (ctx) => { secondaryBtn.SetActive(true); };
         secondaryBtnReference.action.canceled += (ctx) => { secondaryBtn.SetActive(false); };
@@ -50,7 +58,7 @@ public class HighlightManager : MonoBehaviour
         startBtnReference.action.Disable();
         triggerReference.action.Disable();
         gripReference.action.Disable();
-        thumbstickReference.action.performed -= (ctx) => { thumbstick.SetActive(true); };
+        thumbstickReference.action.started -= (ctx) => { thumbstick.SetActive(true); };
         thumbstickReference.action.canceled -= (ctx) => { thumbstick.SetActive(false); };
         secondaryBtnReference.action.started -= (ctx) => { secondaryBtn.SetActive(true); };
         secondaryBtnReference.action.canceled -= (ctx) => { secondaryBtn.SetActive(false); };
@@ -72,6 +80,14 @@ public class HighlightManager : MonoBehaviour
         } else if (Camera.current != null)
         {
             cameraTransform = Camera.current.transform;
+        }
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (isActive)
+        {
+            this.GetComponent<Canvas>().enabled = !pause;
         }
     }
 }
