@@ -17,8 +17,8 @@ Learning Objective: Understand gravity as the curvature of this fabric. “Matte
 Implementations: Objects with mass interacting with the 3D grid (deforming it). Ranking objects of different masses.
 
 <p align="center">
-  <img width="400" height="250" style="horizontal-align:middle" src="files_for_README/ASEE-demo-grid.gif" alt="Mass interacting with Space" />
-  <img width="500" height="250" src="files_for_README/ASEE-demo-clocks.gif" alt="Mass interacting with Time" />
+  <img src="files_for_README/ASEE-demo-grid.gif" alt="Mass interacting with Space" />
+  <img src="files_for_README/ASEE-demo-clocks.gif" alt="Mass interacting with Time" />
 </p>
 
 #### Scene 3
@@ -26,7 +26,7 @@ Learning Objective: “...spacetime tells matter how to move.” <br />
 Implementations: Get an earth like object to orbit a sun like object over a 3D grid
 
 <p align="center">
-  <img width="400" height="250" src="files_for_README/ASEE-demo-orbits.gif" alt="Mass interacting with other Mass" />
+  <img src="files_for_README/ASEE-demo-orbits.gif" alt="Mass interacting with other Mass" />
 </p>
 
 ## License
