@@ -83,11 +83,11 @@ public class HighlightManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationPause(bool pause)
+    private void OnApplicationFocus(bool hasFocus)
     {
         if (isActive)
         {
-            this.GetComponent<Canvas>().enabled = !pause;
+            this.GetComponent<Canvas>().enabled = hasFocus;
         }
     }
 }
