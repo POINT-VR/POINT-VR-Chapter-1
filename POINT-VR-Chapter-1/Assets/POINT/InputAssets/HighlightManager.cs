@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HighlightManager : MonoBehaviour
@@ -38,10 +37,8 @@ public class HighlightManager : MonoBehaviour
         startBtnReference.action.Enable();
         triggerReference.action.Enable();
         gripReference.action.Enable();
-        thumbstickReference.action.started += (ctx) => { 
-            thumbstick.SetActive(true);
-            StartCoroutine(WaitForThumbstickStop());
-        } ;
+        thumbstickReference.action.started += (ctx) => { thumbstick.SetActive(true); } ;
+        thumbstickReference.action.canceled += (ctx) => { thumbstick.SetActive(false); };
         secondaryBtnReference.action.started += (ctx) => { secondaryBtn.SetActive(true); };
         secondaryBtnReference.action.canceled += (ctx) => { secondaryBtn.SetActive(false); };
         primaryBtnReference.action.started += (ctx) => { primaryBtn.SetActive(true); };
@@ -61,10 +58,8 @@ public class HighlightManager : MonoBehaviour
         startBtnReference.action.Disable();
         triggerReference.action.Disable();
         gripReference.action.Disable();
-        thumbstickReference.action.started -= (ctx) => { 
-            thumbstick.SetActive(true);
-            StartCoroutine(WaitForThumbstickStop());
-        };
+        thumbstickReference.action.started -= (ctx) => { thumbstick.SetActive(true); };
+        thumbstickReference.action.canceled -= (ctx) => { thumbstick.SetActive(false); };
         secondaryBtnReference.action.started -= (ctx) => { secondaryBtn.SetActive(true); };
         secondaryBtnReference.action.canceled -= (ctx) => { secondaryBtn.SetActive(false); };
         primaryBtnReference.action.started -= (ctx) => { primaryBtn.SetActive(true); };
@@ -86,13 +81,6 @@ public class HighlightManager : MonoBehaviour
         {
             cameraTransform = Camera.current.transform;
         }
-    }
-
-    IEnumerator WaitForThumbstickStop()
-    {
-        yield return new WaitUntil(() => thumbstickReference.action.ReadValue<Vector2>().x < InputSystem.settings.defaultDeadzoneMin && thumbstickReference.action.ReadValue<Vector2>().y < InputSystem.settings.defaultDeadzoneMin);
-        thumbstick.SetActive(false);
-        yield break;
     }
 
     private void OnApplicationFocus(bool hasFocus)
