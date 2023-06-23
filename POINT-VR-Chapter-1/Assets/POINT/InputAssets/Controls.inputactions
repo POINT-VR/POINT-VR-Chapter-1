@@ -158,7 +158,7 @@
                     "type": "Button",
                     "id": "9106abbc-c956-4a76-a2cd-1dae09606568",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -166,7 +166,7 @@
                     "type": "Button",
                     "id": "790cffa0-b727-4dc8-a761-aa602c61b4df",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -174,7 +174,7 @@
                     "type": "Button",
                     "id": "a819a435-55b5-4753-96c3-c9467fcd5862",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -182,7 +182,7 @@
                     "type": "Button",
                     "id": "5211d94a-cb85-4959-821f-e00b9f3e312e",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -190,7 +190,7 @@
                     "type": "Button",
                     "id": "bee38beb-f348-4b47-97a0-55f7fb2b8afd",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 }
             ],
@@ -424,7 +424,7 @@
                     "type": "Button",
                     "id": "acea5cf0-4e0e-42f4-aeec-88a823ec9b58",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -432,7 +432,7 @@
                     "type": "Button",
                     "id": "2c89cd49-3e8f-44fb-8c0b-6d85cf2154e3",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -440,7 +440,7 @@
                     "type": "Button",
                     "id": "ce6ce250-e486-457a-bf5a-86a9f1447311",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -448,7 +448,7 @@
                     "type": "Button",
                     "id": "957ac90b-271f-46eb-9468-42ea0d42122c",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -456,7 +456,7 @@
                     "type": "Button",
                     "id": "90810746-1477-4757-90be-1b98ec9a2669",
                     "expectedControlType": "Button",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": ""
                 }
             ],
