@@ -144,6 +144,54 @@
                     "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
                     "interactions": ""
+                },
+                {
+                    "name": "HighlightThumbstick",
+                    "type": "Button",
+                    "id": "49cda788-0635-4ded-b153-181c9fb22715",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightPrimary",
+                    "type": "Button",
+                    "id": "9106abbc-c956-4a76-a2cd-1dae09606568",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightSecondary",
+                    "type": "Button",
+                    "id": "790cffa0-b727-4dc8-a761-aa602c61b4df",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightStart",
+                    "type": "Button",
+                    "id": "a819a435-55b5-4753-96c3-c9467fcd5862",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightTrigger",
+                    "type": "Button",
+                    "id": "5211d94a-cb85-4959-821f-e00b9f3e312e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightGrip",
+                    "type": "Button",
+                    "id": "bee38beb-f348-4b47-97a0-55f7fb2b8afd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -234,6 +282,72 @@
                     "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b32c8fc-7fac-4176-aca0-6c08cdcb5cb5",
+                    "path": "<XRController>{LeftHand}/thumbstickTouched",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightThumbstick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "889e8fe7-d6e9-49a0-a236-42a33dd96fbe",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightPrimary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a2abc92-2514-4a61-a5a0-3ea9c994bb65",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00d73066-49b0-4b94-9869-a6c286bd4d0c",
+                    "path": "<XRController>{LeftHand}/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74d0a32a-b12e-443e-92da-7a0c65934471",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1437248-7fb0-4862-992a-0964a71b9a88",
+                    "path": "<XRController>{LeftHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightGrip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -295,6 +409,54 @@
                     "id": "cf3af79f-47f6-4def-9d39-413134a03c0e",
                     "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightThumbstick",
+                    "type": "Button",
+                    "id": "d34029bc-7170-4550-9206-f3b9285c28aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightPrimary",
+                    "type": "Button",
+                    "id": "acea5cf0-4e0e-42f4-aeec-88a823ec9b58",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightSecondary",
+                    "type": "Button",
+                    "id": "2c89cd49-3e8f-44fb-8c0b-6d85cf2154e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightStart",
+                    "type": "Button",
+                    "id": "ce6ce250-e486-457a-bf5a-86a9f1447311",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightTrigger",
+                    "type": "Button",
+                    "id": "957ac90b-271f-46eb-9468-42ea0d42122c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HighlightGrip",
+                    "type": "Button",
+                    "id": "90810746-1477-4757-90be-1b98ec9a2669",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": ""
                 }
             ],
@@ -373,6 +535,72 @@
                     "processors": "ScaleVector2(x=0)",
                     "groups": "Generic XR Controller",
                     "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f731c2d8-1160-4025-9136-cb7a249f55b7",
+                    "path": "<XRController>{RightHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightGrip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0bb4d156-18a7-45f6-b946-45dae0b86c5d",
+                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a69b83d-c4a3-42e7-9830-da5a37256164",
+                    "path": "<XRController>{RightHand}/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "189e7d2c-cc1e-40c9-b408-4bc433581027",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4865fbed-f154-41a5-a9e7-79d18b374bd8",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightPrimary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b588aa2f-bc49-454e-9e20-fffa4febca81",
+                    "path": "<XRController>{RightHand}/thumbstickTouched",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightThumbstick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
