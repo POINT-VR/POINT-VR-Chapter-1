@@ -9,12 +9,14 @@ public class GW_Ring : MonoBehaviour
     [SerializeField] public int numberOfMeshes = 12;
     [SerializeField] public float radius = 5.0f;
     private List<GameObject> sphere_array;
+    private List<float> angles_array;
 
 
     // Start is called before the first frame update
     void Start()
     {
         sphere_array = new List<GameObject>(numberOfMeshes);
+        angles_array = new List<float>(numberOfMeshes);
 
         Vector3 center = transform.position;
 
@@ -26,6 +28,7 @@ public class GW_Ring : MonoBehaviour
             Vector3 pos = SpawnCircle(center, radius, a);
 
             sphere_array.Add(Instantiate(SphereMesh, pos, Quaternion.identity) as GameObject);
+            angles_array.Add(a);
         }
     }
 
@@ -40,7 +43,7 @@ public class GW_Ring : MonoBehaviour
         Vector3 pos;
 
         pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.x + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
         pos.z = center.z;
 
         return pos;
