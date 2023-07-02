@@ -5,8 +5,8 @@ using UnityEngine;
 public class GW_GravityScript : MonoBehaviour
 {
 
-    private float amplitude;
-    private float speed;
+   [SerializeField] private float amplitude;
+   [SerializeField] private float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,33 +20,35 @@ public class GW_GravityScript : MonoBehaviour
         
     }
 
-    Vector3 MovePlusMode(GameObject mesh, Vector3 pos, float angle)
+    public Vector3 MovePlusMode(Vector3 pos, Vector3 center, float angle)
     {
 
-        Vector3 unitVector;
+        Vector3 unitVector = (pos - center).normalized;
 
-        unitVector = Quaternion.AngleAxis(angle, Vector3.up) * pos;
+
 
         Vector3 output;
-
-        output.x = pos.x + unitVector.x * amplitude * Mathf.Cos(Time.deltaTime * speed);
-        output.y = pos.y - unitVector.y * amplitude * Mathf.Cos(Time.deltaTime * speed);
+        output.x = pos.x
+            + unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+        output.y = pos.y
+            - unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
         output.z = pos.z;
 
         return output;
     }
 
-    Vector3 MoveCrossMode(GameObject mesh, Vector3 pos, float angle)
+    public Vector3 MoveCrossMode(Vector3 pos, Vector3 center, float angle)
     {
 
-        Vector3 unitVector;
+        Vector3 unitVectory = (pos-center).normalized;
+        Vector3 unitVector = new Vector3(-unitVectory.y, unitVectory.x, 0);
 
-        unitVector = Quaternion.AngleAxis(angle, Vector3.up) * pos;
 
         Vector3 output;
-
-        output.x = pos.x + unitVector.x * amplitude * Mathf.Sin(Time.deltaTime * speed);
-        output.y = pos.y - unitVector.y * amplitude * Mathf.Sin(Time.deltaTime * speed);
+        output.x = pos.x
+        - unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+        output.y = pos.y
+            + unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
         output.z = pos.z;
 
         return output;
