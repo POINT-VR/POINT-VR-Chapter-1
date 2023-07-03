@@ -245,6 +245,8 @@ MonoBehaviour:
   numberOfMeshes: 24
   radius: 10
   ring: {fileID: 936036997}
+  PercentOfPlusMode: 100
+  PercentOfCrossMode: 100
 --- !u!4 &936036999
 Transform:
   m_ObjectHideFlags: 0
