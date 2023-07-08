@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// This script controls the actions of the laser on objects. As of 7/3/23 UI code is still incomplete - George Bayliss
 /// </summary>
-public class LaserEmulator : MonoBehaviour
+public class HandControllerEmulator : MonoBehaviour
 {
     /// <summary>
     /// The laser pointer
@@ -108,7 +108,7 @@ public class LaserEmulator : MonoBehaviour
     {
         clickReference.action.Disable();
         clickReference.action.started -= Clicked;
-        clickReference.action.canceled -= Released; 
+        clickReference.action.canceled -= Released;
         scrollReference.action.Disable();
         scrollReference.action.performed -= Scroll;
     }
@@ -147,20 +147,17 @@ public class LaserEmulator : MonoBehaviour
                 state = State.none;
             }
         } 
-        else if (state == State.UI || state == State.slider || state == State.scrollbar) // interacting with UI
+        else if (state == State.slider)
         {
-            laser.material.color = laserColor;
-            Physics.Raycast(transform.position, transform.forward, out RaycastHit UIHit, 10f, UIMask);
-            if (state == State.slider)
-            {
-                CheckSlider(UIHit);
-            }
-            if (state == State.scrollbar)
-            {
-                CheckScrollbar(UIHit);
-            }
-        } 
-        else if (state == State.none)
+            Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask);
+            CheckSlider(UIhit);
+        }
+        else if (state == State.scrollbar)
+        {
+            Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask);
+            CheckScrollbar(UIhit);
+        }
+        else if (state == State.none || state == State.UI)
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, laserLength, grabMask))
             {
@@ -168,18 +165,21 @@ public class LaserEmulator : MonoBehaviour
                 float distance = (hit.point - transform.position).magnitude;
                 laser.transform.localScale = new Vector3(laser.transform.localScale.x, distance, laser.transform.localScale.z);
                 laser.transform.localPosition = laserPosition + new Vector3(0, 0, 1) * (distance - laserLength);
+                state = State.none;
             } 
-            else if (Physics.Raycast(transform.position, transform.forward, out hit, laserLength, UIMask)) 
+            else if (Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask)) 
             {
                 laser.material.color = Color.green;
-                float distance = (hit.point - transform.position).magnitude;
+                float distance = (UIhit.point - transform.position).magnitude;
                 laser.transform.localScale = new Vector3(laser.transform.localScale.x, distance, laser.transform.localScale.z);
                 laser.transform.localPosition = laserPosition + new Vector3(0, 0, 1) * (distance - laserLength);
+                state = State.UI;
             } else
             {
                 laser.material.color = laserColor;
                 laser.transform.localScale = new Vector3(laser.transform.localScale.x, laserLength, laser.transform.localScale.z);
                 laser.transform.localPosition = laserPosition;
+                state = State.none;
             }
         }
 
@@ -211,15 +211,32 @@ public class LaserEmulator : MonoBehaviour
     /// </summary>
     public void Release()
     {
-        if (state == State.UI || state == State.slider || state == State.scrollbar)
+        if (state == State.grabbing || state == State.pulling || state == State.pushing)
         {
             state = State.none;
+            grabbingTransform.SetParent(previousParentTransform);
+            GravityScript grav = grabbingTransform.GetComponent<GravityScript>();
+            if (grav != null)
+            {
+                grav.enabled = gravEnabled;
+            }
+            // Add velocity to grabbed object.
+            grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f * (grabbingTransformVelocity);
+            grabbingTransform = null;
+            transform.GetComponent<Animator>().SetBool("isGrabbing", false);
         }
     }
+    ///
+    /// 
+    /// 
     private void Released(InputAction.CallbackContext ctx)
     {
-        Release();
+        if (state == State.slider || state == State.scrollbar)
+        {
+            state = State.UI;
+        }
     }
+
     /// <summary>
     /// When hovering a grabbable click toggles the grabbed and default states. When hovering a UI object, click interacts with it.
     /// </summary>
@@ -265,7 +282,7 @@ public class LaserEmulator : MonoBehaviour
             }
         } else if (Physics.Raycast(transform.position, transform.forward, out hit, laserLength, UIMask)) //UI detected -> interacts with it
         {
-            GetComponent<AudioSource>().PlayScheduled(0);
+            //GetComponent<AudioSource>().PlayScheduled(0);
             UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
             if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
             {
@@ -344,21 +361,8 @@ public class LaserEmulator : MonoBehaviour
     {
         float scrollValue = obj.action.ReadValue<Vector2>().y * scrollSensitivity;
         if (scrollValue != 0)
-        {
-            if (state == State.UI || state == State.slider || state == State.scrollbar) //UI detected -> scroll through menu
-            {
-                Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask);
-                ScrollRect scrollRect = hit.collider.gameObject.GetComponentInParent<ScrollRect>();
-                Debug.Log(hit.collider.gameObject);
-                if (scrollRect != null) // collider is scrollable
-                {
-                    Scrollbar scrollbarVertical = scrollRect.verticalScrollbar;
-                    if (scrollbarVertical != null)
-                    {
-                        scrollbarVertical.value = Mathf.Clamp(scrollbarVertical.value + scrollValue, 0.0f, 1.0f);
-                    }
-                }
-            } else if (state == State.grabbing || state == State.pushing || state == State.pulling) //Holding an object -> scroll to push/pull
+        { 
+            if (state == State.grabbing || state == State.pushing || state == State.pulling) //Holding an object -> scroll to push/pull
             {
                 pullSpeed = scrollValue;
                 if (scrollValue*scrollValue >= 4*squaredMinPullDistance) //avoids error where object is being pulled fast enough to get behind the player

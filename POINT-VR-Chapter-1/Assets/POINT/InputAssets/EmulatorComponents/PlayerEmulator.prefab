@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 2679993988396523930}
   m_Layer: 0
   m_Name: RightHand
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545846528833884825}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: -0.05, z: 0.1}
+  m_LocalPosition: {x: 0.15, y: 0.02, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1610582511682038035}
@@ -5543,7 +5543,7 @@ MonoBehaviour:
   aesthetic: {fileID: 685732246135386628}
   uiManager: {fileID: 685732245830625035}
   toggleBase: {fileID: 685732245593169504}
-  pause: {fileID: 685732246913176618}
+  pause: {fileID: 0}
 --- !u!1 &685732246537950949
 GameObject:
   m_ObjectHideFlags: 0
@@ -7149,12 +7149,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 685732246913176619}
-  - component: {fileID: 685732246913176618}
   - component: {fileID: 685732246913176616}
   - component: {fileID: 685732246913176623}
   - component: {fileID: 3217639794931992806}
+  - component: {fileID: 8381100566543506492}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerEmulator
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7177,30 +7177,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &685732246913176618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685732246913176612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db2a40f08095ce543a65221b27959824, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggleReference: {fileID: 4068349929249546255, guid: a54d6349e0e4d404fa09e1c0531de6d0,
-    type: 3}
-  mainCamera: {fileID: 685732246657436341}
-  distanceFromCamera: 1.25
-  menu: {fileID: 685732245830625029}
-  uiContainer: {fileID: 685732245122186045}
-  gripNotice: {fileID: 685732246166091505}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
-  laserRight: {fileID: 0}
-  laserLeft: {fileID: 0}
-  reducedLaserSize: 0.7
 --- !u!114 &685732246913176616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7346,6 +7322,28 @@ MonoBehaviour:
     type: 3}
   turnIncrement: 0.5
   motionIncrement: 0.05
+--- !u!114 &8381100566543506492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685732246913176612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc17f5b7af97b494da8e2a350b05f7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleReference: {fileID: -8273207224437554049, guid: da2b439d1a2de5c46a4f428f8cf4fe19,
+    type: 3}
+  mainCamera: {fileID: 685732246657436341}
+  distanceFromCamera: 1.25
+  menu: {fileID: 685732245830625029}
+  uiContainer: {fileID: 685732245122186045}
+  gripNotice: {fileID: 685732246166091505}
+  rightHand: {fileID: 7756516437661287477}
+  laserRight: {fileID: 1610582511682038035}
+  reducedLaserSize: 0.7
 --- !u!1 &685732246930800335
 GameObject:
   m_ObjectHideFlags: 0

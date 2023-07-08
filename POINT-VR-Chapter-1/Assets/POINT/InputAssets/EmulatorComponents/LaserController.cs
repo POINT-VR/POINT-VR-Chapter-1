@@ -6,7 +6,7 @@ using Unity.XR.CoreUtils;
 /// <summary>
 /// This script controls the motion of the player's hand
 /// </summary>
-public class HandMotionEmulator : MonoBehaviour
+public class LaserController : MonoBehaviour
 {
     /// <summary>
     /// Input reference for rotation

@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Menu Toggle",
+                    "type": "Button",
+                    "id": "bf03f21b-cec8-4a35-b94f-e8a18255ce9e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Mouse Position",
                     "type": "Button",
                     "id": "cb1c7bc3-c372-44e8-b6fe-8e2d8e10f3ee",
@@ -347,6 +356,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Mouse Delta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34a508dd-b24c-4fdd-a5ae-5543b916a908",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu Toggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

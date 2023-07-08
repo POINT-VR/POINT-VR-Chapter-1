@@ -6,7 +6,7 @@ using Unity.XR.CoreUtils;
 /// <summary>
 /// This script controls the motion of the player
 /// </summary>
-public class PlayerMotionEmulator : MonoBehaviour
+public class TurnControllerEmulator : MonoBehaviour
 {
     /// <summary>
     /// Input refrence for right/left motion
