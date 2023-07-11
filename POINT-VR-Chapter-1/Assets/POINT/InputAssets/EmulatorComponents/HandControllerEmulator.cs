@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 /// <summary>
-/// This script controls the actions of the laser on objects. As of 7/3/23 UI code is still incomplete - George Bayliss
+/// This script controls the actions of the laser on objects.
 /// </summary>
 public class HandControllerEmulator : MonoBehaviour
 {
@@ -27,7 +27,7 @@ public class HandControllerEmulator : MonoBehaviour
     [Header("Input Action References")]
     [SerializeField] InputActionReference clickReference;
     /// <summary>
-    /// The input reference used to scroll through the UI and to push/pull objects
+    /// The input reference used to push/pull objects
     /// </summary>
     [SerializeField] InputActionReference scrollReference;
     /// <summary>
@@ -311,10 +311,6 @@ public class HandControllerEmulator : MonoBehaviour
             }
             state = State.slider;
         }
-        else //Raycast did not find a slider: hand is not holding a slider
-        {
-            state = State.UI;
-        }
     }
     /// <summary>
     /// Checks if the raycast hit was against a scrollbar and acts on the scrollbar if so
@@ -333,10 +329,6 @@ public class HandControllerEmulator : MonoBehaviour
                 activeScrollbar.value = (scrollbarHeight > 0) ? (Mathf.Clamp(((activeScrollbar.transform.InverseTransformPoint(hit.point).y + scrollbarRect.anchoredPosition.y) / scrollbarHeight), 0.0f, 1.0f)) : 0.0f;
             }
             state = State.scrollbar;
-        }
-        else //Raycast did not find a scrollbar: this hand is not holding a scrollbar
-        {
-            state = State.UI;
         }
     }
 
