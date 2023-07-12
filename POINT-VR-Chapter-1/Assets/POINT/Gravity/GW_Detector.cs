@@ -17,6 +17,12 @@ public class GW_Detector : MonoBehaviour
     private List<float> angles_array;
     private List<float> arms_length_array;
     private GW_GravityScript gw_gravity;
+
+    private Vector3 SourceLocation;
+    private Quaternion SourceRotation;
+    private Vector3 radialToSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,5 +83,14 @@ public class GW_Detector : MonoBehaviour
         pos.z = center.z;
 
         return pos;
+    }
+
+    void FindSource()
+    {
+        GameObject source = GameObject.FindWithTag("GW Source");
+        SourceLocation = source.transform.position;
+        SourceRotation = source.transform.rotation;
+
+
     }
 }
