@@ -117,4 +117,63 @@ public class GW_GravityScript : MonoBehaviour
 
         return output;
     }
+
+    float CalculateResponseFunction(int index, float theta, float phi, float psi)
+    {
+        /**
+         * Calculates the Response Function for the polarization mode entered through index
+         * 
+         * Index:
+         * 0:Plus Mode
+         * 1:Cross Mode
+         * 2:Breathing Mode
+         * 3:Longitudinal Mode
+         * 4:X Mode
+         * 5:Y Mode
+         * 
+         * **/
+
+        float output;
+
+        switch (index)
+        {
+            case 0:
+                output =  
+                    0.5f * (1 + Mathf.Pow(Mathf.Cos(theta), 2.0f) * Mathf.Cos(2.0f * phi) * Mathf.Cos(2.0f * psi))
+                    - Mathf.Cos(theta) * Mathf.Sin(2.0f * phi) * Mathf.Sin(2.0f * psi);
+                break;
+
+            case 1:
+                output =
+                    0.5f * (1 + Mathf.Pow(Mathf.Cos(theta), 2.0f) * Mathf.Cos(2.0f * phi) * Mathf.Cos(2.0f * psi))
+                    + Mathf.Cos(theta) * Mathf.Sin(2.0f * phi) * Mathf.Sin(2.0f * psi);
+                break;
+
+            case 2:
+                output = -0.5f * Mathf.Pow(Mathf.Sin(theta), 2.0f) * Mathf.Cos(2 * phi);
+                break;
+
+            case 3:
+                output = 0.5f * Mathf.Pow(Mathf.Sin(theta), 2.0f) * Mathf.Cos(2 * phi);
+                break;
+
+            case 4:
+                output =
+                    -Mathf.Sin(theta) * 
+                    (Mathf.Cos(theta) * Mathf.Cos(2 * phi) * Mathf.Cos(psi) - Mathf.Sin(2 * phi) * Mathf.Sin(psi));
+                break;
+
+            case 5:
+                output =
+                    -Mathf.Sin(theta) *
+                    (Mathf.Cos(theta) * Mathf.Cos(2 * phi) * Mathf.Cos(psi) + Mathf.Sin(2 * phi) * Mathf.Sin(psi));
+                break;
+
+            default: output = 0; break;
+        }
+
+        return output;
+
+
+    }
 }

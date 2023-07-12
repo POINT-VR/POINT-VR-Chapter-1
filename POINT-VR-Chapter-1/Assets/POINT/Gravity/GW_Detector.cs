@@ -22,6 +22,10 @@ public class GW_Detector : MonoBehaviour
     private Quaternion SourceRotation;
     private Vector3 radialToSource;
 
+    private float phi;
+    private float theta;
+    private float psi;
+
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +94,34 @@ public class GW_Detector : MonoBehaviour
         GameObject source = GameObject.FindWithTag("GW Source");
         SourceLocation = source.transform.position;
         SourceRotation = source.transform.rotation;
+
+
+        //Take the radial component between the GW Source and Detector
+        radialToSource = SourceLocation - transform.position;
+
+        /**
+         * Here I'm trying to take the angles phi, theta, and psi according to the spherical coordinate basis
+         * There might be some issues regarding the difference in the coordinate systems of the theoretical functions and the Unity game development environment
+         * , and it might take some renaming of the three angles
+         * TODO: Test these out, and correct them if discrepancies occur
+         * **/
+
+        
+
+        //Projects vector onto XZ Plane (normal vector being up (Y positive))
+        Vector3 ProjectionInXZPlane = Vector3.ProjectOnPlane(radialToSource, Vector3.up);
+
+        //Find angle phi (angle from XZ Plane projection of the vector and the x-axis
+        phi = Vector3.Angle(ProjectionInXZPlane, Vector3.right);
+
+        //Projects vector onto YZ Plane (normal vector being right (X positive))
+        Vector3 ProjectionInYZPlane = Vector3.ProjectOnPlane(radialToSource, Vector3.right);
+
+        //Find angle theta (angle from YZ Plane projection of the vector and the y-axis
+        theta = Vector3.Angle(ProjectionInXZPlane, Vector3.up);
+
+        //Find angle psi from the x-component of the source rotation
+        psi = SourceRotation.x;
 
 
     }
