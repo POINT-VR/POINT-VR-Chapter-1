@@ -71,7 +71,7 @@ public class GW_Ring : MonoBehaviour
 
             //Gives coordinates of oscillations of particles based on plus mode and cross mode polarizations of gravitational waves, can be controlled
             //Phasor addition of Plus and Cross Mode polarization - based oscillations used
-            Vector3 pos = gw_gravity.CalculateOscillations(sphere_pos_array[i], ring.transform.position, angles_array[i], PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode);
+            Vector3 pos = gw_gravity.CalculateOscillations(sphere_pos_array[i], ring.transform.position, angles_array[i], 0.0f, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode);
             // pos.z = sphere_array[i].transform.position.z;
 
             //Translates particle to the calculated coordinate

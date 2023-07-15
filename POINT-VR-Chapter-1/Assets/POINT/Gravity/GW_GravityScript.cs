@@ -20,7 +20,7 @@ public class GW_GravityScript : MonoBehaviour
         
     }
 
-    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, 
+    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, float ampIndex = 0.0f, 
         float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
         float PercentOfLongitudinalMode = 0.0f,
         float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
@@ -28,8 +28,9 @@ public class GW_GravityScript : MonoBehaviour
         Vector3 plus = new Vector3(PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle).x, PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle).y, MovePlusMode(pos, center, angle).z);
         Vector3 cross = new Vector3(PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle).x, PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle).y, MoveCrossMode(pos, center, angle).z);
         Vector3 breathing =  new Vector3(PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle).x, PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle).y, MoveBreathingMode(pos, center, angle).z);
+        Vector3 longitudinal = new Vector3(MoveLongitudinalMode(pos, center, angle, ampIndex).x, MoveLongitudinalMode(pos, center, angle, ampIndex).y, PercentOfLongitudinalMode * MoveLongitudinalMode(pos, center, angle, ampIndex).z);
 
-        return plus + cross + breathing;
+        return plus + cross + breathing + longitudinal;
     }
 
     /**
@@ -45,8 +46,8 @@ public class GW_GravityScript : MonoBehaviour
     {
         /**
          * Motion of a particle based on Plus Mode polarization of a gravitational wave
-         * Works on the principle of x = x_0 + (direction of normal to the mesh) * cos(omega * t)
-         * And y = y_0 - (direction of normal to the mesh) * cos(omega * t)
+         * Works on the principle of x = x_0 + (direction of normal to the mesh).x * cos(omega * t)
+         * And y = y_0 - (direction of normal to the mesh).y * cos(omega * t)
          * (Gives out both x and y oscillations, given propagation on z axis)
          * **/
 
@@ -69,12 +70,12 @@ public class GW_GravityScript : MonoBehaviour
     {
         /**
          * Motion of a particle based on Cross Mode polarization of a gravitational wave
-         * Works on the principle of x = x_0 - (direction of tangent to the mesh) * sin(omega * t)
-         * And y = y_0 + (direction of tangent to the mesh) * sin(omega * t)
+         * Works on the principle of x = x_0 + (direction of normal to the mesh).y * cos(omega * t)
+         * And y = y_0 + (direction of normal to the mesh).x * cos(omega * t)
          * (Gives out both x and y oscillations, given propagation on z axis)
          * **/
 
-        //Create tangent vector of mesh; mesh is translated along this direction
+        //Create normal vector of mesh; mesh is translated along this direction
         Vector3 unitVector = (pos-center).normalized;
         //Vector3 unitVector = new Vector3(-unitVectory.y, unitVectory.x, 0);
 
@@ -94,7 +95,7 @@ public class GW_GravityScript : MonoBehaviour
         /**
          * Motion of a particle based on Breathing Mode polarization of a gravitational wave
          * Works on the principle of x = x_0 + (direction of normal to the mesh) * cos(omega * t)
-         * And y = y_0 - (direction of normal to the mesh) * sin(omega * t)
+         * And y = y_0 + (direction of normal to the mesh) * cos(omega * t)
          * (Gives out both x and y oscillations, given propagation on z axis)
          * **/
 
@@ -109,6 +110,27 @@ public class GW_GravityScript : MonoBehaviour
         output.y = pos.y
             + unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
         output.z = pos.z;
+
+        return output;
+    }
+
+    public Vector3 MoveLongitudinalMode(Vector3 pos, Vector3 center, float angle, float ampIndex)
+    {
+        /**
+         * Motion of a particle based on Longitudinal Mode polarization of a gravitational wave
+         * (Gives out z oscillations, given propagation on z axis)
+         * **/
+
+        //Create normal vector of mesh; mesh is translated along this direction
+        Vector3 unitVector = (pos - center).normalized;
+
+
+
+        Vector3 output;
+        output.x = pos.x;
+        output.y = pos.y;
+
+        output.z = pos.z + Mathf.Cos(ampIndex * Mathf.PI) * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
 
         return output;
     }
