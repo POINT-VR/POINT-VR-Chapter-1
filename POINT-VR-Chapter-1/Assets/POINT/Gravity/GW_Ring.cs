@@ -11,6 +11,7 @@ public class GW_Ring : MonoBehaviour
     [SerializeField] private GameObject ring;
     [SerializeField] private float PercentOfPlusMode;
     [SerializeField] private float PercentOfCrossMode;
+    [SerializeField] private float PercentOfBreathingMode;
 
     private List<GameObject> sphere_array;
     private List<float> angles_array;
@@ -70,9 +71,8 @@ public class GW_Ring : MonoBehaviour
 
             //Gives coordinates of oscillations of particles based on plus mode and cross mode polarizations of gravitational waves, can be controlled
             //Phasor addition of Plus and Cross Mode polarization - based oscillations used
-            Vector3 pos = PercentOfPlusMode/100.0f* gw_gravity.MovePlusMode(sphere_pos_array[i], ring.transform.position, angles_array[i]) 
-                + PercentOfCrossMode / 100.0f* gw_gravity.MoveCrossMode(sphere_pos_array[i], ring.transform.position, angles_array[i]);
-            pos.z = sphere_array[i].transform.position.z;
+            Vector3 pos = gw_gravity.CalculateOscillations(sphere_pos_array[i], ring.transform.position, angles_array[i], PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode);
+            // pos.z = sphere_array[i].transform.position.z;
 
             //Translates particle to the calculated coordinate
             sphere_array[i].transform.position = pos;
