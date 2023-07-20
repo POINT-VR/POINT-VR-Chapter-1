@@ -50,8 +50,11 @@ MonoBehaviour:
   radius: 10
   ring: {fileID: 5324980356590872437}
   PercentOfPlusMode: 100
-  PercentOfCrossMode: 0
-  PercentOfBreathingMode: 0
+  PercentOfCrossMode: 3.35
+  PercentOfBreathingMode: 22.24
+  PercentOfLongitudinalMode: 17.8
+  phase: 0
+  ampIndex: 0
 --- !u!114 &5324980356590872440
 MonoBehaviour:
   m_ObjectHideFlags: 0

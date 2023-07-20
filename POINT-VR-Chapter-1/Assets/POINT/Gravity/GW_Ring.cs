@@ -12,11 +12,19 @@ public class GW_Ring : MonoBehaviour
     [SerializeField] private float PercentOfPlusMode;
     [SerializeField] private float PercentOfCrossMode;
     [SerializeField] private float PercentOfBreathingMode;
+    [SerializeField] private float PercentOfLongitudinalMode;
+    [SerializeField] private float PercentOfXMode;
+    [SerializeField] private float PercentOfYMode;
+
+    [SerializeField] public float phase;
+    [SerializeField] public float ampIndex;
 
     private List<GameObject> sphere_array;
     private List<float> angles_array;
     private List<Vector3> sphere_pos_array;
     private GW_GravityScript gw_gravity;
+
+    //public float phase;
 
 
     // Start is called before the first frame update
@@ -67,11 +75,11 @@ public class GW_Ring : MonoBehaviour
         for (int i = 0; i < numberOfMeshes; i++)
         {
 
-            //Vector3 pos = gw_gravity.MoveCrossMode(sphere_pos_array[i], ring.transform.position, angles_array[i]);
+            //Vector3 pos =  PercentOfCrossMode * gw_gravity.MoveCrossMode(sphere_pos_array[i], ring.transform.position, angles_array[i]);
 
             //Gives coordinates of oscillations of particles based on plus mode and cross mode polarizations of gravitational waves, can be controlled
             //Phasor addition of Plus and Cross Mode polarization - based oscillations used
-            Vector3 pos = gw_gravity.CalculateOscillations(sphere_pos_array[i], ring.transform.position, angles_array[i], 0.0f, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode);
+            Vector3 pos = gw_gravity.CalculateOscillations(sphere_pos_array[i], ring.transform.position, angles_array[i], phase, ampIndex, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
             // pos.z = sphere_array[i].transform.position.z;
 
             //Translates particle to the calculated coordinate

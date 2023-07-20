@@ -20,17 +20,19 @@ public class GW_GravityScript : MonoBehaviour
         
     }
 
-    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, float ampIndex = 0.0f, 
+    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, float phase = 0.0f, float ampIndex = 0.0f, 
         float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
         float PercentOfLongitudinalMode = 0.0f,
         float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
     {
-        Vector3 plus = new Vector3(PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle).x, PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle).y, MovePlusMode(pos, center, angle).z);
-        Vector3 cross = new Vector3(PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle).x, PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle).y, MoveCrossMode(pos, center, angle).z);
-        Vector3 breathing =  new Vector3(PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle).x, PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle).y, MoveBreathingMode(pos, center, angle).z);
-        Vector3 longitudinal = new Vector3(MoveLongitudinalMode(pos, center, angle, ampIndex).x, MoveLongitudinalMode(pos, center, angle, ampIndex).y, PercentOfLongitudinalMode * MoveLongitudinalMode(pos, center, angle, ampIndex).z);
+        Vector3 plus = new Vector3(PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle, phase).x, PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle, phase).y, MovePlusMode(pos, center, angle, phase).z);
+        Vector3 cross = new Vector3(PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle, phase).x, PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle, phase).y, MoveCrossMode(pos, center, angle, phase).z);
+        Vector3 breathing =  new Vector3(PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle, phase).x, PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle, phase).y, MoveBreathingMode(pos, center, angle, phase).z);
+        Vector3 longitudinal = new Vector3(MoveLongitudinalMode(pos, center, angle, ampIndex).x, MoveLongitudinalMode(pos, center, angle, ampIndex).y, PercentOfLongitudinalMode/100.0f * MoveLongitudinalMode(pos, center, angle, ampIndex).z);
+        Vector3 x = new Vector3(PercentOfXMode / 100.0f * MoveXMode(pos, center, angle).x, MoveXMode(pos, center, angle).y, PercentOfXMode / 100.0f * MoveXMode(pos, center, angle).z);
+        Vector3 y = new Vector3(MoveYMode(pos, center, angle).x, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle).y, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle).z);
 
-        return plus + cross + breathing + longitudinal;
+        return plus + cross + breathing + longitudinal + x + y;
     }
 
     /**
@@ -127,10 +129,59 @@ public class GW_GravityScript : MonoBehaviour
 
 
         Vector3 output;
-        output.x = pos.x;
-        output.y = pos.y;
+        output.x = pos.x ;
+        output.y = pos.y ;
 
-        output.z = pos.z + Mathf.Cos(ampIndex * Mathf.PI) * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+        output.z = pos.z
+            + Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+
+        return output;
+    }
+
+    public Vector3 MoveXMode(Vector3 pos, Vector3 center, float angle)
+    {
+        /**
+         * Motion of a particle based on Breathing Mode polarization of a gravitational wave
+         * Works on the principle of x = x_0 + (direction of normal to the mesh) * cos(omega * t)
+         * And y = y_0 + (direction of normal to the mesh) * cos(omega * t)
+         * (Gives out both x and y oscillations, given propagation on z axis)
+         * **/
+
+        //Create normal vector of mesh; mesh is translated along this direction
+        Vector3 unitVector = (pos - center).normalized;
+
+
+
+        Vector3 output;
+        output.x = pos.x
+            + unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+        output.y = pos.y;
+        output.z = pos.z
+            + unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+
+        return output;
+    }
+
+    public Vector3 MoveYMode(Vector3 pos, Vector3 center, float angle)
+    {
+        /**
+         * Motion of a particle based on Breathing Mode polarization of a gravitational wave
+         * Works on the principle of x = x_0 + (direction of normal to the mesh) * cos(omega * t)
+         * And y = y_0 + (direction of normal to the mesh) * cos(omega * t)
+         * (Gives out both x and y oscillations, given propagation on z axis)
+         * **/
+
+        //Create normal vector of mesh; mesh is translated along this direction
+        Vector3 unitVector = (pos - center).normalized;
+
+
+
+        Vector3 output;
+        output.x = pos.x;
+        output.y = pos.y
+            - unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+        output.z = pos.z
+            + unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
 
         return output;
     }
@@ -185,7 +236,31 @@ public class GW_GravityScript : MonoBehaviour
         output.x = pos.x
         - unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad / Mathf.PI + phase);
         output.y = pos.y
-            + unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad / Mathf.PI + phase);
+           + unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad / Mathf.PI + phase);
+        output.z = pos.z;
+
+        return output;
+    }
+
+    public Vector3 MoveBreathingMode(Vector3 pos, Vector3 center, float angle, float phase)
+    {
+        /**
+         * Motion of a particle based on Breathing Mode polarization of a gravitational wave
+         * Works on the principle of x = x_0 + (direction of normal to the mesh) * cos(omega * t)
+         * And y = y_0 + (direction of normal to the mesh) * cos(omega * t)
+         * (Gives out both x and y oscillations, given propagation on z axis)
+         * **/
+
+        //Create normal vector of mesh; mesh is translated along this direction
+        Vector3 unitVector = (pos - center).normalized;
+
+
+
+        Vector3 output;
+        output.x = pos.x
+            + unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI + phase);
+        output.y = pos.y
+            + unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI + phase);
         output.z = pos.z;
 
         return output;

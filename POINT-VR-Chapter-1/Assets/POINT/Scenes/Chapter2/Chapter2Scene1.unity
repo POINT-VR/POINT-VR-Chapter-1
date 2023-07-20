@@ -583,7 +583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1580781848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,15 +596,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9040dc9cc1189346b732806b249bcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RingMesh: {fileID: 0}
+  RingMesh: {fileID: 5324980356590872437, guid: 6ee904e2e0952cc43b58efaf45cdc591,
+    type: 3}
   numberOfMeshes: 12
   radius: 5
-  tube: {fileID: 0}
+  tube: {fileID: 1580781847}
   PercentOfPlusMode: 0
   PercentOfCrossMode: 0
   PercentOfBreathingMode: 0
   phaseDifference: 0
   ampStep: 0
+  distBetweenRings: 0.1
 --- !u!4 &1580781849
 Transform:
   m_ObjectHideFlags: 0
@@ -634,7 +636,37 @@ PrefabInstance:
     - target: {fileID: 5324980356590872437, guid: 6ee904e2e0952cc43b58efaf45cdc591,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324980356590872438, guid: 6ee904e2e0952cc43b58efaf45cdc591,
+        type: 3}
+      propertyPath: phase
+      value: 1.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324980356590872438, guid: 6ee904e2e0952cc43b58efaf45cdc591,
+        type: 3}
+      propertyPath: ampIndex
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324980356590872438, guid: 6ee904e2e0952cc43b58efaf45cdc591,
+        type: 3}
+      propertyPath: PercentOfPlusMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324980356590872438, guid: 6ee904e2e0952cc43b58efaf45cdc591,
+        type: 3}
+      propertyPath: PercentOfCrossMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324980356590872438, guid: 6ee904e2e0952cc43b58efaf45cdc591,
+        type: 3}
+      propertyPath: PercentOfBreathingMode
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324980356590872438, guid: 6ee904e2e0952cc43b58efaf45cdc591,
+        type: 3}
+      propertyPath: PercentOfLongitudinalMode
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5324980356590872439, guid: 6ee904e2e0952cc43b58efaf45cdc591,
         type: 3}
@@ -644,17 +676,17 @@ PrefabInstance:
     - target: {fileID: 5324980356590872439, guid: 6ee904e2e0952cc43b58efaf45cdc591,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.84
+      value: 5.22
       objectReference: {fileID: 0}
     - target: {fileID: 5324980356590872439, guid: 6ee904e2e0952cc43b58efaf45cdc591,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.95
+      value: 3.14
       objectReference: {fileID: 0}
     - target: {fileID: 5324980356590872439, guid: 6ee904e2e0952cc43b58efaf45cdc591,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.68
+      value: 1.83
       objectReference: {fileID: 0}
     - target: {fileID: 5324980356590872439, guid: 6ee904e2e0952cc43b58efaf45cdc591,
         type: 3}
