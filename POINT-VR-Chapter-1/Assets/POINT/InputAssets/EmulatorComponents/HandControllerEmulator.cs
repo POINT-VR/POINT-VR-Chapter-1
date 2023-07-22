@@ -1,7 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 /// <summary>
 /// This script controls the actions of the laser on objects.
@@ -244,6 +242,7 @@ public class HandControllerEmulator : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, laserLength, grabMask)) //Grabbable object detected
         {
+            GetComponent<AudioSource>().PlayScheduled(0);
             if (state == State.none) //Object is not being held -> grabs object
             {
                 state = State.grabbing;
@@ -282,7 +281,7 @@ public class HandControllerEmulator : MonoBehaviour
             }
         } else if (Physics.Raycast(transform.position, transform.forward, out hit, laserLength, UIMask)) //UI detected -> interacts with it
         {
-            //GetComponent<AudioSource>().PlayScheduled(0);
+            GetComponent<AudioSource>().PlayScheduled(0);
             UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
             if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
             {

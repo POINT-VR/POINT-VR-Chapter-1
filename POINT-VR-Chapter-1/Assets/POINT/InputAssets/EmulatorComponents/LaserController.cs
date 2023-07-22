@@ -1,6 +1,5 @@
 ﻿using UnityEngine.InputSystem;
 using UnityEngine;
-using System;
 
 /// <summary>
 /// This script controls the motion of the player's hand

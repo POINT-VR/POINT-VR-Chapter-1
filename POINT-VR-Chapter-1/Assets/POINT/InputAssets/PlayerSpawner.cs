@@ -2,15 +2,25 @@
 public class PlayerSpawner : MonoBehaviour
 {
     /// <summary>
-    /// The player prefab to be instantiated
+    /// The player prefab to be instantiated when using a VR headset
     /// </summary>
     [SerializeField] GameObject player;
+    /// <summary>
+    /// The emulator prefab to be instantiated when using the unity editor
+    /// </summary>
+    [SerializeField] GameObject emulator;
 
     GameObject activePlayer = null;
 
     private void Awake()
     {
-        activePlayer = Instantiate(player, transform);
+        if (Application.isEditor)
+        {
+            activePlayer = Instantiate(emulator, transform);
+        } else
+        {
+            activePlayer = Instantiate(player, transform);
+        }
     }
 
     public void UIChangeScene(int scene)
