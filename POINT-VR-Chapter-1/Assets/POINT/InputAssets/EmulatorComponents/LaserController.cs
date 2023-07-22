@@ -1,8 +1,7 @@
 ﻿using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
-using TreeEditor;
-using Unity.XR.CoreUtils;
+
 /// <summary>
 /// This script controls the motion of the player's hand
 /// </summary>
