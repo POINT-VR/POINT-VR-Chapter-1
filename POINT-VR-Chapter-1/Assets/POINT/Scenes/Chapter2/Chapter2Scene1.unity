@@ -583,7 +583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1580781848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,9 +604,12 @@ MonoBehaviour:
   PercentOfPlusMode: 0
   PercentOfCrossMode: 0
   PercentOfBreathingMode: 0
-  phaseDifference: 0
-  ampStep: 0
-  distBetweenRings: 0.1
+  PercentOfLongitudinalMode: 0
+  PercentOfXMode: 0
+  PercentOfYMode: 0
+  phaseDifference: 0.82
+  ampStep: 1.2
+  distBetweenRings: 1.83
 --- !u!4 &1580781849
 Transform:
   m_ObjectHideFlags: 0
@@ -636,7 +639,7 @@ PrefabInstance:
     - target: {fileID: 5324980356590872437, guid: 6ee904e2e0952cc43b58efaf45cdc591,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5324980356590872438, guid: 6ee904e2e0952cc43b58efaf45cdc591,
         type: 3}

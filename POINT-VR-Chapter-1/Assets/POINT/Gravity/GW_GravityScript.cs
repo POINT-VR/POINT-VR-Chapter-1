@@ -29,8 +29,8 @@ public class GW_GravityScript : MonoBehaviour
         Vector3 cross = new Vector3(PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle, phase).x, PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle, phase).y, MoveCrossMode(pos, center, angle, phase).z);
         Vector3 breathing =  new Vector3(PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle, phase).x, PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle, phase).y, MoveBreathingMode(pos, center, angle, phase).z);
         Vector3 longitudinal = new Vector3(MoveLongitudinalMode(pos, center, angle, ampIndex).x, MoveLongitudinalMode(pos, center, angle, ampIndex).y, PercentOfLongitudinalMode/100.0f * MoveLongitudinalMode(pos, center, angle, ampIndex).z);
-        Vector3 x = new Vector3(PercentOfXMode / 100.0f * MoveXMode(pos, center, angle).x, MoveXMode(pos, center, angle).y, PercentOfXMode / 100.0f * MoveXMode(pos, center, angle).z);
-        Vector3 y = new Vector3(MoveYMode(pos, center, angle).x, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle).y, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle).z);
+        Vector3 x = new Vector3(PercentOfXMode / 100.0f * MoveXMode(pos, center, angle, ampIndex).x, MoveXMode(pos, center, angle, ampIndex).y, PercentOfXMode / 100.0f * MoveXMode(pos, center, angle, ampIndex).z);
+        Vector3 y = new Vector3(MoveYMode(pos, center, angle, ampIndex).x, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle, ampIndex).y, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle, ampIndex).z);
 
         return plus + cross + breathing + longitudinal + x + y;
     }
@@ -133,12 +133,12 @@ public class GW_GravityScript : MonoBehaviour
         output.y = pos.y ;
 
         output.z = pos.z
-            + Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+            + Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI + ampIndex);
 
         return output;
     }
 
-    public Vector3 MoveXMode(Vector3 pos, Vector3 center, float angle)
+    public Vector3 MoveXMode(Vector3 pos, Vector3 center, float angle, float ampIndex)
     {
         /**
          * Motion of a particle based on Breathing Mode polarization of a gravitational wave
@@ -154,7 +154,7 @@ public class GW_GravityScript : MonoBehaviour
 
         Vector3 output;
         output.x = pos.x
-            + unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+            + Vector3.forward.z * Mathf.Cos(ampIndex) *  amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
         output.y = pos.y;
         output.z = pos.z
             + unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
@@ -162,7 +162,7 @@ public class GW_GravityScript : MonoBehaviour
         return output;
     }
 
-    public Vector3 MoveYMode(Vector3 pos, Vector3 center, float angle)
+    public Vector3 MoveYMode(Vector3 pos, Vector3 center, float angle, float ampIndex)
     {
         /**
          * Motion of a particle based on Breathing Mode polarization of a gravitational wave
@@ -179,7 +179,7 @@ public class GW_GravityScript : MonoBehaviour
         Vector3 output;
         output.x = pos.x;
         output.y = pos.y
-            - unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+            - Vector3.forward.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
         output.z = pos.z
             + unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
 

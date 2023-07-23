@@ -9,9 +9,14 @@ public class GW_Tube : MonoBehaviour
     [SerializeField] public int numberOfMeshes = 12;
     [SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject tube;
+
     [SerializeField] private float PercentOfPlusMode;
     [SerializeField] private float PercentOfCrossMode;
     [SerializeField] private float PercentOfBreathingMode;
+    [SerializeField] private float PercentOfLongitudinalMode;
+    [SerializeField] private float PercentOfXMode;
+    [SerializeField] private float PercentOfYMode;
+
     [SerializeField] private float phaseDifference = 10f;
     [SerializeField] private float ampStep;
     [SerializeField] private float distBetweenRings = 0.1f;
@@ -26,6 +31,10 @@ public class GW_Tube : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ring_array = new List<GameObject>(numberOfMeshes);
+        phase_array = new List<float>(numberOfMeshes);
+        ampsteparray = new List<float>(numberOfMeshes);
+
         CreateTube();
     }
 
@@ -37,9 +46,15 @@ public class GW_Tube : MonoBehaviour
             //ring_array[i].phase = phase_array[i];
             //ring_array[i].ampIndex = ampsteparray[i];
 
-            //GW_Ring ringScript = ring_array[i].GetComponent<GW_Ring>();
-           // ringScript.phase = phase_array[i];
-            //ringScript.ampIndex = ampsteparray[i];
+            GW_Ring ringScript = ring_array[i].GetComponent<GW_Ring>();
+           ringScript.phase = phase_array[i];
+           ringScript.ampIndex = ampsteparray[i];
+            ringScript.PercentOfPlusMode = PercentOfPlusMode;
+            ringScript.PercentOfCrossMode = PercentOfCrossMode;
+            ringScript.PercentOfBreathingMode = PercentOfBreathingMode;
+            ringScript.PercentOfLongitudinalMode = PercentOfLongitudinalMode;
+            ringScript.PercentOfXMode = PercentOfXMode;
+            ringScript.PercentOfYMode = PercentOfYMode;
         }
         
     }
@@ -67,7 +82,9 @@ public class GW_Tube : MonoBehaviour
             z += distBetweenRings;
             phase += phaseDifference;
             ampIndex += ampStep;
-            
+
+            instance.transform.parent = tube.transform;
+
         }
     }
 }

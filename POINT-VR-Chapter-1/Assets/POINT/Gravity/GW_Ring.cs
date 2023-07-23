@@ -9,12 +9,12 @@ public class GW_Ring : MonoBehaviour
     [SerializeField] public int numberOfMeshes = 12;
     [SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject ring;
-    [SerializeField] private float PercentOfPlusMode;
-    [SerializeField] private float PercentOfCrossMode;
-    [SerializeField] private float PercentOfBreathingMode;
-    [SerializeField] private float PercentOfLongitudinalMode;
-    [SerializeField] private float PercentOfXMode;
-    [SerializeField] private float PercentOfYMode;
+    [SerializeField] public float PercentOfPlusMode;
+    [SerializeField] public float PercentOfCrossMode;
+    [SerializeField] public float PercentOfBreathingMode;
+    [SerializeField] public float PercentOfLongitudinalMode;
+    [SerializeField] public float PercentOfXMode;
+    [SerializeField] public float PercentOfYMode;
 
     [SerializeField] public float phase;
     [SerializeField] public float ampIndex;
