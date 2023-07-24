@@ -26,7 +26,7 @@ public class CoordinateDisplayer : MonoBehaviour
         Vector3 outputCoordinates = transform.position - origin;
         if (showTime)
         {
-            coordinateText.text = $"({outputCoordinates.x}, {outputCoordinates.y}, {outputCoordinates.z}, {Math.Floor(Time.time - startTime)})";
+            coordinateText.text = $"({Math.Floor(Time.time - startTime)}, {outputCoordinates.x}, {outputCoordinates.y}, {outputCoordinates.z})";
         }
         else
         {
