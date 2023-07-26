@@ -5,35 +5,74 @@ using UnityEngine;
 public class GW_GravityScript : MonoBehaviour
 {
 
-   [SerializeField] private float amplitude;
-   [SerializeField] private float speed;
+    [SerializeField] private float amplitude;
+    [SerializeField] private float speed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, float phase = 0.0f, float ampIndex = 0.0f, 
+    /** public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, float phase = 0.0f, float ampIndex = 0.0f, 
+         float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
+         float PercentOfLongitudinalMode = 0.0f,
+         float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
+     {
+         Vector3 plus = new Vector3(PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle, phase).x, PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle, phase).y, MovePlusMode(pos, center, angle, phase).z);
+         Vector3 cross = new Vector3(PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle, phase).x, PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle, phase).y, MoveCrossMode(pos, center, angle, phase).z);
+         Vector3 breathing =  new Vector3(PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle, phase).x, PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle, phase).y, MoveBreathingMode(pos, center, angle, phase).z);
+         Vector3 longitudinal = new Vector3(MoveLongitudinalMode(pos, center, angle, ampIndex).x, MoveLongitudinalMode(pos, center, angle, ampIndex).y, PercentOfLongitudinalMode/100.0f * MoveLongitudinalMode(pos, center, angle, ampIndex).z);
+         Vector3 x = new Vector3(PercentOfXMode / 100.0f * MoveXMode(pos, center, angle, ampIndex).x, MoveXMode(pos, center, angle, ampIndex).y, PercentOfXMode / 100.0f * MoveXMode(pos, center, angle, ampIndex).z);
+         Vector3 y = new Vector3(MoveYMode(pos, center, angle, ampIndex).x, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle, ampIndex).y, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle, ampIndex).z);
+
+         return plus + cross + breathing + longitudinal + x + y;
+     }**/
+
+    /****
+     * UNIFIED FUNCTION FOR ALL MODES OF POLARIZATION
+     * 
+     * 
+     * 
+     * ****/
+
+    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, float phase = 0.0f, float ampIndex = 0.0f,
         float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
         float PercentOfLongitudinalMode = 0.0f,
         float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
     {
-        Vector3 plus = new Vector3(PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle, phase).x, PercentOfPlusMode / 100.0f * MovePlusMode(pos, center, angle, phase).y, MovePlusMode(pos, center, angle, phase).z);
-        Vector3 cross = new Vector3(PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle, phase).x, PercentOfCrossMode / 100.0f * MoveCrossMode(pos, center, angle, phase).y, MoveCrossMode(pos, center, angle, phase).z);
-        Vector3 breathing =  new Vector3(PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle, phase).x, PercentOfBreathingMode / 100.0f * MoveBreathingMode(pos, center, angle, phase).y, MoveBreathingMode(pos, center, angle, phase).z);
-        Vector3 longitudinal = new Vector3(MoveLongitudinalMode(pos, center, angle, ampIndex).x, MoveLongitudinalMode(pos, center, angle, ampIndex).y, PercentOfLongitudinalMode/100.0f * MoveLongitudinalMode(pos, center, angle, ampIndex).z);
-        Vector3 x = new Vector3(PercentOfXMode / 100.0f * MoveXMode(pos, center, angle, ampIndex).x, MoveXMode(pos, center, angle, ampIndex).y, PercentOfXMode / 100.0f * MoveXMode(pos, center, angle, ampIndex).z);
-        Vector3 y = new Vector3(MoveYMode(pos, center, angle, ampIndex).x, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle, ampIndex).y, PercentOfYMode / 100.0f * MoveYMode(pos, center, angle, ampIndex).z);
+        Vector3 unitVector = (pos - center).normalized;
 
-        return plus + cross + breathing + longitudinal + x + y;
+        Vector3 output;
+
+        output.x = pos.x
+            + PercentOfPlusMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfCrossMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfXMode / 100.0f * Vector3.forward.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+
+
+        output.y = pos.y
+            - PercentOfPlusMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfCrossMode / 100.0f * unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfBreathingMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            - PercentOfYMode / 100.0f * Vector3.forward.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+        output.z = pos.z
+            + PercentOfLongitudinalMode / 100.0f * Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + ampIndex)
+            + PercentOfXMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
+            + PercentOfYMode / 100.0f * unitVector.y *  amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+        return output;
     }
+
 
     /**
      * FUNCTIONS DESCRIBE MOTIONS FOR
@@ -78,7 +117,7 @@ public class GW_GravityScript : MonoBehaviour
          * **/
 
         //Create normal vector of mesh; mesh is translated along this direction
-        Vector3 unitVector = (pos-center).normalized;
+        Vector3 unitVector = (pos - center).normalized;
         //Vector3 unitVector = new Vector3(-unitVectory.y, unitVectory.x, 0);
 
 
@@ -129,8 +168,8 @@ public class GW_GravityScript : MonoBehaviour
 
 
         Vector3 output;
-        output.x = pos.x ;
-        output.y = pos.y ;
+        output.x = pos.x;
+        output.y = pos.y;
 
         output.z = pos.z
             + Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI + ampIndex);
@@ -154,7 +193,7 @@ public class GW_GravityScript : MonoBehaviour
 
         Vector3 output;
         output.x = pos.x
-            + Vector3.forward.z * Mathf.Cos(ampIndex) *  amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
+            + Vector3.forward.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
         output.y = pos.y;
         output.z = pos.z
             + unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad / Mathf.PI);
@@ -286,7 +325,7 @@ public class GW_GravityScript : MonoBehaviour
         switch (index)
         {
             case 0:
-                output =  
+                output =
                     0.5f * (1 + Mathf.Pow(Mathf.Cos(theta), 2.0f) * Mathf.Cos(2.0f * phi) * Mathf.Cos(2.0f * psi))
                     - Mathf.Cos(theta) * Mathf.Sin(2.0f * phi) * Mathf.Sin(2.0f * psi);
                 break;
@@ -307,7 +346,7 @@ public class GW_GravityScript : MonoBehaviour
 
             case 4:
                 output =
-                    -Mathf.Sin(theta) * 
+                    -Mathf.Sin(theta) *
                     (Mathf.Cos(theta) * Mathf.Cos(2 * phi) * Mathf.Cos(psi) - Mathf.Sin(2 * phi) * Mathf.Sin(psi));
                 break;
 

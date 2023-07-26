@@ -53,6 +53,8 @@ MonoBehaviour:
   PercentOfCrossMode: 3.35
   PercentOfBreathingMode: 22.24
   PercentOfLongitudinalMode: 17.8
+  PercentOfXMode: 0
+  PercentOfYMode: 0
   phase: 0
   ampIndex: 0
 --- !u!114 &5324980356590872440
@@ -67,5 +69,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f357a05c8143be42903fb00ef18d901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 2.95
-  speed: 500
+  amplitude: 1
+  speed: 100
