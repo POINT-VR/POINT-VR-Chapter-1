@@ -27,6 +27,8 @@ public class GW_Tube : MonoBehaviour
 
     private Vector3 center;
 
+    private bool doneSpawning = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -41,26 +43,30 @@ public class GW_Tube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < numberOfMeshes; i++)
+        if (doneSpawning)
         {
-            //ring_array[i].phase = phase_array[i];
-            //ring_array[i].ampIndex = ampsteparray[i];
+            for (int i = 0; i < numberOfMeshes; i++)
+            {
+                //ring_array[i].phase = phase_array[i];
+                //ring_array[i].ampIndex = ampsteparray[i];
 
-            GW_Ring ringScript = ring_array[i].GetComponent<GW_Ring>();
-           ringScript.phase = phase_array[i];
-           ringScript.ampIndex = ampsteparray[i];
-            ringScript.PercentOfPlusMode = PercentOfPlusMode;
-            ringScript.PercentOfCrossMode = PercentOfCrossMode;
-            ringScript.PercentOfBreathingMode = PercentOfBreathingMode;
-            ringScript.PercentOfLongitudinalMode = PercentOfLongitudinalMode;
-            ringScript.PercentOfXMode = PercentOfXMode;
-            ringScript.PercentOfYMode = PercentOfYMode;
+                GW_Ring ringScript = ring_array[i].GetComponent<GW_Ring>();
+                ringScript.phase = phase_array[i];
+                ringScript.ampIndex = ampsteparray[i];
+                ringScript.PercentOfPlusMode = PercentOfPlusMode;
+                ringScript.PercentOfCrossMode = PercentOfCrossMode;
+                ringScript.PercentOfBreathingMode = PercentOfBreathingMode;
+                ringScript.PercentOfLongitudinalMode = PercentOfLongitudinalMode;
+                ringScript.PercentOfXMode = PercentOfXMode;
+                ringScript.PercentOfYMode = PercentOfYMode;
+            }
         }
         
     }
 
     void CreateTube()
     {
+
         //Creates Tube on z axis
 
         float z = center.z;
@@ -75,9 +81,14 @@ public class GW_Tube : MonoBehaviour
 
             GameObject instance = Instantiate(RingMesh, pos, Quaternion.identity) as GameObject;
 
+            GW_Ring ringScript = instance.GetComponent<GW_Ring>();
+            ringScript.SpawnCircle();
+
             ring_array.Add(instance);
             phase_array.Add(phase);
             ampsteparray.Add(ampIndex);
+
+            
 
             z += distBetweenRings;
             phase += phaseDifference;
@@ -86,5 +97,7 @@ public class GW_Tube : MonoBehaviour
             instance.transform.parent = tube.transform;
 
         }
+
+        doneSpawning = true;
     }
 }
