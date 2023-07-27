@@ -51,7 +51,7 @@ public class GW_Ring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(angles_array.Count);
+        //Debug.Log(angles_array.Count);
     }
 
     private void FixedUpdate()

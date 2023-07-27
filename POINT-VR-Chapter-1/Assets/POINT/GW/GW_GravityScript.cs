@@ -11,13 +11,16 @@ public class GW_GravityScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(speed < 100)
+        {
+            speed = speed * 100;
+        }
     }
 
     /** public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, float phase = 0.0f, float ampIndex = 0.0f, 
