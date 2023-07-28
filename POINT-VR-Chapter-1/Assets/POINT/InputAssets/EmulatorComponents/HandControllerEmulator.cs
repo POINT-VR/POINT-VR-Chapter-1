@@ -145,19 +145,30 @@ public class HandControllerEmulator : MonoBehaviour
                 state = State.none;
             }
         } 
-        else if (state == State.slider)
+        else if (state == State.slider) //if in slider state checks is slider needs to be updated
         {
-            Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask);
-            CheckSlider(UIhit);
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask))
+            {
+                CheckSlider(UIhit);
+            } else
+            {
+                state = State.none;
+            }
         }
-        else if (state == State.scrollbar)
+        else if (state == State.scrollbar) //if in slider state checks is scrollbar needs to be updated
         {
-            Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask);
-            CheckScrollbar(UIhit);
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask))
+            {
+                CheckScrollbar(UIhit);
+            }
+            else
+            {
+                state = State.none;
+            }
         }
-        else if (state == State.none || state == State.UI)
+        else if (state == State.none || state == State.UI) //hovering but not actively intracting with an object
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, laserLength, grabMask))
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, laserLength, grabMask)) //adjust laser color and length for a grabbable
             {
                 laser.material.color = Color.magenta;
                 float distance = (hit.point - transform.position).magnitude;
@@ -165,7 +176,7 @@ public class HandControllerEmulator : MonoBehaviour
                 laser.transform.localPosition = laserPosition + new Vector3(0, 0, 1) * (distance - laserLength);
                 state = State.none;
             } 
-            else if (Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask)) 
+            else if (Physics.Raycast(transform.position, transform.forward, out RaycastHit UIhit, laserLength, UIMask)) //adjust laser color and length for a UI element
             {
                 laser.material.color = Color.green;
                 float distance = (UIhit.point - transform.position).magnitude;
@@ -207,7 +218,7 @@ public class HandControllerEmulator : MonoBehaviour
     /// <summary>
     /// This makes the hand "drop" whatever it was holding.
     /// </summary>
-    public void Release()
+    public void Release() // This function is used in another file
     {
         if (state == State.grabbing || state == State.pulling || state == State.pushing)
         {
@@ -224,10 +235,10 @@ public class HandControllerEmulator : MonoBehaviour
             transform.GetComponent<Animator>().SetBool("isGrabbing", false);
         }
     }
-    ///
-    /// 
-    /// 
-    private void Released(InputAction.CallbackContext ctx)
+    /// <summary>
+    /// Stops interacting with UI when the mouse is released.
+    /// </summary>
+    private void Released(InputAction.CallbackContext ctx) 
     {
         if (state == State.slider || state == State.scrollbar)
         {
@@ -297,9 +308,9 @@ public class HandControllerEmulator : MonoBehaviour
     /// <param name="hit"></param>
     private void CheckSlider(RaycastHit hit)
     {
-        Slider activeSlider = hit.collider.gameObject.GetComponent<Slider>();
-        if (activeSlider != null) //Collider is a slider: proceeds to interact with slider. 
+        if (hit.collider.gameObject.GetComponent<Slider>()) //Collider is a slider: proceeds to interact with slider. 
         {
+            Slider activeSlider = hit.collider.gameObject.GetComponent<Slider>();
             RectTransform sliderRect = activeSlider.transform as RectTransform;
             if (sliderRect != null)
             {
@@ -317,9 +328,9 @@ public class HandControllerEmulator : MonoBehaviour
     /// <param name="hit"></param>
     private void CheckScrollbar(RaycastHit hit)
     {
-        Scrollbar activeScrollbar = hit.collider.gameObject.GetComponent<Scrollbar>();
-        if (activeScrollbar != null) //Collider is a scrollbar: proceeds to interact with scrollbar. 
+        if (hit.collider.gameObject.GetComponent<Scrollbar>()) //Collider is a scrollbar: proceeds to interact with scrollbar. 
         {
+            Scrollbar activeScrollbar = hit.collider.gameObject.GetComponent<Scrollbar>();
             RectTransform scrollbarRect = activeScrollbar.transform as RectTransform;
             if (scrollbarRect != null)
             {
@@ -328,7 +339,7 @@ public class HandControllerEmulator : MonoBehaviour
                 activeScrollbar.value = (scrollbarHeight > 0) ? (Mathf.Clamp(((activeScrollbar.transform.InverseTransformPoint(hit.point).y + scrollbarRect.anchoredPosition.y) / scrollbarHeight), 0.0f, 1.0f)) : 0.0f;
             }
             state = State.scrollbar;
-        }
+        } 
     }
 
     private void Pull()
