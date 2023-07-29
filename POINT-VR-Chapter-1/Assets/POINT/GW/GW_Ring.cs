@@ -7,7 +7,7 @@ public class GW_Ring : MonoBehaviour
     
     [SerializeField] private GameObject SphereMesh;
     [SerializeField] public int numberOfMeshes = 12;
-    [SerializeField] public float radius = 5.0f;
+    //[SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject ring;
     [SerializeField] public float PercentOfPlusMode;
     [SerializeField] public float PercentOfCrossMode;
@@ -75,7 +75,7 @@ public class GW_Ring : MonoBehaviour
         }
     }
 
-    public void SpawnCircle()
+    public void SpawnCircle(float radius = 5.0f)
     {
         // Initialize mesh and angles array, to create our coordinate system which we use to translate particle
         /**sphere_array = new List<GameObject>(numberOfMeshes);

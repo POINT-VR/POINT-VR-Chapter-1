@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GW_Tube : MonoBehaviour
+public class GW_Sphere : MonoBehaviour
 {
-
     [SerializeField] private GameObject RingMesh;
     [SerializeField] public int numberOfMeshes = 12;
     [SerializeField] public float radius = 5.0f;
@@ -28,16 +27,12 @@ public class GW_Tube : MonoBehaviour
     private Vector3 center;
 
     private bool doneSpawning = false;
-
-
     // Start is called before the first frame update
     void Start()
     {
         ring_array = new List<GameObject>(numberOfMeshes);
         phase_array = new List<float>(numberOfMeshes);
         ampsteparray = new List<float>(numberOfMeshes);
-
-        //ampStep = ampStep * Mathf.PI;
 
         CreateTube();
     }
@@ -63,9 +58,9 @@ public class GW_Tube : MonoBehaviour
                 ringScript.PercentOfYMode = PercentOfYMode;
             }
         }
-        
     }
 
+    //Reused from GW_Tube
     void CreateTube()
     {
 
@@ -77,7 +72,7 @@ public class GW_Tube : MonoBehaviour
 
         for (int i = 0; i < numberOfMeshes; i++)
         {
-            
+
 
             Vector3 pos = new Vector3(center.x, center.y, z);
 
@@ -90,7 +85,7 @@ public class GW_Tube : MonoBehaviour
             phase_array.Add(phase);
             ampsteparray.Add(ampIndex);
 
-            
+
 
             z += distBetweenRings;
             phase += phaseDifference;
@@ -101,5 +96,10 @@ public class GW_Tube : MonoBehaviour
         }
 
         doneSpawning = true;
+    }
+
+    void GenSphereRadii(int minRadius, int maxRadius, int index)
+    {
+        //Generate Radii and Number of Particles for each Ring such that a sphere is formed
     }
 }
