@@ -6,7 +6,7 @@ public class PlayerSpawner : MonoBehaviour
     /// </summary>
     [SerializeField] GameObject player;
     /// <summary>
-    /// The emulator prefab to be instantiated when using the unity editor
+    /// The emulator prefab to be instantiated for testing
     /// </summary>
     [SerializeField] GameObject emulator;
 
@@ -14,13 +14,11 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Awake()
     {
-        if (Application.isEditor)
-        {
-            activePlayer = Instantiate(emulator, transform);
-        } else
-        {
-            activePlayer = Instantiate(player, transform);
-        }
+    #if !UNITY_EDITOR
+        activePlayer = Instantiate(player, transform);
+    #else
+        activePlayer = Instantiate(emulator, transform);
+    #endif
     }
 
     public void UIChangeScene(int scene)
