@@ -57,15 +57,30 @@ Shader "Unlit/NewUnlitShader"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                ///* old deflection function
                 //project normal vectors onto view vector
                 float3 project = dot(i.norm,i.view)*i.view;
-                //subtract project out, gives vectors pointing inwards, relative to how far away from center
+                //subtract project out, gives vectors pointing inwards, relative to how far away from center. impact parameter
                 float b =length(i.norm-project);
                 //deflection function
-                float d = 1.0f/pow(b+0.8f,10);//deflection
+                //float d = 1.0f/pow(b+0.8f,10);//deflection
                 //o.worldRefl=d;
+                
+                
+                
+                //https://www.youtube.com/watch?v=nMv0OKAKkk4
+                //spherical to linear. not working and causing fragments of the mesh. using old mmethod instead
+                //float s2l = pow(1.0f-pow(dot(i.norm,i.view),2),0.5f);
+                //smoothing function
+                float smooth = b/(1.0f-b);
+                //final deformation, 2 constants can be changed
+                float const1 = 0.2f;
+                float const2 = 2.0f;
+                float d =const1/(const2*(const1-smooth));
                 //build function to rotate view vector
-                float3 axis=normalize(cross(i.view,i.norm));
+                
+                float3 axis=normalize(cross(i.norm,i.view));
+
                 float s = sin(d*1.0f);
                 float c = cos(d*1.0f);
                 float oc = 1.0 - c;
@@ -80,7 +95,7 @@ Shader "Unlit/NewUnlitShader"
                 fixed4 co = 0;
                 co.rgb=skyColor;
                 //if close to center, just draw the black hole.
-                if(b<.1f){
+                if(smooth<const1){
                     co.rgb=0;
                 }
                 //c.rgb = i.worldRefl;
