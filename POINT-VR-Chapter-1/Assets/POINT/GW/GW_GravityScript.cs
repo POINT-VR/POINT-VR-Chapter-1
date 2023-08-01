@@ -45,11 +45,14 @@ public class GW_GravityScript : MonoBehaviour
      * 
      * ****/
 
-    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float angle, float phase = 0.0f, float ampIndex = 0.0f,
+    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float phase = 0.0f, float ampIndex = 0.0f,
         float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
         float PercentOfLongitudinalMode = 0.0f,
         float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
     {
+        //Here, ampIndex is used to simulate propagation through the z-axis
+
+        //Vector for assigning relative locations of the spheres
         Vector3 unitVector = (pos - center).normalized;
 
         Vector3 output;
@@ -72,6 +75,45 @@ public class GW_GravityScript : MonoBehaviour
             + PercentOfLongitudinalMode / 100.0f * Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + ampIndex)
             + PercentOfXMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
             + PercentOfYMode / 100.0f * unitVector.y *  amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+        return output;
+    }
+
+    //Overload with different mode of simulating relative z, used for sphere object
+
+    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float maxradius, float phase = 0.0f, float centralZ = 0.0f,
+        float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
+        float PercentOfLongitudinalMode = 0.0f,
+        float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
+    {
+        //Vector for assigning relative locations of the spheres
+        Vector3 unitVector = (pos - center).normalized;
+
+        //Relative z location of the spheres
+        float relativeZ = (pos.z - centralZ) / (maxradius*4);
+
+        //Debug.Log(relativeZ);
+
+        Vector3 output;
+
+        output.x = pos.x
+            + PercentOfPlusMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfCrossMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfXMode / 100.0f *  relativeZ * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+
+
+        output.y = pos.y
+            - PercentOfPlusMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfCrossMode / 100.0f * unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfBreathingMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            - PercentOfYMode / 100.0f *  relativeZ * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
+
+        output.z = pos.z
+            + PercentOfLongitudinalMode / 100.0f * Vector3.forward.z * relativeZ * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
+            + PercentOfXMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
+            - PercentOfYMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
 
         return output;
     }

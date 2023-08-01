@@ -26,6 +26,9 @@ public class GW_Ring : MonoBehaviour
 
     private bool doneSpawningSpheres = false;
 
+    public float centralZ = -9999;
+    private float ringRadius;
+
     //public float phase;
 
 
@@ -56,16 +59,29 @@ public class GW_Ring : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Sanity check
         if (doneSpawningSpheres)
         {
             for (int k = 0; k < numberOfMeshes; k++)
             {
 
+                Vector3 pos;
+                //Debug.Log(centralZ);
                 //Vector3 pos =  PercentOfCrossMode * gw_gravity.MoveCrossMode(sphere_pos_array[i], ring.transform.position, angles_array[i]);
 
                 //Gives coordinates of oscillations of particles based on plus mode and cross mode polarizations of gravitational waves, can be controlled
                 //Phasor addition of Plus and Cross Mode polarization - based oscillations used
-                Vector3 pos = gw_gravity.CalculateOscillations(sphere_pos_array[k], ring.transform.position, angles_array[k], phase, ampIndex, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+
+                //If we assigned a central z (sphere), use algorithm for fixed oscillations in longitudinal/x/y modes
+                if (centralZ > -999)
+                {
+                    pos = gw_gravity.CalculateOscillations(sphere_pos_array[k], ring.transform.position, ringRadius, phase, centralZ, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+                }
+                //We didn't assign a central z (Tube), use algorithm for propagating oscillations in longitudinal/x/y modes
+                else
+                {
+                    pos = gw_gravity.CalculateOscillations(sphere_pos_array[k], ring.transform.position, phase, ampIndex, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+                }
                 // pos.z = sphere_array[i].transform.position.z;
 
                 //Debug.Log(sphere_array[0].transform.position.z);
@@ -75,7 +91,7 @@ public class GW_Ring : MonoBehaviour
         }
     }
 
-    public void SpawnCircle(float radius = 5.0f)
+    public void SpawnCircle(float radius = 5.0f, float maxradius = 5.0f, float centerZ = -9999)
     {
         // Initialize mesh and angles array, to create our coordinate system which we use to translate particle
         /**sphere_array = new List<GameObject>(numberOfMeshes);
@@ -90,6 +106,9 @@ public class GW_Ring : MonoBehaviour
 
         //Setting up angular step for the ring of particles, based on the number of meshes
         float global_ang = 360.0f / numberOfMeshes;
+
+        ringRadius = maxradius;
+        centralZ = centerZ;
 
         for (int j = 0; j < numberOfMeshes; j++)
         {

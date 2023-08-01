@@ -5,10 +5,10 @@ using UnityEngine;
 public class GW_Sphere : MonoBehaviour
 {
     [SerializeField] private GameObject RingMesh;
-    [SerializeField] public int numberOfMeshes = 12;
+    [SerializeField] public int numberOfRings = 10;
     [SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject tube;
-    [SerializeField] private int maxNumberOfMeshes = 100;
+    //[SerializeField] private int maxNumberOfSpheres = 12;
 
     [SerializeField] private float PercentOfPlusMode;
     [SerializeField] private float PercentOfCrossMode;
@@ -25,10 +25,7 @@ public class GW_Sphere : MonoBehaviour
     private List<float> phase_array;
     private List<float> ampsteparray;
 
-    private int numOfSpheres;
-    private int localRadius;
-    private int ringSpheresStep = 1;
-    private int numOfRings;
+    private List<float> localRadii; 
 
     private Vector3 center;
 
@@ -36,9 +33,12 @@ public class GW_Sphere : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ring_array = new List<GameObject>(numberOfMeshes);
-        phase_array = new List<float>(numberOfMeshes);
-        ampsteparray = new List<float>(numberOfMeshes);
+        ring_array = new List<GameObject>(numberOfRings);
+        phase_array = new List<float>(numberOfRings);
+        ampsteparray = new List<float>(numberOfRings);
+        localRadii = new List<float>(numberOfRings);
+
+        distBetweenRings = radius / (numberOfRings / 2);
 
         CreateTube();
     }
@@ -46,9 +46,10 @@ public class GW_Sphere : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Sanity check
         if (doneSpawning)
         {
-            for (int i = 0; i < numberOfMeshes; i++)
+            for (int i = 0; i < numberOfRings; i++)
             {
                 //ring_array[i].phase = phase_array[i];
                 //ring_array[i].ampIndex = ampsteparray[i];
@@ -78,7 +79,13 @@ public class GW_Sphere : MonoBehaviour
         float phase = 0.0f;
         float ampIndex = 0.0f;
 
-        for (int i = 0; i < numberOfMeshes; i++)
+        GenSphereRadii();
+
+        //Calculate the z position of the central ring in the sphere, we will use it to calculate relative z positions of all other rings.
+        float centralZ = center.z + (numberOfRings / 2 - 1) * distBetweenRings;
+        //Debug.Log(centralZ);
+
+        for (int i = 0; i < numberOfRings; i++)
         {
 
 
@@ -87,17 +94,21 @@ public class GW_Sphere : MonoBehaviour
             GameObject instance = Instantiate(RingMesh, pos, Quaternion.identity) as GameObject;
 
             GW_Ring ringScript = instance.GetComponent<GW_Ring>();
-            ringScript.SpawnCircle();
+            ringScript.SpawnCircle(localRadii[i], radius, centralZ);
 
             ring_array.Add(instance);
             phase_array.Add(phase);
             ampsteparray.Add(ampIndex);
+
+            
 
 
 
             z += distBetweenRings;
             phase += phaseDifference;
             ampIndex += ampStep;
+
+            
 
             instance.transform.parent = tube.transform;
 
@@ -110,16 +121,16 @@ public class GW_Sphere : MonoBehaviour
     {
         //Generate Radii and Number of Particles for each Ring such that a sphere is formed
 
-        numOfSpheres = maxNumberOfMeshes;
-        localRadius = radius;
+        
 
-        while(numOfSpheres > 1 && localRadius >= 0)
+        for(int i = 0; i < numberOfRings; i++)
         {
-            //Linear step for z position of rings, quadratic decrease for both radius of the rings and the number of meshes for each ring.
-            numOfSpheres -= (ringSpheresStep * ringSpheresStep);
-            localRadius -= (ringSpheresStep * ringSpheresStep);
-            numOfRings++;
-            ringSpheresStep++;
+            float localRadius = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow(radius - (i * distBetweenRings),2));
+
+            localRadii.Add(localRadius);
+
+            //Debug.Log(localRadius);
+
         }
     }
 }
