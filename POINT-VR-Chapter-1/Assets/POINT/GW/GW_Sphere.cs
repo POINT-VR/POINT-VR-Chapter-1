@@ -8,6 +8,7 @@ public class GW_Sphere : MonoBehaviour
     [SerializeField] public int numberOfMeshes = 12;
     [SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject tube;
+    [SerializeField] private int maxNumberOfMeshes = 100;
 
     [SerializeField] private float PercentOfPlusMode;
     [SerializeField] private float PercentOfCrossMode;
@@ -23,6 +24,11 @@ public class GW_Sphere : MonoBehaviour
     private List<GameObject> ring_array;
     private List<float> phase_array;
     private List<float> ampsteparray;
+
+    private int numOfSpheres;
+    private int localRadius;
+    private int ringSpheresStep = 1;
+    private int numOfRings;
 
     private Vector3 center;
 
@@ -64,6 +70,8 @@ public class GW_Sphere : MonoBehaviour
     void CreateTube()
     {
 
+
+
         //Creates Tube on z axis
 
         float z = center.z;
@@ -98,8 +106,20 @@ public class GW_Sphere : MonoBehaviour
         doneSpawning = true;
     }
 
-    void GenSphereRadii(int minRadius, int maxRadius, int index)
+    void GenSphereRadii()
     {
         //Generate Radii and Number of Particles for each Ring such that a sphere is formed
+
+        numOfSpheres = maxNumberOfMeshes;
+        localRadius = radius;
+
+        while(numOfSpheres > 1 && localRadius >= 0)
+        {
+            //Linear step for z position of rings, quadratic decrease for both radius of the rings and the number of meshes for each ring.
+            numOfSpheres -= (ringSpheresStep * ringSpheresStep);
+            localRadius -= (ringSpheresStep * ringSpheresStep);
+            numOfRings++;
+            ringSpheresStep++;
+        }
     }
 }
