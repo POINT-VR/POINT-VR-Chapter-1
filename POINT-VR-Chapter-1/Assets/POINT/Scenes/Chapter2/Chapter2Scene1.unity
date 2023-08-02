@@ -604,8 +604,8 @@ MonoBehaviour:
   PercentOfPlusMode: 0
   PercentOfCrossMode: 0
   PercentOfBreathingMode: 0
-  PercentOfLongitudinalMode: 0
-  PercentOfXMode: 400
+  PercentOfLongitudinalMode: 1600
+  PercentOfXMode: 0
   PercentOfYMode: 0
   phaseDifference: 0.4
   ampStep: 0
@@ -658,10 +658,10 @@ MonoBehaviour:
   numberOfMeshes: 12
   radius: 5
   tube: {fileID: 1580781847}
-  PercentOfPlusMode: 100
+  PercentOfPlusMode: 0
   PercentOfCrossMode: 0
   PercentOfBreathingMode: 0
-  PercentOfLongitudinalMode: 0
+  PercentOfLongitudinalMode: 100
   PercentOfXMode: 0
   PercentOfYMode: 0
   phaseDifference: 0.82
