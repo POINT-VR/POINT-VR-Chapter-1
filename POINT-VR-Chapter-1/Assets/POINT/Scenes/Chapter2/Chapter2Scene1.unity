@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0068936315, g: 0.0067525106, b: 0.0071824407, a: 1}
+  m_IndirectSpecularColor: {r: 0.0069632446, g: 0.0068257754, b: 0.007311784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -605,7 +605,7 @@ MonoBehaviour:
   PercentOfCrossMode: 0
   PercentOfBreathingMode: 0
   PercentOfLongitudinalMode: 0
-  PercentOfXMode: 0
+  PercentOfXMode: 400
   PercentOfYMode: 0
   phaseDifference: 0.4
   ampStep: 0
@@ -658,7 +658,7 @@ MonoBehaviour:
   numberOfMeshes: 12
   radius: 5
   tube: {fileID: 1580781847}
-  PercentOfPlusMode: 0
+  PercentOfPlusMode: 100
   PercentOfCrossMode: 0
   PercentOfBreathingMode: 0
   PercentOfLongitudinalMode: 0
