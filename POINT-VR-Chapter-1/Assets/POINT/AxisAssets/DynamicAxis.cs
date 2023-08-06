@@ -50,9 +50,6 @@ public class DynamicAxis : MonoBehaviour
         xAxisRenderer.material.color = Color.red;
         yAxisRenderer.material.color = Color.green;
         zAxisRenderer.material.color = Color.blue;
-
-        ShowAxes();
-        StartCoroutine(ExtendAxes(1, 10, 1, false));
     }
 
     /// <summary>
