@@ -18,7 +18,7 @@ public class DynamicAxis : MonoBehaviour
     private MeshRenderer yAxisRenderer;
     private MeshRenderer zAxisRenderer;
 
-    // Start is called before the first frame update
+    private bool doubleSided = true; 
     void Start()
     {
         //Creates the axes
@@ -34,6 +34,10 @@ public class DynamicAxis : MonoBehaviour
         yAxis.transform.localScale = new Vector3(axisWidth, 1, axisWidth);
         zAxis.transform.localScale = new Vector3(axisWidth, 1, axisWidth);
 
+        xAxis.transform.localPosition = Vector3.zero;
+        yAxis.transform.localPosition = Vector3.zero;
+        zAxis.transform.localPosition = Vector3.zero;
+
         //y axis is in proper orientation by default
         xAxis.transform.localEulerAngles = new Vector3(90, 0, 0); 
         zAxis.transform.localEulerAngles = new Vector3(0, 180, 90);
@@ -43,13 +47,13 @@ public class DynamicAxis : MonoBehaviour
         yAxisRenderer = yAxis.GetComponent<MeshRenderer>();
         zAxisRenderer = zAxis.GetComponent<MeshRenderer>();
 
-        //Hides axis by default
-        HideAxes();
-
         //Colors each of the axes properly
         xAxisRenderer.material.color = Color.red;
         yAxisRenderer.material.color = Color.green;
         zAxisRenderer.material.color = Color.blue;
+
+        //Hides axis by default
+        HideAxes();
     }
 
     /// <summary>
@@ -58,7 +62,7 @@ public class DynamicAxis : MonoBehaviour
     /// <param name="doubleSided"> Determines whether the axes extend in both directions or only one. </param>
     /// <param name="axisNumber"> Specifies which axis is acted on. By default all three are enabled. </param>
     /// <returns></returns>
-    public IEnumerator ExtendAxes(float startLength, float endLength, float speed, bool doubleSided, int axisNumber = -1)
+    public IEnumerator ExtendAxes(float startLength, float endLength, float speed, int axisNumber = -1)
     {
         float timeElapsed = 0; 
         float duration = (endLength - startLength) / speed;
@@ -67,10 +71,10 @@ public class DynamicAxis : MonoBehaviour
             yield return null;
             float t = timeElapsed / duration;
             float lerpPoint = Mathf.Lerp(startLength, endLength, t);
-            SetAxesLength(lerpPoint, doubleSided, axisNumber);
+            SetAxesLength(lerpPoint, axisNumber);
             timeElapsed += Time.deltaTime;
         }
-        SetAxesLength(endLength, doubleSided, axisNumber); //snaps to final position after last loop
+        SetAxesLength(endLength, axisNumber); //snaps to final position after last loop
         yield break;
     }
 
@@ -116,7 +120,18 @@ public class DynamicAxis : MonoBehaviour
             zAxisRenderer.enabled = false;
         }
     }
-    private void SetAxesLength(float length, bool doubleSided, int axisNumber = -1) //set to all axes by default
+
+    /// <summary>
+    /// Sets the axis to be double sided (true) or single sided (false)
+    /// </summary>
+    public void SetAxisMode(bool mode)
+    {
+        doubleSided = mode;
+        SetAxesLength(xAxis.transform.localScale.y, 0);
+        SetAxesLength(yAxis.transform.localScale.y, 0);
+        SetAxesLength(zAxis.transform.localScale.y, 0);
+    }
+    private void SetAxesLength(float length, int axisNumber = -1) //set to all axes by default
     {
         if (axisNumber == -1) //all axes
         {

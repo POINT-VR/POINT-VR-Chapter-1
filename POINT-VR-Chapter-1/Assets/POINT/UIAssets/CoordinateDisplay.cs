@@ -10,12 +10,12 @@ public class CoordinateDisplay : MonoBehaviour
     /// <summary>
     /// Decides whether or not to include the 4th time coordinate. 
     /// </summary>
-    private bool showTime;
+    private bool showTime = false;
 
     /// <summary>
     /// Determines whether or not the text is being displayed.
     /// </summary>
-    private bool showText;
+    private bool showText = false;
 
     /// <summary>
     /// The origin for time, t=0.
@@ -45,8 +45,6 @@ public class CoordinateDisplay : MonoBehaviour
         cameraObject = Camera.allCameras[0]; //sets player camera so that position can be calculated correctly
         tNaught = Time.time; //sets time origin to start time
 
-        HideTime();
-        HideText(); //automatically disables time and hides the object
     }
 
     // Update is called once per frame
