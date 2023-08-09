@@ -24,7 +24,6 @@ public class EndPoint : MonoBehaviour
         if ((MassSphere.transform.position - transform.position).magnitude < 1)
         {
             MassSphere.transform.position = transform.position;
-            isActive = false;
         }
     }
 

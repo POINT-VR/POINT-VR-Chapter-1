@@ -17,12 +17,12 @@ public class ObjectiveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator Intro()
     {
-        Debug.Log("Welcome to 4D Spacetime");
+        //incomplete
         yield break;
     }
     IEnumerator ObjectiveOne()
@@ -41,7 +41,21 @@ public class ObjectiveManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         Debug.Log("To help ourselves navigate this space, we use a mathematical tool called a coordinate system. It does not matter how the coordinate system is oriented. In front of you is one potential coordinate system, where the different colors represent different directions. Where the three lines meet is called the origin of the system. We can describe the location of any object in space relative to the origin with just 3 numbers.");
         yield return new WaitForSeconds(2);
-        StartCoroutine(dynamicAxis.ExtendAxes(1, 10, 1));
+        StartCoroutine(dynamicAxis.ExtendAxes(1, 35, 1));
+        yield break;
+    }
+
+    IEnumerator ObjectiveTwo()
+    {
+        yield break;
+    }
+
+    IEnumerator ObjectiveThree()
+    {
+        yield break;
+    }
+    IEnumerator ObjectiveFour()
+    {
         yield break;
     }
 }
