@@ -64,7 +64,7 @@ public class CoordinateDisplay : MonoBehaviour
     {
         Transform dummyCamera = cameraObject.transform; //uses a dummy transform to position the text 'above' the mass from the point of view of the camera
         dummyCamera.LookAt(transform.position);
-        coordinateText.transform.localPosition = dummyCamera.up; 
+        coordinateText.transform.position = transform.position + dummyCamera.up/2; 
 
         coordinateText.transform.LookAt(2* coordinateText.transform.position - dummyCamera.transform.position); //makes the text angle to face the camera.
     }
