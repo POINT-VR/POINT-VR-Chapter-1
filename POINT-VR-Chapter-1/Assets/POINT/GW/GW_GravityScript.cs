@@ -118,6 +118,44 @@ public class GW_GravityScript : MonoBehaviour
         return output;
     }
 
+    //Overload for mesh-based sphere, using a single center position vector for all x, y, and z
+
+    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center,
+       float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
+       float PercentOfLongitudinalMode = 0.0f,
+       float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
+    {
+        //Vector for assigning relative locations of the spheres
+        Vector3 unitVector = (pos - center);
+
+        
+
+        //Debug.Log(relativeZ);
+
+        Vector3 output;
+
+        output.x = pos.x
+            + PercentOfPlusMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
+            + PercentOfCrossMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
+            + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z)
+            + PercentOfXMode / 100.0f * unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+
+
+        output.y = pos.y
+            - PercentOfPlusMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
+            + PercentOfCrossMode / 100.0f * unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
+            + PercentOfBreathingMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z)
+            - PercentOfYMode / 100.0f * unitVector.z * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
+
+        output.z = pos.z
+            + PercentOfLongitudinalMode / 100.0f * unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
+            + PercentOfXMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
+            - PercentOfYMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
+
+        return output;
+    }
+
 
     /**
      * FUNCTIONS DESCRIBE MOTIONS FOR
