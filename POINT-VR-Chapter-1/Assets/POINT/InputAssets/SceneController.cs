@@ -71,7 +71,7 @@ public class SceneController : MonoBehaviour
             floorRendered = floorVisible
         };
         GameManager.Instance.SetData(data);
-        pause.Unpause();
+        pause.Unpause(); //Delete this line for scene switching with emulator
         SceneManager.LoadScene(scene);
     }
 }
