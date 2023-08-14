@@ -53,7 +53,7 @@ public class DynamicAxis : MonoBehaviour
         zAxisRenderer.material.color = Color.blue;
 
         //Hides axis by default
-        HideAxes();
+        ShowAxes();
     }
 
     /// <summary>

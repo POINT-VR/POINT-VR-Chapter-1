@@ -10,12 +10,12 @@ public class CoordinateDisplay : MonoBehaviour
     /// <summary>
     /// Decides whether or not to include the 4th time coordinate. 
     /// </summary>
-    private bool showTime = false;
+    private bool showTime = true;
 
     /// <summary>
     /// Determines whether or not the text is being displayed.
     /// </summary>
-    private bool showText = false;
+    private bool showText = true;
 
     /// <summary>
     /// The origin for time, t=0.

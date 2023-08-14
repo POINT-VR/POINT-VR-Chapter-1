@@ -6,7 +6,7 @@ using UnityEngine;
 public class EndPoint : MonoBehaviour
 {
     private GameObject MassSphere;
-    private bool isActive = false;
+    private bool isActive = true;
     private float snapDistance;
     // Start is called before the first frame update
 
