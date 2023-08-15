@@ -62,11 +62,13 @@ public class CoordinateDisplay : MonoBehaviour
     //private update functions
     private void updatePosition()
     {
-        Transform dummyCamera = cameraObject.transform; //uses a dummy transform to position the text 'above' the mass from the point of view of the camera
+        Transform dummyCamera = new GameObject().transform; //uses a dummy transform to position the text 'above' the mass from the point of view of the camera
+        dummyCamera.position = cameraObject.transform.position;
         dummyCamera.LookAt(transform.position);
         coordinateText.transform.position = transform.position + dummyCamera.up/2; 
 
         coordinateText.transform.LookAt(2* coordinateText.transform.position - dummyCamera.transform.position); //makes the text angle to face the camera.
+        Destroy(dummyCamera.gameObject);
     }
 
     private void updateText()
