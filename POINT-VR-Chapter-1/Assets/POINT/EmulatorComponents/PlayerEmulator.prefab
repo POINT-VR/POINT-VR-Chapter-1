@@ -5770,7 +5770,6 @@ GameObject:
   m_Component:
   - component: {fileID: 685732246657436341}
   - component: {fileID: 685732246657436340}
-  - component: {fileID: 685732246657436345}
   - component: {fileID: 685732246657436346}
   - component: {fileID: 685732246657436344}
   - component: {fileID: 685732246657436347}
@@ -5840,23 +5839,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &685732246657436345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685732246657436342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28097a2aff55e9e408bc1dd139b325a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hardwareType: 0
-  positionReference: {fileID: 7862207684358717888, guid: a54d6349e0e4d404fa09e1c0531de6d0,
-    type: 3}
-  rotationReference: {fileID: -530380113134220495, guid: a54d6349e0e4d404fa09e1c0531de6d0,
-    type: 3}
 --- !u!81 &685732246657436346
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8898,7 +8880,7 @@ Animator:
   m_GameObject: {fileID: 2756668190086701446}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 35e554fb9721bfc4ea00992154d1c400, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3200efbc102d65f41ac4a666c5f27447, type: 2}
+  m_Controller: {fileID: 9100000, guid: 989a6f3a089fcb9429b05b2cb637f17c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
