@@ -84,7 +84,7 @@ public class GW_Tube : MonoBehaviour
             GameObject instance = Instantiate(RingMesh, pos, Quaternion.identity) as GameObject;
 
             GW_Ring ringScript = instance.GetComponent<GW_Ring>();
-            ringScript.SpawnCircle();
+            ringScript.SpawnCircle(radius);
 
             ring_array.Add(instance);
             phase_array.Add(phase);

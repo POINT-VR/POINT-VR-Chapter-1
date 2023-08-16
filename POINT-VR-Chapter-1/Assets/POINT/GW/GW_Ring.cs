@@ -80,7 +80,7 @@ public class GW_Ring : MonoBehaviour
                 //We didn't assign a central z (Tube), use algorithm for propagating oscillations in longitudinal/x/y modes
                 else
                 {
-                    pos = gw_gravity.CalculateOscillations(sphere_pos_array[k], ring.transform.position, phase, ampIndex, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+                    pos = gw_gravity.CalculateOscillations(sphere_pos_array[k], ring.transform.position,true, phase, ampIndex, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
                 }
                 // pos.z = sphere_array[i].transform.position.z;
 

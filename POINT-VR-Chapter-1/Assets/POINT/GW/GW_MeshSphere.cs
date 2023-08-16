@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class GW_MeshSphere : MonoBehaviour
 {
@@ -36,14 +37,37 @@ public class GW_MeshSphere : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+        
+        
+    }
+
+    void FixedUpdate()
+    {
+        /**Thread t = new Thread(() => DisplaceVertices());
+        t.Start();
+        DisplaceVertices();
+        t.Join();**/
+
         for (var i = 0; i < vertices.Length; i++)
         {
             vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], center, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
         }
-
         // assign the local vertices array into the vertices array of the Mesh.
         sphereMesh.vertices = vertices;
+
         sphereMesh.RecalculateBounds();
         sphereMesh.RecalculateNormals();
+    }
+
+    void DisplaceVertices()
+    {
+        for (var i = 0; i < vertices.Length; i++)
+        {
+            vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], center, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+        }
+        // assign the local vertices array into the vertices array of the Mesh.
+        sphereMesh.vertices = vertices;
     }
 }

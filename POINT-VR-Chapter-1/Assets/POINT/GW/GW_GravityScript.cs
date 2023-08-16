@@ -45,7 +45,7 @@ public class GW_GravityScript : MonoBehaviour
      * 
      * ****/
 
-    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, float phase = 0.0f, float ampIndex = 0.0f,
+    public Vector3 CalculateOscillations(Vector3 pos, Vector3 center, bool flag, float phase = 0.0f, float ampIndex = 0.0f,
         float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
         float PercentOfLongitudinalMode = 0.0f,
         float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
@@ -62,6 +62,8 @@ public class GW_GravityScript : MonoBehaviour
             + PercentOfCrossMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
             + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
             + PercentOfXMode / 100.0f * Vector3.forward.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+        //Debug.Log(unitVector.x);
 
 
 
@@ -137,21 +139,21 @@ public class GW_GravityScript : MonoBehaviour
         output.x = pos.x
             + PercentOfPlusMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
             + PercentOfCrossMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
-            + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z)
-            + PercentOfXMode / 100.0f * unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
+            + PercentOfXMode / 100.0f * unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.y * 1000);
 
 
 
         output.y = pos.y
             - PercentOfPlusMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
             + PercentOfCrossMode / 100.0f * unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
-            + PercentOfBreathingMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z)
-            - PercentOfYMode / 100.0f * unitVector.z * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfBreathingMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.z * 1000)
+            - PercentOfYMode / 100.0f * unitVector.z * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + unitVector.x * 1000);
 
         output.z = pos.z
             + PercentOfLongitudinalMode / 100.0f * unitVector.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
-            + PercentOfXMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
-            - PercentOfYMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfXMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + unitVector.y * 1000)
+            - PercentOfYMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + unitVector.x * 1000);
 
         return output;
     }
