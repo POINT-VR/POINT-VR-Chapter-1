@@ -7072,6 +7072,7 @@ MonoBehaviour:
     type: 3}
   rotationReference: {fileID: -530380113134220495, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
+  hapticsEnabled: 0
 --- !u!81 &685732246657436346
 AudioListener:
   m_ObjectHideFlags: 0
@@ -9282,6 +9283,7 @@ MonoBehaviour:
     type: 3}
   rotationReference: {fileID: 8248158260566104461, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
+  hapticsEnabled: 1
 --- !u!137 &685732247080002611
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -11362,6 +11364,7 @@ MonoBehaviour:
     type: 3}
   rotationReference: {fileID: 5101698808175986029, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
+  hapticsEnabled: 1
 --- !u!137 &1993693436745722574
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

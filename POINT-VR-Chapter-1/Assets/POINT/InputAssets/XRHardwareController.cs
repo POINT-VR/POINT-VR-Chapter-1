@@ -41,6 +41,10 @@ public class XRHardwareController : MonoBehaviour
     // In the intended/most common use case, this should be equal to Vector3.zero
     private static Vector3 offset;
     /// <summary>
+    /// Public flag that toggles the controller haptics.
+    /// </summary>
+    public bool hapticsEnabled;
+    /// <summary>
     /// Assigns input actions and locates the connected hardware device associated with this instance
     /// </summary>
     private void OnEnable()
@@ -78,7 +82,9 @@ public class XRHardwareController : MonoBehaviour
         return;
 #endif
 #pragma warning disable CS0162 // Unreachable code detected
-        inputDevice.SendImpulse(0.15f, 0.05f);
+        if (hapticsEnabled) {
+            inputDevice.SendImpulse(0.15f, 0.05f);
+        }
 #pragma warning restore CS0162 // Unreachable code detected
     }
     /// <summary>
