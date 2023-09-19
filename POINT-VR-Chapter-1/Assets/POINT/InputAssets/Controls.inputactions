@@ -147,10 +147,10 @@
                 },
                 {
                     "name": "HighlightThumbstick",
-                    "type": "Button",
-                    "id": "49cda788-0635-4ded-b153-181c9fb22715",
-                    "expectedControlType": "Button",
-                    "processors": "",
+                    "type": "Value",
+                    "id": "62ee0e96-bd14-4eba-ad7e-27c491263b66",
+                    "expectedControlType": "Vector2",
+                    "processors": "StickDeadzone",
                     "interactions": ""
                 },
                 {
@@ -285,17 +285,6 @@
                 },
                 {
                     "name": "",
-                    "id": "2b32c8fc-7fac-4176-aca0-6c08cdcb5cb5",
-                    "path": "<XRController>{LeftHand}/thumbstickTouched",
-                    "interactions": "",
-                    "processors": "AxisDeadzone",
-                    "groups": "Generic XR Controller",
-                    "action": "HighlightThumbstick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "889e8fe7-d6e9-49a0-a236-42a33dd96fbe",
                     "path": "<XRController>{LeftHand}/primaryButton",
                     "interactions": "",
@@ -346,6 +335,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "HighlightGrip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48d75b71-7cd9-4b96-b9fe-8c9fa8e8719d",
+                    "path": "<XRController>{LeftHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "HighlightThumbstick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -413,10 +413,10 @@
                 },
                 {
                     "name": "HighlightThumbstick",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "d34029bc-7170-4550-9206-f3b9285c28aa",
-                    "expectedControlType": "Button",
-                    "processors": "",
+                    "expectedControlType": "Vector2",
+                    "processors": "StickDeadzone",
                     "interactions": ""
                 },
                 {
@@ -596,9 +596,9 @@
                 {
                     "name": "",
                     "id": "b588aa2f-bc49-454e-9e20-fffa4febca81",
-                    "path": "<XRController>{RightHand}/thumbstickTouched",
+                    "path": "<XRController>{RightHand}/thumbstick",
                     "interactions": "",
-                    "processors": "AxisDeadzone",
+                    "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "HighlightThumbstick",
                     "isComposite": false,
