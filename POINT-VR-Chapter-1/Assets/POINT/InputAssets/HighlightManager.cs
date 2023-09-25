@@ -37,8 +37,6 @@ public class HighlightManager : MonoBehaviour
         startBtnReference.action.Enable();
         triggerReference.action.Enable();
         gripReference.action.Enable();
-        thumbstickReference.action.started += (ctx) => { thumbstick.SetActive(true); } ;
-        thumbstickReference.action.canceled += (ctx) => { thumbstick.SetActive(false); };
         secondaryBtnReference.action.started += (ctx) => { secondaryBtn.SetActive(true); };
         secondaryBtnReference.action.canceled += (ctx) => { secondaryBtn.SetActive(false); };
         primaryBtnReference.action.started += (ctx) => { primaryBtn.SetActive(true); };
@@ -58,8 +56,6 @@ public class HighlightManager : MonoBehaviour
         startBtnReference.action.Disable();
         triggerReference.action.Disable();
         gripReference.action.Disable();
-        thumbstickReference.action.started -= (ctx) => { thumbstick.SetActive(true); };
-        thumbstickReference.action.canceled -= (ctx) => { thumbstick.SetActive(false); };
         secondaryBtnReference.action.started -= (ctx) => { secondaryBtn.SetActive(true); };
         secondaryBtnReference.action.canceled -= (ctx) => { secondaryBtn.SetActive(false); };
         primaryBtnReference.action.started -= (ctx) => { primaryBtn.SetActive(true); };
@@ -81,6 +77,11 @@ public class HighlightManager : MonoBehaviour
         {
             cameraTransform = Camera.current.transform;
         }
+
+        // Note: thumbstick input has to be read manually due to thumbstickTouched and thumbstickClicked
+        // in the Input Manager either ignoring deadzones or constantly being triggered
+        if (thumbstickReference.action.ReadValue<Vector2>().magnitude > 0.0f) thumbstick.SetActive(true);
+        else thumbstick.SetActive(false);
     }
 
     private void OnApplicationFocus(bool hasFocus)

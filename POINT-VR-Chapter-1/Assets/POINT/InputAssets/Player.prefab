@@ -10922,7 +10922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c3359bd4a3720747a0d5cb64cf0264c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thumbstickReference: {fileID: 571498917463448294, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+  thumbstickReference: {fileID: 6802790661191367748, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
   secondaryBtnReference: {fileID: -5589238569535809175, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
