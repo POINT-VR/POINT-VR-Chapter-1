@@ -1455,8 +1455,8 @@ MonoBehaviour:
   menuSprite: {fileID: 21300000, guid: 5bce63427ab351e4e9b962dfbe84291f, type: 3}
   teleportationText: Try pointing at the floor and teleporting to the rings in the
     distance!
-  turnText: In addition to turning your head, you can use the joysticks to rotate
-    your view.
+  turnText: In addition to turning your head, you can rotate your view by using the
+    joysticks. Try it now.
   grabText: This sphere is a grabbable object, try picking it up.
   pushPullText: You can also pull and push objects when grabbing them.
   overText: 'The tutorial is now over, please tell the instructor. '
@@ -1660,7 +1660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1337579473
 MeshCollider:
   m_ObjectHideFlags: 0
