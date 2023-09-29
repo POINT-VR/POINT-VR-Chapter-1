@@ -8,10 +8,16 @@ public class ObjectiveManager : MonoBehaviour
 {
     [SerializeField]
     private DynamicAxis dynamicAxis;
+    [SerializeField]
+    private PlaneScript plane;
+    [SerializeField]
+    private EndPoint endPoint;
+    [SerializeField]
+    private GameObject massObject;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ObjectiveOne());
+        StartCoroutine(RunScene());
     }
 
     // Update is called once per frame
@@ -20,9 +26,18 @@ public class ObjectiveManager : MonoBehaviour
 
     }
 
-    IEnumerator Intro()
+    IEnumerator RunScene()
     {
-        //incomplete
+        yield return Setup();
+        yield return ObjectiveOne();
+        yield break;
+    }
+    IEnumerator Setup()
+    {
+        dynamicAxis.HideAxes();
+        plane.GetComponent<MeshRenderer>().enabled = false;
+        massObject.SetActive(false);
+        endPoint.Deactivate();
         yield break;
     }
     IEnumerator ObjectiveOne()
@@ -32,7 +47,7 @@ public class ObjectiveManager : MonoBehaviour
         dynamicAxis.ShowAxes(1);
         yield return new WaitForSeconds(1);
         Debug.Log("left and right (that’s the second dimension)");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         dynamicAxis.ShowAxes(2);
         yield return new WaitForSeconds(1);
         Debug.Log("and forward and backward (that’s the third dimension).");
@@ -58,4 +73,5 @@ public class ObjectiveManager : MonoBehaviour
     {
         yield break;
     }
+
 }

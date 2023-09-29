@@ -30,11 +30,13 @@ public class EndPoint : MonoBehaviour
     public void Activate()
     {
         isActive = true;
+        GetComponent<MeshRenderer>().enabled = true;
     }
 
     public void Deactivate()
     {
         isActive = false;
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void setSnapDistance(float distance)

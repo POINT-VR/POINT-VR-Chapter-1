@@ -7301,8 +7301,8 @@ MonoBehaviour:
     type: 3}
   resetRefrence: {fileID: -2638007419058092452, guid: da2b439d1a2de5c46a4f428f8cf4fe19,
     type: 3}
-  turnIncrement: 2
-  motionIncrement: 0.3
+  turnIncrement: 0.5
+  motionIncrement: 0.1
 --- !u!114 &8381100566543506492
 MonoBehaviour:
   m_ObjectHideFlags: 0

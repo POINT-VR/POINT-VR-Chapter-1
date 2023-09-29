@@ -76,11 +76,11 @@ public class CoordinateDisplay : MonoBehaviour
         Vector3 outputCoordinates = transform.position - (Vector3)origin; //calculates position relative to origin
         if (showTime)
         {
-            coordinateText.text = $"({outputCoordinates.x}, {outputCoordinates.y}, {outputCoordinates.z}, {Math.Floor(Time.time - tNaught)})"; //calculates time relative to origin
+            coordinateText.text = $"({Math.Floor(10*outputCoordinates.x)/10}, {Math.Floor(10 * outputCoordinates.y) / 10}, {Math.Floor(10 * outputCoordinates.z) / 10}, {Math.Floor(Time.time - tNaught)})"; //calculates time relative to origin
         }
         else
         {
-            coordinateText.text = $"({outputCoordinates.x}, {outputCoordinates.y}, {outputCoordinates.z})";
+            coordinateText.text = $"({Math.Floor(10 * outputCoordinates.x) / 10}, {Math.Floor(10 * outputCoordinates.y) / 10}, {Math.Floor(10 * outputCoordinates.z) / 10})";
         }
     }
 
