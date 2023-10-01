@@ -13,7 +13,9 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField]
     private EndPoint endPoint;
     [SerializeField]
-    private GameObject massObject;
+    private CoordinateDisplay massObject;
+    [SerializeField]
+    private FloatingObjectives floatingObjectives;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,18 +32,20 @@ public class ObjectiveManager : MonoBehaviour
     {
         yield return Setup();
         yield return ObjectiveOne();
+        yield return ObjectiveTwo();
         yield break;
     }
     IEnumerator Setup()
     {
         dynamicAxis.HideAxes();
         plane.GetComponent<MeshRenderer>().enabled = false;
-        massObject.SetActive(false);
+        massObject.transform.parent.gameObject.SetActive(false);
         endPoint.Deactivate();
         yield break;
     }
     IEnumerator ObjectiveOne()
     {
+        floatingObjectives.NewObjective("Introduction to the 3D coordinate system");
         Debug.Log("We live in a 3 - dimensional space. Every day we interact with this 3D space. For example we can move up and down(that’s the first dimension)");
         yield return new WaitForSeconds(2);
         dynamicAxis.ShowAxes(1);
@@ -57,11 +61,21 @@ public class ObjectiveManager : MonoBehaviour
         Debug.Log("To help ourselves navigate this space, we use a mathematical tool called a coordinate system. It does not matter how the coordinate system is oriented. In front of you is one potential coordinate system, where the different colors represent different directions. Where the three lines meet is called the origin of the system. We can describe the location of any object in space relative to the origin with just 3 numbers.");
         yield return new WaitForSeconds(2);
         StartCoroutine(dynamicAxis.ExtendAxes(1, 35, 1));
+        yield return new WaitForSeconds(5);
         yield break;
     }
 
     IEnumerator ObjectiveTwo()
     {
+        floatingObjectives.NewObjective("Move an object in 3D space");
+        massObject.transform.parent.gameObject.transform.position = new Vector3(-1, 0, 1);
+        massObject.transform.parent.gameObject.SetActive(true);
+        massObject.GetComponent<CoordinateDisplay>().HideTime();
+        Debug.Log("Look! A mass just appeared in space.");
+        endPoint.Activate();
+        endPoint.setMass(massObject.transform.parent.gameObject);
+        endPoint.transform.position = new Vector3(1, 3, 2);
+        endPoint.setSnapDistance(2);
         yield break;
     }
 

@@ -21,7 +21,7 @@ public class EndPoint : MonoBehaviour
 
     private void SnapPosition()
     {
-        if ((MassSphere.transform.position - transform.position).magnitude < 1)
+        if ((MassSphere.transform.position - transform.position).magnitude < snapDistance)
         {
             MassSphere.transform.position = transform.position;
         }
