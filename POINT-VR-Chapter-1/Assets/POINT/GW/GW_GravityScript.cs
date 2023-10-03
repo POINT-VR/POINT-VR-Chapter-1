@@ -99,17 +99,17 @@ public class GW_GravityScript : MonoBehaviour
         Vector3 output;
 
         output.x = pos.x
-            + PercentOfPlusMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
-            + PercentOfCrossMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
-            + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfPlusMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
+            + PercentOfCrossMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad)
+            + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
             + PercentOfXMode / 100.0f *  relativeZ * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
 
 
 
         output.y = pos.y
-            - PercentOfPlusMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
-            + PercentOfCrossMode / 100.0f * unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
-            + PercentOfBreathingMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            - PercentOfPlusMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
+            + PercentOfCrossMode / 100.0f * unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad)
+            + PercentOfBreathingMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
             - PercentOfYMode / 100.0f *  relativeZ * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
 
         output.z = pos.z
