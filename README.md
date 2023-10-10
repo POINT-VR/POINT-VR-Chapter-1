@@ -1,5 +1,5 @@
 # POINT-VR
-Physics Outreach at Illinois through New Technologies: Developing virtual reality simulations to teach physics.
+Physics Outreach and Instruction through New Technologies: Developing virtual reality simulations to teach physics.
 
 ## Chapter 1
 ### Goals
@@ -15,9 +15,19 @@ Implementations: Axes objects appearing at the player origin, clock object illus
 #### Scene 2
 Learning Objective: Understand gravity as the curvature of this fabric. “Matter tells spacetime how to curve…” <br />
 Implementations: Objects with mass interacting with the 3D grid (deforming it). Ranking objects of different masses.
+
+<p align="center">
+  <img src="files_for_README/ASEE-demo-grid.gif" alt="Mass interacting with Space" />
+  <img src="files_for_README/ASEE-demo-clocks.gif" alt="Mass interacting with Time" />
+</p>
+
 #### Scene 3
 Learning Objective: “...spacetime tells matter how to move.” <br />
 Implementations: Get an earth like object to orbit a sun like object over a 3D grid
+
+<p align="center">
+  <img src="files_for_README/ASEE-demo-orbits.gif" alt="Mass interacting with other Mass" />
+</p>
 
 ## License
 The MIT license grant is only for items developed by POINT which exist in the POINT-VR-Chapter-1/Assets/POINT and POINT-VR-Chapter-1/Builds folder.
