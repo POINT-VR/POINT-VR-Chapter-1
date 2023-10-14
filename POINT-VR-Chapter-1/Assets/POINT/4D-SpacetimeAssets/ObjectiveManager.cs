@@ -11,7 +11,7 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField]
     private PlaneScript plane;
     [SerializeField]
-    private EndPoint endPoint;
+    private GameObject endPoint;
     [SerializeField]
     private CoordinateDisplay massObject;
     [SerializeField]
@@ -40,7 +40,8 @@ public class ObjectiveManager : MonoBehaviour
         dynamicAxis.HideAxes();
         plane.GetComponent<MeshRenderer>().enabled = false;
         massObject.transform.parent.gameObject.SetActive(false);
-        endPoint.Deactivate();
+        endPoint.GetComponentInChildren<EndPoint>().Deactivate();
+        endPoint.SetActive(false);
         yield break;
     }
     IEnumerator ObjectiveOne()
@@ -72,10 +73,20 @@ public class ObjectiveManager : MonoBehaviour
         massObject.transform.parent.gameObject.SetActive(true);
         massObject.GetComponent<CoordinateDisplay>().HideTime();
         Debug.Log("Look! A mass just appeared in space.");
-        endPoint.Activate();
-        endPoint.setMass(massObject.transform.parent.gameObject);
-        endPoint.transform.position = new Vector3(1, 3, 2);
-        endPoint.setSnapDistance(2);
+        yield return new WaitForSeconds(2);
+        Debug.Log("try to drag it to the grey dot.");
+        endPoint.GetComponentInChildren<EndPoint>().Activate();
+        endPoint.GetComponentInChildren<EndPoint>().SetMass(massObject.gameObject);
+        endPoint.GetComponentInChildren<EndPoint>().transform.position = new Vector3(1, 2, 2);
+        endPoint.GetComponentInChildren<EndPoint>().SetTriggerDistance(0.20f);
+        endPoint.SetActive(true);
+        endPoint.GetComponentInChildren<CoordinateDisplay>().HideTime();
+        while (!endPoint.GetComponentInChildren<EndPoint>().WasTriggered())
+        {
+            yield return null;
+        }
+        endPoint.SetActive(false);
+        Debug.Log("Great Job, let's do one more.");
         yield break;
     }
 

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EventSystems;
 using UnityEngine;
 
 public class EndPoint : MonoBehaviour
 {
     private GameObject MassSphere;
     private bool isActive = true;
-    private float snapDistance;
+    private bool triggered = false;
+    private float triggerDistance;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -15,21 +17,23 @@ public class EndPoint : MonoBehaviour
     {
         if (isActive)
         {
-            SnapPosition();
+            CheckTrigger();
         }
     }
 
-    private void SnapPosition()
+    private void CheckTrigger()
     {
-        if ((MassSphere.transform.position - transform.position).magnitude < snapDistance)
+        if ((MassSphere.transform.position - transform.position).magnitude < triggerDistance)
         {
-            MassSphere.transform.position = transform.position;
+            triggered = true;
+            Deactivate();
         }
     }
 
     public void Activate()
     {
         isActive = true;
+        triggered = false;
         GetComponent<MeshRenderer>().enabled = true;
     }
 
@@ -39,12 +43,17 @@ public class EndPoint : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
     }
 
-    public void setSnapDistance(float distance)
+    public void SetTriggerDistance(float distance)
     {
-        snapDistance = distance;
+        triggerDistance = distance;
     }
-    public void setMass(GameObject obj)
+    public void SetMass(GameObject obj)
     {
         MassSphere = obj;
+    }
+
+    public bool WasTriggered()
+    {
+        return triggered;
     }
 }
