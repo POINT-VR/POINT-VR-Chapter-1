@@ -16,13 +16,11 @@ public class ObjectiveManager : MonoBehaviour
     private CoordinateDisplay massObject;
     [SerializeField]
     private FloatingObjectives floatingObjectives;
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(RunScene());
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -35,18 +33,24 @@ public class ObjectiveManager : MonoBehaviour
         yield return ObjectiveTwo();
         yield break;
     }
-    IEnumerator Setup()
+    IEnumerator Setup() //Hides all the objects we don't want
     {
-        dynamicAxis.HideAxes();
-        plane.GetComponent<MeshRenderer>().enabled = false;
-        massObject.transform.parent.gameObject.SetActive(false);
-        endPoint.GetComponentInChildren<EndPoint>().Deactivate();
-        endPoint.SetActive(false);
+        dynamicAxis.HideAxes(); //Hides axes
+
+        plane.GetComponent<MeshRenderer>().enabled = false; //Hides plane
+
+        massObject.transform.parent.gameObject.SetActive(false); //Hides massobject + coordinate displayer
+
+        endPoint.GetComponentInChildren<EndPoint>().Deactivate(); //Hides endpoint
+
+        endPoint.SetActive(false); //hides endpoint coordinate displayer
+
         yield break;
     }
     IEnumerator ObjectiveOne()
     {
         floatingObjectives.NewObjective("Introduction to the 3D coordinate system");
+
         Debug.Log("We live in a 3 - dimensional space. Every day we interact with this 3D space. For example we can move up and down(that’s the first dimension)");
         yield return new WaitForSeconds(2);
         dynamicAxis.ShowAxes(1);
@@ -69,23 +73,27 @@ public class ObjectiveManager : MonoBehaviour
     IEnumerator ObjectiveTwo()
     {
         floatingObjectives.NewObjective("Move an object in 3D space");
+
         massObject.transform.parent.gameObject.transform.position = new Vector3(-1, 0, 1);
-        massObject.transform.parent.gameObject.SetActive(true);
+        massObject.transform.parent.gameObject.SetActive(true); //Shows mass object and coordinate displayer
         massObject.GetComponent<CoordinateDisplay>().HideTime();
+
         Debug.Log("Look! A mass just appeared in space.");
         yield return new WaitForSeconds(2);
         Debug.Log("try to drag it to the grey dot.");
-        endPoint.GetComponentInChildren<EndPoint>().Activate();
+
+        endPoint.GetComponentInChildren<EndPoint>().Activate(); //Shows endpoint
         endPoint.GetComponentInChildren<EndPoint>().SetMass(massObject.gameObject);
         endPoint.GetComponentInChildren<EndPoint>().transform.position = new Vector3(1, 2, 2);
         endPoint.GetComponentInChildren<EndPoint>().SetTriggerDistance(0.20f);
-        endPoint.SetActive(true);
+        endPoint.SetActive(true); //shows coordinate displayer
         endPoint.GetComponentInChildren<CoordinateDisplay>().HideTime();
+
         while (!endPoint.GetComponentInChildren<EndPoint>().WasTriggered())
         {
             yield return null;
         }
-        endPoint.SetActive(false);
+        endPoint.SetActive(false); //hides endpoint coordinates
         Debug.Log("Great Job, let's do one more.");
         yield break;
     }

@@ -4,24 +4,21 @@ using System.Collections.Generic;
 using UnityEditor.EventSystems;
 using UnityEngine;
 
-public class EndPoint : MonoBehaviour
+public class EndPoint : MonoBehaviour //This script is built so that an endpoint can be reused and be fully controlled by another script
 {
     private GameObject MassSphere;
     private bool isActive = true;
     private bool triggered = false;
     private float triggerDistance;
-    // Start is called before the first frame update
-
-    // Update is called once per frame
     void Update()
     {
-        if (isActive)
+        if (isActive) //Checks trigger each frame
         {
             CheckTrigger();
         }
     }
 
-    private void CheckTrigger()
+    private void CheckTrigger() //Checks if the mass sphere is within the is within the snap distance, then deactivates the endpoint
     {
         if ((MassSphere.transform.position - transform.position).magnitude < triggerDistance)
         {
@@ -47,12 +44,12 @@ public class EndPoint : MonoBehaviour
     {
         triggerDistance = distance;
     }
-    public void SetMass(GameObject obj)
+    public void SetMass(GameObject obj) //Sets the mass object
     {
         MassSphere = obj;
     }
 
-    public bool WasTriggered()
+    public bool WasTriggered() //Allows other scripts to tell if the endpoint was triggered
     {
         return triggered;
     }
