@@ -91,7 +91,7 @@ public class ObjectiveManager : MonoBehaviour
 
         while (!endPoint.GetComponentInChildren<EndPoint>().WasTriggered())
         {
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
         endPoint.SetActive(false); //hides endpoint coordinates
         Debug.Log("Great Job, let's do one more.");
