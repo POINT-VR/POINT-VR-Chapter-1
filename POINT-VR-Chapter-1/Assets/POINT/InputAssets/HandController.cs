@@ -378,7 +378,6 @@ public class HandController : MonoBehaviour
         if (obj.action.ReadValue<Vector2>().y != 0 && Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected
         {
             ScrollRect scrollRect = hit.collider.gameObject.GetComponentInParent<ScrollRect>();
-            Debug.Log(hit.collider.gameObject);
             if (scrollRect != null) // collider is scrollable
             {
                 Scrollbar scrollbarVertical = scrollRect.verticalScrollbar;
