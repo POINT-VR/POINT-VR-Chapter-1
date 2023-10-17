@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnRefrence: {fileID: -8967508106800649956, guid: da2b439d1a2de5c46a4f428f8cf4fe19,
     type: 3}
-  turnIncrement: 0.15
+  turnIncrement: 0.2
 --- !u!1 &624716905290467663
 GameObject:
   m_ObjectHideFlags: 0
