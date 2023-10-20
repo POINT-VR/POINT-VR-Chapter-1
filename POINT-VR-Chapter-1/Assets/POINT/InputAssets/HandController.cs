@@ -135,11 +135,11 @@ public class HandController : MonoBehaviour
     {
         if (pulling && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude > squaredMinPullDistance) // object being pulled: pull
         {
-            grabbingTransform.position += pullSpeed * (transform.position - grabbingTransform.position).normalized;
+            grabbingTransform.position -= pullSpeed * transform.forward;
         }
         else if (pushing && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude < squaredMaxPushDistance) // object being pushed: push
         {
-            grabbingTransform.position -= pullSpeed * (transform.position - grabbingTransform.position).normalized;
+            grabbingTransform.position += pullSpeed * transform.forward;
         }
         if (grabbingTransform != null) // Holding an object
         {
