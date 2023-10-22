@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
-  m_isRichText: 0
+  m_isRichText: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1486,6 +1486,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5216075590999562863, guid: ef41a2b49eb0dc44db3ba40ea9d87074,
+        type: 3}
+      propertyPath: m_isRichText
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5216075592234198012, guid: ef41a2b49eb0dc44db3ba40ea9d87074,
         type: 3}
       propertyPath: m_Name
