@@ -75,4 +75,4 @@ crashlytics-build.properties
 /[Pp]rojectSettings/EditorBuildSettings.asset
 /[Pp]ackages/packages-lock.json
 
-EmulatorComponents/**
+**/EmulatorComponents/*
