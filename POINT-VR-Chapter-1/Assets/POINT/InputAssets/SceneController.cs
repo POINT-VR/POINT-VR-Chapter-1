@@ -42,6 +42,14 @@ public class SceneController : MonoBehaviour
     /// The hardware controllers for the right hand. Used to remember whether haptics are enabled.
     /// </summary>
     [SerializeField] XRHardwareController rightHand;
+    /// <summary>
+    /// Setter called by the UI components that alters whether haptics is enabled or disabled
+    /// </summary>
+    public void setHaptics(bool HapticsChoice)
+    {
+        leftHand.hapticsEnabled = HapticsChoice;
+        rightHand.hapticsEnabled = HapticsChoice;
+    }
     // The actual floor visiblilty is tracked by the UI Manager, but this variable is for inter-scene communication relating to floor visibility
     private bool floorVisible;
     /// <summary>
