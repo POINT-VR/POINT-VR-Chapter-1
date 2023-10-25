@@ -194,7 +194,7 @@ public class TutorialManager : MonoBehaviour
     {
         pushed = false;
         pulled = false;
-        // yield return new WaitUntil(() => pushed && pulled);
+        yield return new WaitUntil(() => pushed && pulled);
 
         // Activate Scene Select
         // controlsImage.sprite = overSprite;
