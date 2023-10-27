@@ -21,6 +21,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] NarrationManager narrationManager = null;
     [Header("Floor Toggle Parent")]
     [SerializeField] GameObject floorToggles;
+    [Header("Current Objective")]
+    [SerializeField] TMP_Text currentObjectiveTMP;
+
+    public void updateCurrentObjective(string newObjective)
+    {
+        currentObjectiveTMP.text = newObjective;
+    }
+
     public void AddToFunctionalAudio (AudioSource audioSource)
     {
         functionalAudio.Add(audioSource);

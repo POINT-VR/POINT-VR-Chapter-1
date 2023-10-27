@@ -3850,6 +3850,7 @@ MonoBehaviour:
   - {fileID: 1016775821658908692}
   narrationManager: {fileID: 685732246913176616}
   floorToggles: {fileID: 685732246020707043}
+  currentObjectiveTMP: {fileID: 685732246870028102}
 --- !u!1 &685732245864587167
 GameObject:
   m_ObjectHideFlags: 0
