@@ -39,7 +39,6 @@ public class CoordinateDisplay : MonoBehaviour
     [SerializeField]
     Vector3 origin;
 
-    // Start is called before the first frame update
     void Start()
     {
         cameraObject = Camera.allCameras[0]; //sets player camera so that position can be calculated correctly
@@ -47,7 +46,6 @@ public class CoordinateDisplay : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!showText)
@@ -59,15 +57,16 @@ public class CoordinateDisplay : MonoBehaviour
         updateText();
     }
 
+
     //private update functions
     private void updatePosition()
     {
         Transform dummyCamera = new GameObject().transform; //uses a dummy transform to position the text 'above' the mass from the point of view of the camera
         dummyCamera.position = cameraObject.transform.position;
         dummyCamera.LookAt(transform.position);
-        coordinateText.transform.position = transform.position + dummyCamera.up/2; 
+        coordinateText.transform.position = transform.position + dummyCamera.up / 2;
 
-        coordinateText.transform.LookAt(2* coordinateText.transform.position - dummyCamera.transform.position); //makes the text angle to face the camera.
+        coordinateText.transform.LookAt(2 * coordinateText.transform.position - dummyCamera.transform.position); //makes the text angle to face the camera.
         Destroy(dummyCamera.gameObject);
     }
 
@@ -84,6 +83,7 @@ public class CoordinateDisplay : MonoBehaviour
         }
     }
 
+
     //Public member functions to be accessed by other scripts
     public void SetTime(float t) //sets the time coordinate to any value
     {
@@ -93,6 +93,7 @@ public class CoordinateDisplay : MonoBehaviour
     {
         origin = position;
     }
+
     public void ShowTime()
     {
         showTime = true;
@@ -109,4 +110,13 @@ public class CoordinateDisplay : MonoBehaviour
     {
         showText = false;
     }
+    public void ShowMass()
+    {
+        transform.parent.gameObject.SetActive(false);
+    }
+    public void HideMass()
+    {
+        transform.parent.gameObject.SetActive(true);
+    }
+    
 }

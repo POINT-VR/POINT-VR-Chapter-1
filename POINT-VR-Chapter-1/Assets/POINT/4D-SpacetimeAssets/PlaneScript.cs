@@ -56,4 +56,14 @@ public class PlaneScript : MonoBehaviour
         }
         mesh.SetIndices(lines,MeshTopology.Lines,0);
     }
+
+    public void HidePlane()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void ShowPlane()
+    {
+        GetComponent<MeshRenderer>().enabled = true;
+    }
 }

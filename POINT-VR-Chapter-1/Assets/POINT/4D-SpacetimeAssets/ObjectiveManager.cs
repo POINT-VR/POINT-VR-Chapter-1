@@ -11,7 +11,7 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField]
     private PlaneScript plane;
     [SerializeField]
-    private GameObject endPoint;
+    private EndPoint endPoint;
     [SerializeField]
     private CoordinateDisplay massObject;
     [SerializeField]
@@ -37,13 +37,11 @@ public class ObjectiveManager : MonoBehaviour
     {
         dynamicAxis.HideAxes(); //Hides axes
 
-        plane.GetComponent<MeshRenderer>().enabled = false; //Hides plane
+        plane.HidePlane(); //Hides plane
 
-        massObject.transform.parent.gameObject.SetActive(false); //Hides massobject + coordinate displayer
+        massObject.HideMass(); //Hides mass
 
-        endPoint.GetComponentInChildren<EndPoint>().Deactivate(); //Hides endpoint
-
-        endPoint.SetActive(false); //hides endpoint coordinate displayer
+        endPoint.Deactivate(); //Hides endpoint
 
         yield break;
     }
@@ -65,8 +63,11 @@ public class ObjectiveManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         Debug.Log("To help ourselves navigate this space, we use a mathematical tool called a coordinate system. It does not matter how the coordinate system is oriented. In front of you is one potential coordinate system, where the different colors represent different directions. Where the three lines meet is called the origin of the system. We can describe the location of any object in space relative to the origin with just 3 numbers.");
         yield return new WaitForSeconds(2);
+
         StartCoroutine(dynamicAxis.ExtendAxes(1, 35, 1));
+
         yield return new WaitForSeconds(5);
+
         yield break;
     }
 
@@ -75,25 +76,24 @@ public class ObjectiveManager : MonoBehaviour
         floatingObjectives.NewObjective("Move an object in 3D space");
 
         massObject.transform.parent.gameObject.transform.position = new Vector3(-1, 0, 1);
-        massObject.transform.parent.gameObject.SetActive(true); //Shows mass object and coordinate displayer
-        massObject.GetComponent<CoordinateDisplay>().HideTime();
+        massObject.ShowMass(); //Shows mass object and coordinate displayer
+        massObject.ShowText();
+        massObject.HideTime();
 
         Debug.Log("Look! A mass just appeared in space.");
         yield return new WaitForSeconds(2);
         Debug.Log("try to drag it to the grey dot.");
 
-        endPoint.GetComponentInChildren<EndPoint>().Activate(); //Shows endpoint
-        endPoint.GetComponentInChildren<EndPoint>().SetMass(massObject.gameObject);
-        endPoint.GetComponentInChildren<EndPoint>().transform.position = new Vector3(1, 2, 2);
-        endPoint.GetComponentInChildren<EndPoint>().SetTriggerDistance(0.20f);
-        endPoint.SetActive(true); //shows coordinate displayer
-        endPoint.GetComponentInChildren<CoordinateDisplay>().HideTime();
+        endPoint.Activate(); //Shows endpoint
+        endPoint.SetMass(massObject.gameObject);
+        endPoint.transform.position = new Vector3(1, 2, 2);
+        endPoint.SetTriggerDistance(0.20f);
 
-        while (!endPoint.GetComponentInChildren<EndPoint>().WasTriggered())
+        while (endPoint.WasTriggered())
         {
             yield return new WaitForEndOfFrame();
         }
-        endPoint.SetActive(false); //hides endpoint coordinates
+
         Debug.Log("Great Job, let's do one more.");
         yield break;
     }

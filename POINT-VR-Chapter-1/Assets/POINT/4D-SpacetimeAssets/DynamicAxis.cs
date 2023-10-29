@@ -59,7 +59,6 @@ public class DynamicAxis : MonoBehaviour
     /// <summary>
     /// ExtendAxes Coroutine will Lerp between two axis lengths at a specified speed. 
     /// </summary>
-    /// <param name="doubleSided"> Determines whether the axes extend in both directions or only one. </param>
     /// <param name="axisNumber"> Specifies which axis is acted on. By default all three are enabled. </param>
     /// <returns></returns>
     public IEnumerator ExtendAxes(float startLength, float endLength, float speed, int axisNumber = -1)
