@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// An object for the 4D spacetime introduction that spawns a 3D axis and with public member functions to show/hide and fluidly extend each axis individually.
+/// An object that spawns a 3D axis and with public member functions to show/hide and fluidly extend each axis individually.
 /// </summary>
 public class DynamicAxis : MonoBehaviour
 {
@@ -18,6 +18,9 @@ public class DynamicAxis : MonoBehaviour
     private MeshRenderer yAxisRenderer;
     private MeshRenderer zAxisRenderer;
 
+    /// <summary>
+    /// Bool determines whether or not the axis lines emanate from the origin in one or two directions
+    /// </summary>
     private bool doubleSided = true; 
     void Start()
     {
@@ -55,6 +58,47 @@ public class DynamicAxis : MonoBehaviour
         //Hides axis by default
         ShowAxes();
     }
+    private void SetAxesLength(float length, int axisNumber = -1) //set to all axes by default
+    {
+        if (axisNumber == -1) //all axes
+        {
+            xAxis.transform.localScale = new Vector3(xAxis.transform.localScale.x, length, xAxis.transform.localScale.z);
+            yAxis.transform.localScale = new Vector3(yAxis.transform.localScale.x, length, yAxis.transform.localScale.z);
+            zAxis.transform.localScale = new Vector3(zAxis.transform.localScale.x, length, zAxis.transform.localScale.z);
+            if (!doubleSided)
+            {
+                xAxis.transform.localPosition = length * xAxis.transform.up;
+                yAxis.transform.localPosition = length * yAxis.transform.up;
+                zAxis.transform.localPosition = length * zAxis.transform.up;
+            }
+        }
+        else if (axisNumber == 0) //x axis
+        {
+            xAxis.transform.localScale = new Vector3(xAxis.transform.localScale.x, length, xAxis.transform.localScale.z);
+            if (!doubleSided)
+            {
+                xAxis.transform.localPosition = length * xAxis.transform.up;
+            }
+        }
+        else if (axisNumber == 1) //y axis
+        {
+            yAxis.transform.localScale = new Vector3(yAxis.transform.localScale.x, length, yAxis.transform.localScale.z);
+            if (!doubleSided)
+            {
+                yAxis.transform.localPosition = length * yAxis.transform.up;
+            }
+        }
+        else if (axisNumber == 2) //z axis
+        {
+            zAxis.transform.localScale = new Vector3(zAxis.transform.localScale.x, length, zAxis.transform.localScale.z);
+            if (!doubleSided)
+            {
+                zAxis.transform.localPosition = length * zAxis.transform.up;
+            }
+        }
+    }
+
+    //Public member functions
 
     /// <summary>
     /// ExtendAxes Coroutine will Lerp between two axis lengths at a specified speed. 
@@ -129,45 +173,6 @@ public class DynamicAxis : MonoBehaviour
         SetAxesLength(xAxis.transform.localScale.y, 0);
         SetAxesLength(yAxis.transform.localScale.y, 0);
         SetAxesLength(zAxis.transform.localScale.y, 0);
-    }
-    private void SetAxesLength(float length, int axisNumber = -1) //set to all axes by default
-    {
-        if (axisNumber == -1) //all axes
-        {
-            xAxis.transform.localScale = new Vector3(xAxis.transform.localScale.x, length, xAxis.transform.localScale.z);
-            yAxis.transform.localScale = new Vector3(yAxis.transform.localScale.x, length, yAxis.transform.localScale.z);
-            zAxis.transform.localScale = new Vector3(zAxis.transform.localScale.x, length, zAxis.transform.localScale.z);
-            if (!doubleSided)
-            {
-                xAxis.transform.localPosition = length * xAxis.transform.up;
-                yAxis.transform.localPosition = length * yAxis.transform.up;
-                zAxis.transform.localPosition = length * zAxis.transform.up;
-            }
-        }
-        else if (axisNumber == 0) //x axis
-        {
-            xAxis.transform.localScale = new Vector3(xAxis.transform.localScale.x, length, xAxis.transform.localScale.z);
-            if (!doubleSided)
-            {
-                xAxis.transform.localPosition = length * xAxis.transform.up;
-            }
-        }
-        else if (axisNumber == 1) //y axis
-        {
-            yAxis.transform.localScale = new Vector3(yAxis.transform.localScale.x, length, yAxis.transform.localScale.z);
-            if (!doubleSided)
-            {
-                yAxis.transform.localPosition = length * yAxis.transform.up;
-            }
-        }
-        else if (axisNumber == 2) //z axis
-        {
-            zAxis.transform.localScale = new Vector3(zAxis.transform.localScale.x, length, zAxis.transform.localScale.z);
-            if (!doubleSided)
-            {
-                zAxis.transform.localPosition = length * zAxis.transform.up;
-            }
-        }
     }
 }
 

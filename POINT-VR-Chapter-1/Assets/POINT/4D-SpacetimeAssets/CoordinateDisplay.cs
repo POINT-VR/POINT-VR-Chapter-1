@@ -112,11 +112,11 @@ public class CoordinateDisplay : MonoBehaviour
     }
     public void ShowMass()
     {
-        transform.parent.gameObject.SetActive(false);
+        transform.gameObject.SetActive(true);
     }
     public void HideMass()
     {
-        transform.parent.gameObject.SetActive(true);
+        transform.gameObject.SetActive(false);
     }
     
 }

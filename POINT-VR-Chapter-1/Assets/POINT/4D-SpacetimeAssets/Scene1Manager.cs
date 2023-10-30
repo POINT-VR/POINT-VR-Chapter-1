@@ -4,7 +4,7 @@ using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
-public class ObjectiveManager : MonoBehaviour
+public class Scene1Manager : MonoBehaviour
 {
     [SerializeField]
     private DynamicAxis dynamicAxis;
@@ -35,13 +35,13 @@ public class ObjectiveManager : MonoBehaviour
     }
     IEnumerator Setup() //Hides all the objects we don't want
     {
-        dynamicAxis.HideAxes(); //Hides axes
+        dynamicAxis.HideAxes(); 
 
-        plane.HidePlane(); //Hides plane
+        plane.HidePlane(); 
 
-        massObject.HideMass(); //Hides mass
+        massObject.HideMass();
 
-        endPoint.Deactivate(); //Hides endpoint
+        endPoint.Deactivate(); 
 
         yield break;
     }
@@ -75,7 +75,7 @@ public class ObjectiveManager : MonoBehaviour
     {
         floatingObjectives.NewObjective("Move an object in 3D space");
 
-        massObject.transform.parent.gameObject.transform.position = new Vector3(-1, 0, 1);
+        massObject.transform.position = new Vector3(-1, 0, 1);
         massObject.ShowMass(); //Shows mass object and coordinate displayer
         massObject.ShowText();
         massObject.HideTime();
@@ -95,6 +95,8 @@ public class ObjectiveManager : MonoBehaviour
         }
 
         Debug.Log("Great Job, let's do one more.");
+        endPoint.Deactivate();
+        endPoint.Reset();
         yield break;
     }
 
