@@ -174,4 +174,10 @@ public class UIManager : MonoBehaviour
             ActivateFloorToggle(floorToggles.transform.GetChild(0).gameObject);
         }
     }
+
+    public void ResetColliders()
+    {
+        // re-adjust collider positions since they do not automatically follow UI object on scroll
+        Physics.SyncTransforms();
+    }
 }
