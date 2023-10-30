@@ -124,7 +124,7 @@ public class TutorialManager : MonoBehaviour
         instructions.text = turnText;
 
         
-        player.GetComponentInChildren<UIManager>().updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
 
         StartCoroutine(WaitForTurn());
     }
@@ -139,7 +139,7 @@ public class TutorialManager : MonoBehaviour
         controlsImage.sprite = teleportationSprite;
         instructions.text = teleportationText;
 
-        player.GetComponentInChildren<UIManager>().updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
 
         StartCoroutine(WaitForTeleport());
 
@@ -164,7 +164,7 @@ public class TutorialManager : MonoBehaviour
         controlsImage.sprite = grabSprite;
         instructions.text = grabText;
 
-        player.GetComponentInChildren<UIManager>().updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
 
 
         StartCoroutine(WaitForGrab());
@@ -180,7 +180,7 @@ public class TutorialManager : MonoBehaviour
         controlsImage.sprite = pushPullSprite;
         instructions.text = pushPullText;
 
-        player.GetComponentInChildren<UIManager>().updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
 
 
         StartCoroutine(WaitForPushPull());
@@ -200,7 +200,7 @@ public class TutorialManager : MonoBehaviour
         instructions.text = overText;
         SceneUIContainer.SetActive(true);
 
-        player.GetComponentInChildren<UIManager>().updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
 
 
         yield break;
