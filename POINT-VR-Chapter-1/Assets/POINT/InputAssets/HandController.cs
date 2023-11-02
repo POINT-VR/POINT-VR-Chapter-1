@@ -6,6 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class HandController : MonoBehaviour
 {
+    const int GRABBING_TRANSFORM_MAX_SAVES = 10; // maximum number of frames to consider for calculation of throw velocity
     /// <summary>
     /// The GameObject that is the parent to all hardware devices
     /// </summary>
@@ -93,7 +94,9 @@ public class HandController : MonoBehaviour
     private Transform previousParentTransform, grabbingTransform, lastGrabHit;
     private Color laserColor;
     private Collider lastColliderHit;
-    private Vector3 grabbingTransformVelocity, grabbingTransformPositionPrev, velocityPrev;
+    private int grabbingTransformSavedCount = 0;
+    private float[] savedTimes = new float[GRABBING_TRANSFORM_MAX_SAVES];
+    private Vector3[] savedPos = new Vector3[GRABBING_TRANSFORM_MAX_SAVES];
     private void OnEnable()
     {
         selectReference.action.Enable();
@@ -147,9 +150,17 @@ public class HandController : MonoBehaviour
             grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; 
 
             // Stores the velocity of the grabbing transform while its grabbed
-            velocityPrev = grabbingTransformVelocity;
-            grabbingTransformVelocity = grabbingTransform.position - grabbingTransformPositionPrev;
-            grabbingTransformPositionPrev = grabbingTransform.position;
+            for (int i = GRABBING_TRANSFORM_MAX_SAVES - 2; i >= 0; --i)
+            {
+                // shifts all saved values backwards (as recency decreases)
+                // Note: array used instead of queue due to the latter causing lag in testing
+                savedTimes[i + 1] = savedTimes[i];
+                savedPos[i + 1] = savedPos[i];
+            }
+            // save most recent time and position
+            savedTimes[0] = Time.time;
+            savedPos[0] = grabbingTransform.position;
+            grabbingTransformSavedCount = (grabbingTransformSavedCount < GRABBING_TRANSFORM_MAX_SAVES) ? grabbingTransformSavedCount + 1 : GRABBING_TRANSFORM_MAX_SAVES; // keeps track of how many current valid saved frames
         }
         // Fires a raycast that places the reticle
         Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask);
@@ -254,8 +265,9 @@ public class HandController : MonoBehaviour
             grav.enabled = gravEnabled;
         }
         // Add velocity to grabbed object.
-        grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*hardwareController.Velocity; //2.5f*(grabbingTransformVelocity + velocityPrev);
+        grabbingTransform.GetComponent<Rigidbody>().velocity = (grabbingTransform.position - savedPos[grabbingTransformSavedCount - 1]) / (Time.time - savedTimes[grabbingTransformSavedCount - 1]); // velocity calculation using nth most recent frame and current frame, to prevent influence of potential flicking in the last frames
         grabbingTransform = null;
+        grabbingTransformSavedCount = 0;
         transform.GetComponent<Animator>().SetBool("isGrabbing", false);
     }
     private void Released(InputAction.CallbackContext ctx)
@@ -277,9 +289,7 @@ public class HandController : MonoBehaviour
         previousParentTransform = grabbingTransform.parent;
         grabbingTransform.SetParent(transform);
         grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed object's velocity to zero
-        velocityPrev = Vector3.zero;
-        grabbingTransformVelocity = Vector3.zero;
-        grabbingTransformPositionPrev = hit.transform.position;
+        grabbingTransformSavedCount = 0;
         GravityScript grav = grabbingTransform.GetComponent<GravityScript>();
         if (grav != null)
         {
