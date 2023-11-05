@@ -23,6 +23,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private InputActionReference leftPullingReference;
     [SerializeField] private InputActionReference rightPushingReference;
     [SerializeField] private InputActionReference rightPullingReference;
+    [SerializeField] private InputActionReference openMenuReference;
     [Header("Controls Graphics")]
     [SerializeField] private Sprite teleportationSprite;
     [SerializeField] private Sprite turnSprite;
@@ -45,7 +46,7 @@ public class TutorialManager : MonoBehaviour
     private bool pushed = false, pulled = false;
     private GameObject menus = null;
     private GameObject buttons = null;
-    private UIManager script = null;
+    private UIManager UIManagerScript = null;
     private void OnDisable()
     {
         leftPushingReference.action.started -= Pushed;
@@ -128,14 +129,14 @@ public class TutorialManager : MonoBehaviour
         GameObject UIContainer = mainCamera.transform.Find("UI Container").gameObject;
         GameObject Menu = UIContainer.transform.Find("Menu").gameObject;
         GameObject HeaderButtons = Menu.transform.Find("HeaderButtons").gameObject;
-        //GameObject HeaderButtons = Menu.transform.Find("Buttons").gameObject; //if testing with emulator use this
+        // GameObject HeaderButtons = Menu.transform.Find("Buttons").gameObject; //if testing with emulator use this
         GameObject menuScreens = Menu.transform.Find("MenuScreens").gameObject;
 
         menus = menuScreens;
         buttons = HeaderButtons;
 
-        //Get UI Manager script
-        script = Menu.GetComponent<UIManager>();
+        //Get UI Manager UIManagerScript
+        UIManagerScript = Menu.GetComponent<UIManager>();
         StartCoroutine(WaitForTurn());
     }
 
@@ -227,19 +228,21 @@ public class TutorialManager : MonoBehaviour
     {
         controlsImage.sprite = menuSprite;
         instructions.text = openMenuText;
-        yield return new WaitUntil(() => menus.activeInHierarchy == true); //Waiting until player opens menu
+
         StartCoroutine(WaitForControlsScreenSelection());
         yield break;
     }
 
     IEnumerator WaitForControlsScreenSelection() 
     {
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
 
         controlsImage.sprite = overSprite;
         controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
 
-        script.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
-        script.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
+        UIManagerScript.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
 
         yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
         StartCoroutine(WaitForGeneralMenu());
@@ -248,8 +251,11 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForGeneralMenu() 
     {
-        script.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
-        script.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
+
+        UIManagerScript.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
 
         yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
         StartCoroutine(WaitForSceneSelection());
@@ -258,8 +264,11 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForSceneSelection()
     {
-        script.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
-        script.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
+
+        UIManagerScript.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
 
         yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
         instructions.text = overText;
