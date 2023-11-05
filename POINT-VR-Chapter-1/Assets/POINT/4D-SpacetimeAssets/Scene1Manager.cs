@@ -87,9 +87,9 @@ public class Scene1Manager : MonoBehaviour
         endPoint.Activate(); //Shows endpoint
         endPoint.SetMass(massObject.gameObject);
         endPoint.transform.position = new Vector3(1, 2, 2);
-        endPoint.SetTriggerDistance(0.20f);
+        endPoint.SetTriggerDistance(0.40f);
 
-        while (endPoint.WasTriggered())
+        while (!endPoint.WasTriggered())
         {
             yield return new WaitForEndOfFrame();
         }

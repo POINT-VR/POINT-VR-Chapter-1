@@ -22,6 +22,7 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
     /// The maximum distance an object can be from the endpoint for it to trigger.
     /// </summary>
     private float triggerDistance;
+
     void Update()
     {
         if (isActive) //Checks trigger each frame
@@ -31,8 +32,9 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
     }
     private void CheckTrigger() //Checks if the mass sphere is within the is within the snap distance, then deactivates the endpoint
     {
-        if ((MassSphere.transform.position - transform.position).magnitude < triggerDistance) //Need to make it check that the sphere is not being grabbed
+        if ((MassSphere.transform.position - transform.position).magnitude < triggerDistance && !MassSphere.GetComponentInParent<HandController>()) //Need to make it check that the sphere is not being grabbed
         {
+            MassSphere.transform.position = transform.position;
             triggered = true;
             Deactivate();
         }
