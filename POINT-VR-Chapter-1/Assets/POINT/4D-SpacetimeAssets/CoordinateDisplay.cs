@@ -43,6 +43,8 @@ public class CoordinateDisplay : MonoBehaviour
     {
         cameraObject = Camera.allCameras[0]; //sets player camera so that position can be calculated correctly
         tNaught = Time.time; //sets time origin to start time
+        coordinateText.outlineWidth = 0.1f;
+        coordinateText.outlineColor = new Color32(255, 220, 220, 220); //light grey
 
     }
 
@@ -75,11 +77,11 @@ public class CoordinateDisplay : MonoBehaviour
         Vector3 outputCoordinates = transform.position - (Vector3)origin; //calculates position relative to origin
         if (showTime)
         {
-            coordinateText.text = $"<color=grey>( <color=blue>{Math.Floor(10 * outputCoordinates.x) / 10}</color> , <color=green>{Math.Floor(10 * outputCoordinates.y) / 10}</color> , <color=red>{Math.Floor(10 * outputCoordinates.z) / 10}</color> , {Math.Floor(Time.time - tNaught)} )</color>"; //calculates time relative to origin
+            coordinateText.text = $"<color=white>( <color=blue>{Math.Floor(10 * outputCoordinates.x) / 10}</color> , <color=green>{Math.Floor(10 * outputCoordinates.y) / 10}</color> , <color=red>{Math.Floor(10 * outputCoordinates.z) / 10}</color> , {Math.Floor(Time.time - tNaught)} )</color>"; //calculates time relative to origin
         }
         else
         {
-            coordinateText.text = $"<color=grey>( <color=blue>{Math.Floor(10 * outputCoordinates.x) / 10}</color> , <color=green>{Math.Floor(10 * outputCoordinates.y) / 10}</color> , <color=red>{Math.Floor(10 * outputCoordinates.z) / 10}</color> )</color>";
+            coordinateText.text = $"<color=white>( <color=blue>{Math.Floor(10 * outputCoordinates.x) / 10}</color> , <color=green>{Math.Floor(10 * outputCoordinates.y) / 10}</color> , <color=red>{Math.Floor(10 * outputCoordinates.z) / 10}</color> )</color>";
         }
     }
 
