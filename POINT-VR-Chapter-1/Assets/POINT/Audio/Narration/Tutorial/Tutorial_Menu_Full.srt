@@ -1,0 +1,42 @@
+1
+00:00:00,000 --> 00:00:02,740
+Press the highlighted button to pull up the game menu.
+
+2
+00:00:03,580 --> 00:00:07,240
+If you forget the controls at any point, you can come back here to find them again.
+
+3
+00:00:08,500 --> 00:00:12,940
+From this screen, you can adjust the volume, turn on subtitles, and turn on live controller
+
+4
+00:00:12,940 --> 00:00:16,080
+diagrams to show you which buttons you are pushing as you push them.
+
+5
+00:00:16,720 --> 00:00:20,480
+If you feel disoriented floating in space, you have the option to turn on a floor.
+
+6
+00:00:21,280 --> 00:00:24,840
+The current objective can always be found in this menu if you get stuck.
+
+7
+00:00:25,580 --> 00:00:29,680
+It is best to go through the game in order, but you have the option to select different
+
+8
+00:00:29,680 --> 00:00:30,800
+scenes from this menu.
+
+9
+00:00:31,440 --> 00:00:33,540
+You can replay the tutorial at any point.
+
+10
+00:00:34,160 --> 00:00:35,580
+Select scene 1 to begin.
+
+11
+00:00:35,580 --> 00:00:40,580
