@@ -135,11 +135,11 @@ public class HandController : MonoBehaviour
     {
         if (pulling && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude > squaredMinPullDistance) // object being pulled: pull
         {
-            grabbingTransform.position += pullSpeed * (transform.position - grabbingTransform.position).normalized;
+            grabbingTransform.position -= pullSpeed * transform.forward;
         }
         else if (pushing && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude < squaredMaxPushDistance) // object being pushed: push
         {
-            grabbingTransform.position -= pullSpeed * (transform.position - grabbingTransform.position).normalized;
+            grabbingTransform.position += pullSpeed * transform.forward;
         }
         if (grabbingTransform != null) // Holding an object
         {
@@ -174,8 +174,31 @@ public class HandController : MonoBehaviour
             }
             if (hit.collider.GetComponent<ScrollRect>() == null)
             {
-                laser.material.color = Color.green;
-                transform.GetComponent<Animator>().SetBool("isPointing", true);
+                // Check if detected item is within a ScrollRect; if so, make sure ScrollRect is also hit
+                // This is a workaround for colliders not disappearing even when a UI element is hidden by a mask, as in a ScrollRect
+                ScrollRect scrollRect = hit.collider.GetComponentInParent<ScrollRect>();
+                if (scrollRect != null)
+                {
+                    RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, transform.forward, 10f, UIMask);
+                    bool containsScrollRect = false;
+                    foreach (RaycastHit raycastHit in raycastHits)
+                    {
+                        if (raycastHit.collider.GetComponent<ScrollRect>() == scrollRect)
+                        {
+                            containsScrollRect = true;
+                            break;
+                        }
+                    }
+                    if (containsScrollRect)
+                    {
+                        laser.material.color = Color.green;
+                        transform.GetComponent<Animator>().SetBool("isPointing", true);
+                    }
+                } else
+                {
+                    laser.material.color = Color.green;
+                    transform.GetComponent<Animator>().SetBool("isPointing", true);
+                }
             }
             else
             {
@@ -273,6 +296,23 @@ public class HandController : MonoBehaviour
     { 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected: interact with it
         {
+            // Check if detected item is within a ScrollRect; if so, make sure ScrollRect is also hit
+            // This is a workaround for colliders not disappearing even when a UI element is hidden by a mask, as in a ScrollRect
+            ScrollRect scrollRect = hit.collider.GetComponentInParent<ScrollRect>();
+            if (scrollRect != null)
+            {
+                RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, transform.forward, 10f, UIMask);
+                bool containsScrollRect = false;
+                foreach (RaycastHit raycastHit in raycastHits)
+                {
+                    if (raycastHit.collider.GetComponent<ScrollRect>() == scrollRect)
+                    {
+                        containsScrollRect = true;
+                        break;
+                    }
+                }
+                if (!containsScrollRect) return;
+            }
             GetComponent<AudioSource>().PlayScheduled(0);
             UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
             if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
@@ -378,7 +418,6 @@ public class HandController : MonoBehaviour
         if (obj.action.ReadValue<Vector2>().y != 0 && Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected
         {
             ScrollRect scrollRect = hit.collider.gameObject.GetComponentInParent<ScrollRect>();
-            Debug.Log(hit.collider.gameObject);
             if (scrollRect != null) // collider is scrollable
             {
                 Scrollbar scrollbarVertical = scrollRect.verticalScrollbar;

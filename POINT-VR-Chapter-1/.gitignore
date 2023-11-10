@@ -74,3 +74,8 @@ crashlytics-build.properties
 /[Pp]rojectSettings/ProjectSettings.asset
 /[Pp]rojectSettings/EditorBuildSettings.asset
 /[Pp]ackages/packages-lock.json
+
+# The Emulator
+/Assets/POINT/InputAssets/EditorTesting/
+/Assets/POINT/InputAssets/EditorTesting.meta
+
