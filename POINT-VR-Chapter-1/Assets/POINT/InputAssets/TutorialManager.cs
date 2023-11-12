@@ -3,7 +3,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-
 public class TutorialManager : MonoBehaviour
 {
     // Serialized fields
@@ -24,6 +23,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private InputActionReference leftPullingReference;
     [SerializeField] private InputActionReference rightPushingReference;
     [SerializeField] private InputActionReference rightPullingReference;
+    [SerializeField] private InputActionReference openMenuReference;
     [Header("Controls Graphics")]
     [SerializeField] private Sprite teleportationSprite;
     [SerializeField] private Sprite turnSprite;
@@ -38,14 +38,15 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private string pushPullText;
     [SerializeField] private string overText;
     [SerializeField] private string menuText;
-
-
+    [SerializeField] private string openMenuText;
     // Cache
     private TMP_Text instructions = null;
     private Camera currentCamera = null;
     private GameObject player = null;
     private bool pushed = false, pulled = false;
-
+    private GameObject menus = null;
+    private GameObject buttons = null;
+    private UIManager UIManagerScript = null;
     private void OnDisable()
     {
         leftPushingReference.action.started -= Pushed;
@@ -123,6 +124,19 @@ public class TutorialManager : MonoBehaviour
         controlsImage.sprite = turnSprite;
         instructions.text = turnText;
 
+        //Instantiate menus from player prefab and buttons from player prefab as well
+        GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
+        GameObject UIContainer = mainCamera.transform.Find("UI Container").gameObject;
+        GameObject Menu = UIContainer.transform.Find("Menu").gameObject;
+        GameObject HeaderButtons = Menu.transform.Find("HeaderButtons").gameObject;
+        // GameObject HeaderButtons = Menu.transform.Find("Buttons").gameObject; //if testing with emulator use this
+        GameObject menuScreens = Menu.transform.Find("MenuScreens").gameObject;
+
+        menus = menuScreens;
+        buttons = HeaderButtons;
+
+        //Get UI Manager UIManagerScript
+        UIManagerScript = Menu.GetComponent<UIManager>();
         
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
 
@@ -141,7 +155,7 @@ public class TutorialManager : MonoBehaviour
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
 
-        StartCoroutine(WaitForTeleport());
+        StartCoroutine(WaitForTeleport()); 
 
         yield break;
     }
@@ -195,10 +209,12 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => pushed && pulled);
 
         // Activate Scene Select
-        controlsImage.sprite = overSprite;
-        controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
-        instructions.text = overText;
-        SceneUIContainer.SetActive(true);
+        // controlsImage.sprite = overSprite;
+        // controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
+        // instructions.text = overText;
+        // SceneUIContainer.SetActive(true);
+
+        StartCoroutine(WaitForMenuPopup());
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
 
@@ -220,5 +236,57 @@ public class TutorialManager : MonoBehaviour
         {
             pulled = true;
         }
+    }
+
+    IEnumerator WaitForMenuPopup()
+    {
+        controlsImage.sprite = menuSprite;
+        instructions.text = openMenuText;
+
+        StartCoroutine(WaitForControlsScreenSelection());
+        yield break;
+    }
+
+    IEnumerator WaitForControlsScreenSelection() 
+    {
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
+
+        controlsImage.sprite = overSprite;
+        controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
+
+        UIManagerScript.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
+
+        yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
+        StartCoroutine(WaitForGeneralMenu());
+        yield break;
+    }
+
+    IEnumerator WaitForGeneralMenu() 
+    {
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
+
+        UIManagerScript.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
+
+        yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
+        StartCoroutine(WaitForSceneSelection());
+        yield break;
+    }
+
+    IEnumerator WaitForSceneSelection()
+    {
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
+
+        UIManagerScript.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
+
+        yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
+        instructions.text = overText;
+        SceneUIContainer.SetActive(true);
+        yield break;
     }
 }
