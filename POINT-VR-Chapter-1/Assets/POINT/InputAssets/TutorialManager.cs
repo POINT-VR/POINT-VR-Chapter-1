@@ -122,7 +122,8 @@ public class TutorialManager : MonoBehaviour
         // Turn tutorial
         controlsImage.sprite = turnSprite;
         instructions.text = turnText;
-        
+        NarrationManager.PlayClipWithSubtitles(Tutorial_Intro);
+
         StartCoroutine(WaitForTurn());
     }
 
@@ -133,6 +134,8 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => player.transform.rotation.y != initialRotation);
 
         // Teleportation tutorial
+
+        NarrationManager.PlayClipWithSubtitles(Tutorial_Teleport);
         controlsImage.sprite = teleportationSprite;
         instructions.text = teleportationText;
 
@@ -146,19 +149,24 @@ public class TutorialManager : MonoBehaviour
         // 3 teleport rings of increasing precision to achieve
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone1.transform.position) <= thresholdDistanceToTeleportZone);
 
+        
         teleportZone1.SetActive(false);
         teleportZone2.SetActive(true);
+        NarrationManager.PlayClipWithSubtitles(Tutorial_Teleport_Test_1);
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone2.transform.position) <= thresholdDistanceToTeleportZone/2);
 
+        
         teleportZone2.SetActive(false);
         teleportZone3.SetActive(true);
+        NarrationManager.PlayClipWithSubtitles(Tutorial_Teleport_Test_2);
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone3.transform.position) <= thresholdDistanceToTeleportZone/3);
         teleportZone3.SetActive(false);
 
         // Grab tutorial
+        
         controlsImage.sprite = grabSprite;
         instructions.text = grabText;
-
+        NarrationManager.PlayClipWithSubtitles(Tutorial_Grab);
         StartCoroutine(WaitForGrab());
 
         yield break;
@@ -171,6 +179,7 @@ public class TutorialManager : MonoBehaviour
         // Push and pull tutorial
         controlsImage.sprite = pushPullSprite;
         instructions.text = pushPullText;
+        NarrationManager.PlayClipWithSubtitles(Tutorial_Push&Pull);
 
         StartCoroutine(WaitForPushPull());
 
@@ -188,6 +197,7 @@ public class TutorialManager : MonoBehaviour
         controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
         instructions.text = overText;
         SceneUIContainer.SetActive(true);
+        NarrationManager.PlayClipWithSubtitles(Tutorial_Menu_Scene_Select);
 
         yield break;
     }
