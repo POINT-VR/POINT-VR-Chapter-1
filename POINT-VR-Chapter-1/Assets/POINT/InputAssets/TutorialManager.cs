@@ -139,7 +139,7 @@ public class TutorialManager : MonoBehaviour
         instructions.text = turnText;
         
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Intro");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
 
         StartCoroutine(WaitForTurn());
     }
@@ -152,7 +152,7 @@ public class TutorialManager : MonoBehaviour
 
         // Teleportation tutorial
 
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Teleport");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport");
         controlsImage.sprite = teleportationSprite;
         instructions.text = teleportationText;
 
@@ -171,13 +171,13 @@ public class TutorialManager : MonoBehaviour
         
         teleportZone1.SetActive(false);
         teleportZone2.SetActive(true);
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Teleport_Test_1");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport_Test_1");
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone2.transform.position) <= thresholdDistanceToTeleportZone/2);
 
         
         teleportZone2.SetActive(false);
         teleportZone3.SetActive(true);
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Teleport_Test_2");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport_Test_2");
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone3.transform.position) <= thresholdDistanceToTeleportZone/3);
         teleportZone3.SetActive(false);
 
@@ -186,7 +186,7 @@ public class TutorialManager : MonoBehaviour
         instructions.text = grabText;
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Grab");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Grab");
 
         StartCoroutine(WaitForGrab());
 
@@ -202,7 +202,7 @@ public class TutorialManager : MonoBehaviour
         instructions.text = pushPullText;
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Push&Pull");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Push&Pull");
 
         StartCoroutine(WaitForPushPull());
 
@@ -226,7 +226,7 @@ public class TutorialManager : MonoBehaviour
         instructions.text = openMenuText;
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Menu_Open");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Open");
 
         StartCoroutine(WaitForMenuPopup());
 
@@ -250,7 +250,7 @@ public class TutorialManager : MonoBehaviour
         UIManagerScript.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
 
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Menu_Forget_Controls");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Forget_Controls");
 
         yield return new WaitForSecondsRealtime(4); // Set to the audio file above's duration in seconds 
         StartCoroutine(WaitForGeneralMenu());
@@ -265,7 +265,7 @@ public class TutorialManager : MonoBehaviour
         UIManagerScript.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
 
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Menu_Options");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Options");
 
         yield return new WaitForSecondsRealtime(17); // Set to the audio file above's duration in seconds 
         StartCoroutine(WaitForSceneSelection());
@@ -280,7 +280,7 @@ public class TutorialManager : MonoBehaviour
         UIManagerScript.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
 
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Menu_Scene_Select");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Scene_Select");
 
         yield return new WaitForSecondsRealtime(11); // Set to the audio file above's duration in seconds 
 
