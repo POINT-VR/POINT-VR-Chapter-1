@@ -97,7 +97,7 @@ public class HandController : MonoBehaviour
     private int grabbingTransformSavedCount = 0;
     private float[] savedTimes = new float[GRABBING_TRANSFORM_MAX_SAVES];
     private Vector3[] savedPos = new Vector3[GRABBING_TRANSFORM_MAX_SAVES];
-    private const float THROW_VELOCITY_COEFFICIENT = 0.25f;
+    // private const float THROW_VELOCITY_COEFFICIENT = 0.125f;
 
     private void OnEnable()
     {
@@ -267,7 +267,11 @@ public class HandController : MonoBehaviour
             grav.enabled = gravEnabled;
         }
         // Add velocity to grabbed object.
-        grabbingTransform.GetComponent<Rigidbody>().velocity = THROW_VELOCITY_COEFFICIENT * (grabbingTransform.position - savedPos[grabbingTransformSavedCount - 1]) / (Time.time - savedTimes[grabbingTransformSavedCount - 1]); // velocity calculation using nth most recent frame and current frame, to prevent influence of potential flicking in the last frames
+        // Method #1: Constant coefficient
+        // grabbingTransform.GetComponent<Rigidbody>().velocity = THROW_VELOCITY_COEFFICIENT * (grabbingTransform.position - savedPos[grabbingTransformSavedCount - 1]) / (Time.time - savedTimes[grabbingTransformSavedCount - 1]); // velocity calculation using nth most recent frame and current frame, to prevent influence of potential flicking in the last frames
+        // Method #2: Function
+        float throwVelocityCoeff = Mathf.Clamp(0.125f / Vector3.Distance(grabbingTransform.position, this.transform.position), 0.05f, 1.0f);
+        grabbingTransform.GetComponent<Rigidbody>().velocity = throwVelocityCoeff * (grabbingTransform.position - savedPos[grabbingTransformSavedCount - 1]) / (Time.time - savedTimes[grabbingTransformSavedCount - 1]); // velocity calculation using nth most recent frame and current frame, to prevent influence of potential flicking in the last frames
         grabbingTransform = null;
         grabbingTransformSavedCount = 0;
         transform.GetComponent<Animator>().SetBool("isGrabbing", false);
