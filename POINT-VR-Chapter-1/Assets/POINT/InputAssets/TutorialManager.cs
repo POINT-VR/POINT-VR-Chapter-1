@@ -244,15 +244,15 @@ public class TutorialManager : MonoBehaviour
         //Waiting until player opens menu + explicit press of left menu control
         yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
 
-        controlsImage.sprite = overSprite;
-        controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
+        //controlsImage.sprite = overSprite;
+        //controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
 
         UIManagerScript.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Menu_Forget_Controls");
 
-        yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
+        yield return new WaitForSecondsRealtime(4); // Set to the audio file above's duration in seconds 
         StartCoroutine(WaitForGeneralMenu());
         yield break;
     }
@@ -267,7 +267,7 @@ public class TutorialManager : MonoBehaviour
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Menu_Options");
 
-        yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
+        yield return new WaitForSecondsRealtime(17); // Set to the audio file above's duration in seconds 
         StartCoroutine(WaitForSceneSelection());
         yield break;
     }
@@ -282,7 +282,7 @@ public class TutorialManager : MonoBehaviour
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial/Tutorial_Menu_Scene_Select");
 
-        yield return new WaitForSecondsRealtime(5); //Temporary until narration is implemented
+        yield return new WaitForSecondsRealtime(11); // Set to the audio file above's duration in seconds 
 
         instructions.text = overText;
         SceneUIContainer.SetActive(true);
