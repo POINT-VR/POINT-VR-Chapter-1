@@ -13,6 +13,3 @@ If you feel disoriented floating in space, you have the option to turn on a floo
 4
 00:00:13,120 --> 00:00:16,580
 The current objective can always be found in this menu if you get stuck.
-
-5
-00:00:16,580 --> 00:00:21,580

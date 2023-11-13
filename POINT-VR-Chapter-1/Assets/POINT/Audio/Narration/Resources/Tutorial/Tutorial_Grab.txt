@@ -5,6 +5,3 @@ Look around you until you see a yellow ball.
 2
 00:00:02,960 --> 00:00:06,120
 Try holding down the button on the side of either controller to pick it up.
-
-3
-00:00:06,120 --> 00:00:11,120

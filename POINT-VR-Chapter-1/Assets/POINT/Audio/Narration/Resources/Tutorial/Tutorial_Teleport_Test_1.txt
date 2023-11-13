@@ -5,6 +5,3 @@ Try pointing at the floor and teleporting to that ring in the distance.
 2
 00:00:03,820 --> 00:00:05,940
 If you don't see the ring, it may be behind you.
-
-3
-00:00:05,940 --> 00:00:10,940

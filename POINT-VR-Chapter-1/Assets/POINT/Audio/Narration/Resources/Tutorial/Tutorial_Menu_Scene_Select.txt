@@ -13,6 +13,3 @@ You can replay the tutorial at any point.
 4
 00:00:08,700 --> 00:00:10,080
 Select scene 1 to begin.
-
-5
-00:00:10,080 --> 00:00:15,080

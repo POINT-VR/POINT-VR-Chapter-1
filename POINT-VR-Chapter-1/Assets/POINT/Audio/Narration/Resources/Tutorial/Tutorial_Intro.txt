@@ -9,6 +9,3 @@ In addition to turning your head, you can rotate your view by using the joystick
 3
 00:00:06,600 --> 00:00:07,260
 Try it now.
-
-4
-00:00:07,260 --> 00:00:12,260

@@ -5,6 +5,3 @@ You can also push and pull the ball while holding it.
 2
 00:00:03,400 --> 00:00:05,520
 Grab the ball and try pushing or pulling it.
-
-3
-00:00:05,520 --> 00:00:10,520
