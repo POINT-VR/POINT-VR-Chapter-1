@@ -250,6 +250,8 @@ public class TutorialManager : MonoBehaviour
         UIManagerScript.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
 
+        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
+
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Forget_Controls");
 
         yield return new WaitForSecondsRealtime(4); // Set to the audio file above's duration in seconds 
@@ -265,6 +267,8 @@ public class TutorialManager : MonoBehaviour
         UIManagerScript.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
 
+        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
+
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Options");
 
         yield return new WaitForSecondsRealtime(17); // Set to the audio file above's duration in seconds 
@@ -279,6 +283,8 @@ public class TutorialManager : MonoBehaviour
 
         UIManagerScript.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
+
+        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Scene_Select");
 
