@@ -2,7 +2,7 @@
 using TMPro;
 using System;
 
-//Displays spacial and an optional time coordinate above an object. Public member functions allow for the 4d origin to be manipulated and the text to be shown and hid from other scripts. 
+//Displays spacial and an optional time coordinate above an object. This script is used at every point where we wish to access the mass object.
 public class CoordinateDisplay : MonoBehaviour
 {
     /// <summary>

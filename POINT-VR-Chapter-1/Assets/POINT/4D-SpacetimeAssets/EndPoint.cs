@@ -31,7 +31,7 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
     }
     private void CheckTrigger() //Checks if the mass sphere is within the is within the snap distance, then deactivates the endpoint
     {
-        if ((MassSphere.transform.position - transform.position).magnitude < triggerDistance && !MassSphere.GetComponentInParent<HandController>()) //Need to make it check that the sphere is not being grabbed
+        if ((MassSphere.transform.position - transform.position).magnitude < triggerDistance && !MassSphere.GetComponentInParent<HandController>()) //Check that the sphere is not being grabbed (should be HandControllerEmulator for testing in emulator)
         {
             MassSphere.transform.position = transform.position;
             triggered = true;

@@ -9,7 +9,7 @@ public class Scene1Manager : MonoBehaviour
     [SerializeField]
     private PlaneScript plane;
     [SerializeField]
-    private EndPoint endPoint;
+    private EndPointManager endPointManager;
     [SerializeField]
     private CoordinateDisplay massObject;
     [SerializeField]
@@ -39,7 +39,7 @@ public class Scene1Manager : MonoBehaviour
 
         massObject.HideMass();
 
-        endPoint.Deactivate(); 
+        //endPoint.Deactivate(); 
 
         yield break;
     }
@@ -80,21 +80,12 @@ public class Scene1Manager : MonoBehaviour
 
         Debug.Log("Look! A mass just appeared in space.");
         yield return new WaitForSeconds(2);
-        Debug.Log("try to drag it to the grey dot.");
 
-        endPoint.Activate(); //Shows endpoint
-        endPoint.SetMass(massObject.gameObject);
-        endPoint.transform.position = new Vector3(1, 2, 2);
-        endPoint.SetTriggerDistance(0.40f);
+        //EndPoint stuff goes here
 
-        while (!endPoint.WasTriggered())
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        endPointManager.SetMass(massObject.gameObject);
+        endPointManager.Activate();
 
-        Debug.Log("Great Job, let's do one more.");
-        endPoint.Deactivate();
-        endPoint.Reset();
         yield break;
     }
 
