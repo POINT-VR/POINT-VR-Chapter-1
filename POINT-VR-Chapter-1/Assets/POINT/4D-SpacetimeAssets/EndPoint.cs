@@ -34,6 +34,7 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
         if ((MassSphere.transform.position - transform.position).magnitude < triggerDistance && !MassSphere.GetComponentInParent<HandController>()) //Check that the sphere is not being grabbed (should be HandControllerEmulator for testing in emulator)
         {
             MassSphere.transform.position = transform.position;
+            MassSphere.transform.SetParent(null);
             triggered = true;
             Deactivate();
         }
