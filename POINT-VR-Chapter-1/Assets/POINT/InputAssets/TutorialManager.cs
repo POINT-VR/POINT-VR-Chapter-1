@@ -46,6 +46,10 @@ public class TutorialManager : MonoBehaviour
     private GameObject player = null;
     private bool pushed = false, pulled = false;
 
+    // Variables used for readability
+    private Quaternion cameraRot, uiObjectRot;
+    private float angleCameraUIObject;
+
     private void OnDisable()
     {
         leftPushingReference.action.started -= Pushed;
@@ -79,6 +83,24 @@ public class TutorialManager : MonoBehaviour
         {
             this.transform.LookAt(currentCamera.transform);
             this.transform.Rotate(0, 180, 0);
+        }
+
+        // Head-tracking for uiObjects
+        if (Time.frameCount % 50 == 0) // Check every X frame, dependent on the current fps, should be not too slow or fast
+        {
+            uiObjectRot = this.transform.rotation; // Quaternion representation of the current uiObject rotation
+            cameraRot = currentCamera.transform.rotation; 
+            cameraRot = cameraRot * Quaternion.Euler(0,180,0); // Flipped Quaternion the player's camera rotation
+
+            angleCameraUIObject = -(((uiObjectRot * Quaternion.Inverse(cameraRot)).eulerAngles.y) - 180); // Angle between the camera and current uiObject
+            // 180 shifts the range of angles from (0, 360) -> (-180, 180), where 0 is when the camera and uiObject are facing each other
+
+            // the angle used here should be large enough to not be called when the player just moves their head around naturally
+            if (Mathf.Abs(angleCameraUIObject) > 100)
+            {
+                // Rotate the uiObject around the player the required amount for them to face each other again
+                this.transform.RotateAround(currentCamera.transform.position, Vector3.up, angleCameraUIObject); 
+            }
         }
     }
 
