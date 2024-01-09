@@ -6,7 +6,10 @@ public class EndPointManager : MonoBehaviour
 {
 
     [SerializeField]
-    private EndPoint prefab;
+    private EndPoint endPointPrefab;
+
+    [SerializeField]
+    private DynamicAxis dynamicAxisPrefab;
 
     private GameObject massObject;
 
@@ -14,6 +17,8 @@ public class EndPointManager : MonoBehaviour
     /// Contains all the EndPoints around the mass.
     /// </summary>
     private List<EndPoint> endPoints = new List<EndPoint>();
+
+    private DynamicAxis dynamicAxis;
 
     /// <summary>
     /// The distance between any two adjacent endpoints.
@@ -46,25 +51,32 @@ public class EndPointManager : MonoBehaviour
     void Spawn()
     {
         var pos = massObject.transform.position;
-        for (int i = -1; i <= 1; i++)
+
+        for (int i = 0; i <= 2; i++)
         {
-            for (int j = -1; j <= 1; j++)
+            for (int j = -1; j <= 1; j+=2)
             {
-                for (int k = -1; k <= 1; k++)
+                var newPos = new Vector3();
+                if (i == 0)
                 {
-                    if (i == 0 && j == 0 && k == 0)
-                    {
-                        continue;
-                    }
-                    var newPos = pos + new Vector3(i, j, k)*dist;
-                    var newEndPoint = Instantiate(prefab,newPos, Quaternion.identity, this.transform);
-                    newEndPoint.Deactivate();
-                    newEndPoint.SetMass(massObject.gameObject);
-                    newEndPoint.SetTriggerDistance(dist/2); //To prevent a mass object snapping to multiple Endpoints
-                    endPoints.Add(newEndPoint);
+                    newPos = pos + new Vector3(j, 0, 0) * dist;
+                } else if (i == 1)
+                {
+                    newPos = pos + new Vector3(0, j, 0) * dist;
+                } else
+                {
+                    newPos = pos + new Vector3(0, 0, j) * dist;
                 }
+                var newEndPoint = Instantiate(endPointPrefab,newPos, Quaternion.identity, this.transform);
+                newEndPoint.Deactivate();
+                newEndPoint.SetMass(massObject.gameObject);
+                newEndPoint.SetTriggerDistance(dist/2); //To prevent a mass object snapping to multiple Endpoints
+                endPoints.Add(newEndPoint);
+                
             }
         }
+        dynamicAxis = Instantiate(dynamicAxisPrefab, pos, Quaternion.identity, this.transform);
+
     }
 
     void Destroy()
@@ -74,6 +86,10 @@ public class EndPointManager : MonoBehaviour
             Destroy(endPoint.gameObject);
         }
         endPoints.Clear();
+        if (dynamicAxis != null)
+        {
+            Destroy(dynamicAxis.gameObject);
+        }
     }
 
     public void Activate()

@@ -171,8 +171,8 @@ public class DynamicAxis : MonoBehaviour
     {
         doubleSided = mode;
         SetAxesLength(xAxis.transform.localScale.y, 0);
-        SetAxesLength(yAxis.transform.localScale.y, 0);
-        SetAxesLength(zAxis.transform.localScale.y, 0);
+        SetAxesLength(yAxis.transform.localScale.y, 1);
+        SetAxesLength(zAxis.transform.localScale.y, 2);
     }
 }
 
