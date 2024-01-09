@@ -221,4 +221,34 @@ public class TutorialManager : MonoBehaviour
             pulled = true;
         }
     }
+
+    public void openOptions() {
+        //Note: This code uses similar implementation from the tutorial-ui-menu branch - it can be simplified
+
+        UIManager UIManagerScriptTemp = null;
+        GameObject menusTemp = null;
+        GameObject buttonsTemp = null;
+
+        //Instantiate menus from player prefab and buttons from player prefab as well
+        GameObject mainCameraTemp = player.transform.Find("Main Camera").gameObject;
+        GameObject UIContainerTemp = mainCameraTemp.transform.Find("UI Container").gameObject;
+        GameObject MenuTemp = UIContainerTemp.transform.Find("Menu").gameObject;
+        GameObject HeaderButtonsTemp = MenuTemp.transform.Find("HeaderButtons").gameObject;
+        // GameObject HeaderButtonsTemp = MenuTemp.transform.Find("Buttons").gameObject; //if testing with emulator use this
+        GameObject menuScreensTemp = MenuTemp.transform.Find("MenuScreens").gameObject;
+
+        menusTemp = menuScreensTemp;
+        buttonsTemp = HeaderButtonsTemp;
+
+        // Get UI Manager UIManagerScript
+        UIManagerScriptTemp = MenuTemp.GetComponent<UIManager>();
+
+        //Activate Menus and Buttons
+        UIManagerScriptTemp.ActivateMenu(UIContainerTemp.transform.Find("Menu").gameObject);
+        UIManagerScriptTemp.ActivateButton(MenuTemp.transform.Find("HeaderButtons").gameObject);
+        // UIManagerScriptTemp.ActivateButton(MenuTemp.transform.Find("Buttons").gameObject); //if testing with emulator use this
+        UIManagerScriptTemp.ActivateMenu(MenuTemp.transform.Find("MenuScreens").gameObject);
+        UIManagerScriptTemp.ActivateMenu(menusTemp.transform.Find("GeneralMenu").gameObject); 
+        UIManagerScriptTemp.ActivateButton(buttonsTemp.transform.Find("GeneralButton").gameObject);
+    }
 }
