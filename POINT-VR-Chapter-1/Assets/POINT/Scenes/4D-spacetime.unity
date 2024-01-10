@@ -641,7 +641,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9960d9de1843ea4ca662c76b3393e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3208001973889826497, guid: d289e04228b3eb64489743995438d29b, type: 3}
+  endPointPrefab: {fileID: 3208001973889826497, guid: d289e04228b3eb64489743995438d29b,
+    type: 3}
+  dynamicAxisPrefab: {fileID: 4589141578911581333, guid: 49ad64caf4156064c8569c5af3a720ea,
+    type: 3}
 --- !u!4 &1162779722
 Transform:
   m_ObjectHideFlags: 0
@@ -1240,6 +1243,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589141578911581333, guid: 49ad64caf4156064c8569c5af3a720ea,
+        type: 3}
+      propertyPath: cone
+      value: 
+      objectReference: {fileID: 5106204499800824641, guid: fafe2a3fcf4966b409ff5592ce8babdb,
+        type: 3}
+    - target: {fileID: 4589141578911581333, guid: 49ad64caf4156064c8569c5af3a720ea,
+        type: 3}
+      propertyPath: axisWidth
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4589141578911581339, guid: 49ad64caf4156064c8569c5af3a720ea,
         type: 3}

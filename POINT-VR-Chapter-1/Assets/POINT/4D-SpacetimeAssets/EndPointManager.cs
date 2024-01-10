@@ -76,6 +76,7 @@ public class EndPointManager : MonoBehaviour
             }
         }
         dynamicAxis = Instantiate(dynamicAxisPrefab, pos, Quaternion.identity, this.transform);
+        dynamicAxis.AxisLength(0.8f);
 
     }
 

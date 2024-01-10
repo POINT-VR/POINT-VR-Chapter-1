@@ -10,24 +10,61 @@ public class DynamicAxis : MonoBehaviour
     [SerializeField]
     private float axisWidth;
 
+    [SerializeField] 
+    private GameObject cone;
+
     private GameObject xAxis;
     private GameObject yAxis;
     private GameObject zAxis;
+
+    private GameObject xArrow;
+    private GameObject yArrow;
+    private GameObject zArrow;
+
+    private GameObject xArrowTwo;
+    private GameObject yArrowTwo;
+    private GameObject zArrowTwo;
 
     private MeshRenderer xAxisRenderer;
     private MeshRenderer yAxisRenderer;
     private MeshRenderer zAxisRenderer;
 
+    private MeshRenderer xArrowRenderer;
+    private MeshRenderer yArrowRenderer;
+    private MeshRenderer zArrowRenderer;
+
+    private MeshRenderer xArrowTwoRenderer;
+    private MeshRenderer yArrowTwoRenderer;
+    private MeshRenderer zArrowTwoRenderer;
+
     /// <summary>
     /// Bool determines whether or not the axis lines emanate from the origin in one or two directions
     /// </summary>
     private bool doubleSided = true; 
-    void Start()
+    void Awake()
     {
         //Creates the axes
         xAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         yAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         zAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+
+        xArrow = Instantiate(cone, this.transform);
+        xArrow.transform.localScale = axisWidth*Vector3.one;
+
+        yArrow = Instantiate(cone, this.transform);
+        yArrow.transform.localScale = axisWidth * Vector3.one;
+
+        zArrow = Instantiate(cone, this.transform);
+        zArrow.transform.localScale = axisWidth * Vector3.one;
+
+        xArrowTwo = Instantiate(cone, this.transform);
+        xArrowTwo.transform.localScale = axisWidth * Vector3.one;
+
+        yArrowTwo = Instantiate(cone, this.transform);
+        yArrowTwo.transform.localScale = axisWidth * Vector3.one;
+
+        zArrowTwo = Instantiate(cone, this.transform);
+        zArrowTwo.transform.localScale = axisWidth * Vector3.one;
 
         xAxis.transform.SetParent(this.transform);
         yAxis.transform.SetParent(this.transform);
@@ -41,23 +78,56 @@ public class DynamicAxis : MonoBehaviour
         yAxis.transform.localPosition = Vector3.zero;
         zAxis.transform.localPosition = Vector3.zero;
 
+        xArrow.transform.localPosition = new Vector3(1, 0, 0);
+        yArrow.transform.localPosition = new Vector3(0, 1, 0);
+        zArrow.transform.localPosition = new Vector3(0, 0, 1);
+
+        xArrowTwo.transform.localPosition = new Vector3(-1, 0, 0);
+        yArrowTwo.transform.localPosition = new Vector3(0, -1, 0);
+        zArrowTwo.transform.localPosition = new Vector3(0, 0, -1);
+
+        xArrow.transform.localEulerAngles = new Vector3(0, 180, 90);
+        zArrow.transform.localEulerAngles = new Vector3(90, 0, 0);
+
+        xArrowTwo.transform.localEulerAngles = new Vector3(0, 0, 90);
+        yArrowTwo.transform.localEulerAngles = new Vector3(0, 0, 180);
+        zArrowTwo.transform.localEulerAngles = new Vector3(90, 180, 0);
+
         //y axis is in proper orientation by default
-        xAxis.transform.localEulerAngles = new Vector3(90, 0, 0); 
-        zAxis.transform.localEulerAngles = new Vector3(0, 180, 90);
+        xAxis.transform.localEulerAngles = new Vector3(0, 180, 90);
+        zAxis.transform.localEulerAngles = new Vector3(90, 0, 0);
 
         //Saves refrence to renderers (cleans up code)
         xAxisRenderer = xAxis.GetComponent<MeshRenderer>();
         yAxisRenderer = yAxis.GetComponent<MeshRenderer>();
         zAxisRenderer = zAxis.GetComponent<MeshRenderer>();
 
+        xArrowRenderer = xArrow.GetComponent<MeshRenderer>();
+        yArrowRenderer = yArrow.GetComponent<MeshRenderer>();
+        zArrowRenderer = zArrow.GetComponent<MeshRenderer>();
+
+        xArrowTwoRenderer = xArrowTwo.GetComponent<MeshRenderer>();
+        yArrowTwoRenderer = yArrowTwo.GetComponent<MeshRenderer>();
+        zArrowTwoRenderer = zArrowTwo.GetComponent<MeshRenderer>();
+
         //Colors each of the axes properly
         xAxisRenderer.material.color = Color.red;
         yAxisRenderer.material.color = Color.green;
         zAxisRenderer.material.color = Color.blue;
 
-        //Hides axis by default
+        xArrowRenderer.material.color = Color.red;
+        yArrowRenderer.material.color = Color.green;
+        zArrowRenderer.material.color = Color.blue;
+
+        xArrowTwoRenderer.material.color = Color.red;
+        yArrowTwoRenderer.material.color = Color.green;
+        zArrowTwoRenderer.material.color = Color.blue;
+
+        //Show axis by default
         ShowAxes();
     }
+
+    //Public member functions
     private void SetAxesLength(float length, int axisNumber = -1) //set to all axes by default
     {
         if (axisNumber == -1) //all axes
@@ -70,6 +140,23 @@ public class DynamicAxis : MonoBehaviour
                 xAxis.transform.localPosition = length * xAxis.transform.up;
                 yAxis.transform.localPosition = length * yAxis.transform.up;
                 zAxis.transform.localPosition = length * zAxis.transform.up;
+
+                xArrow.transform.localPosition = 2*length * xAxis.transform.up;
+                yArrow.transform.localPosition = 2*length * yAxis.transform.up;
+                zArrow.transform.localPosition = 2*length * zAxis.transform.up;
+            } else
+            {
+                xAxis.transform.localPosition = new Vector3(0, 0, 0);
+                yAxis.transform.localPosition = new Vector3(0, 0, 0);
+                zAxis.transform.localPosition = new Vector3(0, 0, 0);
+
+                xArrow.transform.localPosition = (length) * xAxis.transform.up;
+                yArrow.transform.localPosition = (length) * yAxis.transform.up;
+                zArrow.transform.localPosition = (length) * zAxis.transform.up;
+
+                xArrowTwo.transform.localPosition = -(length) * xAxis.transform.up;
+                yArrowTwo.transform.localPosition = -(length) * yAxis.transform.up;
+                zArrowTwo.transform.localPosition = -(length) * zAxis.transform.up;
             }
         }
         else if (axisNumber == 0) //x axis
@@ -78,6 +165,9 @@ public class DynamicAxis : MonoBehaviour
             if (!doubleSided)
             {
                 xAxis.transform.localPosition = length * xAxis.transform.up;
+            } else
+            {
+                xAxis.transform.localPosition = new Vector3(0, 0, 0);
             }
         }
         else if (axisNumber == 1) //y axis
@@ -86,6 +176,9 @@ public class DynamicAxis : MonoBehaviour
             if (!doubleSided)
             {
                 yAxis.transform.localPosition = length * yAxis.transform.up;
+            } else
+            {
+                yAxis.transform.localPosition = new Vector3(0, 0, 0);
             }
         }
         else if (axisNumber == 2) //z axis
@@ -94,11 +187,12 @@ public class DynamicAxis : MonoBehaviour
             if (!doubleSided)
             {
                 zAxis.transform.localPosition = length * zAxis.transform.up;
+            } else
+            {
+                zAxis.transform.localPosition = new Vector3(0, 0, 0);
             }
         }
     }
-
-    //Public member functions
 
     /// <summary>
     /// ExtendAxes Coroutine will Lerp between two axis lengths at a specified speed. 
@@ -126,20 +220,32 @@ public class DynamicAxis : MonoBehaviour
         if (axisNumber == -1)
         {
             xAxisRenderer.enabled = true;
+            xArrowRenderer.enabled = true;
+            xArrowTwoRenderer.enabled = true;
             yAxisRenderer.enabled = true;
+            yArrowRenderer.enabled = true;
+            yArrowTwoRenderer.enabled = true;
             zAxisRenderer.enabled = true;
+            zArrowRenderer.enabled = true;
+            zArrowTwoRenderer.enabled = true;
         } 
         else if (axisNumber == 0) 
         {
             xAxisRenderer.enabled = true;
+            xArrowRenderer.enabled = true;
+            xArrowTwoRenderer.enabled = true;
         }
         else if (axisNumber == 1)
         {
             yAxisRenderer.enabled = true;
+            yArrowRenderer.enabled = true;
+            yArrowTwoRenderer.enabled = true;
         }
         else if (axisNumber == 2)
         {
             zAxisRenderer.enabled = true;
+            zArrowRenderer.enabled = true;
+            zArrowTwoRenderer.enabled = true;
         }
     }
     public void HideAxes(int axisNumber = -1)
@@ -147,20 +253,33 @@ public class DynamicAxis : MonoBehaviour
         if (axisNumber == -1)
         {
             xAxisRenderer.enabled = false;
+            xArrowRenderer.enabled = false;
+            xArrowTwoRenderer.enabled = false;
             yAxisRenderer.enabled = false;
+            yArrowRenderer.enabled = false;
+            yArrowTwoRenderer.enabled = false;
             zAxisRenderer.enabled = false;
+            zArrowRenderer.enabled = false;
+            zArrowTwoRenderer.enabled = false;
+
         }
         else if (axisNumber == 0)
         {
             xAxisRenderer.enabled = false;
+            xArrowRenderer.enabled = false;
+            xArrowTwoRenderer.enabled = false;
         }
         else if (axisNumber == 1) 
         {
             yAxisRenderer.enabled = false;
+            yArrowRenderer.enabled = false;
+            yArrowTwoRenderer.enabled = false;
         }
         else if (axisNumber == 2) 
         {
             zAxisRenderer.enabled = false;
+            zArrowRenderer.enabled = false;
+            zArrowTwoRenderer.enabled = false;
         }
     }
 
@@ -173,6 +292,32 @@ public class DynamicAxis : MonoBehaviour
         SetAxesLength(xAxis.transform.localScale.y, 0);
         SetAxesLength(yAxis.transform.localScale.y, 1);
         SetAxesLength(zAxis.transform.localScale.y, 2);
+        if (doubleSided)
+        {
+           if (xAxisRenderer.enabled)
+            { 
+               xArrowTwoRenderer.enabled = true;
+           }
+           if (yAxisRenderer.enabled)
+           {
+               yArrowTwoRenderer.enabled = true;
+           }
+           if (zAxisRenderer.enabled)
+           {
+               zArrowTwoRenderer.enabled = true;
+           }
+
+        } else
+        {
+            xArrowTwoRenderer.enabled = false;
+            yArrowTwoRenderer.enabled = false;
+            zArrowTwoRenderer.enabled = false;
+        }
+    }
+
+    public void AxisLength(float length)
+    {
+        SetAxesLength(length);
     }
 }
 

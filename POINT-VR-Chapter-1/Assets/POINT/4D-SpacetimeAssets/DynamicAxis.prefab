@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4589141578911581332}
   - component: {fileID: 4589141578911581333}
   m_Layer: 0
-  m_Name: DynamicAxis(Thick)
+  m_Name: DynamicAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axisWidth: 0.05
+  cone: {fileID: 5106204499800824641, guid: fafe2a3fcf4966b409ff5592ce8babdb, type: 3}
