@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
+/// <summary>
+/// Accessed by Scene1Manager to spawn a set of endpoints arround a mass, allowing for snap motion along a lattice grid
+/// </summary>
 public class EndPointManager : MonoBehaviour
 {
 
@@ -11,6 +15,9 @@ public class EndPointManager : MonoBehaviour
     [SerializeField]
     private DynamicAxis dynamicAxisPrefab;
 
+    /// <summary>
+    /// The mass object which snaps to endpoints
+    /// </summary>
     private GameObject massObject;
 
     /// <summary>
@@ -18,6 +25,9 @@ public class EndPointManager : MonoBehaviour
     /// </summary>
     private List<EndPoint> endPoints = new List<EndPoint>();
 
+    /// <summary>
+    /// Saves the refrence to the axis object.
+    /// </summary>
     private DynamicAxis dynamicAxis;
 
     /// <summary>
@@ -25,27 +35,28 @@ public class EndPointManager : MonoBehaviour
     /// </summary>
     private float dist = 1.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    private bool isActive = false;
 
-    // Update is called once per frame
-    void Update()
+    void Update() //checks if any of the endpoints are triggered and respawns them in the new location
     {
+        if (!isActive)
+        {
+            return;
+        }
         bool triggered = false;
         foreach (var endPoint in endPoints)
         {
             if(endPoint.WasTriggered())
             {
                 triggered = true;
+                endPoint.ResetTrigger();
+                break;
             }
         }
         if (triggered)
         {
             Destroy();
             Spawn();
-            Activate();
         }
     }
     void Spawn()
@@ -71,6 +82,7 @@ public class EndPointManager : MonoBehaviour
                 newEndPoint.Deactivate();
                 newEndPoint.SetMass(massObject.gameObject);
                 newEndPoint.SetTriggerDistance(dist/2); //To prevent a mass object snapping to multiple Endpoints
+                newEndPoint.Activate();
                 endPoints.Add(newEndPoint);
                 
             }
@@ -93,18 +105,22 @@ public class EndPointManager : MonoBehaviour
         }
     }
 
+    //Public member functions
     public void Activate()
     {
-        foreach (var endPoint in endPoints)
-        {
-            endPoint.Activate();
-        }
+        Spawn();
+        isActive = true;
+    }
+
+    public void Deactivate()
+    {
+        Destroy();
+        isActive = false;
     }
 
     public void SetMass(GameObject obj)
     {
         Destroy();
         massObject = obj;
-        Spawn();
     }
 }

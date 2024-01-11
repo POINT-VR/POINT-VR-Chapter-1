@@ -10,21 +10,28 @@ public class DynamicAxis : MonoBehaviour
     [SerializeField]
     private float axisWidth;
 
+    /// <summary>
+    /// Cone prefab for spawning arrow tips
+    /// </summary>
     [SerializeField] 
     private GameObject cone;
 
+    //Axes
     private GameObject xAxis;
     private GameObject yAxis;
     private GameObject zAxis;
 
+    //Positive arrow tips
     private GameObject xArrow;
     private GameObject yArrow;
     private GameObject zArrow;
 
+    //Negative arrow tips (hidden when in single sided mode)
     private GameObject xArrowTwo;
     private GameObject yArrowTwo;
     private GameObject zArrowTwo;
 
+    //Axis and arrow renderers, used to more easily hide objects 
     private MeshRenderer xAxisRenderer;
     private MeshRenderer yAxisRenderer;
     private MeshRenderer zAxisRenderer;
@@ -41,89 +48,112 @@ public class DynamicAxis : MonoBehaviour
     /// Bool determines whether or not the axis lines emanate from the origin in one or two directions
     /// </summary>
     private bool doubleSided = true; 
+    
+    //Calls awake rather than start so that set up is performed instantly
     void Awake()
     {
-        //Creates the axes
+        //Creates axes
         xAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         yAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         zAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-
-        xArrow = Instantiate(cone, this.transform);
-        xArrow.transform.localScale = axisWidth*Vector3.one;
-
-        yArrow = Instantiate(cone, this.transform);
-        yArrow.transform.localScale = axisWidth * Vector3.one;
-
-        zArrow = Instantiate(cone, this.transform);
-        zArrow.transform.localScale = axisWidth * Vector3.one;
-
-        xArrowTwo = Instantiate(cone, this.transform);
-        xArrowTwo.transform.localScale = axisWidth * Vector3.one;
-
-        yArrowTwo = Instantiate(cone, this.transform);
-        yArrowTwo.transform.localScale = axisWidth * Vector3.one;
-
-        zArrowTwo = Instantiate(cone, this.transform);
-        zArrowTwo.transform.localScale = axisWidth * Vector3.one;
-
         xAxis.transform.SetParent(this.transform);
         yAxis.transform.SetParent(this.transform);
         zAxis.transform.SetParent(this.transform);
 
+        //Creates positive arrows
+        xArrow = Instantiate(cone, this.transform);
+        yArrow = Instantiate(cone, this.transform);
+        zArrow = Instantiate(cone, this.transform);
+
+        //Creates negative arrows
+        xArrowTwo = Instantiate(cone, this.transform);
+        yArrowTwo = Instantiate(cone, this.transform);
+        zArrowTwo = Instantiate(cone, this.transform);
+
+
+
+        //Scales axes
         xAxis.transform.localScale = new Vector3(axisWidth, 1, axisWidth);
         yAxis.transform.localScale = new Vector3(axisWidth, 1, axisWidth);
         zAxis.transform.localScale = new Vector3(axisWidth, 1, axisWidth);
 
+        //Scales positive arrows
+        xArrow.transform.localScale = axisWidth * Vector3.one;
+        yArrow.transform.localScale = axisWidth * Vector3.one;
+        zArrow.transform.localScale = axisWidth * Vector3.one;
+
+        //Scales negative arrows
+        xArrowTwo.transform.localScale = axisWidth * Vector3.one;
+        yArrowTwo.transform.localScale = axisWidth * Vector3.one;
+        zArrowTwo.transform.localScale = axisWidth * Vector3.one;
+
+
+
+        //Positions axes
         xAxis.transform.localPosition = Vector3.zero;
         yAxis.transform.localPosition = Vector3.zero;
         zAxis.transform.localPosition = Vector3.zero;
 
+        //Positions positive arrows
         xArrow.transform.localPosition = new Vector3(1, 0, 0);
         yArrow.transform.localPosition = new Vector3(0, 1, 0);
         zArrow.transform.localPosition = new Vector3(0, 0, 1);
 
+        //Positions negative arrows
         xArrowTwo.transform.localPosition = new Vector3(-1, 0, 0);
         yArrowTwo.transform.localPosition = new Vector3(0, -1, 0);
         zArrowTwo.transform.localPosition = new Vector3(0, 0, -1);
 
+
+
+        //Orients axes, y axis is already properly orientated
+        xAxis.transform.localEulerAngles = new Vector3(0, 180, 90);
+        zAxis.transform.localEulerAngles = new Vector3(90, 0, 0);
+
+        //Orients positive arrows
         xArrow.transform.localEulerAngles = new Vector3(0, 180, 90);
         zArrow.transform.localEulerAngles = new Vector3(90, 0, 0);
 
+        //Orients negative arrows
         xArrowTwo.transform.localEulerAngles = new Vector3(0, 0, 90);
         yArrowTwo.transform.localEulerAngles = new Vector3(0, 0, 180);
         zArrowTwo.transform.localEulerAngles = new Vector3(90, 180, 0);
 
-        //y axis is in proper orientation by default
-        xAxis.transform.localEulerAngles = new Vector3(0, 180, 90);
-        zAxis.transform.localEulerAngles = new Vector3(90, 0, 0);
 
-        //Saves refrence to renderers (cleans up code)
+
+        //Saves refrence to axis renderers 
         xAxisRenderer = xAxis.GetComponent<MeshRenderer>();
         yAxisRenderer = yAxis.GetComponent<MeshRenderer>();
         zAxisRenderer = zAxis.GetComponent<MeshRenderer>();
 
+        //Positive arrow renderes
         xArrowRenderer = xArrow.GetComponent<MeshRenderer>();
         yArrowRenderer = yArrow.GetComponent<MeshRenderer>();
         zArrowRenderer = zArrow.GetComponent<MeshRenderer>();
 
+        //Negative arrow renderes
         xArrowTwoRenderer = xArrowTwo.GetComponent<MeshRenderer>();
         yArrowTwoRenderer = yArrowTwo.GetComponent<MeshRenderer>();
         zArrowTwoRenderer = zArrowTwo.GetComponent<MeshRenderer>();
 
-        //Colors each of the axes properly
+
+
+        //Colors axes 
         xAxisRenderer.material.color = Color.red;
         yAxisRenderer.material.color = Color.green;
         zAxisRenderer.material.color = Color.blue;
 
+        //Colors positive arrows 
         xArrowRenderer.material.color = Color.red;
         yArrowRenderer.material.color = Color.green;
         zArrowRenderer.material.color = Color.blue;
 
+        //Colors negative arrows 
         xArrowTwoRenderer.material.color = Color.red;
         yArrowTwoRenderer.material.color = Color.green;
         zArrowTwoRenderer.material.color = Color.blue;
 
-        //Show axis by default
+        //Shows dynamic axis by default
         ShowAxes();
     }
 
@@ -215,6 +245,9 @@ public class DynamicAxis : MonoBehaviour
         yield break;
     }
 
+    /// <summary>
+    /// Shows the entire dynamic axis (Axes and arrows)
+    /// </summary>
     public void ShowAxes(int axisNumber = -1)
     { 
         if (axisNumber == -1)
@@ -248,6 +281,10 @@ public class DynamicAxis : MonoBehaviour
             zArrowTwoRenderer.enabled = true;
         }
     }
+
+    /// <summary>
+    /// Hides the entire dynamic axis (Axes and arrows)
+    /// </summary>
     public void HideAxes(int axisNumber = -1)
     {
         if (axisNumber == -1)

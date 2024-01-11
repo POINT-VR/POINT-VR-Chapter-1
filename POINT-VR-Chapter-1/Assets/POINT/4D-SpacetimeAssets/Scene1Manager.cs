@@ -35,7 +35,7 @@ public class Scene1Manager : MonoBehaviour
     {
         dynamicAxis.HideAxes(); 
 
-        plane.HidePlane(); 
+        plane.ShowPlane(); 
 
         massObject.HideMass();
 

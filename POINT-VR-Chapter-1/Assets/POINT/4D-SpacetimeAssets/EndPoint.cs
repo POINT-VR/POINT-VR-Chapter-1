@@ -41,6 +41,10 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
     }
 
     //Public Member Function
+
+    /// <summary>
+    /// Shows and activates each the endpoint
+    /// </summary>
     public void Activate()
     {
         isActive = true;
@@ -48,6 +52,9 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
         GetComponent<MeshRenderer>().enabled = true;
     }
 
+    /// <summary>
+    /// Hides and deactivates each the endpoint
+    /// </summary>
     public void Deactivate()
     {
         isActive = false;
@@ -69,8 +76,7 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
         return triggered;
     }
 
-    //Other scripts can reset the endpoint when the information that it was triggered is no longer necessary 
-    public void Reset()
+    public void ResetTrigger()
     { 
         triggered = false;
     }
