@@ -73,7 +73,7 @@ public class Scene1Manager : MonoBehaviour
     {
         floatingObjectives.NewObjective("Move an object in 3D space");
 
-        massObject.transform.position = new Vector3(-1, 0, 1);
+        massObject.transform.position = new Vector3(0, 0, 0);
         massObject.ShowMass(); //Shows mass object and coordinate displayer
         massObject.ShowText();
         massObject.HideTime();
