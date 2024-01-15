@@ -14,6 +14,9 @@ public class FloatingObjectives : MonoBehaviour
     [SerializeField]
     private TMP_Text objectiveText;
 
+    [SerializeField]
+    private Vector3 position;
+
     private string pastObjectives = "";
     private string currentObjective = "";
 
@@ -22,6 +25,8 @@ public class FloatingObjectives : MonoBehaviour
     {
         cameraObject = Camera.allCameras[0];
         this.transform.SetParent(cameraObject.transform);
+        this.transform.localPosition = position;
+        this.transform.localEulerAngles = new Vector3(0, 90, 0);
         objectiveText.text = "";
     }
 
