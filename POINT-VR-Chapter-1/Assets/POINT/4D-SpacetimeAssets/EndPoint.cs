@@ -8,7 +8,7 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
     /// <summary>
     /// Mass which snaps to the endpoint
     /// </summary>
-    private GameObject MassSphere;
+    private GameObject massObject;
 
     private bool isActive = true;
 
@@ -31,10 +31,11 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
     }
     private void CheckTrigger() //Checks if the mass sphere is within the is within the snap distance, then deactivates the endpoint
     {
-        if ((MassSphere.transform.position - transform.position).magnitude < triggerDistance && !MassSphere.GetComponentInParent<HandController>()) //Check that the sphere is not being grabbed (should be HandControllerEmulator for testing in emulator)
+        if ((massObject.transform.position - transform.position).magnitude < triggerDistance && !massObject.GetComponentInParent<HandController>()) //Check that the sphere is not being grabbed (should be HandControllerEmulator for testing in emulator)
         {
-            MassSphere.transform.position = transform.position;
-            MassSphere.transform.SetParent(null);
+            massObject.transform.position = transform.position;       
+            massObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            massObject.transform.SetParent(null);
             triggered = true;
             Deactivate();
         }
@@ -67,7 +68,7 @@ public class EndPoint : MonoBehaviour //This script is built so that an endpoint
     }
     public void SetMass(GameObject obj) //Sets the mass object
     {
-        MassSphere = obj;
+        massObject = obj;
     }
 
     //Allows other scripts to tell if the endpoint was triggered

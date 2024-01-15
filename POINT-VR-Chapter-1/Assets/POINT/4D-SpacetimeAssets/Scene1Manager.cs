@@ -83,6 +83,7 @@ public class Scene1Manager : MonoBehaviour
 
         //EndPoint stuff goes here
 
+        massObject.transform.position = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.Activate();
 
