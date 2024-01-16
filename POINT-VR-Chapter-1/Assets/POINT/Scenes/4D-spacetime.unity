@@ -973,6 +973,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2123360280046722515, guid: c861681eb76b43c45bf220f353f0174b,
         type: 3}
+      propertyPath: position.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123360280046722515, guid: c861681eb76b43c45bf220f353f0174b,
+        type: 3}
+      propertyPath: position.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123360280046722515, guid: c861681eb76b43c45bf220f353f0174b,
+        type: 3}
+      propertyPath: position.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123360280046722515, guid: c861681eb76b43c45bf220f353f0174b,
+        type: 3}
       propertyPath: objectiveText
       value: 
       objectReference: {fileID: 1826228456}
