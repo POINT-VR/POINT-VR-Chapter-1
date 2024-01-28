@@ -1446,6 +1446,8 @@ MonoBehaviour:
     type: 3}
   rightPullingReference: {fileID: 7109928901819384079, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
+  openMenuReference: {fileID: 1753721387454739837, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+    type: 3}
   teleportationSprite: {fileID: 21300000, guid: 315625fd46915454288c3cedb866d290,
     type: 3}
   turnSprite: {fileID: 21300000, guid: 0ad073e87b735384a863c98babe1b6de, type: 3}
@@ -1455,13 +1457,14 @@ MonoBehaviour:
   menuSprite: {fileID: 21300000, guid: 5bce63427ab351e4e9b962dfbe84291f, type: 3}
   teleportationText: Try pointing at the floor and teleporting to the rings in the
     distance!
-  turnText: In addition to turning your head, you can use the joysticks to rotate
-    your view.
+  turnText: In addition to turning your head, you can rotate your view by using the
+    joysticks. Try it now.
   grabText: This sphere is a grabbable object, try picking it up.
   pushPullText: You can also pull and push objects when grabbing them.
   overText: 'The tutorial is now over, please tell the instructor. '
   menuText: When you are ready, look around for a blue button saying "Scene 1" and
     press it with the trigger.
+  openMenuText: Press the highlighted button to pull up the game menu.
 --- !u!114 &1270109314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1660,7 +1663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1337579473
 MeshCollider:
   m_ObjectHideFlags: 0

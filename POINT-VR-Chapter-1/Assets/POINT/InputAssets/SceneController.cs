@@ -34,6 +34,14 @@ public class SceneController : MonoBehaviour
     /// The script that pauses the game
     /// </summary>
     [SerializeField] PauseController pause;
+    /// <summary>
+    /// The hardware controllers for the left hand. Used to remember whether haptics are enabled.
+    /// </summary>
+    [SerializeField] XRHardwareController leftHand;
+    /// <summary>
+    /// The hardware controllers for the right hand. Used to remember whether haptics are enabled.
+    /// </summary>
+    [SerializeField] XRHardwareController rightHand;
     // The actual floor visiblilty is tracked by the UI Manager, but this variable is for inter-scene communication relating to floor visibility
     private bool floorVisible;
     /// <summary>
@@ -55,6 +63,8 @@ public class SceneController : MonoBehaviour
         music.mute = false;
         floorVisible = data.floorRendered;
         uiManager.ActivateFloorToggle(floorVisible);
+        leftHand.HapticsEnabled = data.hapticsEnabled;
+        rightHand.HapticsEnabled = data.hapticsEnabled;
     }
     /// <summary>
     /// Saves the player data to the GameManager and loads a new scene
@@ -68,7 +78,8 @@ public class SceneController : MonoBehaviour
             gripNoticeEnabled = gripNotice.activeSelf,
             functionalVolume = functional.value,
             aestheticVolume = aesthetic.value,
-            floorRendered = floorVisible
+            floorRendered = floorVisible,
+            hapticsEnabled = leftHand.HapticsEnabled
         };
         GameManager.Instance.SetData(data);
         pause.Unpause();

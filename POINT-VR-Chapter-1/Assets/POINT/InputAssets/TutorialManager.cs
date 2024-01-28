@@ -3,7 +3,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-
 public class TutorialManager : MonoBehaviour
 {
     // Serialized fields
@@ -24,6 +23,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private InputActionReference leftPullingReference;
     [SerializeField] private InputActionReference rightPushingReference;
     [SerializeField] private InputActionReference rightPullingReference;
+    [SerializeField] private InputActionReference openMenuReference;
     [Header("Controls Graphics")]
     [SerializeField] private Sprite teleportationSprite;
     [SerializeField] private Sprite turnSprite;
@@ -38,14 +38,15 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private string pushPullText;
     [SerializeField] private string overText;
     [SerializeField] private string menuText;
-
-
+    [SerializeField] private string openMenuText;
     // Cache
     private TMP_Text instructions = null;
     private Camera currentCamera = null;
     private GameObject player = null;
     private bool pushed = false, pulled = false;
-
+    private GameObject menus = null;
+    private GameObject buttons = null;
+    private UIManager UIManagerScript = null;
     private void OnDisable()
     {
         leftPushingReference.action.started -= Pushed;
@@ -119,10 +120,27 @@ public class TutorialManager : MonoBehaviour
         teleportZone2.transform.localScale = new Vector3(teleportRingScale/2, teleportRingScale/2, teleportRingScale/2);
         teleportZone3.transform.localScale = new Vector3(teleportRingScale/3, teleportRingScale/3, teleportRingScale/3);
 
+        //Instantiate menus from player prefab and buttons from player prefab as well
+        GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
+        GameObject UIContainer = mainCamera.transform.Find("UI Container").gameObject;
+        GameObject Menu = UIContainer.transform.Find("Menu").gameObject;
+        GameObject HeaderButtons = Menu.transform.Find("HeaderButtons").gameObject;
+        // GameObject HeaderButtons = Menu.transform.Find("Buttons").gameObject; //if testing with emulator use this
+        GameObject menuScreens = Menu.transform.Find("MenuScreens").gameObject;
+
+        menus = menuScreens;
+        buttons = HeaderButtons;
+
+        // Get UI Manager UIManagerScript
+        UIManagerScript = Menu.GetComponent<UIManager>();
+
         // Turn tutorial
         controlsImage.sprite = turnSprite;
         instructions.text = turnText;
         
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
+
         StartCoroutine(WaitForTurn());
     }
 
@@ -133,10 +151,14 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => player.transform.rotation.y != initialRotation);
 
         // Teleportation tutorial
+
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport");
         controlsImage.sprite = teleportationSprite;
         instructions.text = teleportationText;
 
-        StartCoroutine(WaitForTeleport());
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+
+        StartCoroutine(WaitForTeleport()); 
 
         yield break;
     }
@@ -146,18 +168,25 @@ public class TutorialManager : MonoBehaviour
         // 3 teleport rings of increasing precision to achieve
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone1.transform.position) <= thresholdDistanceToTeleportZone);
 
+        
         teleportZone1.SetActive(false);
         teleportZone2.SetActive(true);
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport_Test_1");
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone2.transform.position) <= thresholdDistanceToTeleportZone/2);
 
+        
         teleportZone2.SetActive(false);
         teleportZone3.SetActive(true);
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport_Test_2");
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone3.transform.position) <= thresholdDistanceToTeleportZone/3);
         teleportZone3.SetActive(false);
 
         // Grab tutorial
         controlsImage.sprite = grabSprite;
         instructions.text = grabText;
+
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Grab");
 
         StartCoroutine(WaitForGrab());
 
@@ -172,6 +201,9 @@ public class TutorialManager : MonoBehaviour
         controlsImage.sprite = pushPullSprite;
         instructions.text = pushPullText;
 
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Push&Pull");
+
         StartCoroutine(WaitForPushPull());
 
         yield break;
@@ -183,9 +215,81 @@ public class TutorialManager : MonoBehaviour
         pulled = false;
         yield return new WaitUntil(() => pushed && pulled);
 
-        // Activate Scene Select
-        controlsImage.sprite = overSprite;
-        controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
+        // OLD: Controls Diagram and then finishing text
+        //controlsImage.sprite = overSprite;
+        //controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
+        //instructions.text = overText;
+        //SceneUIContainer.SetActive(true);
+
+        // Activate Menu
+        controlsImage.sprite = menuSprite;
+        instructions.text = openMenuText;
+
+        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Open");
+
+        StartCoroutine(WaitForMenuPopup());
+
+        yield break;
+    }
+
+    IEnumerator WaitForMenuPopup()
+    {
+        StartCoroutine(WaitForControlsScreenSelection());
+        yield break;
+    }
+
+    IEnumerator WaitForControlsScreenSelection() 
+    {
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
+
+        //controlsImage.sprite = overSprite;
+        //controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
+
+        UIManagerScript.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
+
+        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
+
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Forget_Controls");
+
+        yield return new WaitForSecondsRealtime(4); // Set to the audio file above's duration in seconds 
+        StartCoroutine(WaitForGeneralMenu());
+        yield break;
+    }
+
+    IEnumerator WaitForGeneralMenu() 
+    {
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
+
+        UIManagerScript.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
+
+        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
+
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Options");
+
+        yield return new WaitForSecondsRealtime(17); // Set to the audio file above's duration in seconds 
+        StartCoroutine(WaitForSceneSelection());
+        yield break;
+    }
+
+    IEnumerator WaitForSceneSelection()
+    {
+        //Waiting until player opens menu + explicit press of left menu control
+        yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
+
+        UIManagerScript.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
+        UIManagerScript.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
+
+        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
+
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Scene_Select");
+
+        yield return new WaitForSecondsRealtime(11); // Set to the audio file above's duration in seconds 
+
         instructions.text = overText;
         SceneUIContainer.SetActive(true);
 
