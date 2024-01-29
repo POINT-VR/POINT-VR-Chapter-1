@@ -63,8 +63,8 @@ public class SceneController : MonoBehaviour
         music.mute = false;
         floorVisible = data.floorRendered;
         uiManager.ActivateFloorToggle(floorVisible);
-        leftHand.hapticsEnabled = data.hapticsEnabled;
-        rightHand.hapticsEnabled = data.hapticsEnabled;
+        leftHand.HapticsEnabled = data.hapticsEnabled;
+        rightHand.HapticsEnabled = data.hapticsEnabled;
     }
     /// <summary>
     /// Saves the player data to the GameManager and loads a new scene
@@ -79,7 +79,7 @@ public class SceneController : MonoBehaviour
             functionalVolume = functional.value,
             aestheticVolume = aesthetic.value,
             floorRendered = floorVisible,
-            hapticsEnabled = leftHand.hapticsEnabled
+            hapticsEnabled = leftHand.HapticsEnabled
         };
         GameManager.Instance.SetData(data);
         pause.Unpause();
