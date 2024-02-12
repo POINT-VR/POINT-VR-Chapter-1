@@ -1,0 +1,17 @@
+﻿Key,English(en),Spanish(es)
+MENU_START,Press to Start,Hacer clic para Empezar
+MENU_VERSION,Version:,Versión:
+MENU_GENERAL,General,General
+MENU_CONTROLS,Controls,Controles
+MENU_SCENES,Scenes,Escenas
+SETTINGS_OFF,Off,Apagado
+SETTINGS_ON,On,Encendido
+SETTINGS_NARRATION_VOL,Narration Volume,Volumen de Narración
+SETTINGS_BACKGROUND_VOL,Background Volume,Volumen del Fondo
+SETTINGS_SUBTITLES,Subtitles,Subtítulos
+SETTINGS_SUBS_DISABLED,Disabled,Desactivado
+SETTINGS_SUBS_ENGLISH,English,Inglés
+SETTINGS_LIVE_CONTROLLER_DIAGRAMS,Live Controller Diagrams,Diagramas de Controladores
+SETTINGS_HAPTICS,Haptics,Tecnología Háptica
+SETTINGS_FLOOR,Floor,Suelo
+CURRENT_OBJECTIVE,Current Objective,Objetivo Actual
