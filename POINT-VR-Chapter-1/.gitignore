@@ -78,4 +78,5 @@ crashlytics-build.properties
 # The Emulator
 /Assets/POINT/InputAssets/EditorTesting/
 /Assets/POINT/InputAssets/EditorTesting.meta
+**/EmulatorComponents/*
 
