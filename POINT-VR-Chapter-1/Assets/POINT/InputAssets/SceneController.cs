@@ -11,10 +11,6 @@ public class SceneController : MonoBehaviour
     /// </summary>
     [SerializeField] AudioSource music;
     /// <summary>
-    /// The menu that first appears telling the player about the game's controls.
-    /// </summary>
-    [SerializeField] GameObject gripNotice;
-    /// <summary>
     /// The UI slider for 'functional' audio
     /// </summary>
     [SerializeField] Slider functional;
@@ -34,21 +30,23 @@ public class SceneController : MonoBehaviour
     /// The script that pauses the game
     /// </summary>
     [SerializeField] PauseController pause;
+    [Header("Toggles")]
     /// <summary>
-    /// The hardware controllers for the left hand. Used to remember whether haptics are enabled.
+    /// The menu that first appears telling the player about the game's controls.
     /// </summary>
-    [SerializeField] XRHardwareController leftHand;
+    [SerializeField] BinaryToggle gripNotice;
     /// <summary>
-    /// The hardware controllers for the right hand. Used to remember whether haptics are enabled.
+    /// The toggle that controls the visibility of the floor
     /// </summary>
-    [SerializeField] XRHardwareController rightHand;
-    // The actual floor visiblilty is tracked by the UI Manager, but this variable is for inter-scene communication relating to floor visibility
-    private bool floorVisible;
+    [SerializeField] BinaryToggle floorToggle;
     /// <summary>
-    /// Setter called by the UI components that alters the bookkeeping of floor visibility
+    /// The toggle that controls whether or not haptics are used
     /// </summary>
-    /// <param name="enabled">Whether or not the floor is visible</param>
-    public bool FloorVisibility { set { floorVisible = value; } }
+    [SerializeField] BinaryToggle hapticToggle;
+    /// <summary>
+    /// The toggle that controls whether or not the highlight manager is active
+    /// </summary>
+    [SerializeField] BinaryToggle highlightsToggle;
     /// <summary>
     /// When Instantiated: Get the player data. Communicate this data to all component arguments.
     /// </summary>
@@ -56,15 +54,15 @@ public class SceneController : MonoBehaviour
     {
         GameManager.PlayerData data = GameManager.Instance.GetData();
         music.time = data.musicTime;
-        gripNotice.SetActive(data.gripNoticeEnabled);
+        gripNotice.IsOn = data.gripNoticeEnabled;
         functional.value = data.functionalVolume;
         aesthetic.value = data.aestheticVolume;
         uiManager.ActivateLanguageToggle(toggleBase.GetChild((int)GameManager.Instance.languageSelected).gameObject);
         music.mute = false;
-        floorVisible = data.floorRendered;
-        uiManager.ActivateFloorToggle(floorVisible);
-        leftHand.HapticsEnabled = data.hapticsEnabled;
-        rightHand.HapticsEnabled = data.hapticsEnabled;
+        floorToggle.IsOn = data.floorRendered;
+        hapticToggle.IsOn = data.hapticsEnabled;
+        highlightsToggle.IsOn = data.highlightsEnabled;
+        uiManager.gameObject.SetActive(false);
     }
     /// <summary>
     /// Saves the player data to the GameManager and loads a new scene
@@ -75,11 +73,12 @@ public class SceneController : MonoBehaviour
         GameManager.PlayerData data = new GameManager.PlayerData
         {
             musicTime = music.time,
-            gripNoticeEnabled = gripNotice.activeSelf,
+            gripNoticeEnabled = gripNotice.IsOn,
             functionalVolume = functional.value,
             aestheticVolume = aesthetic.value,
-            floorRendered = floorVisible,
-            hapticsEnabled = leftHand.HapticsEnabled
+            floorRendered = floorToggle.IsOn,
+            hapticsEnabled = hapticToggle.IsOn,
+            highlightsEnabled = highlightsToggle.IsOn
         };
         GameManager.Instance.SetData(data);
         pause.Unpause();
