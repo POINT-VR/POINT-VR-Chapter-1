@@ -57,11 +57,11 @@ public class SceneController : MonoBehaviour
         gripNotice.IsOn = data.gripNoticeEnabled;
         functional.value = data.functionalVolume;
         aesthetic.value = data.aestheticVolume;
-        uiManager.ActivateLanguageToggle(toggleBase.GetChild((int)GameManager.Instance.languageSelected).gameObject);
+        uiManager.SubtitleLanguage = (int) data.subtitleLanguage;
         music.mute = false;
-        floorToggle.IsOn = data.floorRendered;
-        hapticToggle.IsOn = data.hapticsEnabled;
-        highlightsToggle.IsOn = data.highlightsEnabled;
+        floorToggle.IsOn = data.isFloorVisible;
+        hapticToggle.IsOn = data.isHapticsEnabled;
+        highlightsToggle.IsOn = data.isControllerHighlighted;
         uiManager.gameObject.SetActive(false);
     }
     /// <summary>
@@ -76,9 +76,10 @@ public class SceneController : MonoBehaviour
             gripNoticeEnabled = gripNotice.IsOn,
             functionalVolume = functional.value,
             aestheticVolume = aesthetic.value,
-            floorRendered = floorToggle.IsOn,
-            hapticsEnabled = hapticToggle.IsOn,
-            highlightsEnabled = highlightsToggle.IsOn
+            isFloorVisible = floorToggle.IsOn,
+            isHapticsEnabled = hapticToggle.IsOn,
+            isControllerHighlighted = highlightsToggle.IsOn,
+            subtitleLanguage = (GameManager.Language) uiManager.SubtitleLanguage
         };
         GameManager.Instance.SetData(data);
         pause.Unpause();

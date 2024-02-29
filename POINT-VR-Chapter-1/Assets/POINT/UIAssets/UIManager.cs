@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<AudioSource> aestheticAudio = null;
     [Header("Subtitles")]
     [SerializeField] NarrationManager narrationManager = null;
+    [Header("Subtitles Toggle Parent")]
+    [SerializeField] Transform subtitleParent = null;
     [Header("Floor Toggle Parent")]
     [SerializeField] GameObject floorToggles;
     [Header("Current Objective")]
@@ -113,24 +115,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Toggles on selected toggle (i.e. radio button) and switches off everything else
-    /// </summary>
-    /// <param name="toggle"></param>
-    public void ActivateLanguageToggle(GameObject toggle)
+    private GameManager.Language subtitleLanguage;
+    public int SubtitleLanguage
     {
-        Transform parent = toggle.transform.parent;
-        if (parent != null)
+        set
         {
-            for (int i = 0; i < parent.childCount; i++)
+            subtitleLanguage = (GameManager.Language) value;
+            narrationManager.SubtitlesLanguage = subtitleLanguage;
+            for (int i = 0; i < subtitleParent.childCount; i++)
             {
-                Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
+                Image imageComponent = subtitleParent.GetChild(i).GetComponentInChildren<Image>();
                 if (imageComponent != null)
                 {
-                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
+                    if (i == value) // selected toggle
                     {
                         imageComponent.sprite = toggleSelected;
-                        narrationManager.SubtitlesLanguage = GameManager.Instance.languageSelected = (GameManager.Language)i;
                     }
                     else
                     {
@@ -138,6 +137,10 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
+        }
+        get
+        {
+            return (int) subtitleLanguage;
         }
     }
 
