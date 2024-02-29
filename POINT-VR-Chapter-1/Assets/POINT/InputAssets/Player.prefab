@@ -4623,6 +4623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 685732246020707042}
+  - component: {fileID: 8790083579747594497}
   m_Layer: 5
   m_Name: Toggles
   m_TagString: Untagged
@@ -4651,6 +4652,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 586.5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8790083579747594497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685732246020707043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecd0ed4efc22bf4a81db7ef1cf69eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnedOn:
+    m_PersistentCalls:
+      m_Calls: []
+  turnedOff:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &685732246024509777
 GameObject:
   m_ObjectHideFlags: 0
@@ -5089,15 +5108,15 @@ GameObject:
   - component: {fileID: 685732246166091504}
   - component: {fileID: 685732246166091508}
   - component: {fileID: 685732246166091509}
-  - component: {fileID: 685732246166091510}
   - component: {fileID: 685732246166091511}
+  - component: {fileID: 4627857484450759372}
   m_Layer: 5
   m_Name: GripNotice
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &685732246166091504
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5139,32 +5158,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1000, y: 800, z: 1}
   m_Center: {x: 0, y: 40, z: 0}
---- !u!114 &685732246166091510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685732246166091505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onCast:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 685732246166091505}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &685732246166091511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5194,6 +5187,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4627857484450759372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685732246166091505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecd0ed4efc22bf4a81db7ef1cf69eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnedOn:
+    m_PersistentCalls:
+      m_Calls: []
+  turnedOff:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 685732246166091505}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &685732246188154448
 GameObject:
   m_ObjectHideFlags: 0
@@ -6649,10 +6671,10 @@ MonoBehaviour:
   uiManager: {fileID: 685732245830625035}
   toggleBase: {fileID: 685732245593169504}
   pause: {fileID: 685732246913176618}
-  gripNotice: {fileID: 0}
-  floorToggle: {fileID: 0}
-  hapticToggle: {fileID: 0}
-  highlightsToggle: {fileID: 0}
+  gripNotice: {fileID: 4627857484450759372}
+  floorToggle: {fileID: 8790083579747594497}
+  hapticToggle: {fileID: 8790929857480371164}
+  highlightsToggle: {fileID: 3199096125962441099}
 --- !u!1 &685732246537950949
 GameObject:
   m_ObjectHideFlags: 0
@@ -9492,7 +9514,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 685732247174031073}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.72127146
+  m_Size: 0.6107661
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10579,6 +10601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4386701595179277843}
+  - component: {fileID: 3199096125962441099}
   m_Layer: 5
   m_Name: Toggles
   m_TagString: Untagged
@@ -10607,6 +10630,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 586.5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3199096125962441099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722357173136303652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecd0ed4efc22bf4a81db7ef1cf69eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnedOn:
+    m_PersistentCalls:
+      m_Calls: []
+  turnedOff:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1900900736349415424
 GameObject:
   m_ObjectHideFlags: 0
@@ -12593,6 +12634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3623076919503379974}
+  - component: {fileID: 8790929857480371164}
   m_Layer: 5
   m_Name: Toggles
   m_TagString: Untagged
@@ -12621,6 +12663,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 586.5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8790929857480371164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739852343263860080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecd0ed4efc22bf4a81db7ef1cf69eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnedOn:
+    m_PersistentCalls:
+      m_Calls: []
+  turnedOff:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4794465972841076206
 GameObject:
   m_ObjectHideFlags: 0
