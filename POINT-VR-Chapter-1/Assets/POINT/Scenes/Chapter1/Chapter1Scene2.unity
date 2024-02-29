@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 51480176}
   - component: {fileID: 51480178}
   - component: {fileID: 51480177}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 160445311}
   - component: {fileID: 160445313}
   - component: {fileID: 160445312}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Time Counter Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 291691891}
   - component: {fileID: 291691890}
   - component: {fileID: 291691893}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Clock UI Container
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 315200141}
   - component: {fileID: 315200143}
   - component: {fileID: 315200142}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Time Counter Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1211,9 +1211,8 @@ GameObject:
   - component: {fileID: 598355200}
   - component: {fileID: 598355204}
   - component: {fileID: 598355203}
-  - component: {fileID: 598355202}
   - component: {fileID: 598355201}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Timer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1270,21 +1269,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &598355202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598355199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onCast:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &598355203
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2458,9 +2442,8 @@ GameObject:
   - component: {fileID: 1619428141}
   - component: {fileID: 1619428145}
   - component: {fileID: 1619428144}
-  - component: {fileID: 1619428143}
   - component: {fileID: 1619428142}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Timer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2517,21 +2500,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1619428143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619428140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onCast:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1619428144
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2864,7 +2832,7 @@ GameObject:
   - component: {fileID: 1931518678}
   - component: {fileID: 1931518680}
   - component: {fileID: 1931518679}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3002,7 +2970,7 @@ GameObject:
   - component: {fileID: 2110158755}
   - component: {fileID: 2110158754}
   - component: {fileID: 2110158753}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Clock UI Container
   m_TagString: Player
   m_Icon: {fileID: 0}
