@@ -135,11 +135,11 @@ public class HandController : MonoBehaviour
     {
         if (pulling && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude > squaredMinPullDistance) // object being pulled: pull
         {
-            grabbingTransform.position += pullSpeed * (transform.position - grabbingTransform.position).normalized;
+            grabbingTransform.position -= pullSpeed * transform.forward;
         }
         else if (pushing && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude < squaredMaxPushDistance) // object being pushed: push
         {
-            grabbingTransform.position -= pullSpeed * (transform.position - grabbingTransform.position).normalized;
+            grabbingTransform.position += pullSpeed * transform.forward;
         }
         if (grabbingTransform != null) // Holding an object
         {
@@ -158,10 +158,12 @@ public class HandController : MonoBehaviour
             reticle.SetActive(true);
             reticle.transform.position = hit.point;
             reticle.transform.LookAt(new Vector3(playerTransform.parent.position.x, 0f, playerTransform.parent.position.z));
+            transform.GetComponent<Animator>().SetBool("isPointing", true);
         }
         else //Not in teleport mode or raycast was not able to find the floor: hides the reticle
         {
             reticle.SetActive(false);
+            transform.GetComponent<Animator>().SetBool("isPointing", false);
         }
         //Searches for UI or grabbable
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI found: turn this green
@@ -170,7 +172,39 @@ public class HandController : MonoBehaviour
             {
                 hardwareController.VibrateHand();
             }
-            laser.material.color = (hit.collider.GetComponent<ScrollRect>() == null) ? Color.green : laserColor;
+            if (hit.collider.GetComponent<ScrollRect>() == null)
+            {
+                // Check if detected item is within a ScrollRect; if so, make sure ScrollRect is also hit
+                // This is a workaround for colliders not disappearing even when a UI element is hidden by a mask, as in a ScrollRect
+                ScrollRect scrollRect = hit.collider.GetComponentInParent<ScrollRect>();
+                if (scrollRect != null)
+                {
+                    RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, transform.forward, 10f, UIMask);
+                    bool containsScrollRect = false;
+                    foreach (RaycastHit raycastHit in raycastHits)
+                    {
+                        if (raycastHit.collider.GetComponent<ScrollRect>() == scrollRect)
+                        {
+                            containsScrollRect = true;
+                            break;
+                        }
+                    }
+                    if (containsScrollRect)
+                    {
+                        laser.material.color = Color.green;
+                        transform.GetComponent<Animator>().SetBool("isPointing", true);
+                    }
+                } else
+                {
+                    laser.material.color = Color.green;
+                    transform.GetComponent<Animator>().SetBool("isPointing", true);
+                }
+            }
+            else
+            {
+                laser.material.color = laserColor;
+                transform.GetComponent<Animator>().SetBool("isPointing", false);
+            }
             lastColliderHit = hit.collider;
             if (holdingSlider)
             {
@@ -220,9 +254,9 @@ public class HandController : MonoBehaviour
             grav.enabled = gravEnabled;
         }
         // Add velocity to grabbed object.
-        grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*(grabbingTransformVelocity + velocityPrev);
+        grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*hardwareController.Velocity; //2.5f*(grabbingTransformVelocity + velocityPrev);
         grabbingTransform = null;
-
+        transform.GetComponent<Animator>().SetBool("isGrabbing", false);
     }
     private void Released(InputAction.CallbackContext ctx)
     {
@@ -252,6 +286,7 @@ public class HandController : MonoBehaviour
             gravEnabled = grav.enabled;
             grav.enabled = false;
         }
+        transform.GetComponent<Animator>().SetBool("isGrabbing", true);
     }
     /// <summary>
     /// Runs when the user starts holding down the trigger.
@@ -261,6 +296,23 @@ public class HandController : MonoBehaviour
     { 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected: interact with it
         {
+            // Check if detected item is within a ScrollRect; if so, make sure ScrollRect is also hit
+            // This is a workaround for colliders not disappearing even when a UI element is hidden by a mask, as in a ScrollRect
+            ScrollRect scrollRect = hit.collider.GetComponentInParent<ScrollRect>();
+            if (scrollRect != null)
+            {
+                RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, transform.forward, 10f, UIMask);
+                bool containsScrollRect = false;
+                foreach (RaycastHit raycastHit in raycastHits)
+                {
+                    if (raycastHit.collider.GetComponent<ScrollRect>() == scrollRect)
+                    {
+                        containsScrollRect = true;
+                        break;
+                    }
+                }
+                if (!containsScrollRect) return;
+            }
             GetComponent<AudioSource>().PlayScheduled(0);
             UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
             if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
@@ -288,15 +340,18 @@ public class HandController : MonoBehaviour
             playerTransform.parent.position = hit.point;
         }
         teleportMode = false;
+        transform.GetComponent<Animator>().SetBool("isPointing", false);
     }
     private void StopPushing(InputAction.CallbackContext ctx)
     {
         pushing = false;
+        transform.GetComponent<Animator>().SetFloat("pushPull", 0.0f);
     }
     private void StartPushing(InputAction.CallbackContext ctx)
     {
         pushing = true;
         pulling = false;
+        transform.GetComponent<Animator>().SetFloat("pushPull", 1.0f);
     }
     /// <summary>
     /// Checks if the raycast hit was against a slider and acts on the slider if so
@@ -348,12 +403,14 @@ public class HandController : MonoBehaviour
     private void StopPulling(InputAction.CallbackContext obj)
     {
         pulling = false;
+        transform.GetComponent<Animator>().SetFloat("pushPull", 0.0f);
     }
 
     private void StartPulling(InputAction.CallbackContext obj)
     {
         pulling = true;
         pushing = false;
+        transform.GetComponent<Animator>().SetFloat("pushPull", -1.0f);
     }
 
     private void Scroll(InputAction.CallbackContext obj)
@@ -361,7 +418,6 @@ public class HandController : MonoBehaviour
         if (obj.action.ReadValue<Vector2>().y != 0 && Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected
         {
             ScrollRect scrollRect = hit.collider.gameObject.GetComponentInParent<ScrollRect>();
-            Debug.Log(hit.collider.gameObject);
             if (scrollRect != null) // collider is scrollable
             {
                 Scrollbar scrollbarVertical = scrollRect.verticalScrollbar;
