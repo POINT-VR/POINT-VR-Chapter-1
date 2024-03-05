@@ -34,7 +34,8 @@
             float minAlpha = 0.2;
 
             float st = step(_Distance, dist);
-            float blend = (dist / _Distance) * (1 - st) + minAlpha * st;
+            //float blend = (dist / _Distance) * (1 - st) + minAlpha * st;
+            float blend = ((_Distance + ((minAlpha - 1) * dist))/_Distance) * (1-st) + (minAlpha * st);
             o.Alpha = blend; // try to make a smoother transition + color change for opaque sections
         }
         ENDCG
