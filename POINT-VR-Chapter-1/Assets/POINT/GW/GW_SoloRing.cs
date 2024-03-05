@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GW_SoloRing : MonoBehaviour
 {
@@ -9,12 +10,13 @@ public class GW_SoloRing : MonoBehaviour
     [SerializeField] public int numberOfMeshes = 12;
     [SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject ring;
-    [SerializeField] public float PercentOfPlusMode;
-    [SerializeField] public float PercentOfCrossMode;
-    [SerializeField] public float PercentOfBreathingMode;
-    [SerializeField] public float PercentOfLongitudinalMode;
-    [SerializeField] public float PercentOfXMode;
-    [SerializeField] public float PercentOfYMode;
+    [SerializeField] public Toggle[] ModeToggles;
+    private float PercentOfPlusMode;
+    private float PercentOfCrossMode;
+    private float PercentOfBreathingMode;
+    private float PercentOfLongitudinalMode;
+    private float PercentOfXMode;
+    private float PercentOfYMode;
 
     [SerializeField] public float phase;
     [SerializeField] public float ampIndex;
@@ -61,8 +63,34 @@ public class GW_SoloRing : MonoBehaviour
 
             //Parents the particle to the ring GameObject
             instance.transform.parent = ring.transform;
-
         }
+
+        PercentOfPlusMode = 0;
+        PercentOfCrossMode = 0;
+        PercentOfBreathingMode = 0;
+        PercentOfLongitudinalMode = 0;
+        PercentOfXMode = 0;
+        PercentOfYMode = 0;
+
+        //Add listener for when the state of the Toggle changes, to take action
+        ModeToggles[0].onValueChanged.AddListener(delegate {
+                SetPlusMode(ModeToggles[0]);
+            });
+        ModeToggles[1].onValueChanged.AddListener(delegate {
+                SetCrossMode(ModeToggles[1]);
+            });
+        ModeToggles[2].onValueChanged.AddListener(delegate {
+                SetBreathingMode(ModeToggles[2]);
+            });
+        ModeToggles[3].onValueChanged.AddListener(delegate {
+                SetLongitudinalMode(ModeToggles[3]);
+            });
+        ModeToggles[4].onValueChanged.AddListener(delegate {
+                SetXMode(ModeToggles[4]);
+            });
+        ModeToggles[5].onValueChanged.AddListener(delegate {
+                SetYMode(ModeToggles[5]);
+            });
     }
 
 
@@ -101,5 +129,48 @@ public class GW_SoloRing : MonoBehaviour
         pos.z = center.z;
 
         return pos;
+    }
+
+    // Addition by Anisha
+    public void SetPlusMode(Toggle t) {
+        if (t.isOn)
+            PercentOfPlusMode = 100;
+        else
+            PercentOfPlusMode = 0;
+    }
+
+    public void SetCrossMode(Toggle t) {
+        if (t.isOn)
+            PercentOfCrossMode = 100;
+        else
+            PercentOfCrossMode = 0;
+    }
+
+    public void SetBreathingMode(Toggle t) {
+        if (t.isOn)
+            PercentOfBreathingMode = 100;
+        else
+            PercentOfBreathingMode = 0;
+    }
+
+    public void SetLongitudinalMode(Toggle t) {
+        if (t.isOn)
+            PercentOfLongitudinalMode = 100;
+        else
+            PercentOfLongitudinalMode = 0;
+    }
+
+    public void SetXMode(Toggle t) {
+        if (t.isOn)
+            PercentOfXMode = 100;
+        else
+            PercentOfXMode = 0;
+    }
+
+    public void SetYMode(Toggle t) {
+        if (t.isOn)
+            PercentOfYMode = 100;
+        else
+            PercentOfYMode = 0;
     }
 }
