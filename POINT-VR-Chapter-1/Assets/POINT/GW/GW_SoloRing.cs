@@ -73,24 +73,24 @@ public class GW_SoloRing : MonoBehaviour
         PercentOfYMode = 0;
 
         //Add listener for when the state of the Toggle changes, to take action
-        ModeToggles[0].onValueChanged.AddListener(delegate {
-                SetPlusMode(ModeToggles[0]);
-            });
-        ModeToggles[1].onValueChanged.AddListener(delegate {
-                SetCrossMode(ModeToggles[1]);
-            });
-        ModeToggles[2].onValueChanged.AddListener(delegate {
-                SetBreathingMode(ModeToggles[2]);
-            });
-        ModeToggles[3].onValueChanged.AddListener(delegate {
-                SetLongitudinalMode(ModeToggles[3]);
-            });
-        ModeToggles[4].onValueChanged.AddListener(delegate {
-                SetXMode(ModeToggles[4]);
-            });
-        ModeToggles[5].onValueChanged.AddListener(delegate {
-                SetYMode(ModeToggles[5]);
-            });
+        // ModeToggles[0].onValueChanged.AddListener(delegate {
+        //         SetPlusMode(ModeToggles[0]);
+        //     });
+        // ModeToggles[1].onValueChanged.AddListener(delegate {
+        //         SetCrossMode(ModeToggles[1]);
+        //     });
+        // ModeToggles[2].onValueChanged.AddListener(delegate {
+        //         SetBreathingMode(ModeToggles[2]);
+        //     });
+        // ModeToggles[3].onValueChanged.AddListener(delegate {
+        //         SetLongitudinalMode(ModeToggles[3]);
+        //     });
+        // ModeToggles[4].onValueChanged.AddListener(delegate {
+        //         SetXMode(ModeToggles[4]);
+        //     });
+        // ModeToggles[5].onValueChanged.AddListener(delegate {
+        //         SetYMode(ModeToggles[5]);
+        //     });
     }
 
 
@@ -133,44 +133,62 @@ public class GW_SoloRing : MonoBehaviour
 
     // Addition by Anisha
     public void SetPlusMode(Toggle t) {
-        if (t.isOn)
+        if (PercentOfPlusMode == 0) {
             PercentOfPlusMode = 100;
-        else
+            t.isOn = true;
+        } else {
             PercentOfPlusMode = 0;
+            t.isOn = false;
+        }
     }
 
     public void SetCrossMode(Toggle t) {
-        if (t.isOn)
+        if (PercentOfCrossMode == 0) {
             PercentOfCrossMode = 100;
-        else
+            t.isOn = true;
+        } else {
             PercentOfCrossMode = 0;
+            t.isOn = false;
+        }
     }
 
     public void SetBreathingMode(Toggle t) {
-        if (t.isOn)
+        if (PercentOfBreathingMode == 0) {
             PercentOfBreathingMode = 100;
-        else
+            t.isOn = true;
+        } else {
             PercentOfBreathingMode = 0;
+            t.isOn = false;
+        }
     }
 
     public void SetLongitudinalMode(Toggle t) {
-        if (t.isOn)
+        if (PercentOfLongitudinalMode == 0) {
             PercentOfLongitudinalMode = 100;
-        else
+            t.isOn = true;
+        } else {
             PercentOfLongitudinalMode = 0;
+            t.isOn = false;
+        }
     }
 
     public void SetXMode(Toggle t) {
-        if (t.isOn)
+        if (PercentOfXMode == 0) {
             PercentOfXMode = 100;
-        else
+            t.isOn = true;
+        } else {
             PercentOfXMode = 0;
+            t.isOn = false;
+        }
     }
 
     public void SetYMode(Toggle t) {
-        if (t.isOn)
+        if (PercentOfYMode == 0) {
             PercentOfYMode = 100;
-        else
+            t.isOn = true;
+        } else {
             PercentOfYMode = 0;
+            t.isOn = false;
+        }
     }
 }

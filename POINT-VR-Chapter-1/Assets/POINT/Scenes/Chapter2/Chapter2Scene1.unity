@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 31286522}
   - component: {fileID: 31286523}
   - component: {fileID: 31286524}
+  - component: {fileID: 31286525}
   m_Layer: 5
   m_Name: Toggle (5)
   m_TagString: Untagged
@@ -354,6 +355,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 160, y: 20, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &31286525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31286521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCast:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1463374073}
+        m_MethodName: SetYMode
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 31286523}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &31843145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1111,7 @@ GameObject:
   - component: {fileID: 174218169}
   - component: {fileID: 174218170}
   - component: {fileID: 174218171}
+  - component: {fileID: 174218172}
   m_Layer: 5
   m_Name: Toggle (1)
   m_TagString: Untagged
@@ -1172,6 +1200,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 160, y: 20, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &174218172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174218168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCast:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1463374073}
+        m_MethodName: SetCrossMode
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 174218170}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &181444440
 GameObject:
   m_ObjectHideFlags: 0
@@ -4260,6 +4314,7 @@ GameObject:
   - component: {fileID: 963506752}
   - component: {fileID: 963506753}
   - component: {fileID: 963506754}
+  - component: {fileID: 963506755}
   m_Layer: 5
   m_Name: Toggle (2)
   m_TagString: Untagged
@@ -4348,6 +4403,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 160, y: 20, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &963506755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963506751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCast:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1463374073}
+        m_MethodName: SetBreathingMode
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 963506753}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1011014142
 GameObject:
   m_ObjectHideFlags: 0
@@ -4684,6 +4765,7 @@ GameObject:
   - component: {fileID: 1064240365}
   - component: {fileID: 1064240366}
   - component: {fileID: 1064240367}
+  - component: {fileID: 1064240368}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -4772,6 +4854,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 160, y: 20, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1064240368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064240364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCast:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1463374073}
+        m_MethodName: SetPlusMode
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1064240366}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1080516821
 GameObject:
   m_ObjectHideFlags: 0
@@ -5217,6 +5325,7 @@ GameObject:
   - component: {fileID: 1134568748}
   - component: {fileID: 1134568749}
   - component: {fileID: 1134568750}
+  - component: {fileID: 1134568751}
   m_Layer: 5
   m_Name: Toggle (3)
   m_TagString: Untagged
@@ -5305,6 +5414,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 160, y: 20, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1134568751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134568747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCast:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1463374073}
+        m_MethodName: SetLongitudinalMode
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1134568749}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1164187308
 GameObject:
   m_ObjectHideFlags: 0
@@ -10029,6 +10164,7 @@ GameObject:
   - component: {fileID: 2107323013}
   - component: {fileID: 2107323014}
   - component: {fileID: 2107323015}
+  - component: {fileID: 2107323016}
   m_Layer: 5
   m_Name: Toggle (4)
   m_TagString: Untagged
@@ -10117,6 +10253,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 160, y: 20, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2107323016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107323012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fab0ec4bece864c8924d3a25e78f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCast:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1463374073}
+        m_MethodName: SetXMode
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2107323014}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2125031045
 GameObject:
   m_ObjectHideFlags: 0
