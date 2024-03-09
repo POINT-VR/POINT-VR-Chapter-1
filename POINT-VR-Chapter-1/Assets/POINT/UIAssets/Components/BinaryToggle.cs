@@ -29,7 +29,7 @@ public class BinaryToggle : MonoBehaviour, ICollidableGraphic
             }
             else
             {
-                turnedOn.Invoke();
+                turnedOff.Invoke();
                 _isOn = false;
             }
         }
