@@ -7,8 +7,7 @@ public class GW_Detector : MonoBehaviour
 
     [SerializeField] private GameObject SphereMesh;
     
-    [SerializeField] public float LengthOfArm1 = 5.0f;
-    [SerializeField] public float LengthOfArm2 = 5.0f;
+    [SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject detector;
 
     private int numberOfMeshes = 2;
@@ -21,6 +20,13 @@ public class GW_Detector : MonoBehaviour
     private Vector3 SourceLocation;
     private Quaternion SourceRotation;
     private Vector3 radialToSource;
+
+    [SerializeField] public float PercentOfPlusMode;
+    [SerializeField] public float PercentOfCrossMode;
+    [SerializeField] public float PercentOfBreathingMode;
+    [SerializeField] public float PercentOfLongitudinalMode;
+    [SerializeField] public float PercentOfXMode;
+    [SerializeField] public float PercentOfYMode;
 
     private float phi;
     private float theta;
@@ -38,8 +44,6 @@ public class GW_Detector : MonoBehaviour
         arms_length_array = new List<float>(numberOfMeshes);
         angles_array = new List<float>(numberOfMeshes);
 
-        arms_length_array.Add(LengthOfArm1);
-        arms_length_array.Add(LengthOfArm2);
 
 
         //Center position of the GameObject this script is attached to, used to spawn particles around it
@@ -55,7 +59,7 @@ public class GW_Detector : MonoBehaviour
             float a = i * global_ang;
 
             //Arranges the system of particles and gives a coordinate of the particle based on a circle with a center and radius given, definition below
-            Vector3 pos = SpawnCircle(center, arms_length_array[i], a);
+            Vector3 pos = SpawnCircle(center, radius, a);
 
             //Instantiate particle mesh prefab and store particle GameObject, particle position, and angular distance of the particle in our coordinate arrays
             GameObject instance = Instantiate(SphereMesh, pos, Quaternion.identity) as GameObject;
@@ -74,6 +78,28 @@ public class GW_Detector : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void FixedUpdate()
+    {
+        //BAD BAD BAD, ONLY FOR TESTING, REMOVE MAGIC NUMBERS IF IT WORKS
+        float centralZ = transform.position.z + 0.4f;
+
+        //Sanity check
+        if (true)
+        {
+            for (int i = 0; i < numberOfMeshes; i++)
+            {
+
+
+                Vector3 pos = gw_gravity.CalculateOscillations(sphere_pos_array[i], transform.position, radius, 0.4f, centralZ, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+
+                // pos.z = sphere_array[i].transform.position.z;
+
+                //Translates particle to the calculated coordinate
+                sphere_array[i].transform.position = pos;
+            }
+        }
     }
 
     Vector3 SpawnCircle(Vector3 center, float radius, float ang)
