@@ -28,9 +28,13 @@ public class GW_Detector : MonoBehaviour
     [SerializeField] public float PercentOfXMode;
     [SerializeField] public float PercentOfYMode;
 
+    [SerializeField] private Color lineColor;
+
     private float phi;
     private float theta;
     private float psi;
+
+    private List<LineRenderer> lines;
 
 
     // Start is called before the first frame update
@@ -43,6 +47,7 @@ public class GW_Detector : MonoBehaviour
         sphere_pos_array = new List<Vector3>(numberOfMeshes);
         arms_length_array = new List<float>(numberOfMeshes);
         angles_array = new List<float>(numberOfMeshes);
+        lines = new List<LineRenderer>(numberOfMeshes);
 
 
 
@@ -72,12 +77,29 @@ public class GW_Detector : MonoBehaviour
 
         }
 
+        LineRenderer line1 = this.gameObject.transform.GetChild(0).GetComponent<LineRenderer>();
+        LineRenderer line2 = this.gameObject.transform.GetChild(1).GetComponent<LineRenderer>();
+
+        lines.Add(line1);
+        lines.Add(line2);
+
+        for(int i = 0; i < numberOfMeshes; i++)
+        {
+            lines[i].startColor = lineColor;
+            lines[i].endColor = lineColor;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+        for (int i = 0; i < numberOfMeshes; i++)
+        {
+            lines[i].SetPosition(0, transform.position);
+            lines[i].SetPosition(1, sphere_array[i].transform.position);
+        }
     }
 
     private void FixedUpdate()
