@@ -82,12 +82,12 @@ public class GW_Detector : MonoBehaviour
 
         lines.Add(line1);
         lines.Add(line2);
-
-        for(int i = 0; i < numberOfMeshes; i++)
+        /**        for(int i = 0; i < numberOfMeshes; i++)
         {
             lines[i].startColor = lineColor;
             lines[i].endColor = lineColor;
         }
+        **/
 
     }
 
@@ -99,6 +99,15 @@ public class GW_Detector : MonoBehaviour
         {
             lines[i].SetPosition(0, transform.position);
             lines[i].SetPosition(1, sphere_array[i].transform.position);
+
+            if (
+                (sphere_array[i].transform.position.x == transform.position.x && sphere_array[i].transform.position.y == transform.position.y) ||
+                (sphere_array[i].transform.position.z == transform.position.z && sphere_array[i].transform.position.y == transform.position.y) ||
+                (sphere_array[i].transform.position.x == transform.position.x && sphere_array[i].transform.position.z == transform.position.z)
+                )
+                lines[i].material.color = Color.green;
+            else
+                lines[i].material.color = Color.red;
         }
     }
 
@@ -132,6 +141,7 @@ public class GW_Detector : MonoBehaviour
 
         pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
         pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        if (ang == 90.0f) pos.y = center.y;
         pos.z = center.z;
 
         return pos;
