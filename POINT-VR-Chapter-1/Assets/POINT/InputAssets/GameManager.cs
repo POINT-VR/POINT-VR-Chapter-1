@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
             data.musicTime = 0;
-            data.gripNoticeEnabled = true;
+            data.gripNoticeEnabled = false; //Potentionally remove in the future
             data.functionalVolume = 1.0f;
             data.aestheticVolume = 1.0f;
             data.isHapticsEnabled = true;

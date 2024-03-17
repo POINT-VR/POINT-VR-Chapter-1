@@ -34,7 +34,7 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// The menu that first appears telling the player about the game's controls.
     /// </summary>
-    [SerializeField] BinaryToggle gripNotice;
+    [SerializeField] BinaryToggle gripNotice; //Potentionally remove in the future
     /// <summary>
     /// The toggle that controls the visibility of the floor
     /// </summary>
