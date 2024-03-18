@@ -314,10 +314,10 @@ public class HandController : MonoBehaviour
                 if (!containsScrollRect) return;
             }
             GetComponent<AudioSource>().PlayScheduled(0);
-            UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
-            if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
+            ICollidableGraphic activeUICollider = hit.collider.gameObject.GetComponent<ICollidableGraphic>();
+            if (activeUICollider != null) //Collider is a Collidable graphic: invokes assigned event
             {
-                activeUICollider.OnCast.Invoke();
+                activeUICollider.OnCast();
             }
             CheckSlider(hit);
             CheckScrollbar(hit);
