@@ -1,87 +1,66 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace POINT.Feature3
+
+public class SortHolder : MonoBehaviour
 {
-    public class SortHolder : MonoBehaviour
+    public GameObject snapRingPrefab;
+    [SerializeField] private int snapRingCount = 5;
+    [SerializeField] private float padding = 0.15f;
+    [SerializeField] private XRHardwareController hardwareController;
+    [SerializeField] private GameObject NextTaskButton;
+
+    private GameObject[] snapRings = null;
+
+    public void Start()
     {
-        public SnapRing snapRingPrefab;
-        List<SnapRing> snapRings = new List<SnapRing>();
-        public int snapRingCount = 6; // Should be 5 but for some reason last snapRing has no MeshRenderer
-        public float Padding = 0.2f;
-        private float snapRingZWidth = 1f;
-        [SerializeField] XRHardwareController hardwareController;
-        [SerializeField] GameObject NextTaskButton;
-        public void Awake()
-        {
-            // from child object find all snap rings
-            snapRingZWidth = snapRingPrefab.GetComponent<BoxCollider>().size.z;
-            float currentZ = 0;
-            // make sure the snapRingPrefab is set active
-            snapRingPrefab.gameObject.SetActive(true);
-            for (int i = 0; i < snapRingCount; i++)
-            {
-                SnapRing snapRing = Instantiate(snapRingPrefab, transform);
-                //snapRing.GetComponent<MeshRenderer>().enabled = true;
-                snapRing.transform.localPosition = new Vector3(0, 0, currentZ);
-                snapRings.Add(snapRing);
-                currentZ += snapRingZWidth + Padding;
-            }
-            snapRingPrefab.gameObject.SetActive(false);
-            //snapRings[4].GetComponent<MeshRenderer>().enabled = true;
-            
-        }
-        [ContextMenu("Sort")]
-        public bool CheckSortOrder()
-        {
-            List<float> masses= new List<float>();
-            // order should be ascend 
-            // for correct order, change the color to green
-            // for incorrect order, change the color to red
-            foreach (SnapRing snapRing in snapRings)
-            {
-                if (snapRing.collidingObject == null)
-                {
-                    // debug warning 
-                    // only vibrate hand if it is apk use Macro
-                    //# if UNITY_ANDROID && !UNITY_EDITOR
-                    //hardwareController.VibrateHand();
-                    //#endif
-                    return false;
-                }
-                masses.Add(snapRing.collidingObject.mass);
-            }
-            
-            //sort the list
-            masses.Sort();
-            bool isCorrectOrder = true;
-            // check the mass follow the order
-            for (int i = 0; i < masses.Count; i++)
-            {
-                if (masses[i] != snapRings[i].collidingObject.mass)
-                {
-                    isCorrectOrder = false;
-                    // set the color to red by changing the material
-                    snapRings[i].GetComponent<MeshRenderer>().material.color = Color.red;
-                }
-                else
-                {
-                    // set the color to green by changing the material
-                    snapRings[i].GetComponent<MeshRenderer>().material.color = Color.green;
-                }
-            }
+        snapRings = new GameObject[snapRingCount];
+        float snapRingX = snapRingPrefab.GetComponent<BoxCollider>().size.x;
 
-            return isCorrectOrder;
+        // Instantiate required number of snap rings
+        for (int i = 0; i < snapRingCount; ++i)
+        {
+            GameObject snapRing = Instantiate(snapRingPrefab, this.transform);
+            snapRing.transform.localPosition += new Vector3(i * (snapRingX + padding), 0, 0);
+            snapRings[i] = snapRing;
+        }
+    }
+ 
+    public bool CheckSortOrder()
+    {
+        float[] masses = new float[snapRingCount];
+            
+        // Store masses
+        for (int i = 0; i < snapRingCount; ++i)
+        {
+            if (snapRings[i].GetComponentInChildren<Rigidbody>() == null) return false;
+            masses[i] = snapRings[i].GetComponentInChildren<Rigidbody>().mass;
         }
 
-        public void Test()
+        // Sort masses; masses now holds the "solution"
+        Array.Sort(masses);
+        bool isCorrectOrder = true;
+        for (int i = 0; i < snapRingCount; ++i)
         {
-           bool result= CheckSortOrder();
-              if (result)
-              {
-                NextTaskButton.SetActive(true);
-              }
+            if (masses[i] != snapRings[i].GetComponentInChildren<Rigidbody>().mass)
+            {
+                isCorrectOrder = false;
+                snapRings[i].GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+            else
+            {
+                snapRings[i].GetComponent<MeshRenderer>().material.color = Color.green;
+            }
+        }
+
+        return isCorrectOrder;
+    }
+
+    public void TestSortOrder()
+    {
+        if (CheckSortOrder())
+        {
+            NextTaskButton.SetActive(true);
         }
     }
 }
