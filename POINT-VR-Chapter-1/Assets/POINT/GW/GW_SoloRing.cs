@@ -60,6 +60,7 @@ public class GW_SoloRing : MonoBehaviour
             sphere_array.Add(instance);
             sphere_pos_array.Add(pos);
             angles_array.Add(a);
+            instance.tag = "tp";
 
             //Parents the particle to the ring GameObject
             instance.transform.parent = ring.transform;

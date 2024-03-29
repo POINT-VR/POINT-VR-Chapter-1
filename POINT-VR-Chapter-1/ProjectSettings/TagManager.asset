@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - GW Source
+  - tp
   layers:
   - Default
   - TransparentFX
