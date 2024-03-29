@@ -1359,6 +1359,7 @@ GameObject:
   - component: {fileID: 582842887}
   - component: {fileID: 582842886}
   - component: {fileID: 582842885}
+  - component: {fileID: 582842889}
   m_Layer: 0
   m_Name: GridCube
   m_TagString: Untagged
@@ -1442,6 +1443,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &582842889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582842884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307da46a4e074624b9c57fba27a94920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ysphere: {fileID: 64981084}
+  bsphere: {fileID: 754863761}
 --- !u!1 &598355199
 GameObject:
   m_ObjectHideFlags: 0
