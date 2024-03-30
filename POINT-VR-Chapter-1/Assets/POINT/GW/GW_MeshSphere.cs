@@ -21,6 +21,7 @@ public class GW_MeshSphere : MonoBehaviour
     private Vector3[] vertices;
     private Vector3 center;
     private List<Vector3> verticesCenters = new List<Vector3>();
+    private List<Vector3> xyRingCenters = new List<Vector3>();
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +34,10 @@ public class GW_MeshSphere : MonoBehaviour
         for (var i = 0; i < vertices.Length; i++)
         {
             verticesCenters.Add(vertices[i]);
+            Vector3 ringCenter = new Vector3(0, 0, vertices[i].z);
+            xyRingCenters.Add(ringCenter);
         }
-
+        
         PercentOfPlusMode = 0;
         PercentOfCrossMode = 0;
         PercentOfBreathingMode = 0;
@@ -60,7 +63,8 @@ public class GW_MeshSphere : MonoBehaviour
         t.Join();**/
         for (var i = 0; i < vertices.Length; i++)
         {
-            vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], center, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+            //vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], center, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+            vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], xyRingCenters[i], 0.25f*verticesCenters[i].magnitude, 0.0f, 0.0f, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
         }
         // assign the local vertices array into the vertices array of the Mesh.
         sphereMesh.vertices = vertices;
