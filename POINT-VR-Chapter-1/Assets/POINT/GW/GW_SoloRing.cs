@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GW_SoloRing : MonoBehaviour
 {
@@ -10,7 +9,6 @@ public class GW_SoloRing : MonoBehaviour
     [SerializeField] public int numberOfMeshes = 12;
     [SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject ring;
-    [SerializeField] public Toggle[] ModeToggles;
     private float PercentOfPlusMode;
     private float PercentOfCrossMode;
     private float PercentOfBreathingMode;
@@ -72,26 +70,6 @@ public class GW_SoloRing : MonoBehaviour
         PercentOfLongitudinalMode = 0;
         PercentOfXMode = 0;
         PercentOfYMode = 0;
-
-        //Add listener for when the state of the Toggle changes, to take action
-        // ModeToggles[0].onValueChanged.AddListener(delegate {
-        //         SetPlusMode(ModeToggles[0]);
-        //     });
-        // ModeToggles[1].onValueChanged.AddListener(delegate {
-        //         SetCrossMode(ModeToggles[1]);
-        //     });
-        // ModeToggles[2].onValueChanged.AddListener(delegate {
-        //         SetBreathingMode(ModeToggles[2]);
-        //     });
-        // ModeToggles[3].onValueChanged.AddListener(delegate {
-        //         SetLongitudinalMode(ModeToggles[3]);
-        //     });
-        // ModeToggles[4].onValueChanged.AddListener(delegate {
-        //         SetXMode(ModeToggles[4]);
-        //     });
-        // ModeToggles[5].onValueChanged.AddListener(delegate {
-        //         SetYMode(ModeToggles[5]);
-        //     });
     }
 
 
@@ -132,64 +110,17 @@ public class GW_SoloRing : MonoBehaviour
         return pos;
     }
 
-    // Addition by Anisha
-    public void SetPlusMode(Toggle t) {
-        if (PercentOfPlusMode == 0) {
-            PercentOfPlusMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfPlusMode = 0;
-            t.isOn = false;
-        }
-    }
+    public void SetPlusMode(float percent) { PercentOfPlusMode = percent; }
+    public void SetCrossMode(float percent) { PercentOfCrossMode = percent; }
+    public void SetBreathingMode(float percent) { PercentOfBreathingMode = percent; }
+    public void SetLongitudinalMode(float percent) { PercentOfLongitudinalMode = percent; }
+    public void SetXMode(float percent) { PercentOfXMode = percent; }
+    public void SetYMode(float percent) { PercentOfYMode = percent; }
 
-    public void SetCrossMode(Toggle t) {
-        if (PercentOfCrossMode == 0) {
-            PercentOfCrossMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfCrossMode = 0;
-            t.isOn = false;
-        }
-    }
-
-    public void SetBreathingMode(Toggle t) {
-        if (PercentOfBreathingMode == 0) {
-            PercentOfBreathingMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfBreathingMode = 0;
-            t.isOn = false;
-        }
-    }
-
-    public void SetLongitudinalMode(Toggle t) {
-        if (PercentOfLongitudinalMode == 0) {
-            PercentOfLongitudinalMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfLongitudinalMode = 0;
-            t.isOn = false;
-        }
-    }
-
-    public void SetXMode(Toggle t) {
-        if (PercentOfXMode == 0) {
-            PercentOfXMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfXMode = 0;
-            t.isOn = false;
-        }
-    }
-
-    public void SetYMode(Toggle t) {
-        if (PercentOfYMode == 0) {
-            PercentOfYMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfYMode = 0;
-            t.isOn = false;
-        }
-    }
+    public float GetPlusMode() { return PercentOfPlusMode; }
+    public float GetCrossMode() { return PercentOfCrossMode; }
+    public float GetBreathingMode() { return PercentOfBreathingMode; }
+    public float GetLongitudinalMode() { return PercentOfLongitudinalMode; }
+    public float GetXMode() { return PercentOfXMode; }
+    public float GetYMode() { return PercentOfYMode; }
 }

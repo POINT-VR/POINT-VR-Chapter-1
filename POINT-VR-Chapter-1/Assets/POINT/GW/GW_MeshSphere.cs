@@ -83,63 +83,17 @@ public class GW_MeshSphere : MonoBehaviour
         sphereMesh.vertices = vertices;
     }
 
-    public void SetPlusMode(Toggle t) {
-        if (PercentOfPlusMode == 0) {
-            PercentOfPlusMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfPlusMode = 0;
-            t.isOn = false;
-        }
-    }
+    public void SetPlusMode(float percent) { PercentOfPlusMode = percent; }
+    public void SetCrossMode(float percent) { PercentOfCrossMode = percent; }
+    public void SetBreathingMode(float percent) { PercentOfBreathingMode = percent; }
+    public void SetLongitudinalMode(float percent) { PercentOfLongitudinalMode = percent; }
+    public void SetXMode(float percent) { PercentOfXMode = percent; }
+    public void SetYMode(float percent) { PercentOfYMode = percent; }
 
-    public void SetCrossMode(Toggle t) {
-        if (PercentOfCrossMode == 0) {
-            PercentOfCrossMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfCrossMode = 0;
-            t.isOn = false;
-        }
-    }
-
-    public void SetBreathingMode(Toggle t) {
-        if (PercentOfBreathingMode == 0) {
-            PercentOfBreathingMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfBreathingMode = 0;
-            t.isOn = false;
-        }
-    }
-
-    public void SetLongitudinalMode(Toggle t) {
-        if (PercentOfLongitudinalMode == 0) {
-            PercentOfLongitudinalMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfLongitudinalMode = 0;
-            t.isOn = false;
-        }
-    }
-
-    public void SetXMode(Toggle t) {
-        if (PercentOfXMode == 0) {
-            PercentOfXMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfXMode = 0;
-            t.isOn = false;
-        }
-    }
-
-    public void SetYMode(Toggle t) {
-        if (PercentOfYMode == 0) {
-            PercentOfYMode = 100;
-            t.isOn = true;
-        } else {
-            PercentOfYMode = 0;
-            t.isOn = false;
-        }
-    }
+    public float GetPlusMode() { return PercentOfPlusMode; }
+    public float GetCrossMode() { return PercentOfCrossMode; }
+    public float GetBreathingMode() { return PercentOfBreathingMode; }
+    public float GetLongitudinalMode() { return PercentOfLongitudinalMode; }
+    public float GetXMode() { return PercentOfXMode; }
+    public float GetYMode() { return PercentOfYMode; }
 }

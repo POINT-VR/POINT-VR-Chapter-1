@@ -10,12 +10,12 @@ public class GW_Tube : MonoBehaviour
     [SerializeField] public float radius = 5.0f;
     [SerializeField] private GameObject tube;
 
-    [SerializeField] private float PercentOfPlusMode;
-    [SerializeField] private float PercentOfCrossMode;
-    [SerializeField] private float PercentOfBreathingMode;
-    [SerializeField] private float PercentOfLongitudinalMode;
-    [SerializeField] private float PercentOfXMode;
-    [SerializeField] private float PercentOfYMode;
+    private float PercentOfPlusMode;
+    private float PercentOfCrossMode;
+    private float PercentOfBreathingMode;
+    private float PercentOfLongitudinalMode;
+    private float PercentOfXMode;
+    private float PercentOfYMode;
 
     [SerializeField] private float phaseDifference = 10f;
     [SerializeField] private float ampStep;
@@ -40,6 +40,13 @@ public class GW_Tube : MonoBehaviour
         //ampStep = ampStep * Mathf.PI;
 
         CreateTube();
+
+        PercentOfPlusMode = 0;
+        PercentOfCrossMode = 0;
+        PercentOfBreathingMode = 0;
+        PercentOfLongitudinalMode = 0;
+        PercentOfXMode = 0;
+        PercentOfYMode = 0;
     }
 
     // Update is called once per frame
@@ -102,4 +109,18 @@ public class GW_Tube : MonoBehaviour
 
         doneSpawning = true;
     }
+
+    public void SetPlusMode(float percent) { PercentOfPlusMode = percent; }
+    public void SetCrossMode(float percent) { PercentOfCrossMode = percent; }
+    public void SetBreathingMode(float percent) { PercentOfBreathingMode = percent; }
+    public void SetLongitudinalMode(float percent) { PercentOfLongitudinalMode = percent; }
+    public void SetXMode(float percent) { PercentOfXMode = percent; }
+    public void SetYMode(float percent) { PercentOfYMode = percent; }
+
+    public float GetPlusMode() { return PercentOfPlusMode; }
+    public float GetCrossMode() { return PercentOfCrossMode; }
+    public float GetBreathingMode() { return PercentOfBreathingMode; }
+    public float GetLongitudinalMode() { return PercentOfLongitudinalMode; }
+    public float GetXMode() { return PercentOfXMode; }
+    public float GetYMode() { return PercentOfYMode; }
 }
