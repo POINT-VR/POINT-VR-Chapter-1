@@ -3632,8 +3632,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7703238603404437631}
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: SetSphere
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7703238602939601399}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
@@ -5463,8 +5463,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7703238603404437631}
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: SetMesh
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7703238603309610191}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
@@ -9395,8 +9395,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7703238603404437631}
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: SetTube
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7703238604042689655}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
