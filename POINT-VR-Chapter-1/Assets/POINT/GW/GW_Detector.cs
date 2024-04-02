@@ -100,11 +100,13 @@ public class GW_Detector : MonoBehaviour
             lines[i].SetPosition(0, transform.position);
             lines[i].SetPosition(1, sphere_array[i].transform.position);
 
-            if (
+            /**if (
                 (sphere_array[i].transform.position.x == transform.position.x && sphere_array[i].transform.position.y == transform.position.y) ||
                 (sphere_array[i].transform.position.z == transform.position.z && sphere_array[i].transform.position.y == transform.position.y) ||
                 (sphere_array[i].transform.position.x == transform.position.x && sphere_array[i].transform.position.z == transform.position.z)
-                )
+                )**/
+            //if length of the arms is NOT the same, that means we detect a phase shift. Detector turns green.
+            if(Vector3.Distance(sphere_array[0].transform.position, transform.position) != Vector3.Distance(sphere_array[1].transform.position, transform.position))
                 lines[i].material.color = Color.green;
             else
                 lines[i].material.color = Color.red;
