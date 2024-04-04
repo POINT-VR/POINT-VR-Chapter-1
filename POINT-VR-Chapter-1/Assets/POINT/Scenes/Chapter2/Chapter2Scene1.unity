@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0069632446, g: 0.0068257754, b: 0.007311784, a: 1}
+  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   RingMesh: {fileID: 5324980356590872437, guid: 6ee904e2e0952cc43b58efaf45cdc591,
     type: 3}
   numberOfRings: 10
-  radius: 20
+  radius: 1
   tube: {fileID: 1469151320}
   phaseDifference: 0.4
   ampStep: 0
@@ -1512,7 +1512,7 @@ MonoBehaviour:
   RingMesh: {fileID: 5324980356590872437, guid: 6ee904e2e0952cc43b58efaf45cdc591,
     type: 3}
   numberOfMeshes: 12
-  radius: 8
+  radius: 1
   tube: {fileID: 1580781847}
   phaseDifference: 0.82
   ampStep: 1.2
