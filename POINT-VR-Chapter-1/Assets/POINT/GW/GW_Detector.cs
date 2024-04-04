@@ -49,7 +49,8 @@ public class GW_Detector : MonoBehaviour
         angles_array = new List<float>(numberOfMeshes);
         lines = new List<LineRenderer>(numberOfMeshes);
 
-
+        gameObject.SetActive(false); // disabled
+        SphereMesh.SetActive(false);
 
         //Center position of the GameObject this script is attached to, used to spawn particles around it
         Vector3 center = transform.position;
