@@ -123,7 +123,8 @@ public class GW_Ring : MonoBehaviour
             //Debug.Log(posi.y);
 
             //Instantiate particle mesh prefab and store particle GameObject, particle position, and angular distance of the particle in our coordinate arrays
-            GameObject instancer = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            GameObject instancer = GameObject.Instantiate(SphereMesh);
+            instancer.tag = "tp"; // Tag is picked up by trail manager
             instancer.transform.position = posi;
             //Debug.Log(instancer.transform.position.x);
             localArr.Add(instancer);

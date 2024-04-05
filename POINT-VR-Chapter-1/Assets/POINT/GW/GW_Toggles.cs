@@ -51,7 +51,7 @@ public class GW_Toggles : MonoBehaviour
     public void SetPlusMode(Toggle t) {
         if (choice == 0) {
             if (SphereScript.GetPlusMode() == 0) {
-                SphereScript.SetPlusMode(100);
+                SphereScript.SetPlusMode(30);
                 t.isOn = true;
             } else {
                 SphereScript.SetPlusMode(0);
@@ -59,7 +59,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else if (choice == 1) {
             if (TubeScript.GetPlusMode() == 0) {
-                TubeScript.SetPlusMode(100);
+                TubeScript.SetPlusMode(30);
                 t.isOn = true;
             } else {
                 TubeScript.SetPlusMode(0);
@@ -67,7 +67,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else {
             if (MeshScript.GetPlusMode() == 0) {
-                MeshScript.SetPlusMode(100);
+                MeshScript.SetPlusMode(30);
                 t.isOn = true;
             } else {
                 MeshScript.SetPlusMode(0);
@@ -79,7 +79,7 @@ public class GW_Toggles : MonoBehaviour
     public void SetCrossMode(Toggle t) {
         if (choice == 0) {
             if (SphereScript.GetCrossMode() == 0) {
-                SphereScript.SetCrossMode(100);
+                SphereScript.SetCrossMode(30);
                 t.isOn = true;
             } else {
                 SphereScript.SetCrossMode(0);
@@ -87,7 +87,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else if (choice == 1) {
             if (TubeScript.GetCrossMode() == 0) {
-                TubeScript.SetCrossMode(100);
+                TubeScript.SetCrossMode(30);
                 t.isOn = true;
             } else {
                 TubeScript.SetCrossMode(0);
@@ -95,7 +95,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else {
             if (MeshScript.GetCrossMode() == 0) {
-                MeshScript.SetCrossMode(100);
+                MeshScript.SetCrossMode(30);
                 t.isOn = true;
             } else {
                 MeshScript.SetCrossMode(0);
@@ -107,7 +107,7 @@ public class GW_Toggles : MonoBehaviour
     public void SetBreathingMode(Toggle t) {
         if (choice == 0) {
             if (SphereScript.GetBreathingMode() == 0) {
-                SphereScript.SetBreathingMode(100);
+                SphereScript.SetBreathingMode(30);
                 t.isOn = true;
             } else {
                 SphereScript.SetBreathingMode(0);
@@ -115,7 +115,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else if (choice == 1) {
             if (TubeScript.GetBreathingMode() == 0) {
-                TubeScript.SetBreathingMode(100);
+                TubeScript.SetBreathingMode(30);
                 t.isOn = true;
             } else {
                 TubeScript.SetBreathingMode(0);
@@ -123,7 +123,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else {
             if (MeshScript.GetBreathingMode() == 0) {
-                MeshScript.SetBreathingMode(100);
+                MeshScript.SetBreathingMode(30);
                 t.isOn = true;
             } else {
                 MeshScript.SetBreathingMode(0);
@@ -135,7 +135,7 @@ public class GW_Toggles : MonoBehaviour
     public void SetLongitudinalMode(Toggle t) {
         if (choice == 0) {
             if (SphereScript.GetLongitudinalMode() == 0) {
-                SphereScript.SetLongitudinalMode(100);
+                SphereScript.SetLongitudinalMode(30);
                 t.isOn = true;
             } else {
                 SphereScript.SetLongitudinalMode(0);
@@ -143,7 +143,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else if (choice == 1) {
             if (TubeScript.GetLongitudinalMode() == 0) {
-                TubeScript.SetLongitudinalMode(100);
+                TubeScript.SetLongitudinalMode(30);
                 t.isOn = true;
             } else {
                 TubeScript.SetLongitudinalMode(0);
@@ -151,7 +151,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else {
             if (MeshScript.GetLongitudinalMode() == 0) {
-                MeshScript.SetLongitudinalMode(100);
+                MeshScript.SetLongitudinalMode(30);
                 t.isOn = true;
             } else {
                 MeshScript.SetLongitudinalMode(0);
@@ -163,7 +163,7 @@ public class GW_Toggles : MonoBehaviour
     public void SetXMode(Toggle t) {
         if (choice == 0) {
             if (SphereScript.GetXMode() == 0) {
-                SphereScript.SetXMode(100);
+                SphereScript.SetXMode(30);
                 t.isOn = true;
             } else {
                 SphereScript.SetXMode(0);
@@ -171,7 +171,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else if (choice == 1) {
             if (TubeScript.GetXMode() == 0) {
-                TubeScript.SetXMode(100);
+                TubeScript.SetXMode(30);
                 t.isOn = true;
             } else {
                 TubeScript.SetXMode(0);
@@ -179,7 +179,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else {
             if (MeshScript.GetXMode() == 0) {
-                MeshScript.SetXMode(100);
+                MeshScript.SetXMode(30);
                 t.isOn = true;
             } else {
                 MeshScript.SetXMode(0);
@@ -191,7 +191,7 @@ public class GW_Toggles : MonoBehaviour
     public void SetYMode(Toggle t) {
         if (choice == 0) {
             if (SphereScript.GetYMode() == 0) {
-                SphereScript.SetYMode(100);
+                SphereScript.SetYMode(30);
                 t.isOn = true;
             } else {
                 SphereScript.SetYMode(0);
@@ -199,7 +199,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else if (choice == 1) {
             if (TubeScript.GetYMode() == 0) {
-                TubeScript.SetYMode(100);
+                TubeScript.SetYMode(30);
                 t.isOn = true;
             } else {
                 TubeScript.SetYMode(0);
@@ -207,7 +207,7 @@ public class GW_Toggles : MonoBehaviour
             }
         } else {
             if (MeshScript.GetYMode() == 0) {
-                MeshScript.SetYMode(100);
+                MeshScript.SetYMode(30);
                 t.isOn = true;
             } else {
                 MeshScript.SetYMode(0);
