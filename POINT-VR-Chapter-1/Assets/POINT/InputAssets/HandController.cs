@@ -254,7 +254,7 @@ public class HandController : MonoBehaviour
             SnapObject snapObject = grabbingTransform.GetComponent<SnapObject>();
             if (previousParentTransform && previousParentTransform.GetComponent<SnapAnchor>()) previousParentTransform.GetComponent<SnapAnchor>().heldObject = null;
 
-            if (snapObject.currentAnchor)
+            if (snapObject.currentAnchor && snapObject.currentAnchor.GetComponent<SnapAnchor>().heldObject == null)
             {
                 snapped = true;
                 grabbingTransform.SetParent(snapObject.currentAnchor.transform);
