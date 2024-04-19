@@ -10,16 +10,17 @@ public class GW_Sphere : MonoBehaviour
     [SerializeField] private GameObject tube;
     //[SerializeField] private int maxNumberOfSpheres = 12;
 
-    private float PercentOfPlusMode;
-    private float PercentOfCrossMode;
-    private float PercentOfBreathingMode;
-    private float PercentOfLongitudinalMode;
-    private float PercentOfXMode;
-    private float PercentOfYMode;
-
     [SerializeField] private float phaseDifference = 10f;
     [SerializeField] private float ampStep;
     [SerializeField] private float distBetweenRings = 0.1f;
+
+    [Header("For Editor Usage - See Toggle Menus for percent value")]
+    [SerializeField] private float PercentOfPlusMode;
+    [SerializeField] private float PercentOfCrossMode;
+    [SerializeField] private float PercentOfBreathingMode;
+    [SerializeField] private float PercentOfLongitudinalMode;
+    [SerializeField] private float PercentOfXMode;
+    [SerializeField] private float PercentOfYMode;
 
     private List<GameObject> ring_array;
     private List<float> phase_array;

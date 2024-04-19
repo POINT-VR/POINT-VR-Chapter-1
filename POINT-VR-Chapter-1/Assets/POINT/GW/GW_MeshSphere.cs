@@ -10,12 +10,14 @@ public class GW_MeshSphere : MonoBehaviour
     [SerializeField] private GW_GravityScript gravityScript;
 
     [SerializeField] public Toggle[] ModeToggles;
-    private float PercentOfPlusMode;
-    private float PercentOfCrossMode;
-    private float PercentOfBreathingMode;
-    private float PercentOfLongitudinalMode;
-    private float PercentOfXMode;
-    private float PercentOfYMode;
+
+    [Header("For Editor Usage - See Toggle Menus for percent value")]
+    [SerializeField] private float PercentOfPlusMode;
+    [SerializeField] private float PercentOfCrossMode;
+    [SerializeField] private float PercentOfBreathingMode;
+    [SerializeField] private float PercentOfLongitudinalMode;
+    [SerializeField] private float PercentOfXMode;
+    [SerializeField] private float PercentOfYMode;
 
     private Mesh sphereMesh;
     private Vector3[] vertices;
