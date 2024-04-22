@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.0069632446, g: 0.0068257754, b: 0.007311784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3185,8 +3185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b4bf725f1f4a0380903e865599278e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapRingPrefab: {fileID: 6567617309910651400, guid: 01a66bc430f0efd4b8103b9278e6baed,
+  snapRingPrefab: {fileID: 8131705917363199730, guid: cdd4834750d07984e8c825c1f64a333a,
     type: 3}
+  correctSprite: {fileID: 21300000, guid: cd4e78b9d0291734bb48284037659f64, type: 3}
+  wrongSprite: {fileID: 21300000, guid: 2ce5eacb6b6ee6f4b829165a3c8c1375, type: 3}
   snapRingCount: 5
   padding: 0.64
   NextTaskButton: {fileID: 914013651}
