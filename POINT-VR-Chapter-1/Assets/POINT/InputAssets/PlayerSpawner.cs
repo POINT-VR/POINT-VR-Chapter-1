@@ -13,7 +13,7 @@ public class PlayerSpawner : MonoBehaviour
         activePlayer = Instantiate(player, transform);
     }
 
-    public void UIChangeScene(int scene)
+    public void UIChangeScene(string scene)
     {
         if (activePlayer != null)
         {

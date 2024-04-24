@@ -60,7 +60,7 @@ public class SceneController : MonoBehaviour
     /// Saves the player data to the GameManager and loads a new scene
     /// </summary>
     /// <param name="scene">The scene index as assigned in the build settings</param>
-    public void ChangeScene(int scene)
+    public void ChangeScene(string scene)
     {
         GameManager.PlayerData data = new GameManager.PlayerData
         {
