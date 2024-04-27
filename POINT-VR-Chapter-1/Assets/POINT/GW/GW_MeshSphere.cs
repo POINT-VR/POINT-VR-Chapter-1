@@ -66,7 +66,8 @@ public class GW_MeshSphere : MonoBehaviour
         for (var i = 0; i < vertices.Length; i++)
         {
             //vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], center, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
-            vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], xyRingCenters[i], 0.25f*verticesCenters[i].magnitude, 0.0f, 0.0f, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+            //vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], xyRingCenters[i], 0.25f*verticesCenters[i].magnitude, 0.0f, 0.0f, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+            vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], 0.0f, 0.0f, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
         }
         // assign the local vertices array into the vertices array of the Mesh.
         sphereMesh.vertices = vertices;

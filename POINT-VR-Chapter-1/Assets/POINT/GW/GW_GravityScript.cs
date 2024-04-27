@@ -38,6 +38,39 @@ public class GW_GravityScript : MonoBehaviour
          return plus + cross + breathing + longitudinal + x + y;
      }**/
 
+    public Vector3 CalculateOscillations(Vector3 vertex, float ampIndex = 0.0f, float phase = 0.0f, float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
+        float PercentOfLongitudinalMode = 0.0f,
+        float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
+    {
+        
+
+
+        Vector3 output;
+        output.x = vertex.x
+            + PercentOfPlusMode / 100.0f * vertex.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfCrossMode / 100.0f * vertex.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
+            
+            + PercentOfBreathingMode / 100.0f * vertex.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfXMode / 100.0f * vertex.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+        
+        output.y = vertex.y
+            - PercentOfPlusMode / 100.0f * vertex.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfCrossMode / 100.0f * vertex.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
+            
+            + PercentOfBreathingMode / 100.0f * vertex.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            - PercentOfYMode / 100.0f * vertex.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+
+        output.z = vertex.z
+            + PercentOfLongitudinalMode / 100.0f * vertex.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + ampIndex)
+            + PercentOfXMode / 100.0f * vertex.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
+            + PercentOfYMode / 100.0f * vertex.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
+
+        return output;
+
+    }
+
+
     /****
      * UNIFIED FUNCTION FOR ALL MODES OF POLARIZATION
      * 
