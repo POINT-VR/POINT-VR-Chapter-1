@@ -59,7 +59,7 @@ public class GW_GravityScript : MonoBehaviour
             + PercentOfCrossMode / 100.0f * vertex.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
             
             + PercentOfBreathingMode / 100.0f * vertex.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
-            - PercentOfYMode / 100.0f * vertex.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+            - PercentOfYMode / 100.0f * vertex.z * Mathf.Sin(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
 
         output.z = vertex.z
             + PercentOfLongitudinalMode / 100.0f * vertex.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + ampIndex)
