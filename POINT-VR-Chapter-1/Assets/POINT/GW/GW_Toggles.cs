@@ -32,7 +32,8 @@ public class GW_Toggles : MonoBehaviour
 
         player = GameObject.FindGameObjectsWithTag("Player")[0];
         gameObject.transform.SetParent(player.transform);
-        gameObject.transform.localPosition = new Vector3(20, -3, 3);
+        gameObject.transform.localPosition = new Vector3(9.93f, -3.12f, 19.37f);
+        gameObject.transform.localRotation= Quaternion.Euler(-14.30f, -52.70f, 0.95f);
 
         choice = 0;
 
@@ -41,7 +42,7 @@ public class GW_Toggles : MonoBehaviour
         MeshScript = mesh.GetComponent<GW_MeshSphere>();
 
         sphere.SetActive(true);
-        tube.SetActive(false);
+        tube.SetActive(true); // Tube is set active here and inactive in Trails.cs
         mesh.SetActive(false);
 
         // set sphere toggle on

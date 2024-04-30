@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Trails : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject[] tps;
+    public GameObject[] x;
     [SerializeField]
     public float time = 1.0f;
+    public bool trails_on = false;
     private bool is_empty = true;
 
     [SerializeField]
@@ -17,15 +19,23 @@ public class Trails : MonoBehaviour
 
     private Color startColor = Color.white;
     private Color endColor = Color.black;
+
+    [SerializeField] private GameObject sphere;
+    [SerializeField] private GameObject tube;
+    [SerializeField] private Toggle t;
+
     void Update()
     {
-        if (is_empty)
+        if (is_empty) // Gets called first frame
         {
-            tps = GameObject.FindGameObjectsWithTag("tp");
+            // not the best solution to get the particles of the sphere and 
+            // tube in an array but works
+            tps = GameObject.FindGameObjectsWithTag("tp"); 
             AddTrails();
             if (tps.Length != 0)
             {
                 is_empty = false;
+                tube.SetActive(false);  
             }
         }
         //print(tps.Length);
@@ -34,6 +44,7 @@ public class Trails : MonoBehaviour
             
             TrailRenderer tr = p.GetComponent<TrailRenderer>();
             tr.time = time;
+            tr.enabled = trails_on;
         }
     }
 
@@ -51,4 +62,10 @@ public class Trails : MonoBehaviour
         }
     }
     
+    // Meant to be used in UI Collider's On Cast for the Trail Toggles
+    public void TrailsOnChange()
+    {
+        trails_on = !trails_on;
+        t.isOn = trails_on;
+    }
 }
