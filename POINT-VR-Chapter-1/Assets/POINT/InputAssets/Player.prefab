@@ -6725,7 +6725,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Two Masses
+  m_text: Ranking Multiple Masses
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b43c81a05c36074bb7539933754731d, type: 2}
   m_sharedMaterial: {fileID: 9192586152482494649, guid: 9b43c81a05c36074bb7539933754731d,
@@ -7360,7 +7360,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Big Mass
+  m_text: 'Comparison of Two Masses '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b43c81a05c36074bb7539933754731d, type: 2}
   m_sharedMaterial: {fileID: 9192586152482494649, guid: 9b43c81a05c36074bb7539933754731d,

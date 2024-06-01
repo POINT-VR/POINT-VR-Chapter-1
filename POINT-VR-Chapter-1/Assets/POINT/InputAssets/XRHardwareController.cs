@@ -104,6 +104,10 @@ public class XRHardwareController : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // if (inputDevice==null)
+        // {
+        //     ReConnect();
+        // }
         if (hardwareType == Hardware.Headset) //The headset will not update in Update()
         {
             return;
