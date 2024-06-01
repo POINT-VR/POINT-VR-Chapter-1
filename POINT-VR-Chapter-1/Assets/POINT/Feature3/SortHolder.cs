@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
-
+using UnityEngine.UI;
 using UnityEngine;
 
 
 public class SortHolder : MonoBehaviour
 {
     public GameObject snapRingPrefab;
+    [SerializeField] private Sprite correctSprite;
+    [SerializeField] private Sprite wrongSprite;
     [SerializeField] private int snapRingCount = 5;
     [SerializeField] private float padding = 0.15f;
     [SerializeField] private GameObject NextTaskButton;
@@ -59,14 +61,19 @@ public class SortHolder : MonoBehaviour
         bool isCorrectOrder = true;
         for (int i = 0; i < snapRingCount; ++i)
         {
+            snapRings[i].GetComponentInChildren<Image>().enabled = true;
             if (masses[i] != snapRings[i].GetComponentInChildren<Rigidbody>().mass)
             {
                 isCorrectOrder = false;
                 snapRings[i].GetComponent<MeshRenderer>().material.color = Color.red;
+                snapRings[i].GetComponentInChildren<Image>().sprite = wrongSprite;
+                snapRings[i].GetComponentInChildren<Image>().color = Color.red;
             }
             else
             {
                 snapRings[i].GetComponent<MeshRenderer>().material.color = Color.green;
+                snapRings[i].GetComponentInChildren<Image>().sprite = correctSprite;
+                snapRings[i].GetComponentInChildren<Image>().color = Color.green;
             }
         }
 

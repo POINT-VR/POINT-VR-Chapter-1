@@ -14,7 +14,7 @@ public class SnapObject : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         SnapAnchor anchor = other.GetComponent<SnapAnchor>();
-        if (anchor && !currentAnchor && !anchor.heldObject && anchor.snapTag == snapTag)
+        if (anchor && !currentAnchor && anchor.snapTag == snapTag)
         {
             currentAnchor = other;
         }
@@ -24,6 +24,10 @@ public class SnapObject : MonoBehaviour
     {
         if (other.GetComponent<SnapAnchor>() && other == currentAnchor)
         {
+            if (other.GetComponent<SnapAnchor>().heldObject == this.gameObject)
+            {
+                other.GetComponent<SnapAnchor>().heldObject = null;
+            }
             currentAnchor = null;
         }
     }
