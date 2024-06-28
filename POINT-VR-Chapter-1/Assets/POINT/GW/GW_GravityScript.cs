@@ -38,6 +38,8 @@ public class GW_GravityScript : MonoBehaviour
          return plus + cross + breathing + longitudinal + x + y;
      }**/
 
+    // Alex Schaffer's CalculateOscillations for usage with MeshCube
+    // See GW_MeshSphere.cs and GW_MeshTube.cs for its usage.
     public Vector3 CalculateOscillations(Vector3 vertex, float ampIndex = 0.0f, float phase = 0.0f, float PercentOfPlusMode = 0.0f, float PercentOfCrossMode = 0.0f, float PercentOfBreathingMode = 0.0f,
         float PercentOfLongitudinalMode = 0.0f,
         float PercentOfXMode = 0.0f, float PercentOfYMode = 0.0f)
