@@ -999,6 +999,7 @@ GameObject:
   - component: {fileID: 853255868}
   - component: {fileID: 853255867}
   - component: {fileID: 853255869}
+  - component: {fileID: 853255870}
   m_Layer: 0
   m_Name: MeshSphere
   m_TagString: Untagged
@@ -1068,6 +1069,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 1
   speed: 1
+--- !u!114 &853255870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853255866}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0df402be9a264840b0505cd45e4ce35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TubeMeshObject: {fileID: 2000763356}
+  gravityScript: {fileID: 853255869}
+  ModeToggles: []
+  phaseDifference: 1
+  ampStep: 1
+  PercentOfPlusMode: 0
+  PercentOfCrossMode: 0
+  PercentOfBreathingMode: 0
+  PercentOfLongitudinalMode: 0
+  PercentOfXMode: 0
+  PercentOfYMode: 0
 --- !u!114 &885846453 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1749310009956467573, guid: d2d91814e8a9d354dab4d5edf3c74a04,

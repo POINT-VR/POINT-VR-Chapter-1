@@ -313,6 +313,23 @@ public class GW_Toggles : MonoBehaviour
         t.isOn = !t.isOn;
     }
 
+    public void SetMeshTube(Toggle t) {
+        if (t.isOn)
+            mesh.SetActive(false);
+        else
+            mesh.SetActive(true);
+
+        sphere.SetActive(false);
+        tube.SetActive(false);
+
+        // choice = 2;
+        
+        if (!t.isOn)
+            SwitchStructures(2);
+        
+        t.isOn = !t.isOn;
+    }
+
     void SwitchStructures(int structure) {
         int old_choice = choice; // just for toggle resets
         int i = 0;
