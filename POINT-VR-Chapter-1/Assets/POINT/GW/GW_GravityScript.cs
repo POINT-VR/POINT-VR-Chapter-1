@@ -53,7 +53,7 @@ public class GW_GravityScript : MonoBehaviour
             + PercentOfCrossMode / 100.0f * vertex.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
             
             + PercentOfBreathingMode / 100.0f * vertex.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
-            + PercentOfXMode / 100.0f * vertex.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfXMode / 100.0f * vertex.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase);
 
         
         output.y = vertex.y
@@ -61,12 +61,12 @@ public class GW_GravityScript : MonoBehaviour
             + PercentOfCrossMode / 100.0f * vertex.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
             
             + PercentOfBreathingMode / 100.0f * vertex.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
-            - PercentOfYMode / 100.0f * vertex.z * Mathf.Sin(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfYMode / 100.0f * vertex.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase);
 
         output.z = vertex.z
-            + PercentOfLongitudinalMode / 100.0f * vertex.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + ampIndex)
-            + PercentOfXMode / 100.0f * vertex.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
-            + PercentOfYMode / 100.0f * vertex.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfLongitudinalMode / 100.0f * vertex.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfXMode / 100.0f * vertex.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfYMode / 100.0f * vertex.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase);
 
         return output;
 
@@ -96,7 +96,7 @@ public class GW_GravityScript : MonoBehaviour
             + PercentOfPlusMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
             + PercentOfCrossMode / 100.0f * unitVector.y * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
             + PercentOfBreathingMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
-            + PercentOfXMode / 100.0f * Vector3.forward.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfXMode / 100.0f * Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase);
 
         //Debug.Log(unitVector.x);
 
@@ -106,12 +106,12 @@ public class GW_GravityScript : MonoBehaviour
             - PercentOfPlusMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
             + PercentOfCrossMode / 100.0f * unitVector.x * amplitude * Mathf.Sin(Time.time * speed * Mathf.Deg2Rad + phase)
             + PercentOfBreathingMode / 100.0f * unitVector.y * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
-            - PercentOfYMode / 100.0f * Vector3.forward.z * Mathf.Cos(ampIndex) * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfYMode / 100.0f * Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase);
 
         output.z = pos.z
-            + PercentOfLongitudinalMode / 100.0f * Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + ampIndex)
-            + PercentOfXMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad)
-            + PercentOfYMode / 100.0f * unitVector.y *  amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad);
+            + PercentOfLongitudinalMode / 100.0f * Vector3.forward.z * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfXMode / 100.0f * unitVector.x * amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase)
+            + PercentOfYMode / 100.0f * unitVector.y *  amplitude * Mathf.Cos(Time.time * speed * Mathf.Deg2Rad + phase);
 
         return output;
     }
