@@ -17,6 +17,9 @@ public class GW_MeshTube : MonoBehaviour
 
     [SerializeField] public Toggle[] ModeToggles;
 
+    [SerializeField] private float phaseDifference = 1.0f;
+    [SerializeField] private float ampStep = 1.0f;
+
     [Header("For Editor Usage - See Toggle Menus for percent value")]
     [SerializeField] private float PercentOfPlusMode;
     [SerializeField] private float PercentOfCrossMode;
@@ -73,7 +76,7 @@ public class GW_MeshTube : MonoBehaviour
         {
             //vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], center, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
             //vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], xyRingCenters[i], 0.25f*verticesCenters[i].magnitude, 0.0f, 0.0f, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
-            vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], 0.0f, verticesCenters[i].z, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
+            vertices[i] = gravityScript.CalculateOscillations(verticesCenters[i], ampStep*verticesCenters[i].z, phaseDifference*verticesCenters[i].z, PercentOfPlusMode, PercentOfCrossMode, PercentOfBreathingMode, PercentOfLongitudinalMode, PercentOfXMode, PercentOfYMode);
         }
         // assign the local vertices array into the vertices array of the Mesh.
         tubeMesh.vertices = vertices;
