@@ -82,17 +82,18 @@ public class Scene1Manager : MonoBehaviour
         Debug.Log("Look! A mass just appeared in space.");
         yield return new WaitForSeconds(2);
         Debug.Log("This object is currently located at the origin, so its position is (0, 0, 0). Now, reach out and drag the object along the grid lines to get to the desired location. You may follow the example path or make your own path.");
-
         //EndPoint stuff goes here
         massObject.transform.position = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.Activate();
-        // Once the desired location is reached
+        // TODO: Once the desired location is reached
         yield return new WaitForSeconds(4);
-        Debug.Log("Nice job."); 
+        Debug.Log("Nice job.");
         yield return new WaitForSeconds(2);
+        // TODO: Object needs to be reset to origin
         Debug.Log("Now, try getting the object to the same point by taking a different path.");
         yield return new WaitForSeconds(5);
+        // TODO: Continue once player reaches desired location again
         yield break;
     }
 
@@ -100,12 +101,15 @@ public class Scene1Manager : MonoBehaviour
     {
         // Temporary name for the objective until the objectives are implemented
         floatingObjectives.NewObjective("Introduction to the dimension of time");
+        // TODO: Update graphic from previous objective to include 4 cords, add a clock from scene 2 with increasing time, t cord increases with increasing clock time
         Debug.Log("However, this spatial description is not enough. Let's say you want to meet up with a friend. You will have to choose where to meet, and also when to meet. To account for this new information, we need to add one more dimension to our coordinate system, time.");
         yield return new WaitForSeconds(5);
         Debug.Log("Time is different from the other dimensions because we can only move forward in time. Notice how the time on the clock only ever increases."); 
         yield return new WaitForSeconds(5);
         Debug.Log("Move the object as you like and observe how the description of its spatial location changes while time keeps moving forward. Press the 'continue' button when you are ready to move on."); 
         yield return new WaitForSeconds(5);
+        // TODO: Player can move around the object and see how the coordinates change (time increases continuously)
+        // TODO: Continue button appears to continue when ready
         yield break;
     }
     IEnumerator ObjectiveFour()
@@ -113,9 +117,11 @@ public class Scene1Manager : MonoBehaviour
         // Temporary name for the objective until the objectives are implemented
         floatingObjectives.NewObjective("Introduction to 4D Spacetime");
         Debug.Log("Together, the information of the 1D time and the 3D location of an event is what we call 4D spacetime. Spacetime is what makes up the very fabric of our universe. It's all around you, stretching out in every direction and forever into the future."); 
+        // TODO: Turn axes into infinite grid
         yield return new WaitForSeconds(5);
         Debug.Log("Spacetime is not a rigid or fixed object. It can curve."); 
         yield return new WaitForSeconds(2);
+        // TODO: Make spacetime curve toward yellow sphere
         Debug.Log("In fact, Einstein described gravity as the curvature of spacetime. Close to a very massive object, where gravity is strong, the duration of an event and the distance between two events can stretch. John Wheeler described this effect by saying 'Spacetime tells matter how to move; matter tells spacetime how to curve.'"); 
         yield return new WaitForSeconds(5);
         Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once, so we are going to show you only a small portion of the spacetime."); 
