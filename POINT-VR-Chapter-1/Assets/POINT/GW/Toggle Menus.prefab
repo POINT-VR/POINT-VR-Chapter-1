@@ -546,7 +546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 281009727049876515}
   m_Layer: 5
-  m_Name: Test Particle
+  m_Name: Theory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -664,12 +664,12 @@ GameObject:
   - component: {fileID: 3222225427100294820}
   - component: {fileID: 610411950473057629}
   m_Layer: 5
-  m_Name: Toggle Mesh Prop
+  m_Name: Toggle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6027920145997629321
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1828,7 +1828,7 @@ RectTransform:
   - {fileID: 7703238603309610186}
   - {fileID: 6027920145997629321}
   m_Father: {fileID: 7703238604134846809}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3266,7 +3266,7 @@ GameObject:
   - component: {fileID: 7703238602939601396}
   - component: {fileID: 7703238602939601397}
   m_Layer: 5
-  m_Name: Toggle Sphere
+  m_Name: Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3715,7 +3715,7 @@ GameObject:
   - component: {fileID: 7703238603309610188}
   - component: {fileID: 7703238603309610189}
   m_Layer: 5
-  m_Name: Toggle Mesh Instant
+  m_Name: Toggle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5089,7 +5089,7 @@ GameObject:
   - component: {fileID: 7703238604042689652}
   - component: {fileID: 7703238604042689653}
   m_Layer: 5
-  m_Name: Toggle Tube
+  m_Name: Toggle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5684,8 +5684,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7703238603594292271}
-  - {fileID: 623008302965862183}
   - {fileID: 7703238602383872021}
+  - {fileID: 623008302965862183}
   - {fileID: 6994607463634772093}
   - {fileID: 709155460860879158}
   m_Father: {fileID: 7703238603211570007}
@@ -6961,7 +6961,7 @@ GameObject:
   m_Component:
   - component: {fileID: 709155460860879158}
   m_Layer: 5
-  m_Name: Toggles
+  m_Name: Velocity Toggles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7095,7 +7095,7 @@ RectTransform:
   - {fileID: 2424661618536753662}
   - {fileID: 7357515237640839635}
   m_Father: {fileID: 7703238604134846809}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

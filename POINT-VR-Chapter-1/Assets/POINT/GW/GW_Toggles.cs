@@ -19,16 +19,18 @@ public class GW_Toggles : MonoBehaviour
 
     private GW_Sphere SphereScript;
     private GW_Tube TubeScript;
-    private GW_MeshSphere MeshScript;
+
+    private GW_MeshSphere MeshSphere;
+    private GW_MeshTube MeshTube;
 
     private int choice;
 
     // Start is called before the first frame update
     void Start()
     {
-        ModeMenuHolderToggles = gameObject.transform.GetChild(1).GetChild(0).GetChild(1).gameObject;
-        TheoryMenuHolderToggles = gameObject.transform.GetChild(2).GetChild(0).GetChild(1).gameObject;
-        RingMenuHolderToggles = gameObject.transform.GetChild(3).GetChild(0).GetChild(1).gameObject;
+        RingMenuHolderToggles = gameObject.transform.GetChild(2).GetChild(0).GetChild(1).gameObject;
+        ModeMenuHolderToggles = gameObject.transform.GetChild(3).GetChild(0).GetChild(1).gameObject;
+        TheoryMenuHolderToggles = gameObject.transform.GetChild(4).GetChild(0).GetChild(1).gameObject;
 
         player = GameObject.FindGameObjectsWithTag("Player")[0];
         gameObject.transform.SetParent(player.transform);
@@ -39,7 +41,11 @@ public class GW_Toggles : MonoBehaviour
 
         SphereScript = sphere.GetComponent<GW_Sphere>();
         TubeScript = tube.GetComponent<GW_Tube>();
-        MeshScript = mesh.GetComponent<GW_MeshSphere>();
+
+        MeshSphere = mesh.GetComponent<GW_MeshSphere>(); // MeshSphere is Instantaneous GWs
+        MeshSphere.enabled = true;
+        MeshTube = mesh.GetComponent<GW_MeshTube>(); // MeshTube is propgating
+        MeshTube.enabled = false;
 
         sphere.SetActive(true);
         tube.SetActive(true); // Tube is set active here and inactive in Trails.cs
@@ -67,11 +73,18 @@ public class GW_Toggles : MonoBehaviour
                 t.isOn = false;
             }
         } else {
-            if (MeshScript.GetPlusMode() == 0) {
-                MeshScript.SetPlusMode(30);
+            if (MeshSphere.GetPlusMode() == 0) {
+                MeshSphere.SetPlusMode(30);
                 t.isOn = true;
             } else {
-                MeshScript.SetPlusMode(0);
+                MeshSphere.SetPlusMode(0);
+                t.isOn = false;
+            }
+            if (MeshTube.GetPlusMode() == 0) {
+                MeshTube.SetPlusMode(30);
+                t.isOn = true;
+            } else {
+                MeshTube.SetPlusMode(0);
                 t.isOn = false;
             }
         }
@@ -95,11 +108,18 @@ public class GW_Toggles : MonoBehaviour
                 t.isOn = false;
             }
         } else {
-            if (MeshScript.GetCrossMode() == 0) {
-                MeshScript.SetCrossMode(30);
+            if (MeshSphere.GetCrossMode() == 0) {
+                MeshSphere.SetCrossMode(30);
                 t.isOn = true;
             } else {
-                MeshScript.SetCrossMode(0);
+                MeshSphere.SetCrossMode(0);
+                t.isOn = false;
+            }
+            if (MeshTube.GetCrossMode() == 0) {
+                MeshTube.SetCrossMode(30);
+                t.isOn = true;
+            } else {
+                MeshTube.SetCrossMode(0);
                 t.isOn = false;
             }
         }
@@ -123,11 +143,18 @@ public class GW_Toggles : MonoBehaviour
                 t.isOn = false;
             }
         } else {
-            if (MeshScript.GetBreathingMode() == 0) {
-                MeshScript.SetBreathingMode(30);
+            if (MeshSphere.GetBreathingMode() == 0) {
+                MeshSphere.SetBreathingMode(30);
                 t.isOn = true;
             } else {
-                MeshScript.SetBreathingMode(0);
+                MeshSphere.SetBreathingMode(0);
+                t.isOn = false;
+            }
+            if (MeshTube.GetBreathingMode() == 0) {
+                MeshTube.SetBreathingMode(30);
+                t.isOn = true;
+            } else {
+                MeshTube.SetBreathingMode(0);
                 t.isOn = false;
             }
         }
@@ -151,11 +178,18 @@ public class GW_Toggles : MonoBehaviour
                 t.isOn = false;
             }
         } else {
-            if (MeshScript.GetLongitudinalMode() == 0) {
-                MeshScript.SetLongitudinalMode(30);
+            if (MeshSphere.GetLongitudinalMode() == 0) {
+                MeshSphere.SetLongitudinalMode(30);
                 t.isOn = true;
             } else {
-                MeshScript.SetLongitudinalMode(0);
+                MeshSphere.SetLongitudinalMode(0);
+                t.isOn = false;
+            }
+            if (MeshTube.GetLongitudinalMode() == 0) {
+                MeshTube.SetLongitudinalMode(30);
+                t.isOn = true;
+            } else {
+                MeshTube.SetLongitudinalMode(0);
                 t.isOn = false;
             }
         }
@@ -179,11 +213,18 @@ public class GW_Toggles : MonoBehaviour
                 t.isOn = false;
             }
         } else {
-            if (MeshScript.GetXMode() == 0) {
-                MeshScript.SetXMode(30);
+            if (MeshSphere.GetXMode() == 0) {
+                MeshSphere.SetXMode(30);
                 t.isOn = true;
             } else {
-                MeshScript.SetXMode(0);
+                MeshSphere.SetXMode(0);
+                t.isOn = false;
+            }
+            if (MeshTube.GetXMode() == 0) {
+                MeshTube.SetXMode(30);
+                t.isOn = true;
+            } else {
+                MeshTube.SetXMode(0);
                 t.isOn = false;
             }
         }
@@ -207,11 +248,18 @@ public class GW_Toggles : MonoBehaviour
                 t.isOn = false;
             }
         } else {
-            if (MeshScript.GetYMode() == 0) {
-                MeshScript.SetYMode(30);
+            if (MeshSphere.GetYMode() == 0) {
+                MeshSphere.SetYMode(30);
                 t.isOn = true;
             } else {
-                MeshScript.SetYMode(0);
+                MeshSphere.SetYMode(0);
+                t.isOn = false;
+            }
+            if (MeshTube.GetYMode() == 0) {
+                MeshTube.SetYMode(30);
+                t.isOn = true;
+            } else {
+                MeshTube.SetYMode(0);
                 t.isOn = false;
             }
         }
@@ -301,6 +349,8 @@ public class GW_Toggles : MonoBehaviour
             mesh.SetActive(false);
         else
             mesh.SetActive(true);
+            MeshSphere.enabled = true;
+            MeshTube.enabled = false;
 
         sphere.SetActive(false);
         tube.SetActive(false);
@@ -318,6 +368,8 @@ public class GW_Toggles : MonoBehaviour
             mesh.SetActive(false);
         else
             mesh.SetActive(true);
+            MeshSphere.enabled = false;
+            MeshTube.enabled = true;
 
         sphere.SetActive(false);
         tube.SetActive(false);
