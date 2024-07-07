@@ -1,0 +1,23 @@
+﻿Key,English(en),Spanish(es)
+MENU_START,Press to Start,Pulsa para empezar
+MENU_VERSION,Version:,Versión
+MENU_GENERAL,General,Menú General
+MENU_CONTROLS,Controls,Controles
+MENU_SCENES,Scenes,Escenas
+SETTINGS_OFF,Off,Apagado
+SETTINGS_ON,On,Encendido
+SETTINGS_NARRATION_VOL,Narration Volume,Volumen de Narración
+SETTINGS_BACKGROUND_VOL,Background Volume,Volumen de Fondo
+SETTINGS_SUBTITLES,Subtitles,Subtítulos
+SETTINGS_SUBS_DISABLED,Disabled,Apagados
+SETTINGS_SUBS_ENGLISH,English,Inglés
+SETTINGS_LIVE_CONTROLLER_DIAGRAMS,Live Controller Diagrams,Diagrama de los controles en tiempo real
+SETTINGS_HAPTICS,Haptics,Vibración de control
+SETTINGS_FLOOR,Floor,Piso
+SETTINGS_FLOOR_DISCLAIMER,Warning: Presence of floor is intended for user's comfort within the simulation and is NOT physically accurate!,¡Cuidado: La presencia del piso es intencionada para la comodidad del usuario dentro de la simulación pero este NO indica la ubicación real del piso!  
+CURRENT_OBJECTIVE,Current Objective,Objetivo Actual
+SCENES_CHAPTER,Chapter,Capítulo
+SCENES_SCENE,Scene,Escena
+SCENES_SMALL_MASS,Small Mass,Masa Pequeña
+SCENES_BIG_MASS,Big Mass,Masa Grande
+SCENES_TWO_MASSES,Two Masses,Dos Masas
