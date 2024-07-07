@@ -247,39 +247,14 @@ public class HandController : MonoBehaviour
         {
             return;
         }
-
-        bool snapped = false;
-        if (grabbingTransform.GetComponent<SnapObject>())
-        {
-            SnapObject snapObject = grabbingTransform.GetComponent<SnapObject>();
-            if (previousParentTransform && previousParentTransform.GetComponent<SnapAnchor>()) previousParentTransform.GetComponent<SnapAnchor>().heldObject = null;
-
-            if (snapObject.currentAnchor && snapObject.currentAnchor.GetComponent<SnapAnchor>().heldObject == null)
-            {
-                snapped = true;
-                grabbingTransform.SetParent(snapObject.currentAnchor.transform);
-                grabbingTransform.localPosition = snapObject.currentAnchor.GetComponent<BoxCollider>().center;
-                snapObject.currentAnchor.GetComponent<SnapAnchor>().heldObject = snapObject;
-                //snapObject.currentAnchor = null;
-
-            }
-            else
-            {
-                grabbingTransform.SetParent(null);
-            }
-        }
-        else
-        {
-            grabbingTransform.SetParent(previousParentTransform);
-        }
-
+        grabbingTransform.SetParent(previousParentTransform);
         GravityScript grav = grabbingTransform.GetComponent<GravityScript>();
         if (grav != null)
         {
             grav.enabled = gravEnabled;
         }
         // Add velocity to grabbed object.
-        if (!snapped) grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*hardwareController.Velocity; //2.5f*(grabbingTransformVelocity + velocityPrev);
+        grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*hardwareController.Velocity; //2.5f*(grabbingTransformVelocity + velocityPrev);
         grabbingTransform = null;
         transform.GetComponent<Animator>().SetBool("isGrabbing", false);
     }
@@ -300,11 +275,6 @@ public class HandController : MonoBehaviour
             otherHand.Release();
         }
         previousParentTransform = grabbingTransform.parent;
-        if (grabbingTransform && grabbingTransform.GetComponent<SnapObject>()
-                && previousParentTransform && previousParentTransform.GetComponent<SnapAnchor>())
-        {
-            previousParentTransform.GetComponent<SnapAnchor>().heldObject = null;
-        }
         grabbingTransform.SetParent(transform);
         grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed object's velocity to zero
         velocityPrev = Vector3.zero;
@@ -344,10 +314,10 @@ public class HandController : MonoBehaviour
                 if (!containsScrollRect) return;
             }
             GetComponent<AudioSource>().PlayScheduled(0);
-            ICollidableGraphic activeUICollider = hit.collider.gameObject.GetComponent<ICollidableGraphic>();
-            if (activeUICollider != null) //Collider is a Collidable graphic: invokes assigned event
+            UICollider activeUICollider = hit.collider.gameObject.GetComponent<UICollider>();
+            if (activeUICollider != null) //Collider is a UICollider: invokes assigned event
             {
-                activeUICollider.OnCast();
+                activeUICollider.OnCast.Invoke();
             }
             CheckSlider(hit);
             CheckScrollbar(hit);

@@ -1,8 +1,0 @@
-1
-00:00:00,000 --> 00:00:04,000
-We will use a second clock at a different location in space for comparison,
-
-2
-00:00:04,000 --> 00:00:07,000
-so that we can more easily see gravity's effect on time.
-

@@ -1,8 +1,0 @@
-1
-00:00:00,000 --> 00:00:04,080
-Now that we have had a chance to explore how space curvature relates to gravity, let's
-
-2
-00:00:04,080 --> 00:00:07,680
-investigate how our final dimension, time, is connected to gravity.
-

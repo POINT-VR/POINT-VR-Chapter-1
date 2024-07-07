@@ -75,9 +75,7 @@ crashlytics-build.properties
 /[Pp]rojectSettings/EditorBuildSettings.asset
 /[Pp]ackages/packages-lock.json
 
-
-# The Emulator items should not be commited to the main project
+# The Emulator
 /Assets/POINT/InputAssets/EditorTesting/
 /Assets/POINT/InputAssets/EditorTesting.meta
-**/EmulatorComponents/*
-EmulatorComponents.meta
+

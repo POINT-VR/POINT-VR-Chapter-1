@@ -1,8 +1,0 @@
-1
-00:00:00,000 --> 00:00:04,160
-Now that we have tested both of our predictions, let's take a moment to reflect.
-
-2
-00:00:04,160 --> 00:00:06,680
-Did your observations agree with your original predictions?
-
