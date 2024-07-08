@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     // Constants
-    private const float ACTIVE_BUTTON_FONT_SIZE = 64.0f;
-    private const float INACTIVE_BUTTON_FONT_SIZE = 48.0f;
+    private const float ACTIVE_BUTTON_MARGIN = 0.0f;
+    private const float INACTIVE_BUTTON_MARGIN = 10.0f;
     private Color32 ACTIVE_BUTTON_COLOR = new Color32(255, 255, 255, 255);
     private Color32 INACTIVE_BUTTON_COLOR = new Color32(123, 231, 255, 127);
 
@@ -75,12 +75,12 @@ public class UIManager : MonoBehaviour
                     {
                         if (i == button.transform.GetSiblingIndex())
                         {
-                            textComponent.fontSize = ACTIVE_BUTTON_FONT_SIZE;
+                            textComponent.margin = ACTIVE_BUTTON_MARGIN * Vector4.one;
                             textComponent.color = ACTIVE_BUTTON_COLOR;
                         }
                         else
                         {
-                            textComponent.fontSize = INACTIVE_BUTTON_FONT_SIZE;
+                            textComponent.margin = INACTIVE_BUTTON_MARGIN * Vector4.one;
                             textComponent.color = INACTIVE_BUTTON_COLOR;
                         }
                     }

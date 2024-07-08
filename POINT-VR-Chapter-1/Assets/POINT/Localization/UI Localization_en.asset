@@ -90,13 +90,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11747763195920
-    m_Localized: Chapter
+    m_Localized: Chapter {number}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - id: 0
   - m_Id: 11747763195921
-    m_Localized: Scene
+    m_Localized: Scene {number}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - id: 0
   - m_Id: 11747763195922
     m_Localized: Small Mass
     m_Metadata:
@@ -114,4 +116,4 @@ MonoBehaviour:
     00000000:
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 0090403daf0a0000
+        m_Entries: 0090403daf0a00001090403daf0a00001190403daf0a0000
