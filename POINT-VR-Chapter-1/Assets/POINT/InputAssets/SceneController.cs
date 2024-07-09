@@ -59,7 +59,7 @@ public class SceneController : MonoBehaviour
         gripNotice.SetActive(data.gripNoticeEnabled);
         functional.value = data.functionalVolume;
         aesthetic.value = data.aestheticVolume;
-        uiManager.ActivateLanguageToggle(toggleBase.GetChild((int)GameManager.Instance.languageSelected).gameObject);
+        uiManager.ActivateSubtitleLanguageToggle(toggleBase.GetChild((int)GameManager.Instance.subtitlesLanguage).gameObject);
         music.mute = false;
         floorVisible = data.floorRendered;
         uiManager.ActivateFloorToggle(floorVisible);

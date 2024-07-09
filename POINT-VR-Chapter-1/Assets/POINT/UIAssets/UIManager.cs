@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -114,10 +115,10 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Toggles on selected toggle (i.e. radio button) and switches off everything else
-    /// </summary>
+    /// Toggles on selected toggle (i.e. radio button) and switches off everything else.
+    /// Also changes the locale (thus changing interface language)
     /// <param name="toggle"></param>
-    public void ActivateLanguageToggle(GameObject toggle)
+    public void ActivateLocaleToggle(GameObject toggle)
     {
         Transform parent = toggle.transform.parent;
         if (parent != null)
@@ -130,7 +131,36 @@ public class UIManager : MonoBehaviour
                     if (i == toggle.transform.GetSiblingIndex()) // selected toggle
                     {
                         imageComponent.sprite = toggleSelected;
-                        narrationManager.SubtitlesLanguage = GameManager.Instance.languageSelected = (GameManager.Language)i;
+                        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[i];
+                    }
+                    else
+                    {
+                        imageComponent.sprite = toggleUnselected;
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Toggles on selected toggle (i.e. radio button) and switches off everything else.
+    /// Also changes language of subtitles.
+    /// </summary>
+    /// <param name="toggle"></param>
+    public void ActivateSubtitleLanguageToggle(GameObject toggle)
+    {
+        Transform parent = toggle.transform.parent;
+        if (parent != null)
+        {
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
+                if (imageComponent != null)
+                {
+                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
+                    {
+                        imageComponent.sprite = toggleSelected;
+                        narrationManager.SubtitlesLanguage = GameManager.Instance.subtitlesLanguage = (GameManager.Language)i;
                     }
                     else
                     {

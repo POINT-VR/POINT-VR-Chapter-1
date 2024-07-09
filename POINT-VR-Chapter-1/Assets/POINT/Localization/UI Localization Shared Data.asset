@@ -51,16 +51,24 @@ MonoBehaviour:
     m_Key: SETTINGS_BACKGROUND_VOL
     m_Metadata:
       m_Items: []
+  - m_Id: 722530843267072
+    m_Key: SETTINGS_LANGUAGE
+    m_Metadata:
+      m_Items: []
   - m_Id: 11747763195912
     m_Key: SETTINGS_SUBTITLES
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195913
-    m_Key: SETTINGS_SUBS_DISABLED
+  - m_Id: 722530868432896
+    m_Key: SETTINGS_LANGUAGE_DISABLED
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195914
-    m_Key: SETTINGS_SUBS_ENGLISH
+  - m_Id: 722530868432897
+    m_Key: SETTINGS_LANGUAGE_ENGLISH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 722530868432898
+    m_Key: SETTINGS_LANGUAGE_SPANISH
     m_Metadata:
       m_Items: []
   - m_Id: 11747763195915

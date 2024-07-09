@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11747763195904
-    m_Localized: "Versi\xF3n: {localizationVar.version}"
+    m_Localized: "Versi\xF3n:"
     m_Metadata:
       m_Items:
       - id: 0
@@ -58,14 +58,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 11747763195912
     m_Localized: "Subt\xEDtulos"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 11747763195913
-    m_Localized: Apagados
-    m_Metadata:
-      m_Items: []
-  - m_Id: 11747763195914
-    m_Localized: "Ingl\xE9s"
     m_Metadata:
       m_Items: []
   - m_Id: 11747763195915
@@ -110,6 +102,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 11747763195924
     m_Localized: Dos Masas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 722530843267072
+    m_Localized: Lengua
+    m_Metadata:
+      m_Items: []
+  - m_Id: 722530868432896
+    m_Localized: Apagados
+    m_Metadata:
+      m_Items: []
+  - m_Id: 722530868432897
+    m_Localized: "Ingl\xE9s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 722530868432898
+    m_Localized: "Espa\xF1ol"
     m_Metadata:
       m_Items: []
   references:
