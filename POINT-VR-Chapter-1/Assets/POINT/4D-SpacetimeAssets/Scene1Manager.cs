@@ -23,7 +23,6 @@ public class Scene1Manager : MonoBehaviour
     {
         StartCoroutine(RunScene());
     }
-
     void Update()
     {
 
@@ -74,7 +73,6 @@ public class Scene1Manager : MonoBehaviour
 
         // Get UI Manager UIManagerScript
         UIManagerScript = Menu.GetComponent<UIManager>();
-
         floatingObjectives.NewObjective("Introduction to the 3D coordinate system");
 
         Debug.Log("We live in a 3 - dimensional space. Every day we interact with this 3D space. For example we can move up and down(that’s the first dimension)");
@@ -120,17 +118,27 @@ public class Scene1Manager : MonoBehaviour
         massObject.transform.position = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.Activate();
-        // TODO: Once the desired location is reached
-        yield return new WaitForSeconds(4);
+        // Once the desired location is reached
+        yield return new WaitForSeconds(1);
+        yield return new WaitUntil(() => endPointManager.Status() == false);
+        yield return new WaitForSeconds(1);
+        // Object reset to origin
+        massObject.transform.position = new Vector3(0, 0, 0);
         Debug.Log("Nice job.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_2");
         yield return new WaitForSeconds(2);
-        // TODO: Object needs to be reset to origin
         Debug.Log("Now, try getting the object to the same point by taking a different path.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_3");
         yield return new WaitForSeconds(4);
+        // Endpoint manager activated again
+        endPointManager.SetMass(massObject.gameObject);
+        endPointManager.Activate();
+        yield return new WaitForSeconds(1);
+        yield return new WaitUntil(() => endPointManager.Status() == false);
+        yield return new WaitForSeconds(1);
         // TODO: Continue once player reaches desired location again
-        yield return new WaitForSeconds(3);
+        Destroy(massObject.gameObject);
+        yield return new WaitForSeconds(1);
         yield break;
     }
 

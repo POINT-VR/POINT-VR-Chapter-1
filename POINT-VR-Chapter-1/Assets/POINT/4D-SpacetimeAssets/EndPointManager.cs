@@ -62,7 +62,12 @@ public class EndPointManager : MonoBehaviour
     void Spawn()
     {
         var pos = massObject.transform.position;
-
+        // Checking if the target location has been reached (3, 1, 2)
+        if (pos == new Vector3(3,1,2) * dist)
+        {
+            Deactivate();
+            return;
+        }
         for (int i = 0; i <= 2; i++)
         {
             for (int j = -1; j <= 1; j+=2)
@@ -122,5 +127,9 @@ public class EndPointManager : MonoBehaviour
     {
         Destroy();
         massObject = obj;
+    }
+    public bool Status()
+    {
+        return isActive;
     }
 }
