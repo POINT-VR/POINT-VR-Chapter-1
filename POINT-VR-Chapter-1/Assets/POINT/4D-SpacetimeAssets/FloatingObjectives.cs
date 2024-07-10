@@ -6,7 +6,7 @@ public class FloatingObjectives : MonoBehaviour
     /// <summary>
     /// Stores the camera which the floating objectives attaches itself too
     /// </summary>
-    private Camera cameraObject;
+    // private Camera cameraObject;           ***currently testing disattached from camera*** 
 
     /// <summary>
     /// The text object which displays the objectives
@@ -23,8 +23,8 @@ public class FloatingObjectives : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraObject = Camera.allCameras[0];
-        this.transform.SetParent(cameraObject.transform);
+        // cameraObject = Camera.allCameras[0];              ***currently testing disattached from camera*** 
+        // this.transform.SetParent(cameraObject.transform);                 ***currently testing disattached from camera*** 
         this.transform.localPosition = position;
         this.transform.localEulerAngles = new Vector3(0, 90, 0);
         objectiveText.text = "";
