@@ -183,7 +183,7 @@ public class UIManager : MonoBehaviour
             MeshRenderer floorMeshRenderer = floor.GetComponent<MeshRenderer>();
             if (floorMeshRenderer != null)
             {
-                floorMeshRenderer.enabled = toggle.GetComponentInChildren<TMP_Text>().text.Equals("On");
+                floorMeshRenderer.enabled = toggle.name.Contains("On");
 
                 Transform parent = toggle.transform.parent;
                 if (parent != null)
