@@ -138,6 +138,9 @@ public class Scene1Manager : MonoBehaviour
         yield return new WaitForSeconds(1);
         // TODO: Continue once player reaches desired location again
         Destroy(massObject.gameObject);
+        Debug.Log("Nice job.");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_2");
+        yield return new WaitForSeconds(2);
         yield return new WaitForSeconds(1);
         yield break;
     }
