@@ -6,7 +6,7 @@ public class FloatingObjectives : MonoBehaviour
     /// <summary>
     /// Stores the camera which the floating objectives attaches itself too
     /// </summary>
-    // private Camera cameraObject;           ***currently testing disattached from camera*** 
+    private Camera cameraObject;
 
     /// <summary>
     /// The text object which displays the objectives
@@ -23,13 +23,18 @@ public class FloatingObjectives : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // cameraObject = Camera.allCameras[0];              ***currently testing disattached from camera*** 
-        // this.transform.SetParent(cameraObject.transform);                 ***currently testing disattached from camera*** 
-        this.transform.localPosition = position;
+        cameraObject = Camera.allCameras[0]; 
+        // this.transform.SetParent(cameraObject.transform);             ***testing with detached camera***
+        // this.transform.localPosition = position;            ***testing with detached camera***
         this.transform.localEulerAngles = new Vector3(0, 90, 0);
         objectiveText.text = "";
     }
-
+    void Update()
+    { 
+        // Updates Objective Menu to always face Camera
+        this.transform.LookAt(cameraObject.transform);
+        transform.Rotate(0.0f, 270.0f, 0.0f);
+    }
     public void NewObjective(string newObjective) //Takes a new objective and appends it to the list of previous ones
     {
         if (currentObjective != "")
