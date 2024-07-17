@@ -25,6 +25,8 @@ public class EndPointManager : MonoBehaviour
     /// </summary>
     private List<EndPoint> endPoints = new List<EndPoint>();
 
+    private List<Vector3> endPath = new List<Vector3>();
+    private List<Vector3> comparePoints = new List<Vector3>();
     /// <summary>
     /// Saves the refrence to the axis object.
     /// </summary>
@@ -37,6 +39,8 @@ public class EndPointManager : MonoBehaviour
 
     private bool isActive = false;
 
+    private bool pathDone = false;
+
     void Update() //checks if any of the endpoints are triggered and respawns them in the new location
     {
         if (!isActive)
@@ -44,19 +48,53 @@ public class EndPointManager : MonoBehaviour
             return;
         }
         bool triggered = false;
+        bool samePath = false;
         foreach (var endPoint in endPoints)
         {
             if(endPoint.WasTriggered())
             {
-                triggered = true;
-                endPoint.ResetTrigger();
-                break;
+                ///
+                var pos = massObject.transform.position;
+                if (pos != new Vector3(0,0,0))
+                {
+                    endPath.Add(pos);
+                }
+                if (comparePoints.Count >= 1 && endPath.Count >= 1) 
+                {
+                    samePath = true;
+                    for (int i = 0; i < endPath.Count && i < comparePoints.Count; i++)
+                    {
+                        Debug.Log(endPath[i]);
+                        Debug.Log(comparePoints[i]);
+                        if (endPath[i] != comparePoints[i])
+                        {
+                            samePath = false;
+                            break;
+                        }
+                    }
+                }
+                Debug.Log(samePath);
+                if (samePath == false) 
+                {
+                    triggered = true;
+                    endPoint.ResetTrigger();
+                    break;
+                }
+                endPath.RemoveAt(endPath.Count - 1); 
+                ///
             }
         }
         if (triggered)
         {
             Destroy();
             Spawn();
+        } else if (samePath == true) {
+            if (endPath.Count > 0) 
+            {
+                massObject.transform.position = endPath[endPath.Count - 1];
+            } else {
+                massObject.transform.position = new Vector3(0,0,0);
+            }
         }
     }
     void Spawn()
@@ -65,6 +103,7 @@ public class EndPointManager : MonoBehaviour
         // Checking if the target location has been reached (3, 1, 2)
         if (pos == new Vector3(3,1,2) * dist)
         {
+            pathDone = true;
             Deactivate();
             return;
         }
@@ -113,6 +152,7 @@ public class EndPointManager : MonoBehaviour
     //Public member functions
     public void Activate()
     {
+        endPath = new List<Vector3>();
         Spawn();
         isActive = true;
     }
@@ -128,8 +168,24 @@ public class EndPointManager : MonoBehaviour
         Destroy();
         massObject = obj;
     }
+
     public bool Status()
     {
         return isActive;
+    }
+
+    public List<Vector3> GetPath() {
+        return endPath;
+    }
+
+    public bool PathStatus()
+    {
+        return pathDone;
+    }
+
+    public void setComparisonPath(List<Vector3> l) 
+    {
+        comparePoints = l;
+        Debug.Log(comparePoints.Count);
     }
 }

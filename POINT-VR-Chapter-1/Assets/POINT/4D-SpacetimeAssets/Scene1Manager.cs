@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -120,6 +121,17 @@ public class Scene1Manager : MonoBehaviour
         endPointManager.Activate();
         // Once the desired location is reached
         yield return new WaitForSeconds(1);
+        ///
+        ///
+        yield return new WaitUntil(() => endPointManager.PathStatus() == true);
+        List<Vector3> savedPath = endPointManager.GetPath();
+        for (int i = 0; i < savedPath.Count; i++) 
+        {
+            Debug.Log(savedPath[i]);
+        }
+        Debug.Log(savedPath.Count);
+        ///
+        ///
         yield return new WaitUntil(() => endPointManager.Status() == false);
         yield return new WaitForSeconds(1);
         // Object reset to origin
@@ -132,6 +144,7 @@ public class Scene1Manager : MonoBehaviour
         yield return new WaitForSeconds(4);
         // Endpoint manager activated again
         endPointManager.SetMass(massObject.gameObject);
+        endPointManager.setComparisonPath(savedPath);
         endPointManager.Activate();
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => endPointManager.Status() == false);
