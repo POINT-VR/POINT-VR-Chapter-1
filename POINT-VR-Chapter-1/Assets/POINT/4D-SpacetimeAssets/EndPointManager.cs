@@ -25,7 +25,14 @@ public class EndPointManager : MonoBehaviour
     /// </summary>
     private List<EndPoint> endPoints = new List<EndPoint>();
 
+    /// <summary>
+    /// List of 3-vectors that the mass object has passed through.
+    /// </summary>
     private List<Vector3> endPath = new List<Vector3>();
+
+    /// <summary>
+    /// List of 3-vectors that the mass object passed through during first complete attempt (used for comparison to second attempt)
+    /// </summary>
     private List<Vector3> comparePoints = new List<Vector3>();
     /// <summary>
     /// Saves the refrence to the axis object.
@@ -53,42 +60,37 @@ public class EndPointManager : MonoBehaviour
         {
             if(endPoint.WasTriggered())
             {
-                ///
                 var pos = massObject.transform.position;
-                if (pos != new Vector3(0,0,0))
+                if (pos != new Vector3(0,0,0)) // Adds endpoint to endPath list if it is triggered and is not the origin
                 {
                     endPath.Add(pos);
                 }
-                if (comparePoints.Count >= 1 && endPath.Count >= 1) 
+                if (comparePoints.Count >= 1 && endPath.Count >= 1) // Makes sure comparison is only done on the second go-through
                 {
                     samePath = true;
                     for (int i = 0; i < endPath.Count && i < comparePoints.Count; i++)
                     {
-                        Debug.Log(endPath[i]);
-                        Debug.Log(comparePoints[i]);
                         if (endPath[i] != comparePoints[i])
                         {
-                            samePath = false;
+                            samePath = false; // sets samePath to false if any of the points up to this point do not match (AKA different path)
                             break;
                         }
                     }
                 }
-                Debug.Log(samePath);
-                if (samePath == false) 
+                if (samePath == false) // triggers the Endpoints respawning if this is indeed a different path
                 {
                     triggered = true;
                     endPoint.ResetTrigger();
                     break;
                 }
-                endPath.RemoveAt(endPath.Count - 1); 
-                ///
+                endPath.RemoveAt(endPath.Count - 1); // removes endPoint if it is part of the same path
             }
         }
         if (triggered)
         {
             Destroy();
             Spawn();
-        } else if (samePath == true) {
+        } else if (samePath == true) { // if it is the samePath, the mass snaps back to the previous point
             if (endPath.Count > 0) 
             {
                 massObject.transform.position = endPath[endPath.Count - 1];
@@ -186,6 +188,5 @@ public class EndPointManager : MonoBehaviour
     public void setComparisonPath(List<Vector3> l) 
     {
         comparePoints = l;
-        Debug.Log(comparePoints.Count);
     }
 }

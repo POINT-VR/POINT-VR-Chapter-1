@@ -125,20 +125,15 @@ public class Scene1Manager : MonoBehaviour
         examplePath.SetActive(true);
         // Once the desired location is reached
         yield return new WaitForSeconds(1);
-        ///
-        ///
         yield return new WaitUntil(() => endPointManager.PathStatus() == true);
+        // Sets Example Path Off Momentarily
         examplePath.SetActive(false);
+        // Retrieves Previous Endpoint Path
         List<Vector3> savedPath = endPointManager.GetPath();
-        for (int i = 0; i < savedPath.Count; i++) 
-        {
-            Debug.Log(savedPath[i]);
-        }
-        Debug.Log(savedPath.Count);
-        ///
-        ///
         yield return new WaitUntil(() => endPointManager.Status() == false);
         yield return new WaitForSeconds(1);
+
+        
         // Object reset to origin
         massObject.transform.position = new Vector3(0, 0, 0);
         Debug.Log("Nice job.");
@@ -147,16 +142,17 @@ public class Scene1Manager : MonoBehaviour
         Debug.Log("Now, try getting the object to the same point by taking a different path.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_3");
         yield return new WaitForSeconds(4);
-        // Endpoint manager activated again
+        // Endpoint manager activated again, example path re-activated, retrieved endpoint path given as example path to endPointManager
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.setComparisonPath(savedPath);
         endPointManager.Activate();
         examplePath.SetActive(true);
+        // Waits for the desired location to be reached again
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => endPointManager.Status() == false);
         examplePath.SetActive(false);
         yield return new WaitForSeconds(1);
-        // TODO: Continue once player reaches desired location again
+        // Continue once player reaches desired location again
         Destroy(massObject.gameObject);
         Debug.Log("Nice job.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_2");

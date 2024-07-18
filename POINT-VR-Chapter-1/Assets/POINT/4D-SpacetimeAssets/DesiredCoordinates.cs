@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DesiredCoordinates : MonoBehaviour
 {
+    /// <summary>
+    /// Stores the camera which the coordinates attaches itself too
+    /// </summary>
     private Camera cameraObject;
     // Start is called before the first frame update
     void Start()
