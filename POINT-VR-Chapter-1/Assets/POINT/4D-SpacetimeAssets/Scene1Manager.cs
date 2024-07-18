@@ -19,6 +19,7 @@ public class Scene1Manager : MonoBehaviour
     private GameObject player = null;
     private GameObject menus = null;
     private GameObject buttons = null;
+    private GameObject examplePath = null;
     private UIManager UIManagerScript = null;
     void Start()
     {
@@ -47,6 +48,8 @@ public class Scene1Manager : MonoBehaviour
 
         massObject.HideMass();
 
+        examplePath = GameObject.Find("ExamplePathObj");
+        examplePath.SetActive(false);
         //endPoint.Deactivate(); 
         yield break;
     }
@@ -119,11 +122,13 @@ public class Scene1Manager : MonoBehaviour
         massObject.transform.position = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.Activate();
+        examplePath.SetActive(true);
         // Once the desired location is reached
         yield return new WaitForSeconds(1);
         ///
         ///
         yield return new WaitUntil(() => endPointManager.PathStatus() == true);
+        examplePath.SetActive(false);
         List<Vector3> savedPath = endPointManager.GetPath();
         for (int i = 0; i < savedPath.Count; i++) 
         {
@@ -146,8 +151,10 @@ public class Scene1Manager : MonoBehaviour
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.setComparisonPath(savedPath);
         endPointManager.Activate();
+        examplePath.SetActive(true);
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => endPointManager.Status() == false);
+        examplePath.SetActive(false);
         yield return new WaitForSeconds(1);
         // TODO: Continue once player reaches desired location again
         Destroy(massObject.gameObject);
