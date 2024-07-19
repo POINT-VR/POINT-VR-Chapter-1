@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<AudioSource> aestheticAudio = null;
     [Header("Subtitles")]
     [SerializeField] NarrationManager narrationManager = null;
+    [Header("Subtitles Toggle Parent")]
+    [SerializeField] Transform subtitleParent = null;
     [Header("Floor Toggle Parent")]
     [SerializeField] GameObject floorToggles;
     [Header("Current Objective")]
@@ -142,25 +144,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Toggles on selected toggle (i.e. radio button) and switches off everything else.
-    /// Also changes language of subtitles.
-    /// </summary>
-    /// <param name="toggle"></param>
-    public void ActivateSubtitleLanguageToggle(GameObject toggle)
+    private GameManager.Language subtitleLanguage;
+    public int SubtitleLanguage
     {
-        Transform parent = toggle.transform.parent;
-        if (parent != null)
+        set
         {
-            for (int i = 0; i < parent.childCount; i++)
+            subtitleLanguage = (GameManager.Language) value;
+            narrationManager.SubtitlesLanguage = subtitleLanguage;
+            for (int i = 0; i < subtitleParent.childCount; i++)
             {
-                Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
+                Image imageComponent = subtitleParent.GetChild(i).GetComponentInChildren<Image>();
                 if (imageComponent != null)
                 {
-                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
+                    if (i == value) // selected toggle
                     {
                         imageComponent.sprite = toggleSelected;
-                        narrationManager.SubtitlesLanguage = GameManager.Instance.subtitlesLanguage = (GameManager.Language)i;
                     }
                     else
                     {
@@ -168,6 +166,10 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
+        }
+        get
+        {
+            return (int) subtitleLanguage;
         }
     }
 
@@ -203,14 +205,8 @@ public class UIManager : MonoBehaviour
     }
     public void ActivateFloorToggle(bool enabled)
     {
-        if (enabled)
-        {
-            ActivateFloorToggle(floorToggles.transform.GetChild(1).gameObject);
-        }
-        else
-        {
-            ActivateFloorToggle(floorToggles.transform.GetChild(0).gameObject);
-        }
+        (Resources.FindObjectsOfTypeAll(typeof(MeshCollider))[0] as MeshCollider).gameObject.GetComponent<MeshRenderer>().enabled = enabled;
+        // only known method to find Floor after it is inactive; would be preferable to use Layer or Tag to isolate, but this does not seem to be possible if the floor is inactive
     }
 
     public void ResetColliders()

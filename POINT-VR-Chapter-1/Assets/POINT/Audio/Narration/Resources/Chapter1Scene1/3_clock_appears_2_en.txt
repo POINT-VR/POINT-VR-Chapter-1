@@ -1,0 +1,8 @@
+1
+00:00:00,000 --> 00:00:04,320
+Time is different from the other dimensions because we can only move forward in time.
+
+2
+00:00:04,320 --> 00:00:07,360
+Notice how the time on the clock only ever increases.
+

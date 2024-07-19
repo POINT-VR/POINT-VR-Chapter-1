@@ -1,0 +1,16 @@
+1
+00:00:00,000 --> 00:00:04,000
+You should see a 3D grid that represents our three-dimensional space.
+
+2
+00:00:04,000 --> 00:00:07,000
+Now, look around you until you find the clock.
+
+3
+00:00:07,000 --> 00:00:11,000
+This clock allows us to visualize our fourth dimension, time.
+
+4
+00:00:11,000 --> 00:00:16,000
+Together, the shape of the grid and the ticking of the clock represent spacetime.
+

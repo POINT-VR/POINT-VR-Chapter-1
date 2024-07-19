@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour
         public bool gripNoticeEnabled;
         public float functionalVolume;
         public float aestheticVolume;
-        public bool floorRendered;
-        public bool hapticsEnabled;
+        public bool isFloorVisible;
+        public bool isHapticsEnabled;
+        public bool isControllerHighlighted;
+        public Language subtitleLanguage;
     }
     public static GameManager Instance { get; private set; }
     public enum Language { Disabled = 0, English = 1, Spanish = 2, French = 3, Mandarin = 4, Japanese = 5, Hindi = 6, Arabic = 7, Bengali = 8, Russian = 9, Portuguese = 10, Malay = 11, Urdu = 12, Telugu = 13, Korean = 14 };
@@ -22,10 +24,13 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
             data.musicTime = 0;
-            data.gripNoticeEnabled = false;
-            data.functionalVolume = 1;
-            data.aestheticVolume = 1;
-            data.hapticsEnabled = true;
+            data.gripNoticeEnabled = false; //Potentionally remove in the future
+            data.functionalVolume = 1.0f;
+            data.aestheticVolume = 1.0f;
+            data.isHapticsEnabled = true;
+            data.isFloorVisible = false;
+            data.isControllerHighlighted = true;
+            data.subtitleLanguage = Language.English;
         }
         if (Instance != this)
         {
