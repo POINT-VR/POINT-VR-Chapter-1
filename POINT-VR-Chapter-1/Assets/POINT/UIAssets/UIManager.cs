@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     [Header("Volume Adjustments")]
     [SerializeField] private List<AudioSource> functionalAudio = null;
     [SerializeField] private List<AudioSource> aestheticAudio = null;
+    [Header("Language Toggle Parent")]
+    [SerializeField] Transform languageParent = null;
     [Header("Subtitles")]
     [SerializeField] NarrationManager narrationManager = null;
     [Header("Subtitles Toggle Parent")]
@@ -116,24 +118,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Toggles on selected toggle (i.e. radio button) and switches off everything else.
-    /// Also changes the locale (thus changing interface language)
-    /// <param name="toggle"></param>
-    public void ActivateLocaleToggle(GameObject toggle)
+    private GameManager.Language language;
+    public int Language
     {
-        Transform parent = toggle.transform.parent;
-        if (parent != null)
+        set
         {
-            for (int i = 0; i < parent.childCount; i++)
+            language = (GameManager.Language)value;
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[value - 1];
+            for (int i = 0; i < languageParent.childCount; i++)
             {
-                Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
+                Image imageComponent = languageParent.GetChild(i).GetComponentInChildren<Image>();
                 if (imageComponent != null)
                 {
-                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
+                    if (i == value - 1) // selected toggle; offset due to the lack of "Disabled" option
                     {
                         imageComponent.sprite = toggleSelected;
-                        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[i];
                     }
                     else
                     {
@@ -141,6 +140,10 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
+        }
+        get
+        {
+            return (int)language;
         }
     }
 

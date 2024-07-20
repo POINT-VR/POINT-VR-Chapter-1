@@ -107,12 +107,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 685732245830625035}
-        m_MethodName: ActivateLocaleToggle
-        m_Mode: 2
+        m_MethodName: set_Language
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 204471480363841349}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 1
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3762,6 +3762,7 @@ MonoBehaviour:
   - {fileID: 685732246657436347}
   - {fileID: 685732245587941450}
   - {fileID: 1016775821658908692}
+  languageParent: {fileID: 4829586851648874229}
   narrationManager: {fileID: 685732246913176616}
   subtitleParent: {fileID: 685732245593169504}
   floorToggles: {fileID: 7696065343854180903}
@@ -12697,12 +12698,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 685732245830625035}
-        m_MethodName: ActivateLocaleToggle
-        m_Mode: 2
+        m_MethodName: set_Language
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 6735513084285324646}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
