@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -112,6 +113,34 @@ public class UIManager : MonoBehaviour
         foreach (AudioSource audioSource in aestheticAudio)
         {
             audioSource.volume = newVolume;
+        }
+    }
+
+    /// <summary>
+    /// Toggles on selected toggle (i.e. radio button) and switches off everything else.
+    /// Also changes the locale (thus changing interface language)
+    /// <param name="toggle"></param>
+    public void ActivateLocaleToggle(GameObject toggle)
+    {
+        Transform parent = toggle.transform.parent;
+        if (parent != null)
+        {
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                Image imageComponent = parent.GetChild(i).GetComponentInChildren<Image>();
+                if (imageComponent != null)
+                {
+                    if (i == toggle.transform.GetSiblingIndex()) // selected toggle
+                    {
+                        imageComponent.sprite = toggleSelected;
+                        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[i];
+                    }
+                    else
+                    {
+                        imageComponent.sprite = toggleUnselected;
+                    }
+                }
+            }
         }
     }
 
