@@ -15,99 +15,99 @@ MonoBehaviour:
   m_TableCollectionName: UI_Localization
   m_TableCollectionNameGuidString: ecb45d7d9860c9e488011e9bb691b8b6
   m_Entries:
-  - m_Id: 11747759001600
+  - m_Id: 27162349568
     m_Key: MENU_START
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195904
+  - m_Id: 27191709696
     m_Key: MENU_VERSION
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195905
+  - m_Id: 27191709697
     m_Key: MENU_GENERAL
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195906
+  - m_Id: 27191709698
     m_Key: MENU_CONTROLS
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195907
+  - m_Id: 27191709699
     m_Key: MENU_SCENES
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195908
+  - m_Id: 27191709700
     m_Key: SETTINGS_OFF
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195909
+  - m_Id: 27191709701
     m_Key: SETTINGS_ON
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195910
+  - m_Id: 27191709702
     m_Key: SETTINGS_NARRATION_VOL
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195911
+  - m_Id: 27191709703
     m_Key: SETTINGS_BACKGROUND_VOL
     m_Metadata:
       m_Items: []
-  - m_Id: 722530843267072
+  - m_Id: 27191709704
     m_Key: SETTINGS_LANGUAGE
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195912
+  - m_Id: 27191709705
     m_Key: SETTINGS_SUBTITLES
     m_Metadata:
       m_Items: []
-  - m_Id: 722530868432896
+  - m_Id: 27191709706
     m_Key: SETTINGS_LANGUAGE_DISABLED
     m_Metadata:
       m_Items: []
-  - m_Id: 722530868432897
+  - m_Id: 27191709707
     m_Key: SETTINGS_LANGUAGE_ENGLISH
     m_Metadata:
       m_Items: []
-  - m_Id: 722530868432898
+  - m_Id: 27191709708
     m_Key: SETTINGS_LANGUAGE_SPANISH
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195915
+  - m_Id: 27191709709
     m_Key: SETTINGS_LIVE_CONTROLLER_DIAGRAMS
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195916
+  - m_Id: 27191709710
     m_Key: SETTINGS_HAPTICS
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195917
+  - m_Id: 27191709711
     m_Key: SETTINGS_FLOOR
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195918
+  - m_Id: 27191709712
     m_Key: SETTINGS_FLOOR_DISCLAIMER
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195919
+  - m_Id: 27191709713
     m_Key: CURRENT_OBJECTIVE
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195920
+  - m_Id: 27191709714
     m_Key: SCENES_CHAPTER
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195921
+  - m_Id: 27191709715
     m_Key: SCENES_SCENE
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195922
+  - m_Id: 27191709716
     m_Key: SCENES_SMALL_MASS
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195923
+  - m_Id: 27191709717
     m_Key: SCENES_BIG_MASS
     m_Metadata:
       m_Items: []
-  - m_Id: 11747763195924
+  - m_Id: 27191709718
     m_Key: SCENES_TWO_MASSES
     m_Metadata:
       m_Items: []
@@ -121,4 +121,4 @@ MonoBehaviour:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
         asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1720362154454
+        m_CustomEpoch: 1721438569092

@@ -675,7 +675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabb63dbfaee8744b8bee074ed1f7757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subtitlesLanguage: 0
 --- !u!4 &444755463
 Transform:
   m_ObjectHideFlags: 0
@@ -2052,7 +2051,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:ecb45d7d9860c9e488011e9bb691b8b6
     m_TableEntryReference:
-      m_KeyId: 11747759001600
+      m_KeyId: 27162349568
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -2299,7 +2298,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:ecb45d7d9860c9e488011e9bb691b8b6
     m_TableEntryReference:
-      m_KeyId: 11747763195904
+      m_KeyId: 27191709696
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
