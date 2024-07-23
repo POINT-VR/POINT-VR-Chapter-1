@@ -126,8 +126,6 @@ public class Scene1Manager : MonoBehaviour
         // Once the desired location is reached
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => endPointManager.PathStatus() == true);
-        // Sets Example Path Off Momentarily
-        examplePath.SetActive(false);
         // Retrieves Previous Endpoint Path
         List<Vector3> savedPath = endPointManager.GetPath();
         yield return new WaitUntil(() => endPointManager.Status() == false);
@@ -142,11 +140,10 @@ public class Scene1Manager : MonoBehaviour
         Debug.Log("Now, try getting the object to the same point by taking a different path.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_3");
         yield return new WaitForSeconds(4);
-        // Endpoint manager activated again, example path re-activated, retrieved endpoint path given as example path to endPointManager
+        // Endpoint manager activated again, retrieved endpoint path given as example path to endPointManager
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.setComparisonPath(savedPath);
         endPointManager.Activate();
-        examplePath.SetActive(true);
         // Waits for the desired location to be reached again
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => endPointManager.Status() == false);
