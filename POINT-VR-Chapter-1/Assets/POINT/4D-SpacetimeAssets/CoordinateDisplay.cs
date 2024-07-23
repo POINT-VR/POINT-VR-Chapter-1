@@ -75,11 +75,11 @@ public class CoordinateDisplay : MonoBehaviour
         Vector3 outputCoordinates = transform.position - (Vector3)origin; //calculates position relative to origin
         if (showTime)
         {
-            coordinateText.text = $"<color=white>( <color=blue>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=red>{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> , {Math.Floor(Time.time - tNaught)} )</color>"; //calculates time relative to origin, +0.01 accounts for a rounding error
+            coordinateText.text = $"<color=white>( <color=red>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=blue{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> , {Math.Floor(Time.time - tNaught)} )</color>"; //calculates time relative to origin, +0.01 accounts for a rounding error
         }
         else
         {
-            coordinateText.text = $"<color=white>( <color=blue>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=red>{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> )</color>";
+            coordinateText.text = $"<color=white>( <color=red>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=blue>{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> )</color>";
         }
     }
 
