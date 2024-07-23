@@ -140,7 +140,8 @@ public class Scene1Manager : MonoBehaviour
         Debug.Log("Now, try getting the object to the same point by taking a different path.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_3");
         yield return new WaitForSeconds(4);
-        // Endpoint manager activated again, retrieved endpoint path given as example path to endPointManager
+        // Endpoint manager activated again, retrieved endpoint path given as example path to 
+        massObject.transform.position = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.setComparisonPath(savedPath);
         endPointManager.Activate();
