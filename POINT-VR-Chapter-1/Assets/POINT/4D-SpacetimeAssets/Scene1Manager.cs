@@ -150,7 +150,7 @@ public class Scene1Manager : MonoBehaviour
         examplePath.SetActive(false);
         yield return new WaitForSeconds(1);
         // Continue once player reaches desired location again
-        Destroy(massObject.gameObject);
+        massObject.transform.position = new Vector3(0, 0, 0);
         Debug.Log("Nice job.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_2");
         yield return new WaitForSeconds(2);
