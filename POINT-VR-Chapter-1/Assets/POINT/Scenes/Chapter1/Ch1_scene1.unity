@@ -734,7 +734,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (3, 1, 2)
+  m_text: <color=#A6008B>( <color=red>3</color> , <color=green>1</color> , <color=blue>2</color>
+    )</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c05c57be7bc3494da0c26626d70c868, type: 2}
   m_sharedMaterial: {fileID: -3600680322368273387, guid: 5c05c57be7bc3494da0c26626d70c868,
@@ -1632,6 +1633,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123360279791988157, guid: c861681eb76b43c45bf220f353f0174b,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123360279791988157, guid: c861681eb76b43c45bf220f353f0174b,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2123360280046722514, guid: c861681eb76b43c45bf220f353f0174b,
         type: 3}
