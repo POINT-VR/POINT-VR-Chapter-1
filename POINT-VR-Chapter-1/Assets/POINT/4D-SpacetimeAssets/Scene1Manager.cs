@@ -20,6 +20,7 @@ public class Scene1Manager : MonoBehaviour
     private GameObject menus = null;
     private GameObject buttons = null;
     private GameObject examplePath = null;
+    private GameObject secondPath = null;
     private UIManager UIManagerScript = null;
     void Start()
     {
@@ -50,6 +51,9 @@ public class Scene1Manager : MonoBehaviour
 
         examplePath = GameObject.Find("ExamplePathObj");
         examplePath.SetActive(false);
+
+        secondPath = GameObject.Find("SecondPathManager");
+        secondPath.SetActive(false);
         //endPoint.Deactivate(); 
         yield break;
     }
@@ -145,9 +149,23 @@ public class Scene1Manager : MonoBehaviour
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.setComparisonPath(savedPath);
         endPointManager.Activate();
+        // Creating yellow path that shows the player's first complete path
+        foreach (Vector3 v in savedPath)
+        {
+            if (v != new Vector3(3,1,2) * 1.0f)
+            {
+                var newPathPoint = Instantiate(secondPath.transform.GetChild(0).gameObject, v, Quaternion.identity, secondPath.transform);
+            }
+        }
+        secondPath.SetActive(true);
+        for (int i = 0; i < 5; i++) 
+        {
+            examplePath.transform.GetChild(i).gameObject.SetActive(false);
+        }
         // Waits for the desired location to be reached again
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => endPointManager.Status() == false);
+        secondPath.SetActive(false);
         examplePath.SetActive(false);
         yield return new WaitForSeconds(1);
         // Continue once player reaches desired location again
