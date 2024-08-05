@@ -32,7 +32,7 @@ public class GridScript : MonoBehaviour
     /// <summary>
     /// The number of subjunctions on each "bar".
     /// </summary>
-    readonly int divisions = 5;
+    [SerializeField] private int divisions = 5;
     /// <summary>
     /// This struct is used to simplify the mass-position calculation and make memory use more compact
     /// </summary>

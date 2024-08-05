@@ -13,8 +13,8 @@ public class GridAnimation : MonoBehaviour
     [Tooltip("The grid that deforms around a mass sphere")]
     [SerializeField] private GridScript deformationGrid = null;
 
-    [Tooltip("The mass sphere that deforms the grid")]
-    [SerializeField] private Rigidbody massSphere = null;
+    [Tooltip("The mass spheres that deform the grid")]
+    [SerializeField] private Rigidbody[] massSpheres = null;
 
     [Header("Properties")]
     [Tooltip("Material for the static grid")]
@@ -31,11 +31,29 @@ public class GridAnimation : MonoBehaviour
     /// </summary>
     private Vector3 gridCubeSpawnPoint = 10000.0f * Vector3.one;
 
+    /// <summary>
+    /// The main camera to serve as a reference to player point of vision
+    /// </summary>
+    private Camera playerCamera = null;
+
     private void Start()
     {
-        if (dynamicAxis != null && gridMaterial != null && staticGrid != null && deformationGrid != null && massSphere != null)
+        if (dynamicAxis != null && gridMaterial != null && staticGrid != null && deformationGrid != null
+            && massSpheres != null && massSpheres.Length > 0)
         {
             StartCoroutine(AxisToGridTransition());
+        }
+    }
+
+    private void Update()
+    {
+        if (playerCamera != null)
+        {
+            Shader.SetGlobalVector("Grid_Player_Position", playerCamera.transform.position);
+        }
+        else
+        {
+            playerCamera = Camera.current;
         }
     }
 
@@ -52,15 +70,22 @@ public class GridAnimation : MonoBehaviour
         staticGrid.transform.position = originPosition + (new Vector3(0.5f, -0.5f, 0.5f) * (int)staticGridBounds.size.x);
         staticGrid.SetActive(true);
 
-        massSphere.gameObject.SetActive(true);
-        deformationGrid.transform.position = gridCubeSpawnPoint;
-        deformationGrid.GetComponent<MeshRenderer>().material = gridMaterial;
-        deformationGrid.gameObject.SetActive(true);
-        Color originalMassColor = massSphere.GetComponent<MeshRenderer>().material.color;
-        massSphere.GetComponent<MeshRenderer>().material.color = new Color(originalMassColor.r, originalMassColor.g, originalMassColor.b, 0.0f);
-        massSphere.transform.position = originPosition + massSpawnOffset;
-        massSphere.gameObject.SetActive(false);
+        Shader.SetGlobalFloat("Grid_Player_HideRadius", 0.5f);
+        Shader.SetGlobalFloat("Grid_Player_FadeRadius", 1.0f);
 
+        for (int i = 0; i < massSpheres.Length; ++i)
+        {
+            Rigidbody massSphere = massSpheres[i];
+            massSphere.gameObject.SetActive(true);
+            deformationGrid.transform.position = gridCubeSpawnPoint;
+            deformationGrid.GetComponent<MeshRenderer>().material = gridMaterial;
+            deformationGrid.gameObject.SetActive(true);
+            Color originalMassColor = massSphere.GetComponent<MeshRenderer>().material.color;
+            massSphere.GetComponent<MeshRenderer>().material.color = new Color(originalMassColor.r, originalMassColor.g, originalMassColor.b, 0.0f);
+            massSphere.transform.position = originPosition + (massSpawnOffset * Mathf.Pow(-1, i));
+            massSphere.gameObject.SetActive(false);
+        }
+        
         yield return dynamicAxis.ExtendAxes(1.0f, 16.0f, 2.0f);
 
         StartCoroutine(dynamicAxis.TransitionAxisColor(Color.white, 3.0f));
@@ -68,16 +93,24 @@ public class GridAnimation : MonoBehaviour
         
         yield return RevealGrid(16.0f, 8.0f);
         dynamicAxis.SetAxisMaterial(gridMaterial);
-        yield return ShrinkGrid(1.0f, 0.8f, 2.0f);
+        yield return ShrinkGrid(0.8f, 1.0f, 2.0f);
         dynamicAxis.gameObject.SetActive(false);
         staticGrid.SetActive(false);
-        massSphere.gameObject.SetActive(true);
+        foreach (Rigidbody massSphere in massSpheres)
+        {
+            massSphere.gameObject.SetActive(true);
+        }
         deformationGrid.transform.position = Vector3.zero;
 
         this.transform.position = originPosition;
-        this.transform.LookAt(massSphere.transform);
-        StartCoroutine(RevealMass(originalMassColor, 5.0f));
-        StartCoroutine(AnimateSphereCycle(originPosition, 20.0f));
+        this.transform.LookAt(massSpheres[0].transform.position);
+
+        foreach (Rigidbody massSphere in massSpheres)
+        {
+            Color massColor = massSphere.GetComponent<MeshRenderer>().material.color;
+            StartCoroutine(RevealMass(massSphere, new Color(massColor.r, massColor.g, massColor.b, 1.0f), 5.0f));
+            StartCoroutine(AnimateSphereCycle(massSphere, originPosition, 20.0f));
+        }
     }
 
     private IEnumerator RevealGrid(float maxRadius, float duration)
@@ -122,7 +155,7 @@ public class GridAnimation : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator RevealMass(Color endColor, float duration)
+    private IEnumerator RevealMass(Rigidbody massSphere, Color endColor, float duration)
     {
         float timeElapsed = 0;
         float originalMass = massSphere.mass;
@@ -143,15 +176,16 @@ public class GridAnimation : MonoBehaviour
         }
 
         massSphere.mass = mass; //snaps to final value after last loop
-        //massSphere.transform.position = endPosition;
         massSphere.GetComponent<MeshRenderer>().material.color = endColor;
         yield break;
     }
 
-    private IEnumerator AnimateSphereCycle(Vector3 originPosition, float speed)
+    private IEnumerator AnimateSphereCycle(Rigidbody massSphere, Vector3 originPosition, float speed)
     {
-        massSphere.transform.RotateAround(originPosition, this.transform.up, speed * Time.deltaTime);
-        yield return null;
-        StartCoroutine(AnimateSphereCycle(originPosition, speed));
+        while (true)
+        {
+            massSphere.transform.RotateAround(originPosition, this.transform.up, speed * Time.deltaTime);
+            yield return null;
+        }
     }
 }
