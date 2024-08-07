@@ -158,9 +158,12 @@ public class Scene1Manager : MonoBehaviour
             }
         }
         secondPath.SetActive(true);
-        for (int i = 0; i < 5; i++) 
+        for (int i = 0; i < 13; i++) 
         {
-            examplePath.transform.GetChild(i).gameObject.SetActive(false);
+            if (i != 5 && i != 6) 
+            {
+                examplePath.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
         // Waits for the desired location to be reached again
         yield return new WaitForSeconds(1);
