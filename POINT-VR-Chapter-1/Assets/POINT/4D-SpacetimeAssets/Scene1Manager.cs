@@ -150,11 +150,41 @@ public class Scene1Manager : MonoBehaviour
         endPointManager.setComparisonPath(savedPath);
         endPointManager.Activate();
         // Creating yellow path that shows the player's first complete path
-        foreach (Vector3 v in savedPath)
+        for (int i = 0; i < savedPath.Count; i++)
         {
+            Vector3 v = savedPath[i];
             if (v != new Vector3(3,1,2) * 1.0f)
             {
                 var newPathPoint = Instantiate(secondPath.transform.GetChild(0).gameObject, v, Quaternion.identity, secondPath.transform);
+            }
+            // if first line
+            if (i == 0) 
+            {
+                var newPathLine = Instantiate(secondPath.transform.GetChild(1).gameObject, new Vector3(v.x / 2, v.y / 2, v.z / 2), Quaternion.identity, secondPath.transform);
+                // if the line will be along y axis then that is how it is originally
+                // along x axis
+                if (v.x > 0)
+                {
+                    newPathLine.transform.Rotate(0.0f, 0.0f, 90.0f, Space.Self);
+                }
+                // along z axis
+                if (v.z > 0)
+                {
+                    newPathLine.transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);
+                }
+            } else {
+                var newPathLine = Instantiate(secondPath.transform.GetChild(1).gameObject, new Vector3((v.x + savedPath[i-1].x) / 2, (v.y + savedPath[i-1].y) / 2, (v.z + savedPath[i-1].z) / 2), Quaternion.identity, secondPath.transform); 
+                // if the line will be along y axis that is how it is originally
+                // along x axis
+                if (v.x - savedPath[i-1].x != 0)
+                {
+                    newPathLine.transform.Rotate(0.0f, 0.0f, 90.0f, Space.Self);
+                }
+                // along z axis
+                if (v.z - savedPath[i-1].z != 0)
+                {
+                    newPathLine.transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);
+                }
             }
         }
         secondPath.SetActive(true);
