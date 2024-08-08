@@ -157,7 +157,7 @@ public class Scene1Manager : MonoBehaviour
             {
                 var newPathPoint = Instantiate(secondPath.transform.GetChild(0).gameObject, v, Quaternion.identity, secondPath.transform);
             }
-            // if first line
+            // if first line (works by checking which axis has been travelled on and using that to set the rotation of the cylinder, simply placing it at the halfway point)
             if (i == 0) 
             {
                 var newPathLine = Instantiate(secondPath.transform.GetChild(1).gameObject, new Vector3(v.x / 2, v.y / 2, v.z / 2), Quaternion.identity, secondPath.transform);
@@ -172,8 +172,9 @@ public class Scene1Manager : MonoBehaviour
                 {
                     newPathLine.transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);
                 }
-            } else {
+            } else { // (in this case, the point for the cylinder is obtained by taking the halfway point between the Vector v and the last vector)
                 var newPathLine = Instantiate(secondPath.transform.GetChild(1).gameObject, new Vector3((v.x + savedPath[i-1].x) / 2, (v.y + savedPath[i-1].y) / 2, (v.z + savedPath[i-1].z) / 2), Quaternion.identity, secondPath.transform); 
+                // works by seeing in what direction the last movement was by checking the last vector and subtracting, then using that to set rotation
                 // if the line will be along y axis that is how it is originally
                 // along x axis
                 if (v.x - savedPath[i-1].x != 0)
@@ -192,6 +193,7 @@ public class Scene1Manager : MonoBehaviour
         {
             if (i != 5 && i != 6) 
             {
+                // disables everything but the final endpoint and final coordinates
                 examplePath.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
