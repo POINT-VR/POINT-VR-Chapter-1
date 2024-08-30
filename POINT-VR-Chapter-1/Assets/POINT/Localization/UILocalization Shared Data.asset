@@ -14,7 +14,103 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: UILocalization
   m_TableCollectionNameGuidString: ea97502b36f6cd149b6a571be6e2583f
-  m_Entries: []
+  m_Entries:
+  - m_Id: 1521769025536
+    m_Key: MENU_START
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802752
+    m_Key: MENU_VERSION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802753
+    m_Key: MENU_GENERAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802754
+    m_Key: MENU_CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997056
+    m_Key: MENU_SCENES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997057
+    m_Key: SETTINGS_OFF
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997058
+    m_Key: SETTINGS_ON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997059
+    m_Key: SETTINGS_NARRATION_VOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191360
+    m_Key: SETTINGS_BACKGROUND_VOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191361
+    m_Key: SETTINGS_LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191362
+    m_Key: SETTINGS_SUBTITLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191363
+    m_Key: SETTINGS_LANGUAGE_DISABLED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191364
+    m_Key: SETTINGS_LANGUAGE_ENGLISH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191365
+    m_Key: SETTINGS_LANGUAGE_SPANISH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191366
+    m_Key: SETTINGS_LIVE_CONTROLLER_DIAGRAMS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191367
+    m_Key: SETTINGS_HAPTICS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191368
+    m_Key: SETTINGS_FLOOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191369
+    m_Key: SETTINGS_FLOOR_DISCLAIMER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191370
+    m_Key: CURRENT_OBJECTIVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191371
+    m_Key: SCENES_CHAPTER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191372
+    m_Key: SCENES_SCENE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191373
+    m_Key: SCENES_SMALL_MASS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191374
+    m_Key: SCENES_BIG_MASS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191375
+    m_Key: SCENES_TWO_MASSES
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

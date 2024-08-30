@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -17,6 +18,8 @@ public class UIManager : MonoBehaviour
     [Header("Volume Adjustments")]
     [SerializeField] private List<AudioSource> functionalAudio = null;
     [SerializeField] private List<AudioSource> aestheticAudio = null;
+    [Header("Language Toggle Parent")]
+    [SerializeField] Transform languageParent = null;
     [Header("Subtitles")]
     [SerializeField] NarrationManager narrationManager = null;
     [Header("Subtitles Toggle Parent")]
@@ -31,7 +34,7 @@ public class UIManager : MonoBehaviour
         currentObjectiveTMP.text = newObjective;
     }
 
-    public void AddToFunctionalAudio (AudioSource audioSource)
+    public void AddToFunctionalAudio(AudioSource audioSource)
     {
         functionalAudio.Add(audioSource);
     }
@@ -77,12 +80,12 @@ public class UIManager : MonoBehaviour
                     {
                         if (i == button.transform.GetSiblingIndex())
                         {
-                            textComponent.fontSize = ACTIVE_BUTTON_FONT_SIZE;
+                            textComponent.fontSizeMax = ACTIVE_BUTTON_FONT_SIZE;
                             textComponent.color = ACTIVE_BUTTON_COLOR;
                         }
                         else
                         {
-                            textComponent.fontSize = INACTIVE_BUTTON_FONT_SIZE;
+                            textComponent.fontSizeMax = INACTIVE_BUTTON_FONT_SIZE;
                             textComponent.color = INACTIVE_BUTTON_COLOR;
                         }
                     }
@@ -115,12 +118,41 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private GameManager.Language language;
+    public int Language
+    {
+        set
+        {
+            language = (GameManager.Language)value;
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[value - 1];
+            for (int i = 0; i < languageParent.childCount; i++)
+            {
+                Image imageComponent = languageParent.GetChild(i).GetComponentInChildren<Image>();
+                if (imageComponent != null)
+                {
+                    if (i == value - 1) // selected toggle; offset due to the lack of "Disabled" option
+                    {
+                        imageComponent.sprite = toggleSelected;
+                    }
+                    else
+                    {
+                        imageComponent.sprite = toggleUnselected;
+                    }
+                }
+            }
+        }
+        get
+        {
+            return (int)language;
+        }
+    }
+
     private GameManager.Language subtitleLanguage;
     public int SubtitleLanguage
     {
         set
         {
-            subtitleLanguage = (GameManager.Language) value;
+            subtitleLanguage = (GameManager.Language)value;
             narrationManager.SubtitlesLanguage = subtitleLanguage;
             for (int i = 0; i < subtitleParent.childCount; i++)
             {
@@ -140,7 +172,7 @@ public class UIManager : MonoBehaviour
         }
         get
         {
-            return (int) subtitleLanguage;
+            return (int)subtitleLanguage;
         }
     }
 

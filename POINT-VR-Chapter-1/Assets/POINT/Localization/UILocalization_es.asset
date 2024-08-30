@@ -16,7 +16,113 @@ MonoBehaviour:
     m_Code: es
   m_SharedData: {fileID: 11400000, guid: ea97502b36f6cd149b6a571be6e2583f, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - id: 0
+  m_TableData:
+  - m_Id: 1521769025536
+    m_Localized: Pulsa para empezar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802752
+    m_Localized: "Versi\xF3n: {0}"
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 1521785802753
+    m_Localized: "Men\xFA General"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802754
+    m_Localized: Controles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997056
+    m_Localized: Escenas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997057
+    m_Localized: Apagado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997058
+    m_Localized: Encendido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997059
+    m_Localized: "Volumen de Narraci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191360
+    m_Localized: Volumen de Fondo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191361
+    m_Localized: Lengua
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191362
+    m_Localized: "Subt\xEDtulos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191363
+    m_Localized: Apagados
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191364
+    m_Localized: "Ingl\xE9s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191365
+    m_Localized: "Espa\xF1ol"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191366
+    m_Localized: Diagrama de los controles en tiempo real
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191367
+    m_Localized: "Vibraci\xF3n de control"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191368
+    m_Localized: Piso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191369
+    m_Localized: "\xA1Cuidado: La presencia del piso es intencionada para la comodidad
+      del usuario dentro de la simulaci\xF3n pero este NO indica la ubicaci\xF3n
+      real del piso!  "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191370
+    m_Localized: Objetivo Actual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191371
+    m_Localized: "Cap\xEDtulo {number}"
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 1521794191372
+    m_Localized: Escena {number}
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 1521794191373
+    m_Localized: "Masa Peque\xF1a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191374
+    m_Localized: Masa Grande
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191375
+    m_Localized: Dos Masas
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00908051620100000b900052620100000c90005262010000

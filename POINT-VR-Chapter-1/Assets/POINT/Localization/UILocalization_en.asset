@@ -16,7 +16,112 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: ea97502b36f6cd149b6a571be6e2583f, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - id: 0
+  m_TableData:
+  - m_Id: 1521769025536
+    m_Localized: Press to Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802752
+    m_Localized: 'Version: {0}'
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 1521785802753
+    m_Localized: General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802754
+    m_Localized: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997056
+    m_Localized: Scenes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997057
+    m_Localized: Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997058
+    m_Localized: On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997059
+    m_Localized: Narration Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191360
+    m_Localized: Background Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191361
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191362
+    m_Localized: Subtitles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191363
+    m_Localized: Disabled
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191364
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191365
+    m_Localized: Spanish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191366
+    m_Localized: Live Controller Diagrams
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191367
+    m_Localized: Haptics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191368
+    m_Localized: Floor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191369
+    m_Localized: 'Warning: Presence of floor is intended for user''s comfort within
+      the simulation and is NOT physically accurate!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191370
+    m_Localized: Current Objective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191371
+    m_Localized: Chapter {number}
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 1521794191372
+    m_Localized: Scene {number}
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 1521794191373
+    m_Localized: Small Mass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191374
+    m_Localized: Big Mass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191375
+    m_Localized: Two Masses
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00908051620100000b900052620100000c90005262010000
