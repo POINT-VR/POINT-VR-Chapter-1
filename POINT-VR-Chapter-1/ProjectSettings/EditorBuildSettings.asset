@@ -6,17 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/POINT/Scenes/Tutorial.unity
+    path: Assets/POINT/Scenes/Chapter1/Tutorial.unity
     guid: ad557d7729cb1e94486b73729194a995
   - enabled: 1
-    path: Assets/POINT/Scenes/Chapter1Scene1.unity
-    guid: 7bb142371e870df498b49a9c43d269c9
+    path: Assets/POINT/Scenes/Conference Demos/ConfDemo_part1_one-mass-y.unity
+    guid: 152450adfd3469443b8a770205f31b3b
   - enabled: 1
-    path: Assets/POINT/Scenes/Chapter1Scene2.unity
-    guid: 00fd07b7c2541e74ab355370657202e3
+    path: Assets/POINT/Scenes/Conference Demos/ConfDemo_part2_two-masses.unity
+    guid: 690326eb2d462764d8258d5fb9d11a4a
   - enabled: 1
-    path: Assets/POINT/Scenes/Chapter1Scene3.unity
-    guid: d70116b07839f504186e46ec97f88d84
+    path: Assets/POINT/Scenes/Conference Demos/ConfDemo_part3_ranking-masses.unity
+    guid: cbae5ebdf07bb9048a2f4ed3a657fa16
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2eac5b88f02ba704abc6cff84097461a,
       type: 2}
