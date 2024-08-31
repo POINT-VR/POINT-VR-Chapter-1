@@ -124,7 +124,12 @@ public class UIManager : MonoBehaviour
         set
         {
             language = (GameManager.Language)value;
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[value - 1];
+
+            if (value - 1 >= 0 && value - 1 < LocalizationSettings.AvailableLocales.Locales.Count)
+            {
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[value - 1];
+            }
+            
             for (int i = 0; i < languageParent.childCount; i++)
             {
                 Image imageComponent = languageParent.GetChild(i).GetComponentInChildren<Image>();
