@@ -93,7 +93,7 @@ public class GridAnimation : MonoBehaviour
         
         yield return RevealGrid(16.0f, 8.0f);
         dynamicAxis.SetAxisMaterial(gridMaterial);
-        yield return ShrinkGrid(0.8f, 1.0f, 2.0f);
+        yield return ShrinkGrid(1.8f, 3.0f, 2.0f);
         dynamicAxis.gameObject.SetActive(false);
         staticGrid.SetActive(false);
         foreach (Rigidbody massSphere in massSpheres)
@@ -171,6 +171,8 @@ public class GridAnimation : MonoBehaviour
 
             Color colorLerpPoint = Color.Lerp(originalColor, endColor, t);
             massSphere.GetComponent<MeshRenderer>().material.color = colorLerpPoint;
+
+            Shader.SetGlobalFloat("Grid_OpaqueRadius", Shader.GetGlobalFloat("Grid_OpaqueRadius") - (0.0001f * (duration - timeElapsed)));
 
             timeElapsed += Time.deltaTime;
         }

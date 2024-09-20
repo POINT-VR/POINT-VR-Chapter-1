@@ -868,8 +868,8 @@ MonoBehaviour:
   - {fileID: 2064035409}
   - {fileID: 1247478367}
   gridMaterial: {fileID: 2100000, guid: b341bb808c640614e985db860bf00a1e, type: 2}
-  mass: 0.25
-  massSpawnOffset: {x: 0.6, y: -0.6, z: 0.6}
+  mass: 0.15
+  massSpawnOffset: {x: 0.4, y: -0.4, z: 0.4}
 --- !u!4 &1681556283
 Transform:
   m_ObjectHideFlags: 0
