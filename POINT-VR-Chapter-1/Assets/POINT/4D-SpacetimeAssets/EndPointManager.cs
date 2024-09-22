@@ -56,10 +56,18 @@ public class EndPointManager : MonoBehaviour
         }
         bool triggered = false;
         bool samePath = false;
+        bool moveLimit = false;
         foreach (var endPoint in endPoints)
         {
             if(endPoint.WasTriggered())
             {
+                // checking if move limit has been reached (it says >10 but because of the fact that this updates one late this actually activates at 12 turns)
+                if (endPath.Count > 10 && massObject.transform.position != new Vector3(3,1,2) * dist)
+                {
+                    triggered = false;
+                    moveLimit = true;
+                    break;
+                }
                 var pos = massObject.transform.position;
                 if (pos != new Vector3(0,0,0)) // Adds endpoint to endPath list if it is triggered and is not the origin
                 {
@@ -90,6 +98,9 @@ public class EndPointManager : MonoBehaviour
         {
             Destroy();
             Spawn();
+        } else if (moveLimit == true) {
+            massObject.transform.position = new Vector3(0,0,0);
+            endPath = new List<Vector3>();
         } else if (samePath == true) { // if it is the samePath, the mass snaps back to the previous point
             if (endPath.Count > 0) 
             {
