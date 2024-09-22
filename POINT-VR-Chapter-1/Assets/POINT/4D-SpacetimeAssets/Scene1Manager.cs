@@ -20,8 +20,11 @@ public class Scene1Manager : MonoBehaviour
     private GameObject menus = null;
     private GameObject buttons = null;
     private GameObject examplePath = null;
+    private GameObject objectiveClock = null;
     private GameObject secondPath = null;
+    private GameObject continueButton = null;
     private UIManager UIManagerScript = null;
+    private static bool objectiveContinue = false;
     void Start()
     {
         StartCoroutine(RunScene());
@@ -54,6 +57,12 @@ public class Scene1Manager : MonoBehaviour
 
         secondPath = GameObject.Find("SecondPathManager");
         secondPath.SetActive(false);
+
+        objectiveClock = GameObject.Find("Clock and Timer");
+        objectiveClock.SetActive(false);
+
+        continueButton = GameObject.Find("Continue UI Container");
+        continueButton.SetActive(false);
         //endPoint.Deactivate(); 
         yield break;
     }
@@ -68,19 +77,6 @@ public class Scene1Manager : MonoBehaviour
     }
     IEnumerator ObjectiveOne()
     {
-        //Instantiate menus from player prefab and buttons from player prefab as well
-        GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
-        GameObject UIContainer = mainCamera.transform.Find("UI Container").gameObject;
-        GameObject Menu = UIContainer.transform.Find("Menu").gameObject;
-        GameObject HeaderButtons = Menu.transform.Find("HeaderButtons").gameObject;
-        // GameObject HeaderButtons = Menu.transform.Find("Buttons").gameObject; //if testing with emulator use this
-        GameObject menuScreens = Menu.transform.Find("MenuScreens").gameObject;
-
-        menus = menuScreens;
-        buttons = HeaderButtons;
-
-        // Get UI Manager UIManagerScript
-        UIManagerScript = Menu.GetComponent<UIManager>();
         floatingObjectives.NewObjective("Introduction to the 3D coordinate system");
 
         Debug.Log("We live in a 3 - dimensional space. Every day we interact with this 3D space. For example we can move up and down(that’s the first dimension)");
@@ -216,18 +212,29 @@ public class Scene1Manager : MonoBehaviour
     {
         // Temporary name for the objective until the objectives are implemented
         floatingObjectives.NewObjective("Introduction to the dimension of time");
-        // TODO: Update graphic from previous objective to include 4 cords, add a clock from scene 2 with increasing time, t cord increases with increasing clock time
+        //Update graphic from previous objective to include 4 cords, add a clock from scene 2 with increasing time, t cord increases with increasing clock time
         Debug.Log("However, this spatial description is not enough. Let's say you want to meet up with a friend. You will have to choose where to meet, and also when to meet. To account for this new information, we need to add one more dimension to our coordinate system, time.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\3_clock_appears_1");
         yield return new WaitForSeconds(15);
+        massObject.ShowTime();
+        massObject.SetTime(0);
+        objectiveClock.SetActive(true);
+
         Debug.Log("Time is different from the other dimensions because we can only move forward in time. Notice how the time on the clock only ever increases."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\3_clock_appears_2");
         yield return new WaitForSeconds(8);
         Debug.Log("Move the object as you like and observe how the description of its spatial location changes while time keeps moving forward. Press the 'continue' button when you are ready to move on."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\3_clock_appears_3");
         yield return new WaitForSeconds(10);
-        // TODO: Player can move around the object and see how the coordinates change (time increases continuously)
-        // TODO: Continue button appears to continue when ready
+        massObject.transform.position = new Vector3(0, 0, 0);
+        // Player can move around the object and see how the coordinates change (time increases continuously)
+        // Continue button appears to continue when ready
+        continueButton.SetActive(true);
+        yield return new WaitUntil(() => Scene1Manager.objectiveContinue == true);
+        objectiveClock.SetActive(false);
+        continueButton.SetActive(false);
+        massObject.transform.position = new Vector3(0, 0, 0);
+        massObject.HideMass();
         yield return new WaitForSeconds(3);
         yield break;
     }
@@ -251,6 +258,9 @@ public class Scene1Manager : MonoBehaviour
         yield return new WaitForSeconds(10);
         yield return new WaitForSeconds(3);
         yield break;
+    }
+    public void ContinueObjective() {
+        objectiveContinue = true;
     }
 
 }
