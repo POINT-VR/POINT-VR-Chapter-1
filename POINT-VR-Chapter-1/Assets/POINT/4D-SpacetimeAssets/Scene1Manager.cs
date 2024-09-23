@@ -148,6 +148,10 @@ public class Scene1Manager : MonoBehaviour
         // Creating yellow path that shows the player's first complete path
         for (int i = 0; i < savedPath.Count; i++)
         {
+            // Diverting back to normal path if the player takes more than 12 steps
+            if (endPointManager.limitReached() == true) {
+                break;
+            }
             Vector3 v = savedPath[i];
             if (v != new Vector3(3,1,2) * 1.0f)
             {
@@ -184,9 +188,16 @@ public class Scene1Manager : MonoBehaviour
                 }
             }
         }
-        secondPath.SetActive(true);
+        // Diverting back to normal path if the player takes more than 12 steps
+        if (endPointManager.limitReached() == false) {
+            secondPath.SetActive(true);
+        }
         for (int i = 0; i < 13; i++) 
         {
+            // Diverting back to normal path if the player takes more than 12 steps
+            if (endPointManager.limitReached() == true) {
+                break;
+            }
             if (i != 5 && i != 6) 
             {
                 // disables everything but the final endpoint and final coordinates

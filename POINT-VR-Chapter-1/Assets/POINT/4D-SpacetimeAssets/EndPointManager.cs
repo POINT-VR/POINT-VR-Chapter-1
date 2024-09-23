@@ -48,6 +48,8 @@ public class EndPointManager : MonoBehaviour
 
     private bool pathDone = false;
 
+    private bool moveLimit = false;
+
     void Update() //checks if any of the endpoints are triggered and respawns them in the new location
     {
         if (!isActive)
@@ -56,7 +58,6 @@ public class EndPointManager : MonoBehaviour
         }
         bool triggered = false;
         bool samePath = false;
-        bool moveLimit = false;
         foreach (var endPoint in endPoints)
         {
             if(endPoint.WasTriggered())
@@ -64,18 +65,16 @@ public class EndPointManager : MonoBehaviour
                 // checking if move limit has been reached (it says >10 but because of the fact that this updates one late this actually activates at 12 turns)
                 if (endPath.Count > 10 && massObject.transform.position != new Vector3(3,1,2) * dist)
                 {
-                    triggered = false;
                     moveLimit = true;
-                    break;
                 }
                 var pos = massObject.transform.position;
                 if (pos != new Vector3(0,0,0)) // Adds endpoint to endPath list if it is triggered and is not the origin
                 {
                     endPath.Add(pos);
                 }
-                if (comparePoints.Count >= 1 && endPath.Count >= 1) // Makes sure comparison is only done on the second go-through
-                {
-                    samePath = true;
+                if (comparePoints.Count >= 1 && endPath.Count >= 1 && moveLimit == false) // Makes sure comparison is only done on the second go-through, and when
+                {                                                                        // the player has not had their previous run go over 12 moves, if it has
+                    samePath = true;                                                     // then we just let them take whatever path they want the second time
                     for (int i = 0; i < endPath.Count && i < comparePoints.Count; i++)
                     {
                         if (endPath[i] != comparePoints[i])
@@ -98,9 +97,6 @@ public class EndPointManager : MonoBehaviour
         {
             Destroy();
             Spawn();
-        } else if (moveLimit == true) {
-            massObject.transform.position = new Vector3(0,0,0);
-            endPath = new List<Vector3>();
         } else if (samePath == true) { // if it is the samePath, the mass snaps back to the previous point
             if (endPath.Count > 0) 
             {
@@ -199,5 +195,9 @@ public class EndPointManager : MonoBehaviour
     public void setComparisonPath(List<Vector3> l) 
     {
         comparePoints = l;
+    }
+    public bool limitReached()
+    {
+        return moveLimit;
     }
 }
