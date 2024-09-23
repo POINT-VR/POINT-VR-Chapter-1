@@ -17,13 +17,10 @@ public class Scene1Manager : MonoBehaviour
     private FloatingObjectives floatingObjectives;
     private Camera currentCamera = null;
     private GameObject player = null;
-    private GameObject menus = null;
-    private GameObject buttons = null;
     private GameObject examplePath = null;
     private GameObject objectiveClock = null;
     private GameObject secondPath = null;
     private GameObject continueButton = null;
-    private UIManager UIManagerScript = null;
     private static bool objectiveContinue = false;
     void Start()
     {
