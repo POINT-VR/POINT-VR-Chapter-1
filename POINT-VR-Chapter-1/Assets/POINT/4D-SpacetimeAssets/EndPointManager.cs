@@ -49,6 +49,7 @@ public class EndPointManager : MonoBehaviour
     private bool pathDone = false;
 
     private bool moveLimit = false;
+    private bool inRange = true;
 
     void Update() //checks if any of the endpoints are triggered and respawns them in the new location
     {
@@ -68,6 +69,13 @@ public class EndPointManager : MonoBehaviour
                     moveLimit = true;
                 }
                 var pos = massObject.transform.position;
+                // makes sure player is in range
+                if (pos.x < -3 || pos.x > 5 || pos.y < -3 || pos.y > 5 || pos.z < -3 || pos.z > 5)
+                {
+                    inRange = false;
+                    triggered = false;
+                    break;
+                }
                 if (pos != new Vector3(0,0,0)) // Adds endpoint to endPath list if it is triggered and is not the origin
                 {
                     endPath.Add(pos);
@@ -97,6 +105,13 @@ public class EndPointManager : MonoBehaviour
         {
             Destroy();
             Spawn();
+        } else if (inRange == false) { // checks if player is in range, if not moves back to origin
+            if (comparePoints.Count <= 1) { // resets the move limit if this is the first part of the activity, if it is the second part
+                moveLimit = false;          // then it does not to make player still have to abide by not following the previous path
+            }
+            massObject.transform.position = new Vector3(0,0,0);
+            endPath = new List<Vector3>();  
+            inRange = true;
         } else if (samePath == true) { // if it is the samePath, the mass snaps back to the previous point
             if (endPath.Count > 0) 
             {
