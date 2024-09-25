@@ -105,10 +105,14 @@ public class GridAnimation : MonoBehaviour
         this.transform.position = originPosition;
         this.transform.LookAt(massSpheres[0].transform.position);
 
+        yield return new WaitForSeconds(1.0f);
+
         foreach (Rigidbody massSphere in massSpheres)
         {
+            // Reveal mass and start orbit
             Color massColor = massSphere.GetComponent<MeshRenderer>().material.color;
-            StartCoroutine(RevealMass(massSphere, new Color(massColor.r, massColor.g, massColor.b, 1.0f), 5.0f));
+            massSphere.mass = mass;
+            massSphere.GetComponent<MeshRenderer>().material.color = new Color(massColor.r, massColor.g, massColor.b, 1.0f);
             StartCoroutine(AnimateSphereCycle(massSphere, originPosition, 20.0f));
         }
     }
@@ -152,33 +156,6 @@ public class GridAnimation : MonoBehaviour
         Shader.SetGlobalFloat("Grid_OpaqueRadius", endOpaqueRadius);
         Shader.SetGlobalFloat("Grid_ExponentialConstant", endExponentialConstant);
 
-        yield break;
-    }
-
-    private IEnumerator RevealMass(Rigidbody massSphere, Color endColor, float duration)
-    {
-        float timeElapsed = 0;
-        float originalMass = massSphere.mass;
-        Color originalColor = massSphere.GetComponent<MeshRenderer>().material.color;
-
-        while (timeElapsed < duration)
-        {
-            yield return null;
-            float t = timeElapsed / duration;
-
-            float massLerpPoint = Mathf.Lerp(originalMass, mass, t);
-            massSphere.mass = massLerpPoint;
-
-            Color colorLerpPoint = Color.Lerp(originalColor, endColor, t);
-            massSphere.GetComponent<MeshRenderer>().material.color = colorLerpPoint;
-
-            Shader.SetGlobalFloat("Grid_OpaqueRadius", Shader.GetGlobalFloat("Grid_OpaqueRadius") - (0.0001f * (duration - timeElapsed)));
-
-            timeElapsed += Time.deltaTime;
-        }
-
-        massSphere.mass = mass; //snaps to final value after last loop
-        massSphere.GetComponent<MeshRenderer>().material.color = endColor;
         yield break;
     }
 
