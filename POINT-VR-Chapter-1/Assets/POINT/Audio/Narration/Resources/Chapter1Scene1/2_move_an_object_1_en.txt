@@ -1,0 +1,12 @@
+1
+00:00:00,000 --> 00:00:06,000
+This object is currently located at the origin, so its position is (0, 0, 0).
+
+2
+00:00:06,000 --> 00:00:11,360
+Now, reach out and drag the object along the grid lines to get to the desired location.
+
+3
+00:00:11,360 --> 00:00:14,060
+You may follow the example path or make your own path.
+
