@@ -8,8 +8,6 @@ public class Scene1Manager : MonoBehaviour
     [SerializeField]
     private DynamicAxis dynamicAxis;
     [SerializeField]
-    private PlaneScript plane;
-    [SerializeField]
     private EndPointManager endPointManager;
     [SerializeField]
     private CoordinateDisplay massObject;
@@ -45,7 +43,6 @@ public class Scene1Manager : MonoBehaviour
     {
         dynamicAxis.HideAxes(); 
 
-        plane.ShowPlane(); 
 
         massObject.HideMass();
 
