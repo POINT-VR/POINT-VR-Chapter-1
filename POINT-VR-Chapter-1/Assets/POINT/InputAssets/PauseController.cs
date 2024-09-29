@@ -9,6 +9,14 @@ public class PauseController : MonoBehaviour
     /// The input reference for turning the menu on and off
     /// </summary>
     [SerializeField] InputActionReference toggleReference;
+    public InputActionReference ToggleReference
+    {
+        get
+        {
+            return toggleReference;
+        }
+    }
+
     /// <summary>
     /// The distance that the menu spawns away from the camera
     /// </summary>
@@ -103,12 +111,21 @@ public class PauseController : MonoBehaviour
         return;
 #endif
 #pragma warning disable CS0162 // Unreachable code detected
-        if (!focus && !gamePaused)
+        if (!focus && !gamePaused && UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex > 0)
         {
+            // Pause only if focus lost and game is not paused in a scene other than the start menu (buildIndex 0)
             Toggle(new InputAction.CallbackContext());
         }
 #pragma warning restore CS0162 // Unreachable code detected
     }
+    public void Pause()
+    {
+        if (!gamePaused)
+        {
+            Toggle(new InputAction.CallbackContext());
+        }
+    }
+
     public void Unpause()
     {
         if (gamePaused)

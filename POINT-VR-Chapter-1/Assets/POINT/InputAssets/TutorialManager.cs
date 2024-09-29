@@ -11,7 +11,6 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     [SerializeField] private float thresholdDistanceToTeleportZone;
     [Header("References")]
-    [SerializeField] private TMP_Text versionText;
     [SerializeField] private Image controlsImage;
     [SerializeField] private GameObject floor;
     [SerializeField] private GameObject massSphere;
@@ -55,7 +54,7 @@ public class TutorialManager : MonoBehaviour
         rightPullingReference.action.started -= Pulled;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
         if (controlsImage != null)
         {
@@ -63,15 +62,15 @@ public class TutorialManager : MonoBehaviour
             controlsImage.gameObject.SetActive(false);
         }
 
-        StartCoroutine(WaitForPlayerSpawn());
         floor.SetActive(false); // deactivate floor to prevent teleporting before tutorial start
         massSphere.SetActive(false);
         teleportZone1.SetActive(false);
         teleportZone2.SetActive(false);
         teleportZone3.SetActive(false);
         SceneUIContainer.SetActive(false);
-        versionText.transform.parent.gameObject.SetActive(true);
-        versionText.text = "Version: " + Application.version;
+
+        yield return WaitForPlayerSpawn();
+        StartTutorial();
     }
 
     private void Update()
@@ -105,12 +104,11 @@ public class TutorialManager : MonoBehaviour
         yield break;
     }
 
-    public void StartTutorial()
+    private void StartTutorial()
     {
         // Tutorial initialization
         player.GetComponent<PauseController>().enabled = true; // enable pausing
         player.GetComponent<TurnController>().enabled = true; // enable snap turn
-        versionText.transform.parent.gameObject.SetActive(false); // deactivate start menu
         controlsImage.gameObject.SetActive(true); // activate controls graphics
         floor.SetActive(true); // activate floor for teleportation
         massSphere.SetActive(true);
@@ -311,43 +309,4 @@ public class TutorialManager : MonoBehaviour
             pulled = true;
         }
     }
-
-    public void openOptions() {
-        //Note: This code uses similar implementation from the tutorial-ui-menu branch - it can be simplified
-
-        // UIManager UIManagerScriptTemp = null;
-        // GameObject menusTemp = null;
-        // GameObject buttonsTemp = null;
-
-        // //Instantiate menus from player prefab and buttons from player prefab as well
-        // GameObject mainCameraTemp = player.transform.Find("Main Camera").gameObject;
-        // GameObject UIContainerTemp = mainCameraTemp.transform.Find("UI Container").gameObject;
-        // GameObject MenuTemp = UIContainerTemp.transform.Find("Menu").gameObject;
-        // // GameObject HeaderButtonsTemp = MenuTemp.transform.Find("HeaderButtons").gameObject;
-        // GameObject HeaderButtonsTemp = MenuTemp.transform.Find("Buttons").gameObject; //if testing with emulator use this
-        // GameObject menuScreensTemp = MenuTemp.transform.Find("MenuScreens").gameObject;
-
-        // menusTemp = menuScreensTemp;
-        // buttonsTemp = HeaderButtonsTemp;
-
-        // // Get UI Manager UIManagerScript
-        // UIManagerScriptTemp = MenuTemp.GetComponent<UIManager>();
-
-        // //Activate Menus and Buttons
-        // UIManagerScriptTemp.ActivateMenu(UIContainerTemp.transform.Find("Menu").gameObject);
-        // // UIManagerScriptTemp.ActivateButton(MenuTemp.transform.Find("HeaderButtons").gameObject);
-        // UIManagerScriptTemp.ActivateButton(MenuTemp.transform.Find("Buttons").gameObject); //if testing with emulator use this
-        // UIManagerScriptTemp.ActivateMenu(MenuTemp.transform.Find("MenuScreens").gameObject);
-        // UIManagerScriptTemp.ActivateMenu(menusTemp.transform.Find("GeneralMenu").gameObject); 
-        // UIManagerScriptTemp.ActivateButton(buttonsTemp.transform.Find("GeneralButton").gameObject);
-
-        openMenuReference.action.Enable();
-        openMenuReference.action.started += menuOpened;
-        Debug.Log("hi");
-    }
-
-    private void menuOpened(InputAction.CallbackContext context)
-        {
-            Debug.Log("MenuPressed!");
-        }
 }
