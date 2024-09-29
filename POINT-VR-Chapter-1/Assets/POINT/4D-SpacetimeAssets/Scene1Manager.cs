@@ -74,20 +74,19 @@ public class Scene1Manager : MonoBehaviour
         floatingObjectives.NewObjective("Introduction to the 3D coordinate system");
 
         Debug.Log("We live in a 3 - dimensional space. Every day we interact with this 3D space. For example we can move up and down(that’s the first dimension)");
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_1");
-        yield return new WaitForSeconds(9);
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_1_1");
+        yield return new WaitForSecondsRealtime(6);
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_1_2");
         dynamicAxis.ShowAxes(1);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         Debug.Log("left and right (that’s the second dimension)");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_2");
-        yield return new WaitForSeconds(3);
         dynamicAxis.ShowAxes(0);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         Debug.Log("and forward and backward (that’s the third dimension).");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_3");
-        yield return new WaitForSeconds(4);
         dynamicAxis.ShowAxes(2);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(4);
         Debug.Log("To help ourselves navigate this space, we use a mathematical tool called a coordinate system. It does not matter how the coordinate system is oriented. In front of you is one potential coordinate system, where the different colors represent different directions. Where the three lines meet is called the origin of the system. We can describe the location of any object in space relative to the origin with just 3 numbers.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_4");
         yield return new WaitForSeconds(25);
