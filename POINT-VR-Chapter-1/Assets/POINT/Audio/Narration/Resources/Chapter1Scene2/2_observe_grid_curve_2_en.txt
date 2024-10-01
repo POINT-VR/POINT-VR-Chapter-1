@@ -1,0 +1,8 @@
+1
+00:00:00,000 --> 00:00:03,640
+Explore for as long as you would like, and then move the sphere to the target location
+
+2
+00:00:03,640 --> 00:00:05,880
+in the center of the grid when you are ready to move on.
+
