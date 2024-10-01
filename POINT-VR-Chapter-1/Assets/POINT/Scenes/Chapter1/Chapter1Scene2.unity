@@ -3041,7 +3041,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2678ec2ac66344e41bf418d162bf764e, type: 2}
+  - {fileID: 2100000, guid: 537c3608b104eb24c9be7f929f7c102e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3110,8 +3110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 1983842607}
   correctAngle: 180
-  correctMaterial: {fileID: 2100000, guid: 2678ec2ac66344e41bf418d162bf764e, type: 2}
-  incorrectMaterial: {fileID: 2100000, guid: cfd6f687679bc604fb8f740ae317246b, type: 2}
+  correctMaterial: {fileID: 2100000, guid: 537c3608b104eb24c9be7f929f7c102e, type: 2}
+  incorrectMaterial: {fileID: 2100000, guid: 3ee69e859d6cca74f99ba471f7fadc6e, type: 2}
 --- !u!4 &1983842614
 Transform:
   m_ObjectHideFlags: 0
