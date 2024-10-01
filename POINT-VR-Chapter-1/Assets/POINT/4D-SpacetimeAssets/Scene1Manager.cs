@@ -5,14 +5,37 @@ using UnityEngine;
 
 public class Scene1Manager : MonoBehaviour
 {
-    [SerializeField]
-    private DynamicAxis dynamicAxis;
-    [SerializeField]
-    private EndPointManager endPointManager;
-    [SerializeField]
-    private CoordinateDisplay massObject;
-    [SerializeField]
-    private FloatingObjectives floatingObjectives;
+    [SerializeField] private DynamicAxis dynamicAxis;
+    [SerializeField] private EndPointManager endPointManager;
+    [SerializeField] private CoordinateDisplay massObject;
+    [SerializeField] private FloatingObjectives floatingObjectives;
+
+    [Header("Grid Animation references")]
+    [Tooltip("The floor of the simulation")]
+    [SerializeField] private GameObject floor = null;
+
+    [Tooltip("A large static grid that cannot deform")]
+    [SerializeField] private GameObject staticGrid = null;
+
+    [Tooltip("The grid that deforms around a mass sphere")]
+    [SerializeField] private GridScript deformationGrid = null;
+
+    [Tooltip("The mass spheres that deform the grid")]
+    [SerializeField] private Rigidbody[] massSpheres = null;
+
+    [Header("Grid Animation properties")]
+    [Tooltip("Material for the static grid")]
+    [SerializeField] private Material gridMaterial = null;
+
+    [Tooltip("The intended mass of the mass sphere")]
+    [SerializeField] private float mass = 0.25f;
+
+    [Tooltip("The position where the mass starts to spawn in, ending in the center of the deformation grid")]
+    [SerializeField] private Vector3 massSpawnOffset = Vector3.zero;
+
+    [Tooltip("Speed at which masses orbit")]
+    [SerializeField] private float orbitSpeed = 20.0f;
+
     private Camera currentCamera = null;
     private GameObject player = null;
     private GameObject examplePath = null;
@@ -20,16 +43,44 @@ public class Scene1Manager : MonoBehaviour
     private GameObject secondPath = null;
     private GameObject continueButton = null;
     private static bool objectiveContinue = false;
-    void Start()
+
+    /// <summary>
+    /// A faraway point for the grid cube to spawn (for grid animation)
+    /// </summary>
+    private Vector3 gridCubeSpawnPoint = 10000.0f * Vector3.one;
+
+    /// <summary>
+    /// A GameObject to act as a reference transform for proper mass orbit
+    /// </summary>
+    private GameObject massOrbitReference = null;
+
+    /// <summary>
+    /// Whether the masses are currently orbiting as part of the animation
+    /// </summary>
+    private bool massOrbiting = false;
+
+    private void Start()
     {
         StartCoroutine(RunScene());
     }
-    void Update()
-    {
 
+    private void Update()
+    {
+        if (currentCamera != null)
+        {
+            Shader.SetGlobalVector("Grid_Player_Position", currentCamera.transform.position);
+        }
+
+        if (massOrbiting)
+        {
+            foreach (Rigidbody massSphere in massSpheres)
+            {
+                massSphere.transform.RotateAround(massOrbitReference.transform.position, massOrbitReference.transform.up, orbitSpeed * Time.deltaTime);
+            }
+        }
     }
 
-    IEnumerator RunScene()
+    private IEnumerator RunScene()
     {
         yield return Setup();
         yield return WaitForPlayerSpawn();
@@ -39,11 +90,10 @@ public class Scene1Manager : MonoBehaviour
         yield return ObjectiveFour();
         yield break;
     }
-    IEnumerator Setup() //Hides all the objects we don't want
+    private IEnumerator Setup()
     {
+        // Hide all objects we do not want
         dynamicAxis.HideAxes(); 
-
-
         massObject.HideMass();
 
         examplePath = GameObject.Find("ExamplePathObj");
@@ -58,9 +108,30 @@ public class Scene1Manager : MonoBehaviour
         continueButton = GameObject.Find("Continue UI Container");
         continueButton.SetActive(false);
         //endPoint.Deactivate(); 
+
+        // Set up for grid animation
+        Shader.SetGlobalFloat("Grid_RevealRadius", 0.0f);
+        Shader.SetGlobalFloat("Grid_OpaqueRadius", 2.0f);
+        Shader.SetGlobalFloat("Grid_ExponentialConstant", 0.2f);
+        Shader.SetGlobalFloat("Grid_Player_HideRadius", 0.5f);
+        Shader.SetGlobalFloat("Grid_Player_FadeRadius", 1.0f);
+
+        deformationGrid.transform.position = gridCubeSpawnPoint;
+        deformationGrid.GetComponent<MeshRenderer>().material = gridMaterial;
+        deformationGrid.gameObject.SetActive(true);
+
+        for (int i = 0; i < massSpheres.Length; ++i)
+        {
+            Rigidbody massSphere = massSpheres[i];
+            massSphere.gameObject.SetActive(true);
+            Color originalMassColor = massSphere.GetComponent<MeshRenderer>().material.color;
+            massSphere.GetComponent<MeshRenderer>().material.color = new Color(originalMassColor.r, originalMassColor.g, originalMassColor.b, 0.0f);
+            massSphere.gameObject.SetActive(false);
+        }
+
         yield break;
     }
-    IEnumerator WaitForPlayerSpawn()
+    private IEnumerator WaitForPlayerSpawn()
     {
         yield return new WaitUntil(() => Camera.current != null);
 
@@ -69,7 +140,7 @@ public class Scene1Manager : MonoBehaviour
 
         yield break;
     }
-    IEnumerator ObjectiveOne()
+    private IEnumerator ObjectiveOne()
     {
         floatingObjectives.NewObjective("Introduction to the 3D coordinate system");
 
@@ -97,7 +168,7 @@ public class Scene1Manager : MonoBehaviour
         yield break;
     }
 
-    IEnumerator ObjectiveTwo()
+    private IEnumerator ObjectiveTwo()
     {
         floatingObjectives.NewObjective("Move an object in 3D space");
 
@@ -210,7 +281,7 @@ public class Scene1Manager : MonoBehaviour
         yield break;
     }
 
-    IEnumerator ObjectiveThree()
+    private IEnumerator ObjectiveThree()
     {
         // Temporary name for the objective until the objectives are implemented
         floatingObjectives.NewObjective("Introduction to the dimension of time");
@@ -240,29 +311,126 @@ public class Scene1Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(3);
         yield break;
     }
-    IEnumerator ObjectiveFour()
+    private IEnumerator ObjectiveFour()
     {
         // Temporary name for the objective until the objectives are implemented
         floatingObjectives.NewObjective("Introduction to 4D Spacetime");
+
+        // Reset position of relevant objects as deformed grid requires origin to be at its center
+        Vector3 originPosition = (deformationGrid.gridSize - Vector3.one) / 2.0f;
+        Shader.SetGlobalVector("Grid_OriginPosition", new Vector4(originPosition.x, originPosition.y, originPosition.z, 0.0f));
+        Vector3 translate = originPosition - dynamicAxis.transform.position;
+        dynamicAxis.transform.position = originPosition;
+        floor.transform.position += translate;
+        floatingObjectives.transform.position += translate;
+        player.transform.parent.position += translate; // PlayerBase
+
+        Bounds staticGridBounds = staticGrid.GetComponent<MeshRenderer>().bounds;
+        staticGrid.transform.position = originPosition + (new Vector3(0.5f, -0.5f, 0.5f) * (int)staticGridBounds.size.x);
+        staticGrid.SetActive(true);
+
+        for (int i = 0; i < massSpheres.Length; ++i)
+        {
+            Rigidbody massSphere = massSpheres[i];
+            massSphere.transform.position = originPosition + (massSpawnOffset * Mathf.Pow(-1, i));
+        }
+
         Debug.Log("Together, the information of the 1D time and the 3D location of an event is what we call 4D spacetime. Spacetime is what makes up the very fabric of our universe. It's all around you, stretching out in every direction and forever into the future."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_1");
-        yield return new WaitForSecondsRealtime(16);
-        // TODO: Turn axes into infinite grid
+        // Sum of yield returns should be 16s
+        StartCoroutine(dynamicAxis.TransitionAxisColor(Color.white, 4.0f));
+        yield return dynamicAxis.TransitionAxisThickness(0.02f, 4.0f);
+        yield return RevealGrid(16.0f, 12.0f);
+
         Debug.Log("Spacetime is not a rigid or fixed object. It can curve.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_2");
-        yield return new WaitForSecondsRealtime(5);
-        // TODO: Make spacetime curve toward yellow sphere
+        // Sum of yield returns should be 5s
+        dynamicAxis.SetAxisMaterial(gridMaterial);
+        yield return ShrinkGrid(1.8f, 3.0f, 2.0f);
+        dynamicAxis.gameObject.SetActive(false);
+        staticGrid.SetActive(false);
+        foreach (Rigidbody massSphere in massSpheres)
+        {
+            massSphere.gameObject.SetActive(true);
+        }
+        deformationGrid.transform.position = Vector3.zero;
+
+        massOrbitReference = new GameObject();
+        massOrbitReference.transform.position = originPosition;
+        massOrbitReference.transform.LookAt(massSpheres[0].transform.position);
+
+        foreach (Rigidbody massSphere in massSpheres)
+        {
+            // Reveal mass and start orbit
+            Color massColor = massSphere.GetComponent<MeshRenderer>().material.color;
+            massSphere.mass = mass;
+            massSphere.GetComponent<MeshRenderer>().material.color = new Color(massColor.r, massColor.g, massColor.b, 1.0f);
+        }
+        massOrbiting = true;
+        yield return new WaitForSecondsRealtime(3);
+        
         Debug.Log("In fact, Einstein described gravity as the curvature of spacetime. Close to a very massive object, where gravity is strong, the duration of an event and the distance between two events can stretch. John Wheeler described this effect by saying 'Spacetime tells matter how to move; matter tells spacetime how to curve.'"); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_3");
         yield return new WaitForSecondsRealtime(20);
         Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once, so we are going to show you only a small portion of the spacetime."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4");
-        yield return new WaitForSecondsRealtime(10);
-        yield return new WaitForSecondsRealtime(3);
         yield break;
     }
+
     public void ContinueObjective() {
         objectiveContinue = true;
     }
 
+    #region Grid Animation helper functions
+    private IEnumerator RevealGrid(float maxRadius, float duration)
+    {
+        float timeElapsed = 0;
+        while (timeElapsed < duration)
+        {
+            yield return null;
+            float t = timeElapsed / duration;
+            float lerpPoint = Mathf.Lerp(0.0f, maxRadius, t);
+            Shader.SetGlobalFloat("Grid_RevealRadius", lerpPoint);
+            timeElapsed += Time.deltaTime;
+        }
+        Shader.SetGlobalFloat("Grid_RevealRadius", maxRadius); //snaps to final value after last loop
+        yield break;
+    }
+
+    private IEnumerator ShrinkGrid(float endOpaqueRadius, float endExponentialConstant, float duration)
+    {
+        float timeElapsed = 0;
+
+        float startOpaqueRadius = Shader.GetGlobalFloat("Grid_OpaqueRadius");
+        float startExponentialConstant = Shader.GetGlobalFloat("Grid_ExponentialConstant");
+
+        while (timeElapsed < duration)
+        {
+            yield return null;
+            float t = timeElapsed / duration;
+
+            float opaqueRadiusLerp = Mathf.Lerp(startOpaqueRadius, endOpaqueRadius, t);
+            Shader.SetGlobalFloat("Grid_OpaqueRadius", opaqueRadiusLerp);
+
+            float exponentialConstantRadius = Mathf.Lerp(startExponentialConstant, endExponentialConstant, t);
+            Shader.SetGlobalFloat("Grid_ExponentialConstant", exponentialConstantRadius);
+
+            timeElapsed += Time.deltaTime;
+        }
+
+        Shader.SetGlobalFloat("Grid_OpaqueRadius", endOpaqueRadius);
+        Shader.SetGlobalFloat("Grid_ExponentialConstant", endExponentialConstant);
+
+        yield break;
+    }
+
+    private IEnumerator AnimateSphereCycle(Rigidbody massSphere, Vector3 originPosition, float speed)
+    {
+        while (true)
+        {
+            massSphere.transform.RotateAround(originPosition, massOrbitReference.transform.up, speed * Time.deltaTime);
+            yield return null;
+        }
+    }
+    #endregion
 }
