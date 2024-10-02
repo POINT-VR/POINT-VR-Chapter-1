@@ -49,16 +49,6 @@ public class Scene1Manager : MonoBehaviour
     /// </summary>
     private Vector3 gridCubeSpawnPoint = 10000.0f * Vector3.one;
 
-    /// <summary>
-    /// A GameObject to act as a reference transform for proper mass orbit
-    /// </summary>
-    private GameObject massOrbitReference = null;
-
-    /// <summary>
-    /// Whether the masses are currently orbiting as part of the animation
-    /// </summary>
-    private bool massOrbiting = false;
-
     private void Start()
     {
         StartCoroutine(RunScene());
@@ -69,14 +59,6 @@ public class Scene1Manager : MonoBehaviour
         if (currentCamera != null)
         {
             Shader.SetGlobalVector("Grid_Player_Position", currentCamera.transform.position);
-        }
-
-        if (massOrbiting)
-        {
-            foreach (Rigidbody massSphere in massSpheres)
-            {
-                massSphere.transform.RotateAround(massOrbitReference.transform.position, massOrbitReference.transform.up, orbitSpeed * Time.deltaTime);
-            }
         }
     }
 
@@ -355,18 +337,15 @@ public class Scene1Manager : MonoBehaviour
         }
         deformationGrid.transform.position = Vector3.zero;
 
-        massOrbitReference = new GameObject();
-        massOrbitReference.transform.position = originPosition;
-        massOrbitReference.transform.LookAt(massSpheres[0].transform.position);
-
         foreach (Rigidbody massSphere in massSpheres)
         {
             // Reveal mass and start orbit
+            massSphere.constraints = RigidbodyConstraints.FreezePositionY;
             Color massColor = massSphere.GetComponent<MeshRenderer>().material.color;
             massSphere.mass = mass;
             massSphere.GetComponent<MeshRenderer>().material.color = new Color(massColor.r, massColor.g, massColor.b, 1.0f);
+            StartCoroutine(AnimateSphereCycle(massSphere, originPosition, orbitSpeed));
         }
-        massOrbiting = true;
         yield return new WaitForSecondsRealtime(3);
         
         Debug.Log("In fact, Einstein described gravity as the curvature of spacetime. Close to a very massive object, where gravity is strong, the duration of an event and the distance between two events can stretch. John Wheeler described this effect by saying 'Spacetime tells matter how to move; matter tells spacetime how to curve.'"); 
@@ -428,7 +407,7 @@ public class Scene1Manager : MonoBehaviour
     {
         while (true)
         {
-            massSphere.transform.RotateAround(originPosition, massOrbitReference.transform.up, speed * Time.deltaTime);
+            massSphere.transform.RotateAround(originPosition, Vector3.up, speed * Time.deltaTime);
             yield return null;
         }
     }
