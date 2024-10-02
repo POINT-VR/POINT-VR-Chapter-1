@@ -1,0 +1,20 @@
+1
+00:00:00,000 --> 00:00:04,940
+Nice! As we can see, once the sphere is close enough to the clock, this clock begins to
+
+2
+00:00:04,940 --> 00:00:10,240
+tick more slowly relative to the other clock. This is because time slows down in the presence
+
+3
+00:00:10,240 --> 00:00:15,020
+of gravity relative to how time flows in the absence of gravity. This effect is called
+
+4
+00:00:15,020 --> 00:00:20,120
+time dilation. Move the sphere around to explore how time is affected when the sphere is at
+
+5
+00:00:20,120 --> 00:00:23,800
+different distances from the clock. Press the continue button when you are ready.
+

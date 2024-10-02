@@ -1,0 +1,8 @@
+1
+00:00:00,000 --> 00:00:03,460
+In general, all points that are the same distance away from the sphere
+
+2
+00:00:03,460 --> 00:00:05,460
+experience the same force of gravity.
+

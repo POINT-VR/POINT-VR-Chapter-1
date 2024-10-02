@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:04,220
+It is best to go through the game in order, but you have the option to select different
+
+2
+00:00:04,220 --> 00:00:05,320
+scenes from this menu.
+
+3
+00:00:05,960 --> 00:00:08,040
+You can replay the tutorial at any point.
+
+4
+00:00:08,700 --> 00:00:10,080
+Select scene 1 to begin.

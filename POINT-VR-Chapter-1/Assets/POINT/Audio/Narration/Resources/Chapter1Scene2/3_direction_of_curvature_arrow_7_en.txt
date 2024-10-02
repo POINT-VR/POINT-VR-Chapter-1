@@ -1,0 +1,24 @@
+1
+00:00:00,000 --> 00:00:03,500
+As we can see, all arrows point towards the yellow sphere.
+
+2
+00:00:03,500 --> 00:00:08,500
+So, the grid curvature tells us that objects will accelerate towards the center of the sphere,
+
+3
+00:00:08,500 --> 00:00:11,300
+indicating the direction that gravity acts.
+
+4
+00:00:11,300 --> 00:00:15,500
+On Earth, we experience this acceleration as objects falling down,
+
+5
+00:00:15,500 --> 00:00:18,800
+when in reality, they are moving towards the center of the planet.
+
+6
+00:00:18,800 --> 00:00:22,000
+The concept of down really depends on your point of view.
+
