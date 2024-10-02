@@ -11,7 +11,6 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     [SerializeField] private float thresholdDistanceToTeleportZone;
     [Header("References")]
-    [SerializeField] private TMP_Text versionText;
     [SerializeField] private Image controlsImage;
     [SerializeField] private GameObject floor;
     [SerializeField] private GameObject massSphere;
@@ -55,7 +54,7 @@ public class TutorialManager : MonoBehaviour
         rightPullingReference.action.started -= Pulled;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
         if (controlsImage != null)
         {
@@ -63,15 +62,15 @@ public class TutorialManager : MonoBehaviour
             controlsImage.gameObject.SetActive(false);
         }
 
-        StartCoroutine(WaitForPlayerSpawn());
         floor.SetActive(false); // deactivate floor to prevent teleporting before tutorial start
         massSphere.SetActive(false);
         teleportZone1.SetActive(false);
         teleportZone2.SetActive(false);
         teleportZone3.SetActive(false);
         SceneUIContainer.SetActive(false);
-        versionText.transform.parent.gameObject.SetActive(true);
-        versionText.text = "Version: " + Application.version;
+
+        yield return WaitForPlayerSpawn();
+        StartTutorial();
     }
 
     private void Update()
@@ -105,12 +104,11 @@ public class TutorialManager : MonoBehaviour
         yield break;
     }
 
-    public void StartTutorial()
+    private void StartTutorial()
     {
         // Tutorial initialization
         player.GetComponent<PauseController>().enabled = true; // enable pausing
         player.GetComponent<TurnController>().enabled = true; // enable snap turn
-        versionText.transform.parent.gameObject.SetActive(false); // deactivate start menu
         controlsImage.gameObject.SetActive(true); // activate controls graphics
         floor.SetActive(true); // activate floor for teleportation
         massSphere.SetActive(true);
