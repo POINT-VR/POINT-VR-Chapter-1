@@ -9,6 +9,7 @@ public class Scene1Manager : MonoBehaviour
     [SerializeField] private EndPointManager endPointManager;
     [SerializeField] private CoordinateDisplay massObject;
     [SerializeField] private FloatingObjectives floatingObjectives;
+    [SerializeField] private GameObject nextSceneButton;
 
     [Header("Grid Animation references")]
     [Tooltip("The floor of the simulation")]
@@ -42,6 +43,7 @@ public class Scene1Manager : MonoBehaviour
     private GameObject objectiveClock = null;
     private GameObject secondPath = null;
     private GameObject continueButton = null;
+    private GameObject floatingObjectivesMenu = null;
     private static bool objectiveContinue = false;
 
     /// <summary>
@@ -90,6 +92,10 @@ public class Scene1Manager : MonoBehaviour
         continueButton = GameObject.Find("Continue UI Container");
         continueButton.SetActive(false);
         //endPoint.Deactivate(); 
+
+        nextSceneButton.SetActive(false);
+
+        floatingObjectivesMenu = GameObject.Find("FloatingObjectives");
 
         // Set up for grid animation
         Shader.SetGlobalFloat("Grid_RevealRadius", 0.0f);
@@ -317,6 +323,7 @@ public class Scene1Manager : MonoBehaviour
             massSphere.transform.position = originPosition + (massSpawnOffset * Mathf.Pow(-1, i));
         }
 
+        floatingObjectivesMenu.SetActive(false); // Hide Objectives as grid grows
         Debug.Log("Together, the information of the 1D time and the 3D location of an event is what we call 4D spacetime. Spacetime is what makes up the very fabric of our universe. It's all around you, stretching out in every direction and forever into the future."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_1");
         // Sum of yield returns should be 16s
@@ -331,6 +338,7 @@ public class Scene1Manager : MonoBehaviour
         yield return ShrinkGrid(1.8f, 3.0f, 2.0f);
         dynamicAxis.gameObject.SetActive(false);
         staticGrid.SetActive(false);
+        floatingObjectivesMenu.SetActive(true); // Bring back Objectives as grid shrinks
         foreach (Rigidbody massSphere in massSpheres)
         {
             massSphere.gameObject.SetActive(true);
@@ -351,6 +359,7 @@ public class Scene1Manager : MonoBehaviour
         Debug.Log("In fact, Einstein described gravity as the curvature of spacetime. Close to a very massive object, where gravity is strong, the duration of an event and the distance between two events can stretch. John Wheeler described this effect by saying 'Spacetime tells matter how to move; matter tells spacetime how to curve.'"); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_3");
         yield return new WaitForSecondsRealtime(20);
+        nextSceneButton.SetActive(true); // End of Scene, tell player to continue
         Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once, so we are going to show you only a small portion of the spacetime."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4");
         yield break;
