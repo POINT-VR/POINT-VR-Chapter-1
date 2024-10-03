@@ -1,5 +1,5 @@
-# POINT-VR
-Physics Outreach and Instruction through New Technologies: Developing virtual reality simulations to teach physics.
+# Einstein's Spacetime
+is developed by POINT VR, Physics Outreach and Instruction through New Technologies: Developing virtual reality simulations to teach physics.
 
 ## Chapter 1
 ### Goals
