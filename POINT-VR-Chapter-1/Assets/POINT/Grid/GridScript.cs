@@ -16,13 +16,23 @@ public class GridScript : MonoBehaviour
     /// The thickness of the grid's "bars". 
     /// </summary>
     readonly float thickness = 0.02f;
-    readonly int size_z = 8;
-    readonly int size_x = 8;
-    readonly int size_y = 5; //Produces a 7 x 7 x 4 grid
+
+    // Default values produce a 7 x 7 x 4 grid
+    [SerializeField] private int size_z = 8;
+    [SerializeField] private int size_x = 8;
+    [SerializeField] private int size_y = 5; 
+    public Vector3 gridSize
+    {
+        get
+        {
+            return new Vector3(size_x, size_y, size_z);
+        }
+    }
+
     /// <summary>
     /// The number of subjunctions on each "bar".
     /// </summary>
-    readonly int divisions = 5;
+    [SerializeField] private int divisions = 5;
     /// <summary>
     /// This struct is used to simplify the mass-position calculation and make memory use more compact
     /// </summary>

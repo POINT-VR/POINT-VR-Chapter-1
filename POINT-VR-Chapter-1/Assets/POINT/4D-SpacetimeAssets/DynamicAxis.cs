@@ -6,15 +6,14 @@ using UnityEngine;
 /// </summary>
 public class DynamicAxis : MonoBehaviour
 {
+    [Tooltip("Radius of cylinders representing the axes")]
+    [SerializeField] private float axisWidth;
 
-    [SerializeField]
-    private float axisWidth;
+    [Tooltip("Cone prefab for spawning arrow tips")]
+    [SerializeField] private GameObject cone;
 
-    /// <summary>
-    /// Cone prefab for spawning arrow tips
-    /// </summary>
-    [SerializeField] 
-    private GameObject cone;
+    [Tooltip("Cone prefab for spawning arrow tips")]
+    [SerializeField] private Material axisMaterial;
 
     //Axes
     private GameObject xAxis;
@@ -119,8 +118,6 @@ public class DynamicAxis : MonoBehaviour
         yArrowTwo.transform.localEulerAngles = new Vector3(0, 0, 180);
         zArrowTwo.transform.localEulerAngles = new Vector3(90, 180, 0);
 
-
-
         //Saves refrence to axis renderers 
         xAxisRenderer = xAxis.GetComponent<MeshRenderer>();
         yAxisRenderer = yAxis.GetComponent<MeshRenderer>();
@@ -136,7 +133,22 @@ public class DynamicAxis : MonoBehaviour
         yArrowTwoRenderer = yArrowTwo.GetComponent<MeshRenderer>();
         zArrowTwoRenderer = zArrowTwo.GetComponent<MeshRenderer>();
 
+        SetAxisMaterial(axisMaterial);
 
+        // Set render queue axes
+        xAxisRenderer.material.renderQueue--;
+        yAxisRenderer.material.renderQueue--;
+        zAxisRenderer.material.renderQueue--;
+
+        // Set render queue positive arrows 
+        xArrowRenderer.material.renderQueue--;
+        yArrowRenderer.material.renderQueue--;
+        zArrowRenderer.material.renderQueue--;
+
+        // Set render queue negative arrows 
+        xArrowTwoRenderer.material.renderQueue--;
+        yArrowTwoRenderer.material.renderQueue--;
+        zArrowTwoRenderer.material.renderQueue--;
 
         //Colors axes 
         xAxisRenderer.material.color = Color.red;
@@ -246,6 +258,83 @@ public class DynamicAxis : MonoBehaviour
     }
 
     /// <summary>
+    /// Lerps material between two colors
+    /// </summary>
+    /// <param name="endColor"></param>
+    /// <param name="duration"></param>
+    /// <returns></returns>
+    public IEnumerator TransitionAxisColor(Color endColor, float duration)
+    {
+        float timeElapsed = 0;
+
+        Color xColor = xAxisRenderer.material.color;
+        Color yColor = yAxisRenderer.material.color;
+        Color zColor = zAxisRenderer.material.color;
+
+        while (timeElapsed < duration) //textbook lerp
+        {
+            yield return null;
+            float t = timeElapsed / duration;
+
+            xAxisRenderer.material.color = Color.Lerp(xColor, endColor, t);
+            xArrowRenderer.material.color = Color.Lerp(xColor, endColor, t);
+            xArrowTwoRenderer.material.color = Color.Lerp(xColor, endColor, t);
+
+            yAxisRenderer.material.color = Color.Lerp(yColor, endColor, t);
+            yArrowRenderer.material.color = Color.Lerp(yColor, endColor, t);
+            yArrowTwoRenderer.material.color = Color.Lerp(yColor, endColor, t);
+
+            zAxisRenderer.material.color = Color.Lerp(zColor, endColor, t);
+            zArrowRenderer.material.color = Color.Lerp(zColor, endColor, t);
+            zArrowTwoRenderer.material.color = Color.Lerp(zColor, endColor, t);
+
+            timeElapsed += Time.deltaTime;
+        }
+
+        // Set to final color after last loop
+        xAxisRenderer.material.color = endColor;
+        xArrowRenderer.material.color = endColor;
+        xArrowTwoRenderer.material.color = endColor;
+
+        yAxisRenderer.material.color = endColor;
+        yArrowRenderer.material.color = endColor;
+        yArrowTwoRenderer.material.color = endColor;
+
+        zAxisRenderer.material.color = endColor;
+        zArrowRenderer.material.color = endColor;
+        zArrowTwoRenderer.material.color = endColor;
+
+        yield break;
+    }
+
+    /// <summary>
+    /// Lerps thickness of the axes
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator TransitionAxisThickness(float endThickness, float duration)
+    {
+        float timeElapsed = 0;
+        float startThickness = xAxis.transform.localScale.x;
+        while (timeElapsed < duration) //textbook lerp
+        {
+            yield return null;
+            float t = timeElapsed / duration;
+            float lerpPoint = Mathf.Lerp(startThickness, endThickness, t);
+
+            xAxis.transform.localScale = new Vector3(lerpPoint, xAxis.transform.localScale.y, lerpPoint);
+            yAxis.transform.localScale = new Vector3(lerpPoint, yAxis.transform.localScale.y, lerpPoint);
+            zAxis.transform.localScale = new Vector3(lerpPoint, zAxis.transform.localScale.y, lerpPoint);
+
+            timeElapsed += Time.deltaTime;
+        }
+
+        xAxis.transform.localScale = new Vector3(endThickness, xAxis.transform.localScale.y, endThickness);
+        yAxis.transform.localScale = new Vector3(endThickness, yAxis.transform.localScale.y, endThickness);
+        zAxis.transform.localScale = new Vector3(endThickness, zAxis.transform.localScale.y, endThickness);
+        yield break;
+    }
+
+    /// <summary>
     /// Shows the entire dynamic axis (Axes and arrows)
     /// </summary>
     public void ShowAxes(int axisNumber = -1)
@@ -350,6 +439,24 @@ public class DynamicAxis : MonoBehaviour
             yArrowTwoRenderer.enabled = false;
             zArrowTwoRenderer.enabled = false;
         }
+    }
+
+    public void SetAxisMaterial(Material material)
+    {
+        // Set material axes
+        xAxisRenderer.material = material;
+        yAxisRenderer.material = material;
+        zAxisRenderer.material = material;
+
+        // Set material positive arrows 
+        xArrowRenderer.material = material;
+        yArrowRenderer.material = material;
+        zArrowRenderer.material = material;
+
+        // Set material negative arrows 
+        xArrowTwoRenderer.material = material;
+        yArrowTwoRenderer.material = material;
+        zArrowTwoRenderer.material = material;
     }
 
     public void AxisLength(float length)
