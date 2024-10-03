@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/POINT/Scenes/Chapter1/Tutorial.unity
     guid: ad557d7729cb1e94486b73729194a995
   - enabled: 1
+    path: Assets/POINT/Scenes/Chapter1/Ch1_scene1.unity
+    guid: 45649d26e2b00294e9f40fb36e550e6c
+  - enabled: 1
     path: Assets/POINT/Scenes/Conference Demos/ConfDemo_part1_one-mass-y.unity
     guid: 152450adfd3469443b8a770205f31b3b
   - enabled: 1
