@@ -111,17 +111,23 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         // Get UI Manager UIManagerScript
         UIManagerScript = Menu.GetComponent<UIManager>();
 
+        yield return new WaitForSeconds(1);
         UIManagerScript.updateCurrentObjective(objective1); // Grid/Space Deformation
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\1_intro_to_grids_and_clocks_1");
+        yield return new WaitForSeconds(16);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\1_intro_to_grids_and_clocks_2");
+        yield return new WaitForSeconds(7);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\2_observe_grid_curve_1");
+        yield return new WaitForSeconds(60); // Pause to let player explore
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_1");
+        yield return new WaitForSeconds(10);
         // Question Time for Player: What does that say about Gravity
 
         UIManagerScript.updateCurrentObjective(objective2); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_2");
+        yield return new WaitForSeconds(7.1f);
         
         // TODO: Would be cool if after this question the sun sphere animated to the center of the grid. 
         // Instead of just spawing at the center of the grid
@@ -131,16 +137,21 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         massSphere.layer = LayerIgnoreRayCast; // set massSphere to uninteractable
                 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_3");
+        yield return new WaitForSeconds(2.5f);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_4");
+        yield return new WaitForSeconds(2);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_5");
         yield return new WaitForSeconds(6.1f);
         
         yield return new WaitUntil(() => state != false); // Complete objective
         
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_6");
+        yield return new WaitForSeconds(1); // Nice Job
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_7");
+        yield return new WaitForSeconds(22);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_8");
+        yield return new WaitForSeconds(5.5f);
         setOfDirectionalArrows.SetActive(false);
         massSphere.layer = LayerGrip; // End of Task, set sphere back to interactable
         arrowTask = false;
@@ -148,6 +159,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         UIManagerScript.updateCurrentObjective(objective3); // Time Deformation
         snapRing.SetActive(true);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\4_observe_time_dialation_1");
+        yield return new WaitForSeconds(8);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\4_observe_time_dialation_2");
 
         yield return new WaitUntil(() => snapRing.GetComponentInChildren<Rigidbody>() != null);
