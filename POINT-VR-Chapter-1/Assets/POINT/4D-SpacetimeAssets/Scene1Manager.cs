@@ -362,7 +362,8 @@ public class Scene1Manager : MonoBehaviour
         nextSceneButton.SetActive(true); // End of Scene, tell player to continue
         Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once, so we are going to show you only a small portion of the spacetime."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4");
-
+        yield return new WaitForSeconds(9.6f);
+        
         Debug.Log("Press the 'continue' button when you are ready to move on."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("continue");
         yield break;
