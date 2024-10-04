@@ -1,0 +1,245 @@
+{
+    "creditsCategories":
+    [
+        {
+            "categoryTitle": "Production",
+            "positions":
+            [
+                {
+                    "positionTitle": "Producers",
+                    "names":
+                    [
+                        "Kristen Schumacher",
+                        "Sonali Joshi"
+                    ]
+                },
+                {
+                    "positionTitle": "Production Manager",
+                    "names":
+                    [
+                        "Sonali Joshi"
+                    ]
+                },
+                {
+                    "positionTitle": "Project Management Assistance",
+                    "names":
+                    [
+                        "Mireille Tan"
+                    ]
+                }
+            ]
+        },
+        {
+            "categoryTitle": "Design",
+            "positions":
+            [
+                {
+                    "positionTitle": "Original Concept",
+                    "names":
+                    [
+                        "Kristen Schumacher"
+                    ]
+                }
+            ]
+        },
+        {
+            "categoryTitle": "Writers",
+            "positions":
+            [
+                {
+                    "positionTitle": "Scripter Writers",
+                    "names":
+                    [
+                        "Kristen Schumacher",
+                        "Chloe Richards",
+                        "Jessica L. Raley"
+                    ]
+                },
+                {
+                    "positionTitle": "Editors",
+                    "names":
+                    [
+                        "Jessica L. Raley",
+                        "Kristen Schumacher"
+                    ]
+                },
+                {
+                    "positionTitle": "Science Consultants",
+                    "names":
+                    [
+                        "Alexandria Tucker (Equations)",
+                        "Nicolás Yunes (Script)"
+                    ]
+                }
+            ]
+        },
+        {
+            "categoryTitle": "Programming",
+            "positions":
+            [
+                {
+                    "positionTitle": "Controls",
+                    "names":
+                    [
+                        "Chris Vistian"
+                    ]
+                },
+                {
+                    "positionTitle": "Physics",
+                    "names":
+                    [
+                        "Chris Vistian",
+                        "Sonali Joshi"
+                    ]
+                },
+                {
+                    "positionTitle": "User Interface",
+                    "names":
+                    [
+                        "Mireille Tan",
+                        "Chris Vistian"
+                    ]
+                },
+                {
+                    "positionTitle": "Localization",
+                    "names":
+                    [
+                        "Mireille Tan"
+                    ]
+                },
+                {
+                    "positionTitle": "Development",
+                    "names":
+                    [
+                        "Sonali Joshi",
+                        "Mireille Tan",
+                        "Chris Vistian",
+                        "Dante Ratchev",
+                        "Ethan Man",
+                        "George Bayliss",
+                        "Matthew Tan",
+                        "Zhanyu Feng",
+                        "Emily Dillingham"
+                    ]
+                }
+            ]
+        },
+        {
+            "categoryTitle": "Art",
+            "positions":
+            [
+                {
+                    "positionTitle": "Art Director",
+                    "names":
+                    [
+                        "Mireille Tan"
+                    ]
+                },
+                {
+                    "positionTitle": "Animator",
+                    "names":
+                    [
+                        "Mireille Tan"
+                    ]
+                },
+                {
+                    "positionTitle": "Skybox Images",
+                    "names":
+                    [
+                        "Alex Nickl"
+                    ]
+                }
+            ]
+        },
+        {
+            "categoryTitle": "Audio",
+            "positions":
+            [
+                {
+                    "positionTitle": "Narrator",
+                    "names":
+                    [
+                        "Jacob Schumacher"
+                    ]
+                },
+                {
+                    "positionTitle": "Audio Engineer",
+                    "names":
+                    [
+                        "Dante Ratchev",
+                        "Sonali Joshi"
+                    ]
+                },
+                {
+                    "positionTitle": "Music",
+                    "names":
+                    [
+                        "Sonali Joshi (Arranger)",
+                        "ZUN (Original)"
+                    ]
+                },
+                {
+                    "positionTitle": "Subtitles",
+                    "names":
+                    [
+                        "Dante Ratchev",
+                        "Sonali Joshi",
+                        "Emily Dillingham"
+                    ]
+                }
+            ]
+        },
+        {
+            "categoryTitle": "Localization",
+            "positions":
+            [
+                {
+                    "positionTitle": "Localization Manager",
+                    "names":
+                    [
+                        "Sonali Joshi"
+                    ]
+                },
+                {
+                    "positionTitle": "Spanish Translator",
+                    "names":
+                    [
+                        "Daniel Caballero"
+                    ]
+                }
+            ]
+        },
+        {
+            "categoryTitle": "Special Thanks",
+            "positions":
+            [
+                {
+                    "positionTitle": "",
+                    "names":
+                    [
+                        "Eric Shaffer",
+                        "Jina Kang"
+                    ]
+                }
+            ]
+        },
+        {
+            "categoryTitle": "Thanks to the following contributors",
+            "positions":
+            [
+                {
+                    "positionTitle": "",
+                    "names":
+                    [
+                        "Alex Nickl",
+                        "Dhruv Srivastava",
+                        "Anisha Jog",
+                        "Roger Wang",
+                        "Henry Che",
+                        "Chenzhengyi Liu"
+                    ]
+                }
+            ]
+        }
+    ]
+}
