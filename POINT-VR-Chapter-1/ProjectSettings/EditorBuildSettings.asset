@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/POINT/Scenes/Conference Demos/ConfDemo_part3_ranking-masses.unity
     guid: cbae5ebdf07bb9048a2f4ed3a657fa16
+  - enabled: 1
+    path: Assets/POINT/Scenes/Chapter1/EndCredits.unity
+    guid: 34853c8ba87e90c49b75acc2840e97b7
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2eac5b88f02ba704abc6cff84097461a,
       type: 2}

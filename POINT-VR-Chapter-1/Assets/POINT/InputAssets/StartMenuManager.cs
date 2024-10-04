@@ -199,4 +199,16 @@ public class StartMenuManager : MonoBehaviour
             }
         }
     }
+
+    public void StartCredits()
+    {
+        if (player != null)
+        {
+            SceneController sceneController = player.GetComponentInChildren<SceneController>();
+            if (sceneController != null)
+            {
+                sceneController.ChangeScene(5);
+            }
+        }
+    }
 }
