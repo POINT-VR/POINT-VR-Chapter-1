@@ -10,6 +10,9 @@ public class Directional_Arrow_Script : MonoBehaviour
     [SerializeField] public Material correctMaterial;
 
     [SerializeField] public Material incorrectMaterial;
+
+    public bool Correct = false;
+
     // Start is called before the first frame update
     void Start()
     {   
@@ -17,8 +20,10 @@ public class Directional_Arrow_Script : MonoBehaviour
         if(arrow.transform.eulerAngles.z == correctAngle)
         {
             gameObjectRenderer.material = correctMaterial;
+            Correct = true;
         } else {
             gameObjectRenderer.material = incorrectMaterial;
+            Correct = false;
         }
     }
 
@@ -36,11 +41,13 @@ public class Directional_Arrow_Script : MonoBehaviour
         );
 
         MeshRenderer gameObjectRenderer = arrow.GetComponent<MeshRenderer>();
-        if(arrow.transform.eulerAngles.z == correctAngle)
+        if( ((int) (arrow.transform.eulerAngles.z % 360)) == correctAngle)
         {
             gameObjectRenderer.material = correctMaterial;
+            Correct = true;
         } else {
             gameObjectRenderer.material = incorrectMaterial;
+            Correct = false;
         }
     }
 }

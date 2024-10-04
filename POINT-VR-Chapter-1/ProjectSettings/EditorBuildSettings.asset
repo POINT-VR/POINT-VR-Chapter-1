@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/POINT/Scenes/Chapter1/Tutorial.unity
     guid: ad557d7729cb1e94486b73729194a995
   - enabled: 1
+    path: Assets/POINT/Scenes/Chapter1/Ch1_scene1.unity
+    guid: 45649d26e2b00294e9f40fb36e550e6c
+  - enabled: 1
     path: Assets/POINT/Scenes/Conference Demos/ConfDemo_part1_one-mass-y.unity
     guid: 152450adfd3469443b8a770205f31b3b
   - enabled: 1
@@ -20,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/POINT/Scenes/Conference Demos/ConfDemo_part3_ranking-masses.unity
     guid: cbae5ebdf07bb9048a2f4ed3a657fa16
+  - enabled: 1
+    path: Assets/POINT/Scenes/Chapter1/EndCredits.unity
+    guid: 34853c8ba87e90c49b75acc2840e97b7
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2eac5b88f02ba704abc6cff84097461a,
       type: 2}
