@@ -207,7 +207,7 @@ public class StartMenuManager : MonoBehaviour
             SceneController sceneController = player.GetComponentInChildren<SceneController>();
             if (sceneController != null)
             {
-                sceneController.ChangeScene(5);
+                sceneController.ChangeScene(6);
             }
         }
     }
