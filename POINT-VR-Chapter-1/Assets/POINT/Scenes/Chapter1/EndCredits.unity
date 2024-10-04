@@ -917,7 +917,7 @@ MonoBehaviour:
     Schumacher\r\nSonali Joshi\r\n\r\nProduction Manager:\r\nSonali Joshi\r\n\r\nProject
     Management Assistance:\r\nMireille Tan"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 304d7b6ac4678744a8df8c28f7ef810c, type: 2}
   m_sharedMaterial: {fileID: 7525430167382668832, guid: f40308fb73ccff1438f373026ccda1f0,
     type: 2}
   m_fontSharedMaterials: []
