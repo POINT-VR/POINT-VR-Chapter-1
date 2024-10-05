@@ -37,7 +37,7 @@
         {
             fixed4 c = _Color;
             o.Albedo = c.rgb;
-            o.Alpha = lerp(0.0, 1.0, pow(dot(IN.worldNormal, IN.viewDir), 4));
+            o.Alpha = lerp(0.0, c.a * 2.0, pow(dot(IN.worldNormal, IN.viewDir), 2));
         }
         ENDCG
     }
