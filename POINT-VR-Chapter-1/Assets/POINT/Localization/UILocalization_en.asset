@@ -107,16 +107,98 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - id: 0
-  - m_Id: 1521794191373
-    m_Localized: Small Mass
+  - m_Id: 13434977798623232
+    m_Localized: Press for
     m_Metadata:
       m_Items: []
-  - m_Id: 1521794191374
-    m_Localized: Big Mass
+  - m_Id: 13430563188805632
+    m_Localized: Options
     m_Metadata:
       m_Items: []
-  - m_Id: 1521794191375
-    m_Localized: Two Masses
+  - m_Id: 13430563205582848
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777152
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777153
+    m_Localized: Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777154
+    m_Localized: 'Select a scene:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777155
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777156
+    m_Localized: Intro to Spacetime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777157
+    m_Localized: Matter Tells Spacetime How To Curve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777158
+    m_Localized: Return to Home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777159
+    m_Localized: Explore how matter warps space and time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777161
+    m_Localized: 'Time:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777162
+    m_Localized: Press To Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777163
+    m_Localized: Lightest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777164
+    m_Localized: Heaviest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271424
+    m_Localized: Try pointing at the floor and teleporting to the rings in the distance!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271425
+    m_Localized: In addition to turning your head, you can rotate your view by using
+      the joysticks. Try it now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271426
+    m_Localized: This sphere is a grabbable object, try picking it up.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271427
+    m_Localized: You can also pull and push objects when grabbing them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271428
+    m_Localized: 'The tutorial is now over, please tell the instructor. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271429
+    m_Localized: When you are ready, look around for a blue button saying "Scene
+      1" and press it with the trigger.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271430
+    m_Localized: Press the highlighted button to pull up the game menu.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13448451257831424
+    m_Localized: Continue
     m_Metadata:
       m_Items: []
   references:

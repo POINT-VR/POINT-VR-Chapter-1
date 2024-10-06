@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Localization;
 
 public class Scene1Manager : MonoBehaviour
 {
@@ -36,6 +36,16 @@ public class Scene1Manager : MonoBehaviour
 
     [Tooltip("Speed at which masses orbit")]
     [SerializeField] private float orbitSpeed = 20.0f;
+
+    [Header("Objective Text")]
+    [SerializeField] private LocalizedString objectiveOneText;
+    [SerializeField] private LocalizedString objectiveTwoText;
+    [SerializeField] private LocalizedString objectiveThreeText;
+    [SerializeField] private LocalizedString objectiveFourText;
+    private string objectiveOneString;
+    private string objectiveTwoString;
+    private string objectiveThreeString;
+    private string objectiveFourString;
 
     private Camera currentCamera = null;
     private GameObject player = null;

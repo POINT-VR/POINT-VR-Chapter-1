@@ -108,16 +108,99 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - id: 0
-  - m_Id: 1521794191373
-    m_Localized: "Masa Peque\xF1a"
+  - m_Id: 13434977798623232
+    m_Localized: Pulsa para
     m_Metadata:
       m_Items: []
-  - m_Id: 1521794191374
-    m_Localized: Masa Grande
+  - m_Id: 13430563188805632
+    m_Localized: Opciones
     m_Metadata:
       m_Items: []
-  - m_Id: 1521794191375
-    m_Localized: Dos Masas
+  - m_Id: 13430563205582848
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777152
+    m_Localized: Confirma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777153
+    m_Localized: Vuelve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777154
+    m_Localized: 'Elige una escena:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777155
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777156
+    m_Localized: "Introducci\xF3n al Espacio-tiempo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777157
+    m_Localized: "La Materia Dice al Espacio-tiempo C\xF3mo Curvarse"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777158
+    m_Localized: Vuelve al Inicio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777159
+    m_Localized: "Investiga c\xF3mo la materia deforma el espacio y el tiempo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777161
+    m_Localized: 'Tiempo:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777162
+    m_Localized: Pulsa para continuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777163
+    m_Localized: "M\xE1s ligero"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777164
+    m_Localized: "M\xE1s pesado"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271424
+    m_Localized: Trata de apuntar al piso y teletransportarte a los anillos en la
+      distancia!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271425
+    m_Localized: "Adem\xE1s de girar tu cabeza, puedes girar tu mirada con los joysticks.
+      Lo trata ahora."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271426
+    m_Localized: 'Esta esfera es algo que puedes coger, trata de recogerla. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271427
+    m_Localized: "Tambi\xE9n puedes tirar y empujar cosas cuando los est\xE1s cogiendo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271428
+    m_Localized: El tutorial ha terminado, por favor informa el instructor.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271429
+    m_Localized: "Cuando eres listo, busca un bot\xF3n azul con el texto \"Escena
+      1\" y lo pulsa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271430
+    m_Localized: "Pulsa el bot\xF3n resaltado para abrir el men\xFA."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13448451257831424
+    m_Localized: Continua
     m_Metadata:
       m_Items: []
   references:

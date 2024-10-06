@@ -19,6 +19,14 @@ MonoBehaviour:
     m_Key: MENU_START
     m_Metadata:
       m_Items: []
+  - m_Id: 13430563188805632
+    m_Key: MENU_OPTIONS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563205582848
+    m_Key: MENU_CREDITS
+    m_Metadata:
+      m_Items: []
   - m_Id: 1521785802752
     m_Key: MENU_VERSION
     m_Metadata:
@@ -33,6 +41,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1521789997056
     m_Key: MENU_SCENES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777152
+    m_Key: MENU_CONFIRM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777153
+    m_Key: MENU_RETURN
     m_Metadata:
       m_Items: []
   - m_Id: 1521789997057
@@ -95,20 +111,84 @@ MonoBehaviour:
     m_Key: SCENES_CHAPTER
     m_Metadata:
       m_Items: []
+  - m_Id: 13430563209777154
+    m_Key: SCENES_SELECT
+    m_Metadata:
+      m_Items: []
   - m_Id: 1521794191372
     m_Key: SCENES_SCENE
     m_Metadata:
       m_Items: []
-  - m_Id: 1521794191373
-    m_Key: SCENES_SMALL_MASS
+  - m_Id: 13430563209777155
+    m_Key: SCENES_TUTORIAL
     m_Metadata:
       m_Items: []
-  - m_Id: 1521794191374
-    m_Key: SCENES_BIG_MASS
+  - m_Id: 13430563209777156
+    m_Key: SCENES_INTRO_TO_SPACETIME
     m_Metadata:
       m_Items: []
-  - m_Id: 1521794191375
-    m_Key: SCENES_TWO_MASSES
+  - m_Id: 13430563209777157
+    m_Key: SCENES_MATTER_TELLS_SPACETIME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777158
+    m_Key: SCENES_RETURN_HOME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777159
+    m_Key: OBJECTIVE_EXPLORE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13434977798623232
+    m_Key: INSTRUCTIONS_PRESS_FOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271424
+    m_Key: TUTORIAL_TELEPORT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271425
+    m_Key: TUTORIAL_TURN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271426
+    m_Key: TUTORIAL_GRAB
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271427
+    m_Key: TUTORIAL_PUSH_PULL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271428
+    m_Key: TUTORIAL_OVER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271429
+    m_Key: TUTORIAL_MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271430
+    m_Key: TUTORIAL_OPEN_MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777161
+    m_Key: UI_TIME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777162
+    m_Key: UI_PRESS_TO_CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13448451257831424
+    m_Key: UI_CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777163
+    m_Key: RANKING_LIGHTEST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777164
+    m_Key: RANKING_HEAVIEST
     m_Metadata:
       m_Items: []
   m_Metadata:

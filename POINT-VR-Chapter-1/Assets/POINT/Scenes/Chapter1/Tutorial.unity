@@ -366,9 +366,9 @@ MonoBehaviour:
   m_fontSize: 32
   m_fontSizeBase: 32
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 24
+  m_fontSizeMax: 32
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -504,7 +504,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -704,6 +704,7 @@ GameObject:
   - component: {fileID: 667940550}
   - component: {fileID: 667940552}
   - component: {fileID: 667940551}
+  - component: {fileID: 667940553}
   m_Layer: 5
   m_Name: Instructions
   m_TagString: Untagged
@@ -749,7 +750,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press with Trigger for
+  m_text: Press for
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c05c57be7bc3494da0c26626d70c868, type: 2}
   m_sharedMaterial: {fileID: -3600680322368273387, guid: 5c05c57be7bc3494da0c26626d70c868,
@@ -780,9 +781,9 @@ MonoBehaviour:
   m_fontSize: 60
   m_fontSizeBase: 60
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 32
+  m_fontSizeMax: 60
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -827,6 +828,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667940549}
   m_CullTransparentMesh: 0
+--- !u!114 &667940553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667940549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13434977798623232
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 667940551}
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 1
 --- !u!1 &684260365
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +991,7 @@ GameObject:
   - component: {fileID: 1194862048}
   - component: {fileID: 1194862050}
   - component: {fileID: 1194862049}
+  - component: {fileID: 1194862051}
   m_Layer: 5
   m_Name: Scene Name
   m_TagString: Untagged
@@ -1030,9 +1070,9 @@ MonoBehaviour:
   m_fontSize: 140
   m_fontSizeBase: 140
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 80
+  m_fontSizeMax: 140
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1077,6 +1117,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194862047}
   m_CullTransparentMesh: 0
+--- !u!114 &1194862051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194862047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 1521794191372
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: number
+      variable:
+        id: 0
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1194862049}
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 1
+    00000000:
+      type: {class: UIntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables,
+        asm: Unity.Localization}
+      data:
+        m_Value: 1
 --- !u!1 &1226068541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,16 +1301,71 @@ MonoBehaviour:
   pushPullSprite: {fileID: 21300000, guid: 2794dcc9276180f458bd4f06cb95a104, type: 3}
   overSprite: {fileID: 0}
   menuSprite: {fileID: 21300000, guid: 5bce63427ab351e4e9b962dfbe84291f, type: 3}
-  teleportationText: Try pointing at the floor and teleporting to the rings in the
-    distance!
-  turnText: In addition to turning your head, you can rotate your view by using the
-    joysticks. Try it now.
-  grabText: This sphere is a grabbable object, try picking it up.
-  pushPullText: You can also pull and push objects when grabbing them.
-  overText: 'The tutorial is now over, please tell the instructor. '
-  menuText: When you are ready, look around for a blue button saying "Scene 1" and
-    press it with the trigger.
-  openMenuText: Press the highlighted button to pull up the game menu.
+  teleportationText:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13443997431271424
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  turnText:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13443997431271425
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  grabText:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13443997431271426
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  pushPullText:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13443997431271427
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  overText:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13443997431271428
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  menuText:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13443997431271429
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  openMenuText:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13443997431271430
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 1
 --- !u!114 &1270109314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,7 +1585,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337579472}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 0

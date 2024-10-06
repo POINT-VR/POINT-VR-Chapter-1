@@ -33,7 +33,11 @@ EditorBuildSettings:
       type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 8eba22a5a1a0f84478c02b39354696eb,
       type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: d9fa10bf67921d34688d96fcf0cd56ef,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 2eb42e1390af4ba4ab51a9b482e68338,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 4dd5ea5325ca26a4cbf5b83149f74bec,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7c600385b2e0246499112b5f537d1007,
       type: 2}
