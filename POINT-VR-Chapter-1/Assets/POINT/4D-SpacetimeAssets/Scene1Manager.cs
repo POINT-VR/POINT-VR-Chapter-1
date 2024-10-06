@@ -214,12 +214,12 @@ public class Scene1Manager : MonoBehaviour
                 var newPathLine = Instantiate(secondPath.transform.GetChild(1).gameObject, new Vector3(v.x / 2, v.y / 2, v.z / 2), Quaternion.identity, secondPath.transform);
                 // if the line will be along y axis then that is how it is originally
                 // along x axis
-                if (v.x > 0)
+                if (v.x != 0)
                 {
                     newPathLine.transform.Rotate(0.0f, 0.0f, 90.0f, Space.Self);
                 }
                 // along z axis
-                if (v.z > 0)
+                if (v.z != 0)
                 {
                     newPathLine.transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);
                 }
