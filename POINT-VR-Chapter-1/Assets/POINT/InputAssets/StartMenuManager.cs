@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization;
 
 public class StartMenuManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class StartMenuManager : MonoBehaviour
 
     [Tooltip("Transform containing the subtitle toggles")]
     [SerializeField] private Transform subtitleParent = null;
+
+    [Tooltip("Default localized string that appears under current objective in the UI menu")]
+    [SerializeField] private LocalizedString defaultObjective;
 
     /// <summary>
     /// A reference to the player GameObject
@@ -126,6 +130,7 @@ public class StartMenuManager : MonoBehaviour
         yield return new WaitUntil(() => Camera.current != null);
 
         player = Camera.current.transform.parent.gameObject;
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(defaultObjective);
         player.GetComponent<PauseController>().ToggleReference.action.Disable();
     }
 

@@ -44,12 +44,12 @@ public class UIManager : MonoBehaviour
         currentObjective.StringChanged -= UpdateObjectiveLocalized;
     }
 
-    public void updateCurrentObjective(string newObjective)
+    public void UpdateCurrentObjective(string newObjective)
     {
         currentObjectiveTMP.text = newObjective;
     }
 
-    public void updateCurrentObjective(LocalizedString newObjective)
+    public void UpdateCurrentObjective(LocalizedString newObjective)
     {
         currentObjective = newObjective;
         currentObjective.RefreshString();

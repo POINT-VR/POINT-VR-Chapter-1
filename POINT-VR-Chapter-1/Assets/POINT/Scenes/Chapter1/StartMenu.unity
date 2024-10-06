@@ -1144,6 +1144,17 @@ MonoBehaviour:
   fullMenu: {fileID: 264075179}
   versionText: {fileID: 1224902910}
   subtitleParent: {fileID: 2052267816}
+  defaultObjective:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13430563209777159
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 1
 --- !u!114 &1028624119
 MonoBehaviour:
   m_ObjectHideFlags: 0

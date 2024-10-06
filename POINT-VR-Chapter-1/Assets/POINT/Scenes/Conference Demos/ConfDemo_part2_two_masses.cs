@@ -64,12 +64,12 @@ public class ConfDemo_part2_two_masses : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1);
         
-        UIManagerScript.updateCurrentObjective(objective1); // Grid/Space Deformation Two Masses
+        UIManagerScript.UpdateCurrentObjective(objective1); // Grid/Space Deformation Two Masses
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_1");
 
         yield return new WaitForSecondsRealtime(60); // Do space curvature prediction
 
-        UIManagerScript.updateCurrentObjective(objective2); // Time Deformation Two Masses
+        UIManagerScript.UpdateCurrentObjective(objective2); // Time Deformation Two Masses
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_2");
         yield return new WaitForSecondsRealtime(12);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_3");
@@ -83,7 +83,7 @@ public class ConfDemo_part2_two_masses : MonoBehaviour
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_6");
         yield return new WaitForSecondsRealtime(16);
 
-        UIManagerScript.updateCurrentObjective(objective3); // Continue to next scene
+        UIManagerScript.UpdateCurrentObjective(objective3); // Continue to next scene
         SceneUIContainer.SetActive(true); // Continue to next scene 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_7");
 

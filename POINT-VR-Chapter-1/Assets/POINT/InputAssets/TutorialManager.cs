@@ -168,7 +168,7 @@ public class TutorialManager : MonoBehaviour
         turnText.RefreshString();
         instructions.text = turnString;
         
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
 
         StartCoroutine(WaitForTurn());
@@ -187,7 +187,7 @@ public class TutorialManager : MonoBehaviour
         teleportationText.RefreshString();
         instructions.text = teleportationString;
 
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
 
         StartCoroutine(WaitForTeleport()); 
 
@@ -217,7 +217,7 @@ public class TutorialManager : MonoBehaviour
         grabText.RefreshString();
         instructions.text = grabString;
 
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Grab");
 
         StartCoroutine(WaitForGrab());
@@ -234,7 +234,7 @@ public class TutorialManager : MonoBehaviour
         pushPullText.RefreshString();
         instructions.text = pushPullString;
 
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Push&Pull");
 
         StartCoroutine(WaitForPushPull());
@@ -259,7 +259,7 @@ public class TutorialManager : MonoBehaviour
         openMenuText.RefreshString();
         instructions.text = openMenuString;
 
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Open");
 
         StartCoroutine(WaitForMenuPopup());
@@ -356,7 +356,7 @@ public class TutorialManager : MonoBehaviour
             if (instructions.text == teleportationString)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -372,7 +372,7 @@ public class TutorialManager : MonoBehaviour
             if (instructions.text == turnString)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -388,7 +388,7 @@ public class TutorialManager : MonoBehaviour
             if (instructions.text == grabString)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -404,7 +404,7 @@ public class TutorialManager : MonoBehaviour
             if (instructions.text == pushPullString)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -420,7 +420,7 @@ public class TutorialManager : MonoBehaviour
             if (instructions.text == overString)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -436,7 +436,7 @@ public class TutorialManager : MonoBehaviour
             if (instructions.text == menuString)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -452,7 +452,7 @@ public class TutorialManager : MonoBehaviour
             if (instructions.text == openMenuString)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
             }
             else
             {
