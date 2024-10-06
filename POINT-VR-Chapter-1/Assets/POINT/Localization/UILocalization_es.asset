@@ -203,6 +203,41 @@ MonoBehaviour:
     m_Localized: Continua
     m_Metadata:
       m_Items: []
+  - m_Id: 13565752678322176
+    m_Localized: "Introducci\xF3n al sistema de coordenadas 3D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099392
+    m_Localized: Mueve un objeto en el espacio 3D
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099393
+    m_Localized: "Introducci\xF3n a la dimensi\xF3n de tiempo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099394
+    m_Localized: "Introducci\xF3n al Espacio-tiempo 4D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122360958976
+    m_Localized: "Mueve la esfera por la cuadr\xEDcula y observa c\xF3mo deforma
+      la cuadr\xEDcula. Tarda un minuto o m\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930496
+    m_Localized: "Pulsa las flechas hasta est\xE1n hacia la direcci\xF3n de gravedad
+      y se convirten azules."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930497
+    m_Localized: "Trae la esfera a la ubicaci\xF3n diana para observar c\xF3mo afecta
+      el tiempo la gravedad."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930498
+    m_Localized: "Continua a la escena pr\xF3xima."
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
@@ -29,9 +30,39 @@ public class UIManager : MonoBehaviour
     [Header("Current Objective")]
     [SerializeField] TMP_Text currentObjectiveTMP;
 
+    private LocalizedString currentObjective;
+    private string objectiveText;
+
+    private void OnEnable()
+    {
+        currentObjective.StringChanged += UpdateObjectiveLocalized;
+    }
+
+    private void OnDisable()
+    {
+        currentObjective.StringChanged -= UpdateObjectiveLocalized;
+    }
+
     public void updateCurrentObjective(string newObjective)
     {
         currentObjectiveTMP.text = newObjective;
+    }
+
+    public void updateCurrentObjective(LocalizedString newObjective)
+    {
+        currentObjective = newObjective;
+        currentObjective.RefreshString();
+    }
+
+    private void UpdateObjectiveLocalized(string s)
+    {
+        objectiveText = s;
+        RefreshCurrentObjectiveLocalized();
+    }
+
+    private void RefreshCurrentObjectiveLocalized()
+    {
+        currentObjectiveTMP.text = objectiveText;
     }
 
     public void AddToFunctionalAudio(AudioSource audioSource)

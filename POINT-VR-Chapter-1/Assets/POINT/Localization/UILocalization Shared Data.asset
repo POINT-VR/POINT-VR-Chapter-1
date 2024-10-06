@@ -183,6 +183,38 @@ MonoBehaviour:
     m_Key: UI_CONTINUE
     m_Metadata:
       m_Items: []
+  - m_Id: 13565752678322176
+    m_Key: SCENE1_OBJECTIVE1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099392
+    m_Key: SCENE1_OBJECTIVE2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099393
+    m_Key: SCENE1_OBJECTIVE3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099394
+    m_Key: SCENE1_OBJECTIVE4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122360958976
+    m_Key: ARROWS_OBJECTIVE1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930496
+    m_Key: ARROWS_OBJECTIVE2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930497
+    m_Key: ARROWS_OBJECTIVE3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930498
+    m_Key: ARROWS_OBJECTIVE4
+    m_Metadata:
+      m_Items: []
   - m_Id: 13430563209777163
     m_Key: RANKING_LIGHTEST
     m_Metadata:

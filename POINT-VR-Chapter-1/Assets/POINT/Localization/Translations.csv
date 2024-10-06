@@ -41,5 +41,13 @@ TUTORIAL_OPEN_MENU,Press the highlighted button to pull up the game menu.,Pulsa 
 UI_TIME,Time:,Tiempo:
 UI_PRESS_TO_CONTINUE,Press To Continue,Pulsa para continuar
 UI_CONTINUE,Continue,Continua
+SCENE1_OBJECTIVE1,Introduction to the 3D coordinate system,Introducción al sistema de coordenadas 3D
+SCENE1_OBJECTIVE2,Move an object in 3D space,Mueve un objeto en el espacio 3D
+SCENE1_OBJECTIVE3,Introduction to the dimension of time,Introducción a la dimensión de tiempo
+SCENE1_OBJECTIVE4,Introduction to 4D Spacetime,Introducción al Espacio-tiempo 4D
+ARROWS_OBJECTIVE1,Move the sphere through the grid and observe how the grid deforms. Take a minute or more.,Mueve la esfera por la cuadrícula y observa cómo deforma la cuadrícula. Tarda un minuto o más.
+ARROWS_OBJECTIVE2,Press the arrows until they point in the direction of gravity and turn blue.,Pulsa las flechas hasta están hacia la dirección de gravedad y se convirten azules.
+ARROWS_OBJECTIVE3,Bring the sphere to the target location to observe how gravity affects time.,Trae la esfera a la ubicación diana para observar cómo afecta el tiempo la gravedad.
+ARROWS_OBJECTIVE4,Continue to next scene.,Continua a la escena próxima.
 RANKING_LIGHTEST,Lightest,Más ligero
 RANKING_HEAVIEST,Heaviest,Más pesado

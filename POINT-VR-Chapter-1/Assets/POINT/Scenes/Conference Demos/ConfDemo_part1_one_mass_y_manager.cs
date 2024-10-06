@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.Localization;
 using UnityEngine.InputSystem;
 public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
 {
@@ -15,11 +14,16 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
     [SerializeField] private GameObject setOfDirectionalArrows;
 
     [Header("Instructions Text")]
-    [SerializeField] private string objective1;
-    [SerializeField] private string objective2;
-    [SerializeField] private string objective3;
-    [SerializeField] private string objective4;
-    
+    [SerializeField] private LocalizedString objective1Text;
+    [SerializeField] private LocalizedString objective2Text;
+    [SerializeField] private LocalizedString objective3Text;
+    [SerializeField] private LocalizedString objective4Text;
+
+    private string objective1string;
+    private string objective2string;
+    private string objective3string;
+    private string objective4string;
+
     // Cache
     private Camera currentCamera = null;
     private GameObject player = null;
@@ -65,7 +69,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         UIManagerScript = Menu.GetComponent<UIManager>();
 
         yield return new WaitForSeconds(1);
-        UIManagerScript.updateCurrentObjective(objective1); // Grid/Space Deformation
+        UIManagerScript.updateCurrentObjective(objective1Text); // Grid/Space Deformation
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\1_intro_to_grids_and_clocks_1");
         yield return new WaitForSeconds(16);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\1_intro_to_grids_and_clocks_2");
@@ -78,7 +82,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         yield return new WaitForSeconds(10);
         // Question Time for Player: What does that say about Gravity
 
-        UIManagerScript.updateCurrentObjective(objective2); 
+        UIManagerScript.updateCurrentObjective(objective2Text); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_2");
         yield return new WaitForSeconds(7.1f);
 
@@ -129,7 +133,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         massSphere.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None; // End of Task, set sphere back to movable
         massSphere.layer = LayerMask.NameToLayer("Grip"); // End of Task, set sphere back to interactable
 
-        UIManagerScript.updateCurrentObjective(objective3); // Time Deformation
+        UIManagerScript.updateCurrentObjective(objective3Text); // Time Deformation
         snapRing.SetActive(true);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\4_observe_time_dialation_1");
         yield return new WaitForSeconds(8);
@@ -138,7 +142,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         yield return new WaitUntil(() => snapRing.GetComponentInChildren<Rigidbody>() != null);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\4_observe_time_dialation_3");
 
-        UIManagerScript.updateCurrentObjective(objective4); // Continue to next scene
+        UIManagerScript.updateCurrentObjective(objective4Text); // Continue to next scene
         SceneUIContainer.SetActive(true); // Continue to next scene 
 
         yield break;
