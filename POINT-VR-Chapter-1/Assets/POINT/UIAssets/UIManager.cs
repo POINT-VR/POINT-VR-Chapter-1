@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        currentObjective = new LocalizedString();
         currentObjective.StringChanged += UpdateObjectiveLocalized;
     }
 
@@ -62,7 +63,10 @@ public class UIManager : MonoBehaviour
 
     private void RefreshCurrentObjectiveLocalized()
     {
-        currentObjectiveTMP.text = objectiveText;
+        if (currentObjectiveTMP)
+        {
+            currentObjectiveTMP.text = objectiveText;
+        }
     }
 
     public void AddToFunctionalAudio(AudioSource audioSource)
