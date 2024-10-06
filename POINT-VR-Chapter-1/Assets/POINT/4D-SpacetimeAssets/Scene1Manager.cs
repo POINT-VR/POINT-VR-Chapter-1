@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 public class Scene1Manager : MonoBehaviour
@@ -81,6 +82,9 @@ public class Scene1Manager : MonoBehaviour
         massObject.HideMass();
 
         examplePath = GameObject.Find("ExamplePathObj");
+        // setting outline for final coords
+        examplePath.transform.GetChild(6).GetComponent<TMP_Text>().outlineWidth = 0.1f;
+        examplePath.transform.GetChild(6).GetComponent<TMP_Text>().outlineColor = new Color32(255, 220, 220, 220); //light grey
         examplePath.SetActive(false);
 
         secondPath = GameObject.Find("SecondPathManager");
