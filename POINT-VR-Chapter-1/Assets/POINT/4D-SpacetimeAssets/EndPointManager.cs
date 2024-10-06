@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using M = System.Math;
 using UnityEngine;
 
 /// <summary>
@@ -76,9 +77,9 @@ public class EndPointManager : MonoBehaviour
                     triggered = false;
                     break;
                 }
-                if (pos != new Vector3(0,0,0)) // Adds endpoint to endPath list if it is triggered and is not the origin
+                if (pos != new Vector3(0,0,0) || endPath.Count > 0) // Adds endpoint to endPath list if it is triggered and is not the origin in the beginning
                 {
-                    endPath.Add(pos);
+                    endPath.Add(new Vector3((int) (M.Round(pos.x)), (int) (M.Round(pos.y)), (int) (M.Round(pos.z))));
                 }
                 if (comparePoints.Count >= 1 && endPath.Count >= 1 && moveLimit == false) // Makes sure comparison is only done on the second go-through, and when
                 {                                                                        // the player has not had their previous run go over 12 moves, if it has
