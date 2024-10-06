@@ -84,6 +84,9 @@ public class CoordinateDisplay : MonoBehaviour
         {
             coordinateText.text = $"<color=white>( <color=red>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=blue>{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> )</color>";
         }
+        RectTransform rt = coordinateText.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
+        Bounds textBounds = coordinateText.mesh.bounds;
+        rt.sizeDelta = new Vector2(textBounds.max.x - textBounds.min.x + 40, 130);
     }
 
 
