@@ -165,6 +165,7 @@ public class TutorialManager : MonoBehaviour
 
         // Turn tutorial
         controlsImage.sprite = turnSprite;
+        turnText.RefreshString();
         instructions.text = turnString;
         
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
@@ -183,6 +184,7 @@ public class TutorialManager : MonoBehaviour
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport");
         controlsImage.sprite = teleportationSprite;
+        teleportationText.RefreshString();
         instructions.text = teleportationString;
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
@@ -212,6 +214,7 @@ public class TutorialManager : MonoBehaviour
 
         // Grab tutorial
         controlsImage.sprite = grabSprite;
+        grabText.RefreshString();
         instructions.text = grabString;
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
@@ -228,6 +231,7 @@ public class TutorialManager : MonoBehaviour
 
         // Push and pull tutorial
         controlsImage.sprite = pushPullSprite;
+        pushPullText.RefreshString();
         instructions.text = pushPullString;
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
@@ -252,6 +256,7 @@ public class TutorialManager : MonoBehaviour
 
         // Activate Menu
         controlsImage.sprite = menuSprite;
+        openMenuText.RefreshString();
         instructions.text = openMenuString;
 
         player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
@@ -319,6 +324,7 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(11); // Set to the audio file above's duration in seconds 
 
+        overText.RefreshString();
         instructions.text = overString;
         SceneUIContainer.SetActive(true);
 
@@ -345,92 +351,113 @@ public class TutorialManager : MonoBehaviour
     // TODO: Investigate if there is a way for only one function to be made that can be applied to all
     private void UpdateTeleportationString(string s)
     {
-        if (instructions.text == teleportationString)
+        if (instructions != null)
         {
-            instructions.text = s;
-            player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        }
-        else
-        {
-            teleportationString = s;
+            if (instructions.text == teleportationString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                teleportationString = s;
+            }
         }
     }
 
     private void UpdateTurnString(string s)
     {
-        if (instructions.text == turnString)
+        if (instructions != null)
         {
-            instructions.text = s;
-            player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        }
-        else
-        {
-            turnString = s;
+            if (instructions.text == turnString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                turnString = s;
+            }
         }
     }
 
     private void UpdateGrabString(string s)
     {
-        if (instructions.text == grabString)
+        if (instructions != null)
         {
-            instructions.text = s;
-            player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        }
-        else
-        {
-            grabString = s;
+            if (instructions.text == grabString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                grabString = s;
+            }
         }
     }
 
     private void UpdatePushPullString(string s)
     {
-        if (instructions.text == pushPullString)
+        if (instructions != null)
         {
-            instructions.text = s;
-            player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        }
-        else
-        {
-            pushPullString = s;
+            if (instructions.text == pushPullString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                pushPullString = s;
+            }
         }
     }
 
     private void UpdateOverString(string s)
     {
-        if (instructions.text == overString)
+        if (instructions != null)
         {
-            instructions.text = s;
-            player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        }
-        else
-        {
-            overString = s;
+            if (instructions.text == overString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                overString = s;
+            }
         }
     }
 
     private void UpdateMenuString(string s)
     {
-        if (instructions.text == menuString)
+        if (instructions != null)
         {
-            instructions.text = s;
-            player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        }
-        else
-        {
-            menuString = s;
+            if (instructions.text == menuString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                menuString = s;
+            }
         }
     }
 
     private void UpdateOpenMenuString(string s)
     {
-        if (instructions.text == openMenuString)
+        if (instructions != null)
         {
-            instructions.text = s;
-            player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
-        }
-        else
-        {
-            openMenuString = s;
+            if (instructions.text == openMenuString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                openMenuString = s;
+            }
         }
     }
     #endregion
