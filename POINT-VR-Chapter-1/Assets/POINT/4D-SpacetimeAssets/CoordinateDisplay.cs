@@ -64,7 +64,10 @@ public class CoordinateDisplay : MonoBehaviour
         Transform dummyCamera = new GameObject().transform; //uses a dummy transform to position the text 'above' the mass from the point of view of the camera
         dummyCamera.position = cameraObject.transform.position;
         dummyCamera.LookAt(transform.position);
-        coordinateText.transform.position = transform.position + dummyCamera.up / 2;
+        Vector3 shellVector = cameraObject.transform.position - coordinateText.transform.position; // vector pointing to camera from location of text
+        shellVector.y = 0; // setting the y component equal to 0 so only the other 2 components get normalized
+        Vector3 shellNorm = 0.3f * (shellVector).normalized;
+        coordinateText.transform.position = transform.position + shellNorm + new Vector3(0,0.5f,0);
 
         coordinateText.transform.LookAt(2 * coordinateText.transform.position - dummyCamera.transform.position); //makes the text angle to face the camera.
         Destroy(dummyCamera.gameObject);
@@ -75,11 +78,11 @@ public class CoordinateDisplay : MonoBehaviour
         Vector3 outputCoordinates = transform.position - (Vector3)origin; //calculates position relative to origin
         if (showTime)
         {
-            coordinateText.text = $"<color=white>( <color=blue>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=red>{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> , {Math.Floor(Time.time - tNaught)} )</color>"; //calculates time relative to origin, +0.01 accounts for a rounding error
+            coordinateText.text = $"<color=white>( <color=red>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=blue>{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> , {Math.Floor(Time.time - tNaught)} )</color>"; //calculates time relative to origin, +0.01 accounts for a rounding error
         }
         else
         {
-            coordinateText.text = $"<color=white>( <color=blue>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=red>{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> )</color>";
+            coordinateText.text = $"<color=white>( <color=red>{(Math.Floor(10 * outputCoordinates.x + 0.01) / 10)}</color> , <color=green>{(Math.Floor(10 * outputCoordinates.y + 0.01) / 10)}</color> , <color=blue>{(Math.Floor(10 * outputCoordinates.z + 0.01) / 10)}</color> )</color>";
         }
     }
 

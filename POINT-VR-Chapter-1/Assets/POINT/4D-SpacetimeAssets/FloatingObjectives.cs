@@ -23,13 +23,18 @@ public class FloatingObjectives : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraObject = Camera.allCameras[0];
-        this.transform.SetParent(cameraObject.transform);
-        this.transform.localPosition = position;
+        cameraObject = Camera.allCameras[0]; 
+        // this.transform.SetParent(cameraObject.transform);             ***testing with detached camera***
+        // this.transform.localPosition = position;            ***testing with detached camera***
         this.transform.localEulerAngles = new Vector3(0, 90, 0);
         objectiveText.text = "";
     }
-
+    void Update()
+    { 
+        // Updates Objective Menu to always face Camera
+        this.transform.LookAt(cameraObject.transform);
+        transform.Rotate(0.0f, 270.0f, 0.0f);
+    }
     public void NewObjective(string newObjective) //Takes a new objective and appends it to the list of previous ones
     {
         if (currentObjective != "")

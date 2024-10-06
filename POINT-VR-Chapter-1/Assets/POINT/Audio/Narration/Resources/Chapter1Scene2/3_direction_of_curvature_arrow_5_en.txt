@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:01,284
+To complete the activity, 
+
+2
+00:00:01,284 --> 00:00:03,626
+reach out and tap the arrows to make them rotate
+
+3
+00:00:03,626 --> 00:00:06,083
+until they are all pointing in the direction of gravity.

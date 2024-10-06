@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:04,000
+In this activity, we will investigate what the curvature of the grid
+
+2
+00:00:04,000 --> 00:00:07,000
+tells us about how the gravity of the sphere would influence nearby objects.

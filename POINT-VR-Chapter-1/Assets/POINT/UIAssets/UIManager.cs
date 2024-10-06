@@ -13,8 +13,8 @@ public class UIManager : MonoBehaviour
     private Color32 INACTIVE_BUTTON_COLOR = new Color32(123, 231, 255, 127);
 
     [Header("Sprites")]
-    [SerializeField] private Sprite toggleSelected = null;
-    [SerializeField] private Sprite toggleUnselected = null;
+    [SerializeField] public Sprite toggleSelected = null;
+    [SerializeField] public Sprite toggleUnselected = null;
     [Header("Volume Adjustments")]
     [SerializeField] private List<AudioSource> functionalAudio = null;
     [SerializeField] private List<AudioSource> aestheticAudio = null;
