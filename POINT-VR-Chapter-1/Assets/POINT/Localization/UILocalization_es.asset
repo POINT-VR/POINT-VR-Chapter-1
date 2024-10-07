@@ -238,6 +238,32 @@ MonoBehaviour:
     m_Localized: "Continua a la escena pr\xF3xima."
     m_Metadata:
       m_Items: []
+  - m_Id: 13788494816120832
+    m_Localized: "A Kristen Schumacher le gustar\xEDa reconocer que este material
+      se basa en obras apoyadas por el Programa de Becas para la Investigaci\xF3n
+      Graduada de la Fundaci\xF3n Nacional para la Ciencia, bajo la beca n\xFAmero
+      DGE \u2013 1746047.\n\nLos auriculares de NCSA: Los auriculares de realidad
+      virtual fueron prove\xEDdos en parte por Nicol\xE1s Yunes a trav\xE9s de la
+      beca de la Fundaci\xF3n Nacional para la Ciencia n\xFAmero PHY-2207650 y en
+      parte por el proyecto El Mapeado para la Energ\xEDa Oscura. El Mapeado para
+      la Energ\xEDa Oscura es apoyado por la beca de la Fundaci\xF3n Nacional para
+      la Ciencia AST- 1536171. Cualquieras opiniones expresadas en este material
+      son las de los desarrolladores y no necesariamente reflejar las opiniones de
+      la Fundaci\xF3n Nacional para la Ciencia."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675264
+    m_Localized: Ve a ver nuestro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675265
+    m_Localized: Sitio web
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675266
+    m_Localized: Repositorio de GitHub
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

@@ -223,6 +223,22 @@ MonoBehaviour:
     m_Key: RANKING_HEAVIEST
     m_Metadata:
       m_Items: []
+  - m_Id: 13788494816120832
+    m_Key: CREDITS_FUNDING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675264
+    m_Key: CREDITS_CHECK_OUT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675265
+    m_Key: CREDITS_WEBSITE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675266
+    m_Key: CREDITS_GITHUB
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

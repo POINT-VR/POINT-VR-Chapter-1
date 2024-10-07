@@ -236,6 +236,30 @@ MonoBehaviour:
     m_Localized: Continue to next scene.
     m_Metadata:
       m_Items: []
+  - m_Id: 13788494816120832
+    m_Localized: "Kristen Schumacher would like to acknowledge that this material
+      is based upon work supported by the National Science Foundation Graduate Research
+      Fellowship Program under Grant No. DGE \u2013 1746047.\n\nNCSA headsets: Virtual
+      reality headsets were provided in part by Nicol\xE1s Yunes through the National
+      Science Foundation (NSF) Grant No. PHY-2207650 and in part by the Dark Energy
+      Survey project. The Dark Energy Survey project is supported by National Science
+      Foundation grant AST- 1536171. Any opinions, findings, conclusions or recommendations
+      expressed in this material are those of the developers and do not necessarily
+      reflect the views of the National Science Foundation."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675264
+    m_Localized: Check out our
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675265
+    m_Localized: Website
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675266
+    m_Localized: GitHub Repository
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:
