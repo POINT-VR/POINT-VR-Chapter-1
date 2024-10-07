@@ -30,19 +30,8 @@ public class UIManager : MonoBehaviour
     [Header("Current Objective")]
     [SerializeField] TMP_Text currentObjectiveTMP;
 
-    private LocalizedString currentObjective;
+    private LocalizedString currentObjective = null;
     private string objectiveText;
-
-    private void OnEnable()
-    {
-        currentObjective = new LocalizedString();
-        currentObjective.StringChanged += UpdateObjectiveLocalized;
-    }
-
-    private void OnDisable()
-    {
-        currentObjective.StringChanged -= UpdateObjectiveLocalized;
-    }
 
     public void UpdateCurrentObjective(string newObjective)
     {
@@ -51,7 +40,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCurrentObjective(LocalizedString newObjective)
     {
+        if (currentObjective != null)
+        {
+            currentObjective.StringChanged -= UpdateObjectiveLocalized;
+        }
         currentObjective = newObjective;
+        currentObjective.StringChanged += UpdateObjectiveLocalized;
         currentObjective.RefreshString();
     }
 
