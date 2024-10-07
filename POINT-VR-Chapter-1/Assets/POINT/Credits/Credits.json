@@ -2,11 +2,11 @@
     "creditsCategories":
     [
         {
-            "categoryTitle": "Production",
+            "categoryTitle": "Production / Producción",
             "positions":
             [
                 {
-                    "positionTitle": "Producers",
+                    "positionTitle": "Producers / Productores",
                     "names":
                     [
                         "Kristen Schumacher",
@@ -14,14 +14,14 @@
                     ]
                 },
                 {
-                    "positionTitle": "Production Manager",
+                    "positionTitle": "Production Manager / Gerente de Producción",
                     "names":
                     [
                         "Sonali Joshi"
                     ]
                 },
                 {
-                    "positionTitle": "Project Management Assistance",
+                    "positionTitle": "Project Management Assistance / Asistancia para Gestión del Proyecto",
                     "names":
                     [
                         "Mireille Tan"
@@ -30,11 +30,11 @@
             ]
         },
         {
-            "categoryTitle": "Design",
+            "categoryTitle": "Design / Diseño",
             "positions":
             [
                 {
-                    "positionTitle": "Original Concept",
+                    "positionTitle": "Original Concept / Concepto Original",
                     "names":
                     [
                         "Kristen Schumacher"
@@ -43,11 +43,11 @@
             ]
         },
         {
-            "categoryTitle": "Writers",
+            "categoryTitle": "Writers / Escritores",
             "positions":
             [
                 {
-                    "positionTitle": "Scripter Writers",
+                    "positionTitle": "Script Writers / Escritores del Guion",
                     "names":
                     [
                         "Kristen Schumacher",
@@ -56,7 +56,7 @@
                     ]
                 },
                 {
-                    "positionTitle": "Editors",
+                    "positionTitle": "Editors / Editores",
                     "names":
                     [
                         "Jessica L. Raley",
@@ -64,7 +64,7 @@
                     ]
                 },
                 {
-                    "positionTitle": "Science Consultants",
+                    "positionTitle": "Science Consultants / Consultores Científicos",
                     "names":
                     [
                         "Alexandria Tucker (Equations)",
@@ -74,18 +74,18 @@
             ]
         },
         {
-            "categoryTitle": "Programming",
+            "categoryTitle": "Programming / Programación",
             "positions":
             [
                 {
-                    "positionTitle": "Controls",
+                    "positionTitle": "Controls / Controles",
                     "names":
                     [
                         "Chris Vistian"
                     ]
                 },
                 {
-                    "positionTitle": "Physics",
+                    "positionTitle": "Physics / Física",
                     "names":
                     [
                         "Chris Vistian",
@@ -93,7 +93,7 @@
                     ]
                 },
                 {
-                    "positionTitle": "User Interface",
+                    "positionTitle": "User Interface / Interfaz de Usuario",
                     "names":
                     [
                         "Mireille Tan",
@@ -101,14 +101,14 @@
                     ]
                 },
                 {
-                    "positionTitle": "Localization",
+                    "positionTitle": "Localization / Localización",
                     "names":
                     [
                         "Mireille Tan"
                     ]
                 },
                 {
-                    "positionTitle": "Development",
+                    "positionTitle": "Development / Desarrollo",
                     "names":
                     [
                         "Sonali Joshi",
@@ -125,25 +125,25 @@
             ]
         },
         {
-            "categoryTitle": "Art",
+            "categoryTitle": "Art / Arte",
             "positions":
             [
                 {
-                    "positionTitle": "Art Director",
+                    "positionTitle": "Art Director / Director del Arte",
                     "names":
                     [
                         "Mireille Tan"
                     ]
                 },
                 {
-                    "positionTitle": "Animator",
+                    "positionTitle": "Animator / Animador",
                     "names":
                     [
                         "Mireille Tan"
                     ]
                 },
                 {
-                    "positionTitle": "Skybox Images",
+                    "positionTitle": "Skybox Images / Imagenes de Skybox",
                     "names":
                     [
                         "Alex Nickl"
@@ -152,18 +152,18 @@
             ]
         },
         {
-            "categoryTitle": "Audio",
+            "categoryTitle": "Audio / Audio",
             "positions":
             [
                 {
-                    "positionTitle": "Narrator",
+                    "positionTitle": "Narrator / Narrador",
                     "names":
                     [
                         "Jacob Schumacher"
                     ]
                 },
                 {
-                    "positionTitle": "Audio Engineer",
+                    "positionTitle": "Audio Engineer / Ingeniero de Audio",
                     "names":
                     [
                         "Dante Ratchev",
@@ -171,7 +171,7 @@
                     ]
                 },
                 {
-                    "positionTitle": "Music",
+                    "positionTitle": "Music / Música",
                     "names":
                     [
                         "Sonali Joshi (Arranger)",
@@ -179,7 +179,7 @@
                     ]
                 },
                 {
-                    "positionTitle": "Subtitles",
+                    "positionTitle": "Subtitles / Subtítulos",
                     "names":
                     [
                         "Dante Ratchev",
@@ -190,18 +190,18 @@
             ]
         },
         {
-            "categoryTitle": "Localization",
+            "categoryTitle": "Localization / Localización",
             "positions":
             [
                 {
-                    "positionTitle": "Localization Manager",
+                    "positionTitle": "Localization Manager / Gerente de Localización",
                     "names":
                     [
                         "Sonali Joshi"
                     ]
                 },
                 {
-                    "positionTitle": "Spanish Translator",
+                    "positionTitle": "Spanish Translator / Traductor de Español",
                     "names":
                     [
                         "Daniel Caballero"
@@ -210,7 +210,7 @@
             ]
         },
         {
-            "categoryTitle": "Special Thanks",
+            "categoryTitle": "Special Thanks / Agradecimientos",
             "positions":
             [
                 {
@@ -224,7 +224,7 @@
             ]
         },
         {
-            "categoryTitle": "Thanks to the following contributors",
+            "categoryTitle": "Thanks to the following contributors / Gracias",
             "positions":
             [
                 {

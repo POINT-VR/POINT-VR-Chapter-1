@@ -68,7 +68,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1);
         
-        UIManagerScript.updateCurrentObjective(objective1); // Rank different masses
+        UIManagerScript.UpdateCurrentObjective(objective1); // Rank different masses
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\6_put_masses_in_order_1");
 
         // Do ranking, see SortHolder.cs
@@ -89,7 +89,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     public void PlayRadiiTask()
     {
         // Called in the OnCast() in the Task1 UI -> Next Task Button, once they click to continue to Task 2
-        UIManagerScript.updateCurrentObjective(objective2); // Rank different radii, same mass
+        UIManagerScript.UpdateCurrentObjective(objective2); // Rank different radii, same mass
         StartCoroutine(RadiiTaskAudio());
     }
 
@@ -103,7 +103,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     {
         // Called in the OnCast() of Task2 UI -> Small, Right answer
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_3");
-        UIManagerScript.updateCurrentObjective(objective3); // Congrats, all done
+        UIManagerScript.UpdateCurrentObjective(objective3); // Congrats, all done
         SceneUIContainer.SetActive(true);
     }
 }

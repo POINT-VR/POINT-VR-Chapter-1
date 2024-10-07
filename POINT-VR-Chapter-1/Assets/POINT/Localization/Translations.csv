@@ -1,0 +1,61 @@
+﻿Key,English(en),Spanish(es)
+MENU_START,Press to Start,Pulsa para empezar
+MENU_OPTIONS,Options,Opciones
+MENU_CREDITS,Credits,Créditos
+MENU_VERSION,Version: {0},Versión: {0}
+MENU_GENERAL,General,Menú General
+MENU_CONTROLS,Controls,Controles
+MENU_SCENES,Scenes,Escenas
+MENU_CONFIRM,Confirm,Confirma
+MENU_RETURN,Return,Vuelve
+SETTINGS_OFF,Off,Apagado
+SETTINGS_ON,On,Encendido
+SETTINGS_NARRATION_VOL,Narration Volume,Volumen de Narración
+SETTINGS_BACKGROUND_VOL,Background Volume,Volumen de Fondo
+SETTINGS_LANGUAGE,Language,Lengua
+SETTINGS_SUBTITLES,Subtitles,Subtítulos
+SETTINGS_LANGUAGE_DISABLED,Disabled,Apagados
+SETTINGS_LANGUAGE_ENGLISH,English,Inglés
+SETTINGS_LANGUAGE_SPANISH,Spanish,Español
+SETTINGS_LIVE_CONTROLLER_DIAGRAMS,Live Controller Diagrams,Diagrama de los controles en tiempo real
+SETTINGS_HAPTICS,Haptics,Vibración de control
+SETTINGS_FLOOR,Floor,Piso
+SETTINGS_FLOOR_DISCLAIMER,Warning: Presence of floor is intended for user's comfort within the simulation and is NOT physically accurate!,¡Cuidado: La presencia del piso es intencionada para la comodidad del usuario dentro de la simulación pero este NO indica la ubicación real del piso!  
+CURRENT_OBJECTIVE,Current Objective,Objetivo Actual
+SCENES_CHAPTER,Chapter {number},Capítulo {number}
+SCENES_SELECT,Select a scene:,Elige una escena:
+SCENES_SCENE,Scene {number},Escena {number}
+SCENES_TUTORIAL,Tutorial,Tutorial
+SCENES_INTRO_TO_SPACETIME,Intro to Spacetime,Introducción al Espacio-tiempo
+SCENES_MATTER_TELLS_SPACETIME,Matter Tells Spacetime How To Curve,La Materia Dice al Espacio-tiempo Cómo Curvarse
+SCENES_RETURN_HOME,Return to Home,Vuelve al Inicio
+OBJECTIVE_EXPLORE,Explore how matter warps space and time.,Investiga cómo la materia deforma el espacio y el tiempo.
+INSTRUCTIONS_PRESS_FOR,Press for,Pulsa para
+TUTORIAL_TELEPORT,Try pointing at the floor and teleporting to the rings in the distance!,Trata de apuntar al piso y teletransportarte a los anillos en la distancia!
+TUTORIAL_TURN,"In addition to turning your head, you can rotate your view by using the joysticks. Try it now.","Además de girar tu cabeza, puedes girar tu mirada con los joysticks. Lo trata ahora."
+TUTORIAL_GRAB,"This sphere is a grabbable object, try picking it up.","Esta esfera es algo que puedes coger, trata de recogerla. "
+TUTORIAL_PUSH_PULL,You can also pull and push objects when grabbing them.,También puedes tirar y empujar cosas cuando los estás cogiendo.
+TUTORIAL_OVER,"The tutorial is now over, please tell the instructor. ","El tutorial ha terminado, por favor informa el instructor."
+TUTORIAL_MENU,"When you are ready, look around for a blue button saying ""Scene 1"" and press it with the trigger.","Cuando eres listo, busca un botón azul con el texto ""Escena 1"" y lo pulsa."
+TUTORIAL_OPEN_MENU,Press the highlighted button to pull up the game menu.,Pulsa el botón resaltado para abrir el menú.
+UI_TIME,Time:,Tiempo:
+UI_PRESS_TO_CONTINUE,Press To Continue,Pulsa para continuar
+UI_CONTINUE,Continue,Continua
+SCENE1_OBJECTIVE1,Introduction to the 3D coordinate system,Introducción al sistema de coordenadas 3D
+SCENE1_OBJECTIVE2,Move an object in 3D space,Mueve un objeto en el espacio 3D
+SCENE1_OBJECTIVE3,Introduction to the dimension of time,Introducción a la dimensión de tiempo
+SCENE1_OBJECTIVE4,Introduction to 4D Spacetime,Introducción al Espacio-tiempo 4D
+ARROWS_OBJECTIVE1,Move the sphere through the grid and observe how the grid deforms. Take a minute or more.,Mueve la esfera por la cuadrícula y observa cómo deforma la cuadrícula. Tarda un minuto o más.
+ARROWS_OBJECTIVE2,Press the arrows until they point in the direction of gravity and turn blue.,Pulsa las flechas hasta están hacia la dirección de gravedad y se convirten azules.
+ARROWS_OBJECTIVE3,Bring the sphere to the target location to observe how gravity affects time.,Trae la esfera a la ubicación diana para observar cómo afecta el tiempo la gravedad.
+ARROWS_OBJECTIVE4,Continue to next scene.,Continua a la escena próxima.
+RANKING_LIGHTEST,Lightest,Más ligero
+RANKING_HEAVIEST,Heaviest,Más pesado
+CREDITS_FUNDING,"Kristen Schumacher would like to acknowledge that this material is based upon work supported by the National Science Foundation Graduate Research Fellowship Program under Grant No. DGE – 1746047.
+
+NCSA headsets: Virtual reality headsets were provided in part by Nicolás Yunes through the National Science Foundation (NSF) Grant No. PHY-2207650 and in part by the Dark Energy Survey project. The Dark Energy Survey project is supported by National Science Foundation grant AST- 1536171. Any opinions, findings, conclusions or recommendations expressed in this material are those of the developers and do not necessarily reflect the views of the National Science Foundation.","A Kristen Schumacher le gustaría reconocer que este material se basa en obras apoyadas por el Programa de Becas para la Investigación Graduada de la Fundación Nacional para la Ciencia, bajo la beca número DGE – 1746047.
+
+Los auriculares de NCSA: Los auriculares de realidad virtual fueron proveídos en parte por Nicolás Yunes a través de la beca de la Fundación Nacional para la Ciencia número PHY-2207650 y en parte por el proyecto El Mapeado para la Energía Oscura. El Mapeado para la Energía Oscura es apoyado por la beca de la Fundación Nacional para la Ciencia AST- 1536171. Cualquieras opiniones expresadas en este material son las de los desarrolladores y no necesariamente reflejar las opiniones de la Fundación Nacional para la Ciencia."
+CREDITS_CHECK_OUT,Check out our,Ve a ver nuestro
+CREDITS_WEBSITE,Website,Sitio web
+CREDITS_GITHUB,GitHub Repository,Repositorio de GitHub

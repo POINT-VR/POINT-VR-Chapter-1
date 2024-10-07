@@ -57,6 +57,7 @@ public class SceneController : MonoBehaviour
         gripNotice.IsOn = data.gripNoticeEnabled;
         functional.value = data.functionalVolume;
         aesthetic.value = data.aestheticVolume;
+        uiManager.Language = (int)data.language;
         uiManager.SubtitleLanguage = (int) data.subtitleLanguage;
         music.mute = false;
         floorToggle.IsOn = data.isFloorVisible;
@@ -79,6 +80,7 @@ public class SceneController : MonoBehaviour
             isFloorVisible = floorToggle.IsOn,
             isHapticsEnabled = hapticToggle.IsOn,
             isControllerHighlighted = highlightsToggle.IsOn,
+            language = (GameManager.Language)uiManager.Language,
             subtitleLanguage = (GameManager.Language) uiManager.SubtitleLanguage
         };
         GameManager.Instance.SetData(data);

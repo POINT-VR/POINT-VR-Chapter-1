@@ -1,0 +1,268 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UILocalization_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: ea97502b36f6cd149b6a571be6e2583f, type: 2}
+  m_Metadata:
+    m_Items:
+    - id: 0
+  m_TableData:
+  - m_Id: 1521769025536
+    m_Localized: Press to Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802752
+    m_Localized: 'Version: {0}'
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 1521785802753
+    m_Localized: General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802754
+    m_Localized: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997056
+    m_Localized: Scenes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997057
+    m_Localized: Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997058
+    m_Localized: On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997059
+    m_Localized: Narration Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191360
+    m_Localized: Background Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191361
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191362
+    m_Localized: Subtitles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191363
+    m_Localized: Disabled
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191364
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191365
+    m_Localized: Spanish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191366
+    m_Localized: Live Controller Diagrams
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191367
+    m_Localized: Haptics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191368
+    m_Localized: Floor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191369
+    m_Localized: 'Warning: Presence of floor is intended for user''s comfort within
+      the simulation and is NOT physically accurate!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191370
+    m_Localized: Current Objective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191371
+    m_Localized: Chapter {number}
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 1521794191372
+    m_Localized: Scene {number}
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 13434977798623232
+    m_Localized: Press for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563188805632
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563205582848
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777152
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777153
+    m_Localized: Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777154
+    m_Localized: 'Select a scene:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777155
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777156
+    m_Localized: Intro to Spacetime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777157
+    m_Localized: Matter Tells Spacetime How To Curve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777158
+    m_Localized: Return to Home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777159
+    m_Localized: Explore how matter warps space and time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777161
+    m_Localized: 'Time:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777162
+    m_Localized: Press To Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777163
+    m_Localized: Lightest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777164
+    m_Localized: Heaviest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271424
+    m_Localized: Try pointing at the floor and teleporting to the rings in the distance!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271425
+    m_Localized: In addition to turning your head, you can rotate your view by using
+      the joysticks. Try it now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271426
+    m_Localized: This sphere is a grabbable object, try picking it up.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271427
+    m_Localized: You can also pull and push objects when grabbing them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271428
+    m_Localized: 'The tutorial is now over, please tell the instructor. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271429
+    m_Localized: When you are ready, look around for a blue button saying "Scene
+      1" and press it with the trigger.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271430
+    m_Localized: Press the highlighted button to pull up the game menu.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13448451257831424
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752678322176
+    m_Localized: Introduction to the 3D coordinate system
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099392
+    m_Localized: Move an object in 3D space
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099393
+    m_Localized: Introduction to the dimension of time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099394
+    m_Localized: Introduction to 4D Spacetime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122360958976
+    m_Localized: Move the sphere through the grid and observe how the grid deforms.
+      Take a minute or more.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930496
+    m_Localized: Press the arrows until they point in the direction of gravity and
+      turn blue.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930497
+    m_Localized: Bring the sphere to the target location to observe how gravity affects
+      time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930498
+    m_Localized: Continue to next scene.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494816120832
+    m_Localized: "Kristen Schumacher would like to acknowledge that this material
+      is based upon work supported by the National Science Foundation Graduate Research
+      Fellowship Program under Grant No. DGE \u2013 1746047.\n\nNCSA headsets: Virtual
+      reality headsets were provided in part by Nicol\xE1s Yunes through the National
+      Science Foundation (NSF) Grant No. PHY-2207650 and in part by the Dark Energy
+      Survey project. The Dark Energy Survey project is supported by National Science
+      Foundation grant AST- 1536171. Any opinions, findings, conclusions or recommendations
+      expressed in this material are those of the developers and do not necessarily
+      reflect the views of the National Science Foundation."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675264
+    m_Localized: Check out our
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675265
+    m_Localized: Website
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675266
+    m_Localized: GitHub Repository
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00908051620100000b900052620100000c90005262010000

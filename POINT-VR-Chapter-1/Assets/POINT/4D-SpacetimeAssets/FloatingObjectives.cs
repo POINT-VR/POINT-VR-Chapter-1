@@ -11,37 +11,53 @@ public class FloatingObjectives : MonoBehaviour
     /// <summary>
     /// The text object which displays the objectives
     /// </summary>
-    [SerializeField]
-    private TMP_Text objectiveText;
+    [SerializeField] private TMP_Text objectiveText;
 
-    [SerializeField]
-    private Vector3 position;
+    [SerializeField] private Vector3 position;
 
-    private string pastObjectives = "";
-    private string currentObjective = "";
+    private System.Collections.Generic.List<string> objectives;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         cameraObject = Camera.allCameras[0]; 
         // this.transform.SetParent(cameraObject.transform);             ***testing with detached camera***
         // this.transform.localPosition = position;            ***testing with detached camera***
         this.transform.localEulerAngles = new Vector3(0, 90, 0);
         objectiveText.text = "";
+        objectives = new System.Collections.Generic.List<string>();
     }
-    void Update()
+
+    private void Update()
     { 
         // Updates Objective Menu to always face Camera
         this.transform.LookAt(cameraObject.transform);
         transform.Rotate(0.0f, 270.0f, 0.0f);
     }
-    public void NewObjective(string newObjective) //Takes a new objective and appends it to the list of previous ones
+    
+    public int NewObjective(string newObjective) //Takes a new objective and appends it to the list of previous ones
     {
-        if (currentObjective != "")
+        objectives.Add(newObjective);
+        ReloadObjectives();
+
+        return objectives.Count - 1;
+    }
+
+    public void UpdateObjectiveLanguage(int idx, string s)
+    {
+        if (idx >= 0 && idx < objectives.Count)
         {
-            pastObjectives += currentObjective + "\n";
+            objectives[idx] = s;
+            ReloadObjectives();
         }
-        currentObjective = newObjective;
-        objectiveText.text = $"<color=grey>{pastObjectives}</color><color=white>{currentObjective}</color>"; //TMP_Text formatting shenanigenry
+    }
+
+    private void ReloadObjectives()
+    {
+        objectiveText.text = "";
+        for (int i = 0; i < objectives.Count; i++)
+        {
+            string colorTag = (i == objectives.Count - 1) ? "<color=white>" : "<color=grey>";
+            objectiveText.text += colorTag + objectives[i] + "</color>" + "\n";
+        }
     }
 }
