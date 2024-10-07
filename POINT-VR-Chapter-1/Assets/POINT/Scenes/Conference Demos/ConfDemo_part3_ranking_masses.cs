@@ -99,11 +99,25 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\6_put_masses_in_order_3");
     }
 
-    public void PlayEndRadiiTask()
+    public IEnumerator EndRadiiAudio()
     {
-        // Called in the OnCast() of Task2 UI -> Small, Right answer
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_3");
         UIManagerScript.UpdateCurrentObjective(objective3); // Congrats, all done
         SceneUIContainer.SetActive(true);
+
+        yield return new WaitForSeconds(10); // Wait 10 seconds before going into Credits
+
+        SceneController sceneController = player.GetComponentInChildren<SceneController>(); // Automatically go to Credits
+        if (sceneController != null)
+            {
+                sceneController.ChangeScene(6);
+            }
+        yield break;
+    }
+
+    public void PlayEndRadiiTask()
+    {
+        // Called in the OnCast() of Task2 UI -> Small, Right answer
+        StartCoroutine(EndRadiiAudio());        
     }
 }
