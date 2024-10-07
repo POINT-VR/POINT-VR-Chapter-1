@@ -366,7 +366,16 @@ public class Scene1Manager : MonoBehaviour
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_2");
         // Sum of yield returns should be 5s
         dynamicAxis.SetAxisMaterial(gridMaterial);
+
+        Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once"); 
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4_1");
+        yield return new WaitForSeconds(6.5f);
+
+        Debug.Log(", so we are going to show you only a small portion of the spacetime.");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4_2");
+        // no : yield return new WaitForSeconds(3.7f);
         yield return ShrinkGrid(1.8f, 3.0f, 2.0f);
+
         dynamicAxis.gameObject.SetActive(false);
         staticGrid.SetActive(false);
         floatingObjectivesMenu.SetActive(true); // Bring back Objectives as grid shrinks
@@ -391,9 +400,6 @@ public class Scene1Manager : MonoBehaviour
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_3");
         yield return new WaitForSecondsRealtime(20);
         nextSceneButton.SetActive(true); // End of Scene, tell player to continue
-        Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once, so we are going to show you only a small portion of the spacetime."); 
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4");
-        yield return new WaitForSeconds(9.6f);
         
         Debug.Log("Press the 'continue' button when you are ready to move on."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("continue");
