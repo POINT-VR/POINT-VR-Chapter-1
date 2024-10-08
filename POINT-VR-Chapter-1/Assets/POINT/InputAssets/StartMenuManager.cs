@@ -15,8 +15,8 @@ public class StartMenuManager : MonoBehaviour
     [Tooltip("TextMeshPro component that displays the current version number")]
     [SerializeField] private TMP_Text versionText = null;
 
-    [Tooltip("Transform containing the subtitle toggles")]
-    [SerializeField] private Transform subtitleParent = null;
+    [Tooltip("Transform containing the language toggles")]
+    [SerializeField] private Transform languageParent = null;
 
     [Tooltip("Default localized string that appears under current objective in the UI menu")]
     [SerializeField] private LocalizedString defaultObjective;
@@ -41,8 +41,8 @@ public class StartMenuManager : MonoBehaviour
     /// </summary>
     private Vector3 lastCameraPosition = Vector3.positiveInfinity;
 
-    private int subtitleLanguage = 1;
-    public int SubtitleLanguage
+    private int language = 1;
+    public int Language
     {
         set
         {
@@ -54,14 +54,14 @@ public class StartMenuManager : MonoBehaviour
                 }
             }
 
-            if (uiManager != null && subtitleParent != null)
+            if (uiManager != null && languageParent != null)
             {
-                for (int i = 0; i < subtitleParent.childCount; i++)
+                for (int i = 0; i < languageParent.childCount; i++)
                 {
-                    Image imageComponent = subtitleParent.GetChild(i).GetComponentInChildren<Image>();
+                    Image imageComponent = languageParent.GetChild(i).GetComponentInChildren<Image>();
                     if (imageComponent != null)
                     {
-                        if (i == value) // selected toggle
+                        if (i == value - 1) // selected toggle
                         {
                             imageComponent.sprite = uiManager.toggleSelected;
                         }
@@ -73,7 +73,7 @@ public class StartMenuManager : MonoBehaviour
                 }
             }
             
-            subtitleLanguage = value;
+            language = value;
         }
     }
 
@@ -192,7 +192,7 @@ public class StartMenuManager : MonoBehaviour
 
         if (uiManager != null)
         {
-            uiManager.SubtitleLanguage = subtitleLanguage;
+            uiManager.Language = language;
         }
 
         if (player != null)
@@ -202,6 +202,22 @@ public class StartMenuManager : MonoBehaviour
             {
                 sceneController.ChangeScene(1);
             }
+        }
+    }
+
+    public void UpdateLanguage()
+    {
+        if (uiManager == null)
+        {
+            if (player != null)
+            {
+                uiManager = player.GetComponentInChildren<UIManager>(true);
+            }
+        }
+
+        if (uiManager != null)
+        {
+            Language = uiManager.Language;
         }
     }
 
