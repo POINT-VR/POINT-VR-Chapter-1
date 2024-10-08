@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
         public bool isFloorVisible;
         public bool isHapticsEnabled;
         public bool isControllerHighlighted;
+        public Language language;
         public Language subtitleLanguage;
     }
     public static GameManager Instance { get; private set; }
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
             data.isHapticsEnabled = true;
             data.isFloorVisible = false;
             data.isControllerHighlighted = true;
+            data.language = Language.English;
             data.subtitleLanguage = Language.English;
         }
         if (Instance != this)

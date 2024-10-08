@@ -3,6 +3,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
+
 public class TutorialManager : MonoBehaviour
 {
     // Serialized fields
@@ -31,13 +33,22 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Sprite overSprite;
     [SerializeField] private Sprite menuSprite;
     [Header("Instructions Text")]
-    [SerializeField] private string teleportationText;
-    [SerializeField] private string turnText;
-    [SerializeField] private string grabText;
-    [SerializeField] private string pushPullText;
-    [SerializeField] private string overText;
-    [SerializeField] private string menuText;
-    [SerializeField] private string openMenuText;
+    [SerializeField] private LocalizedString teleportationText;
+    [SerializeField] private LocalizedString turnText;
+    [SerializeField] private LocalizedString grabText;
+    [SerializeField] private LocalizedString pushPullText;
+    [SerializeField] private LocalizedString overText;
+    [SerializeField] private LocalizedString menuText;
+    [SerializeField] private LocalizedString openMenuText;
+    private string teleportationString;
+    private string turnString;
+    private string grabString;
+    private string pushPullString;
+    private string overString;
+    private string menuString;
+    private string openMenuString;
+
+
     // Cache
     private TMP_Text instructions = null;
     private Camera currentCamera = null;
@@ -46,12 +57,32 @@ public class TutorialManager : MonoBehaviour
     private GameObject menus = null;
     private GameObject buttons = null;
     private UIManager UIManagerScript = null;
+
+    private void OnEnable()
+    {
+        teleportationText.StringChanged += UpdateTeleportationString;
+        turnText.StringChanged += UpdateTurnString;
+        grabText.StringChanged += UpdateGrabString;
+        pushPullText.StringChanged += UpdatePushPullString;
+        overText.StringChanged += UpdateOverString;
+        menuText.StringChanged += UpdateMenuString;
+        openMenuText.StringChanged += UpdateOpenMenuString;
+    }
+
     private void OnDisable()
     {
         leftPushingReference.action.started -= Pushed;
         leftPullingReference.action.started -= Pulled;
         rightPushingReference.action.started -= Pushed;
         rightPullingReference.action.started -= Pulled;
+
+        teleportationText.StringChanged -= UpdateTeleportationString;
+        turnText.StringChanged -= UpdateTurnString;
+        grabText.StringChanged -= UpdateGrabString;
+        pushPullText.StringChanged -= UpdatePushPullString;
+        overText.StringChanged -= UpdateOverString;
+        menuText.StringChanged -= UpdateMenuString;
+        openMenuText.StringChanged -= UpdateOpenMenuString;
     }
 
     private IEnumerator Start()
@@ -134,9 +165,10 @@ public class TutorialManager : MonoBehaviour
 
         // Turn tutorial
         controlsImage.sprite = turnSprite;
-        instructions.text = turnText;
+        turnText.RefreshString();
+        instructions.text = turnString;
         
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
 
         StartCoroutine(WaitForTurn());
@@ -152,9 +184,10 @@ public class TutorialManager : MonoBehaviour
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport");
         controlsImage.sprite = teleportationSprite;
-        instructions.text = teleportationText;
+        teleportationText.RefreshString();
+        instructions.text = teleportationString;
 
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
 
         StartCoroutine(WaitForTeleport()); 
 
@@ -181,9 +214,10 @@ public class TutorialManager : MonoBehaviour
 
         // Grab tutorial
         controlsImage.sprite = grabSprite;
-        instructions.text = grabText;
+        grabText.RefreshString();
+        instructions.text = grabString;
 
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Grab");
 
         StartCoroutine(WaitForGrab());
@@ -197,9 +231,10 @@ public class TutorialManager : MonoBehaviour
 
         // Push and pull tutorial
         controlsImage.sprite = pushPullSprite;
-        instructions.text = pushPullText;
+        pushPullText.RefreshString();
+        instructions.text = pushPullString;
 
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Push&Pull");
 
         StartCoroutine(WaitForPushPull());
@@ -221,9 +256,10 @@ public class TutorialManager : MonoBehaviour
 
         // Activate Menu
         controlsImage.sprite = menuSprite;
-        instructions.text = openMenuText;
+        openMenuText.RefreshString();
+        instructions.text = openMenuString;
 
-        player.GetComponentInChildren<UIManager>(true).updateCurrentObjective(instructions.text);
+        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Open");
 
         StartCoroutine(WaitForMenuPopup());
@@ -288,7 +324,8 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(11); // Set to the audio file above's duration in seconds 
 
-        instructions.text = overText;
+        overText.RefreshString();
+        instructions.text = overString;
         SceneUIContainer.SetActive(true);
 
         yield break;
@@ -309,4 +346,119 @@ public class TutorialManager : MonoBehaviour
             pulled = true;
         }
     }
+
+    #region Localization helper methods
+    // TODO: Investigate if there is a way for only one function to be made that can be applied to all
+    private void UpdateTeleportationString(string s)
+    {
+        if (instructions != null)
+        {
+            if (instructions.text == teleportationString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                teleportationString = s;
+            }
+        }
+    }
+
+    private void UpdateTurnString(string s)
+    {
+        if (instructions != null)
+        {
+            if (instructions.text == turnString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                turnString = s;
+            }
+        }
+    }
+
+    private void UpdateGrabString(string s)
+    {
+        if (instructions != null)
+        {
+            if (instructions.text == grabString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                grabString = s;
+            }
+        }
+    }
+
+    private void UpdatePushPullString(string s)
+    {
+        if (instructions != null)
+        {
+            if (instructions.text == pushPullString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                pushPullString = s;
+            }
+        }
+    }
+
+    private void UpdateOverString(string s)
+    {
+        if (instructions != null)
+        {
+            if (instructions.text == overString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                overString = s;
+            }
+        }
+    }
+
+    private void UpdateMenuString(string s)
+    {
+        if (instructions != null)
+        {
+            if (instructions.text == menuString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                menuString = s;
+            }
+        }
+    }
+
+    private void UpdateOpenMenuString(string s)
+    {
+        if (instructions != null)
+        {
+            if (instructions.text == openMenuString)
+            {
+                instructions.text = s;
+                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+            }
+            else
+            {
+                openMenuString = s;
+            }
+        }
+    }
+    #endregion
 }

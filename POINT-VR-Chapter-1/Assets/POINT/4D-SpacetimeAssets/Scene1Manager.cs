@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
 using TMPro;
 
 
@@ -38,8 +39,19 @@ public class Scene1Manager : MonoBehaviour
     [Tooltip("Speed at which masses orbit")]
     [SerializeField] private float orbitSpeed = 20.0f;
 
+    [Header("Objective Text")]
+    [SerializeField] private LocalizedString objectiveOneText;
+    [SerializeField] private LocalizedString objectiveTwoText;
+    [SerializeField] private LocalizedString objectiveThreeText;
+    [SerializeField] private LocalizedString objectiveFourText;
+    private string objectiveOneString;
+    private string objectiveTwoString;
+    private string objectiveThreeString;
+    private string objectiveFourString;
+
     private Camera currentCamera = null;
     private GameObject player = null;
+    private UIManager uiManager = null;
     private GameObject examplePath = null;
     private GameObject objectiveClock = null;
     private GameObject secondPath = null;
@@ -51,6 +63,22 @@ public class Scene1Manager : MonoBehaviour
     /// A faraway point for the grid cube to spawn (for grid animation)
     /// </summary>
     private Vector3 gridCubeSpawnPoint = 10000.0f * Vector3.one;
+
+    private void OnEnable()
+    {
+        objectiveOneText.StringChanged += UpdateObjectiveOneString;
+        objectiveTwoText.StringChanged += UpdateObjectiveTwoString;
+        objectiveThreeText.StringChanged += UpdateObjectiveThreeString;
+        objectiveFourText.StringChanged += UpdateObjectiveFourString;
+    }
+
+    private void OnDisable()
+    {
+        objectiveOneText.StringChanged -= UpdateObjectiveOneString;
+        objectiveTwoText.StringChanged -= UpdateObjectiveTwoString;
+        objectiveThreeText.StringChanged -= UpdateObjectiveThreeString;
+        objectiveFourText.StringChanged -= UpdateObjectiveFourString;
+    }
 
     private void Start()
     {
@@ -129,12 +157,14 @@ public class Scene1Manager : MonoBehaviour
 
         currentCamera = Camera.current;
         player = currentCamera.transform.parent.gameObject;
+        uiManager = player.GetComponentInChildren<UIManager>(true);
 
         yield break;
     }
     private IEnumerator ObjectiveOne()
     {
-        floatingObjectives.NewObjective("Introduction to the 3D coordinate system");
+        floatingObjectives.NewObjective(objectiveOneString);
+        uiManager.UpdateCurrentObjective(objectiveOneText);
 
         Debug.Log("We live in a 3 - dimensional space. Every day we interact with this 3D space. For example we can move up and down(that’s the first dimension)");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_1_1");
@@ -162,7 +192,8 @@ public class Scene1Manager : MonoBehaviour
 
     private IEnumerator ObjectiveTwo()
     {
-        floatingObjectives.NewObjective("Move an object in 3D space");
+        floatingObjectives.NewObjective(objectiveTwoString);
+        uiManager.UpdateCurrentObjective(objectiveTwoText);
 
         massObject.transform.position = new Vector3(0, 0, 0);
         massObject.ShowMass(); //Shows mass object and coordinate displayer
@@ -276,7 +307,9 @@ public class Scene1Manager : MonoBehaviour
     private IEnumerator ObjectiveThree()
     {
         // Temporary name for the objective until the objectives are implemented
-        floatingObjectives.NewObjective("Introduction to the dimension of time");
+        floatingObjectives.NewObjective(objectiveThreeString);
+        uiManager.UpdateCurrentObjective(objectiveThreeText);
+
         //Update graphic from previous objective to include 4 cords, add a clock from scene 2 with increasing time, t cord increases with increasing clock time
         Debug.Log("However, this spatial description is not enough. Let's say you want to meet up with a friend. You will have to choose where to meet, and also when to meet. To account for this new information, we need to add one more dimension to our coordinate system, time.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\3_clock_appears_1");
@@ -306,7 +339,8 @@ public class Scene1Manager : MonoBehaviour
     private IEnumerator ObjectiveFour()
     {
         // Temporary name for the objective until the objectives are implemented
-        floatingObjectives.NewObjective("Introduction to 4D Spacetime");
+        floatingObjectives.NewObjective(objectiveFourString);
+        uiManager.UpdateCurrentObjective(objectiveFourText);
 
         // Reset position of relevant objects as deformed grid requires origin to be at its center
         Vector3 originPosition = (deformationGrid.gridSize - Vector3.one) / 2.0f;
@@ -339,7 +373,16 @@ public class Scene1Manager : MonoBehaviour
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_2");
         // Sum of yield returns should be 5s
         dynamicAxis.SetAxisMaterial(gridMaterial);
+
+        Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once"); 
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4_1");
+        yield return new WaitForSeconds(6.5f);
+
+        Debug.Log(", so we are going to show you only a small portion of the spacetime.");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4_2");
+        // no : yield return new WaitForSeconds(3.7f);
         yield return ShrinkGrid(1.8f, 3.0f, 2.0f);
+
         dynamicAxis.gameObject.SetActive(false);
         staticGrid.SetActive(false);
         floatingObjectivesMenu.SetActive(true); // Bring back Objectives as grid shrinks
@@ -364,9 +407,6 @@ public class Scene1Manager : MonoBehaviour
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_3");
         yield return new WaitForSecondsRealtime(20);
         nextSceneButton.SetActive(true); // End of Scene, tell player to continue
-        Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once, so we are going to show you only a small portion of the spacetime."); 
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4");
-        yield return new WaitForSeconds(9.6f);
         
         Debug.Log("Press the 'continue' button when you are ready to move on."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("continue");
@@ -426,6 +466,48 @@ public class Scene1Manager : MonoBehaviour
         {
             massSphere.transform.RotateAround(originPosition, Vector3.up, speed * Time.deltaTime);
             yield return null;
+        }
+    }
+    #endregion
+
+    #region Localization helper methods
+    private void UpdateObjectiveOneString(string s)
+    {
+
+        objectiveOneString = s;
+        if (floatingObjectives != null)
+        {
+            floatingObjectives.UpdateObjectiveLanguage(0, s);
+        }
+    }
+
+    private void UpdateObjectiveTwoString(string s)
+    {
+
+        objectiveTwoString = s;
+        if (floatingObjectives != null)
+        {
+            floatingObjectives.UpdateObjectiveLanguage(1, s);
+        }
+    }
+
+    private void UpdateObjectiveThreeString(string s)
+    {
+
+        objectiveThreeString = s;
+        if (floatingObjectives != null)
+        {
+            floatingObjectives.UpdateObjectiveLanguage(2, s);
+        }
+    }
+
+    private void UpdateObjectiveFourString(string s)
+    {
+
+        objectiveFourString = s;
+        if (floatingObjectives != null)
+        {
+            floatingObjectives.UpdateObjectiveLanguage(3, s);
         }
     }
     #endregion

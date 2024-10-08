@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine.Localization;
 using UnityEngine.InputSystem;
+
 public class ConfDemo_part3_ranking_masses : MonoBehaviour
 {
     // Serialized fields
@@ -15,9 +16,9 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     [SerializeField] private InputActionReference openMenuReference;
 
     [Header("Instructions Text")]
-    [SerializeField] private string objective1;
-    [SerializeField] private string objective2;
-    [SerializeField] private string objective3;
+    [SerializeField] private LocalizedString objective1;
+    [SerializeField] private LocalizedString objective2;
+    [SerializeField] private LocalizedString objective3;
 
     // Cache
     private TMP_Text instructions = null;
@@ -68,7 +69,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1);
         
-        UIManagerScript.updateCurrentObjective(objective1); // Rank different masses
+        UIManagerScript.UpdateCurrentObjective(objective1); // Rank different masses
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\6_put_masses_in_order_1");
 
         // Do ranking, see SortHolder.cs
@@ -89,7 +90,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     public void PlayRadiiTask()
     {
         // Called in the OnCast() in the Task1 UI -> Next Task Button, once they click to continue to Task 2
-        UIManagerScript.updateCurrentObjective(objective2); // Rank different radii, same mass
+        UIManagerScript.UpdateCurrentObjective(objective2); // Rank different radii, same mass
         StartCoroutine(RadiiTaskAudio());
     }
 
@@ -99,11 +100,25 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\6_put_masses_in_order_3");
     }
 
+    public IEnumerator EndRadiiAudio()
+    {
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_3");
+        UIManagerScript.UpdateCurrentObjective(objective3); // Congrats, all done
+        SceneUIContainer.SetActive(true);
+
+        yield return new WaitForSeconds(10); // Wait 10 seconds before going into Credits
+
+        SceneController sceneController = player.GetComponentInChildren<SceneController>(); // Automatically go to Credits
+        if (sceneController != null)
+            {
+                sceneController.ChangeScene(6);
+            }
+        yield break;
+    }
+
     public void PlayEndRadiiTask()
     {
         // Called in the OnCast() of Task2 UI -> Small, Right answer
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_3");
-        UIManagerScript.updateCurrentObjective(objective3); // Congrats, all done
-        SceneUIContainer.SetActive(true);
+        StartCoroutine(EndRadiiAudio());        
     }
 }

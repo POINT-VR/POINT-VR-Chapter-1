@@ -1,0 +1,8 @@
+1
+00:00:00,000 --> 00:00:03,640
+Explore por cuánto tiempo usted desee y después mueva la esfera a la posición 
+
+2
+00:00:03,640 --> 00:00:05,880
+deseada en el centro de la cuadrícula una vez que esté listo para continuar.
+

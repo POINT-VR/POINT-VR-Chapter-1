@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.Localization;
 using UnityEngine.InputSystem;
 public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
 {
@@ -13,13 +12,20 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
     [SerializeField] private GameObject snapRing;
     [SerializeField] private InputActionReference openMenuReference;
     [SerializeField] private GameObject setOfDirectionalArrows;
+    [SerializeField] private GameObject task3Location;
+    [SerializeField] private GameObject continue1;
 
     [Header("Instructions Text")]
-    [SerializeField] private string objective1;
-    [SerializeField] private string objective2;
-    [SerializeField] private string objective3;
-    [SerializeField] private string objective4;
-    
+    [SerializeField] private LocalizedString objective1Text;
+    [SerializeField] private LocalizedString objective2Text;
+    [SerializeField] private LocalizedString objective3Text;
+    [SerializeField] private LocalizedString objective4Text;
+
+    private string objective1string;
+    private string objective2string;
+    private string objective3string;
+    private string objective4string;
+
     // Cache
     private Camera currentCamera = null;
     private GameObject player = null;
@@ -27,6 +33,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
     private GameObject buttons = null;
     private UIManager UIManagerScript = null;
     private DirectionalArrow[] directionalArrows;
+    private static bool objectiveContinue = false;
 
     private void Start()
     {
@@ -35,6 +42,8 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         StartCoroutine(WaitForPlayerSpawn());
         setOfDirectionalArrows.SetActive(false);
         directionalArrows = setOfDirectionalArrows.GetComponentsInChildren<DirectionalArrow>(true);
+        task3Location.SetActive(false);
+        continue1.SetActive(false);
     }
 
     private IEnumerator WaitForPlayerSpawn()
@@ -65,25 +74,40 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         UIManagerScript = Menu.GetComponent<UIManager>();
 
         yield return new WaitForSeconds(1);
-        UIManagerScript.updateCurrentObjective(objective1); // Grid/Space Deformation
+        UIManagerScript.UpdateCurrentObjective(objective1Text); // Grid/Space Deformation
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\1_intro_to_grids_and_clocks_1");
         yield return new WaitForSeconds(16);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\1_intro_to_grids_and_clocks_2");
         yield return new WaitForSeconds(7);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\2_observe_grid_curve_1");
-        yield return new WaitForSeconds(60); // Pause to let player explore
+        yield return new WaitForSeconds(20.4f); // Continue Button
+        continue1.SetActive(true);
+        Debug.Log("Press the 'continue' button when you are ready to move on."); 
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("continue");
+        yield return new WaitUntil(() => ConfDemo_part1_one_mass_y_manager.objectiveContinue == true);
+        continue1.SetActive(false);
+
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\2_observe_grid_curve_2");
+        yield return new WaitForSeconds(5.9f);
+
+        task3Location.SetActive(true);
+        yield return new WaitUntil(() => task3Location.transform.GetChild(1).gameObject.GetComponentInChildren<Rigidbody>() != null); // Reach SnapRing
+        massSphere.transform.parent = null; // Make player drop the sphere
+        massSphere.layer = LayerMask.NameToLayer("Ignore Raycast"); // set massSphere to uninteractable
+        // Makes sphere stop moving
+        massSphere.GetComponent<Rigidbody>().velocity = Vector3.zero; // move massSphere to center of grid
+        massSphere.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll; // freeze massSphere in place
+        task3Location.SetActive(false);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_1");
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(7.6f);
         // Question Time for Player: What does that say about Gravity
 
-        UIManagerScript.updateCurrentObjective(objective2); 
+        UIManagerScript.UpdateCurrentObjective(objective2Text); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_2");
         yield return new WaitForSeconds(7.1f);
 
-        // TODO: Would be cool if after this question the sun sphere animated to the center of the grid. 
-        // Instead of just spawing at the center of the grid
         ArrowTask();
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_3");
@@ -96,14 +120,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
 
     private void ArrowTask()
     {
-        massSphere.transform.parent = null; // Make player drop the sphere
         setOfDirectionalArrows.SetActive(true);  // spawn six directional arrows
-        massSphere.layer = LayerMask.NameToLayer("Ignore Raycast"); // set massSphere to uninteractable
-
-        // Makes sphere stop moving and locates it to the center of the grid
-        massSphere.GetComponent<Rigidbody>().velocity = Vector3.zero; // move massSphere to center of grid
-        massSphere.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll; // freeze massSphere in place
-        massSphere.transform.position = new Vector3(4.5f, 2f, 4f); // move massSphere to center of grid
     }
 
     public void CheckArrowTask()
@@ -128,8 +145,10 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         setOfDirectionalArrows.SetActive(false);
         massSphere.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None; // End of Task, set sphere back to movable
         massSphere.layer = LayerMask.NameToLayer("Grip"); // End of Task, set sphere back to interactable
+        task3Location.SetActive(true); // Reactivate because this seems to break the second snapRing snaping ability
+        task3Location.transform.GetChild(0).gameObject.SetActive(false);
 
-        UIManagerScript.updateCurrentObjective(objective3); // Time Deformation
+        UIManagerScript.UpdateCurrentObjective(objective3Text); // Time Deformation
         snapRing.SetActive(true);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\4_observe_time_dialation_1");
         yield return new WaitForSeconds(8);
@@ -138,9 +157,13 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         yield return new WaitUntil(() => snapRing.GetComponentInChildren<Rigidbody>() != null);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\4_observe_time_dialation_3");
 
-        UIManagerScript.updateCurrentObjective(objective4); // Continue to next scene
+        UIManagerScript.UpdateCurrentObjective(objective4Text); // Continue to next scene
         SceneUIContainer.SetActive(true); // Continue to next scene 
 
         yield break;
+    }
+
+    public void ContinueObjective() {
+        objectiveContinue = true;
     }
 }
