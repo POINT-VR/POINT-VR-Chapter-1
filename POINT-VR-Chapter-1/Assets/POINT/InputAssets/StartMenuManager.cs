@@ -18,6 +18,9 @@ public class StartMenuManager : MonoBehaviour
     [Tooltip("Transform containing the language toggles")]
     [SerializeField] private Transform languageParent = null;
 
+    [Tooltip("Transform containing the subtitles toggles")]
+    [SerializeField] private Transform subtitlesParent = null;
+
     [Tooltip("Default localized string that appears under current objective in the UI menu")]
     [SerializeField] private LocalizedString defaultObjective;
 
@@ -74,6 +77,44 @@ public class StartMenuManager : MonoBehaviour
             }
             
             language = value;
+        }
+    }
+
+    private int subtitleLanguage = 1;
+    public int SubtitleLanguage
+    {
+        set
+        {
+            if (uiManager == null)
+            {
+                if (player != null)
+                {
+                    uiManager = player.GetComponentInChildren<UIManager>(true);
+                }
+            }
+
+            if (value > 0) value = 1;
+
+            if (uiManager != null && subtitlesParent != null)
+            {
+                for (int i = 0; i < subtitlesParent.childCount; i++)
+                {
+                    Image imageComponent = subtitlesParent.GetChild(i).GetComponentInChildren<Image>();
+                    if (imageComponent != null)
+                    {
+                        if (i == value) // selected toggle
+                        {
+                            imageComponent.sprite = uiManager.toggleSelected;
+                        }
+                        else
+                        {
+                            imageComponent.sprite = uiManager.toggleUnselected;
+                        }
+                    }
+                }
+            }
+
+            subtitleLanguage = value;
         }
     }
 
@@ -193,6 +234,7 @@ public class StartMenuManager : MonoBehaviour
         if (uiManager != null)
         {
             uiManager.Language = language;
+            uiManager.SubtitleLanguage = subtitleLanguage;
         }
 
         if (player != null)
@@ -218,6 +260,7 @@ public class StartMenuManager : MonoBehaviour
         if (uiManager != null)
         {
             Language = uiManager.Language;
+            SubtitleLanguage = uiManager.SubtitleLanguage;
         }
     }
 
