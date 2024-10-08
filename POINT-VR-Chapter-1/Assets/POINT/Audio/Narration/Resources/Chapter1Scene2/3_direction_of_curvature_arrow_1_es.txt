@@ -1,0 +1,12 @@
+1
+00:00:00,000 --> 00:00:02,540
+Cuando la esfera está dentro de la cuadrícula,
+
+2
+00:00:02,540 --> 00:00:05,540
+la cuadrícula se curva hacia la masa desde todas las direcciones.
+
+3
+00:00:05,540 --> 00:00:07,540
+¿Qué nos dice esto acerca de la gravedad?
+

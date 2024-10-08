@@ -1,0 +1,24 @@
+1
+00:00:00,000 --> 00:00:03,500
+Como podemos ver, todas las flechas apuntan hacia la esfera amarilla.
+
+2
+00:00:03,500 --> 00:00:08,500
+De esta manera la curvatura de la cuadrícula nos muestra que los objetos se van a acelerar hacia el centro de la esfera,
+
+3
+00:00:08,500 --> 00:00:11,300
+indicando la dirección en la que actúa la gravedad.
+
+4
+00:00:11,300 --> 00:00:15,500
+En la Tierra experimentamos esta aceleración cuando los objetos caen hacia abajo,
+
+5
+00:00:15,500 --> 00:00:18,800
+cuando en realidad lo que sucede es que los objetos se aceleran hacia el centro del planeta.
+
+6
+00:00:18,800 --> 00:00:22,000
+De esta manera el concepto de “abajo” depende de nuestro punto de vista.
+

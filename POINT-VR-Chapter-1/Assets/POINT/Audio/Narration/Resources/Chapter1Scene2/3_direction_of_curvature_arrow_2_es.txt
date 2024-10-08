@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:04,000
+En esa actividad investigaremos qué nos dice la curvatura de la cuadrícula 
+
+2
+00:00:04,000 --> 00:00:07,000
+sobre cómo la gravedad de la esfera influye a objetos cercanos.
