@@ -1110,7 +1110,7 @@ PrefabInstance:
     - target: {fileID: 8485868697897709159, guid: 17be0a47712d0eb42ade2520c33e6508,
         type: 3}
       propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_SubtitleLanguage
+      value: set_Language
       objectReference: {fileID: 0}
     - target: {fileID: 8485868698067604804, guid: 17be0a47712d0eb42ade2520c33e6508,
         type: 3}
@@ -1125,7 +1125,7 @@ PrefabInstance:
     - target: {fileID: 8485868698067604804, guid: 17be0a47712d0eb42ade2520c33e6508,
         type: 3}
       propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_SubtitleLanguage
+      value: set_Language
       objectReference: {fileID: 0}
     - target: {fileID: 8485868698333259824, guid: 17be0a47712d0eb42ade2520c33e6508,
         type: 3}
