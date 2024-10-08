@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine.Localization;
 using UnityEngine.InputSystem;
+
 public class ConfDemo_part2_two_masses : MonoBehaviour
 {
     // Serialized fields
@@ -15,9 +16,9 @@ public class ConfDemo_part2_two_masses : MonoBehaviour
     [SerializeField] private GameObject continue2;
  
     [Header("Instructions Text")]
-    [SerializeField] private string objective1;
-    [SerializeField] private string objective2;
-    [SerializeField] private string objective3;
+    [SerializeField] private LocalizedString objective1;
+    [SerializeField] private LocalizedString objective2;
+    [SerializeField] private LocalizedString objective3;
 
     // Cache
     private TMP_Text instructions = null;

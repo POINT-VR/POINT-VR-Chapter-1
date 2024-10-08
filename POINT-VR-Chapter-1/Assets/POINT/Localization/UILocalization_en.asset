@@ -260,9 +260,84 @@ MonoBehaviour:
     m_Localized: GitHub Repository
     m_Metadata:
       m_Items: []
+  - m_Id: 14144785858203648
+    m_Localized: Which of these two spheres will curve the grid more? Test your prediction
+      by moving each sphere onto the grid, one at a time. Take a minute or more.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785874980864
+    m_Localized: Which of the two spheres will slow one clock more relative to the
+      other clock? Bring each mass to the target location close to the clock, one
+      at a time. Take a minute or more.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785874980865
+    m_Localized: Continue to next scene.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14146155743055872
+    m_Localized: Ranking different objects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120768
+    m_Localized: Task
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 14152113433120769
+    m_Localized: 'There are some spheres with different masses. Sort them in the
+      rings in front of you. You can test them by putting into the grid, one at a
+      time. Once you finish, press the "Check" button to test your ranking. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120770
+    m_Localized: 'There are two spheres with different radii but the same mass. Make
+      a prediction: Which will curve the grid more?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120771
+    m_Localized: Check
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120772
+    m_Localized: Next Task
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120773
+    m_Localized: Bigger one
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120774
+    m_Localized: Smaller one
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120775
+    m_Localized: Correct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120776
+    m_Localized: Try Again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650880
+    m_Localized: Place the spheres in order from least massive to most massive. You
+      can check your accuracy by pressing the 'check' button next to the line of
+      spheres.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650881
+    m_Localized: Do you think a sphere with a smaller volume or larger volume will
+      curve the grid more? To answer this question, pick up each sphere and place
+      it on the grid one at a time and then select your answer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650882
+    m_Localized: Congratulations! The simulation is over.
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00908051620100000b900052620100000c90005262010000
+        m_Entries: 00908051620100000b900052620100000c90005262010000009000ae45473200

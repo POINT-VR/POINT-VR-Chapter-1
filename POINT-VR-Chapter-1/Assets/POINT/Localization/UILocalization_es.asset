@@ -264,9 +264,85 @@ MonoBehaviour:
     m_Localized: Repositorio de GitHub
     m_Metadata:
       m_Items: []
+  - m_Id: 14144785858203648
+    m_Localized: "\xBFCu\xE1l de las dos esferas deformar\xE1 la cuadr\xEDcula m\xE1s?
+      Verifica tu predicci\xF3n por movar cada esfera en la cuadr\xEDcula, de una
+      a una. Tarda un minuto o m\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785874980864
+    m_Localized: "\xBFCu\xE1l de las dos esferas retrasar\xE1 un reloj m\xE1s con
+      relacion al otro? Trae cada masa a la ubicaci\xF3n diana cerca del reloj, de
+      una a una. Tarda un minuto o m\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785874980865
+    m_Localized: "Continua a la escena pr\xF3xima."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14146155743055872
+    m_Localized: Clasificando objetos diferentes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120768
+    m_Localized: Tarea
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 14152113433120769
+    m_Localized: "Hay algunas esferas con masas diferentes. Las clasifica en los
+      anillos delate de ti. Puedes examinarlas por ponerlas en la cuadr\xEDcula,
+      de una a una. Cuando terminas, pulsa al bot\xF3n para verificar tu clasificaci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120770
+    m_Localized: "Hay dos esferas con radios diferentes pero la misma masa. Predice:
+      \xBFCu\xE1l deformar\xE1 la cuadr\xEDcula m\xE1s?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120771
+    m_Localized: Comprueba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120772
+    m_Localized: "Tarea Pr\xF3xima"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120773
+    m_Localized: "Lo m\xE1s grande"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120774
+    m_Localized: "Lo m\xE1s peque\xF1o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120775
+    m_Localized: Correcto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120776
+    m_Localized: Vuelve a Intentarlo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650880
+    m_Localized: "Clasifica las esferas en orden de la menos masiva a la m\xE1s masiva.
+      Puedes verificar tu exactitud por pulsar el bot\xF3n \"Comprueba\" al lado
+      de la l\xEDnea de las esferas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650881
+    m_Localized: "\xBFPiensas que la esfera con el volumen m\xE1s peque\xF1o o grande
+      deformar\xE1 la cuadr\xEDcula m\xE1s? Para responder, recoge cada esfera y
+      la pone en la cuadr\xEDcula de una a una, y despu\xE9s elegir tu respuesta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650882
+    m_Localized: "\xA1Enhorabuena! La simulaci\xF3n ha terminado."
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00908051620100000b900052620100000c90005262010000
+        m_Entries: 00908051620100000b900052620100000c90005262010000009000ae45473200
