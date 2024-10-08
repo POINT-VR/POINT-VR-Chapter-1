@@ -51,6 +51,7 @@ public class Scene1Manager : MonoBehaviour
 
     private Camera currentCamera = null;
     private GameObject player = null;
+    private UIManager uiManager = null;
     private GameObject examplePath = null;
     private GameObject objectiveClock = null;
     private GameObject secondPath = null;
@@ -156,12 +157,14 @@ public class Scene1Manager : MonoBehaviour
 
         currentCamera = Camera.current;
         player = currentCamera.transform.parent.gameObject;
+        uiManager = player.GetComponentInChildren<UIManager>(true);
 
         yield break;
     }
     private IEnumerator ObjectiveOne()
     {
         floatingObjectives.NewObjective(objectiveOneString);
+        uiManager.UpdateCurrentObjective(objectiveOneText);
 
         Debug.Log("We live in a 3 - dimensional space. Every day we interact with this 3D space. For example we can move up and down(that’s the first dimension)");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_1_1");
@@ -190,6 +193,7 @@ public class Scene1Manager : MonoBehaviour
     private IEnumerator ObjectiveTwo()
     {
         floatingObjectives.NewObjective(objectiveTwoString);
+        uiManager.UpdateCurrentObjective(objectiveTwoText);
 
         massObject.transform.position = new Vector3(0, 0, 0);
         massObject.ShowMass(); //Shows mass object and coordinate displayer
@@ -304,6 +308,8 @@ public class Scene1Manager : MonoBehaviour
     {
         // Temporary name for the objective until the objectives are implemented
         floatingObjectives.NewObjective(objectiveThreeString);
+        uiManager.UpdateCurrentObjective(objectiveThreeText);
+
         //Update graphic from previous objective to include 4 cords, add a clock from scene 2 with increasing time, t cord increases with increasing clock time
         Debug.Log("However, this spatial description is not enough. Let's say you want to meet up with a friend. You will have to choose where to meet, and also when to meet. To account for this new information, we need to add one more dimension to our coordinate system, time.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\3_clock_appears_1");
@@ -334,6 +340,7 @@ public class Scene1Manager : MonoBehaviour
     {
         // Temporary name for the objective until the objectives are implemented
         floatingObjectives.NewObjective(objectiveFourString);
+        uiManager.UpdateCurrentObjective(objectiveFourText);
 
         // Reset position of relevant objects as deformed grid requires origin to be at its center
         Vector3 originPosition = (deformationGrid.gridSize - Vector3.one) / 2.0f;
