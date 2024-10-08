@@ -15,8 +15,11 @@ public class StartMenuManager : MonoBehaviour
     [Tooltip("TextMeshPro component that displays the current version number")]
     [SerializeField] private TMP_Text versionText = null;
 
-    [Tooltip("Transform containing the subtitle toggles")]
-    [SerializeField] private Transform subtitleParent = null;
+    [Tooltip("Transform containing the language toggles")]
+    [SerializeField] private Transform languageParent = null;
+
+    [Tooltip("Transform containing the subtitles toggles")]
+    [SerializeField] private Transform subtitlesParent = null;
 
     [Tooltip("Default localized string that appears under current objective in the UI menu")]
     [SerializeField] private LocalizedString defaultObjective;
@@ -41,6 +44,42 @@ public class StartMenuManager : MonoBehaviour
     /// </summary>
     private Vector3 lastCameraPosition = Vector3.positiveInfinity;
 
+    private int language = 1;
+    public int Language
+    {
+        set
+        {
+            if (uiManager == null)
+            {
+                if (player != null)
+                {
+                    uiManager = player.GetComponentInChildren<UIManager>(true);
+                }
+            }
+
+            if (uiManager != null && languageParent != null)
+            {
+                for (int i = 0; i < languageParent.childCount; i++)
+                {
+                    Image imageComponent = languageParent.GetChild(i).GetComponentInChildren<Image>();
+                    if (imageComponent != null)
+                    {
+                        if (i == value - 1) // selected toggle
+                        {
+                            imageComponent.sprite = uiManager.toggleSelected;
+                        }
+                        else
+                        {
+                            imageComponent.sprite = uiManager.toggleUnselected;
+                        }
+                    }
+                }
+            }
+            
+            language = value;
+        }
+    }
+
     private int subtitleLanguage = 1;
     public int SubtitleLanguage
     {
@@ -54,11 +93,13 @@ public class StartMenuManager : MonoBehaviour
                 }
             }
 
-            if (uiManager != null && subtitleParent != null)
+            if (value > 0) value = 1;
+
+            if (uiManager != null && subtitlesParent != null)
             {
-                for (int i = 0; i < subtitleParent.childCount; i++)
+                for (int i = 0; i < subtitlesParent.childCount; i++)
                 {
-                    Image imageComponent = subtitleParent.GetChild(i).GetComponentInChildren<Image>();
+                    Image imageComponent = subtitlesParent.GetChild(i).GetComponentInChildren<Image>();
                     if (imageComponent != null)
                     {
                         if (i == value) // selected toggle
@@ -72,7 +113,7 @@ public class StartMenuManager : MonoBehaviour
                     }
                 }
             }
-            
+
             subtitleLanguage = value;
         }
     }
@@ -192,6 +233,7 @@ public class StartMenuManager : MonoBehaviour
 
         if (uiManager != null)
         {
+            uiManager.Language = language;
             uiManager.SubtitleLanguage = subtitleLanguage;
         }
 
@@ -202,6 +244,23 @@ public class StartMenuManager : MonoBehaviour
             {
                 sceneController.ChangeScene(1);
             }
+        }
+    }
+
+    public void UpdateLanguage()
+    {
+        if (uiManager == null)
+        {
+            if (player != null)
+            {
+                uiManager = player.GetComponentInChildren<UIManager>(true);
+            }
+        }
+
+        if (uiManager != null)
+        {
+            Language = uiManager.Language;
+            SubtitleLanguage = uiManager.SubtitleLanguage;
         }
     }
 

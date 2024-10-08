@@ -1651,6 +1651,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5477324578079385403, guid: 2011726434ab5504db0591931cd0ea01,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 78.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477324578079385403, guid: 2011726434ab5504db0591931cd0ea01,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477324578079385403, guid: 2011726434ab5504db0591931cd0ea01,
+        type: 3}
+      propertyPath: m_fontSizeMin
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5477324578594241473, guid: 2011726434ab5504db0591931cd0ea01,
         type: 3}
       propertyPath: m_Pivot.x

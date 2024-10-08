@@ -153,6 +153,11 @@ public class UIManager : MonoBehaviour
         set
         {
             language = (GameManager.Language)value;
+            if (subtitleLanguage != 0)
+            {
+                subtitleLanguage = language;
+                narrationManager.SubtitlesLanguage = language;
+            }
 
             if (value - 1 >= 0 && value - 1 < LocalizationSettings.AvailableLocales.Locales.Count)
             {
@@ -186,8 +191,18 @@ public class UIManager : MonoBehaviour
     {
         set
         {
-            subtitleLanguage = (GameManager.Language)value;
-            narrationManager.SubtitlesLanguage = subtitleLanguage;
+            if (value == 0)
+            {
+                subtitleLanguage = (GameManager.Language)value;
+                narrationManager.SubtitlesLanguage = subtitleLanguage;
+            }
+            else
+            {
+                subtitleLanguage = language;
+                narrationManager.SubtitlesLanguage = language;
+            }
+
+
             for (int i = 0; i < subtitleParent.childCount; i++)
             {
                 Image imageComponent = subtitleParent.GetChild(i).GetComponentInChildren<Image>();

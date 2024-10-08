@@ -135,6 +135,10 @@ MonoBehaviour:
     m_Key: SCENES_RETURN_HOME
     m_Metadata:
       m_Items: []
+  - m_Id: 14146155743055872
+    m_Key: SCENES_RANKING_DIFFERENT_MASSES
+    m_Metadata:
+      m_Items: []
   - m_Id: 13430563209777159
     m_Key: OBJECTIVE_EXPLORE
     m_Metadata:
@@ -215,12 +219,72 @@ MonoBehaviour:
     m_Key: ARROWS_OBJECTIVE4
     m_Metadata:
       m_Items: []
+  - m_Id: 14144785858203648
+    m_Key: TWOMASSES_OBJECTIVE1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785874980864
+    m_Key: TWOMASSES_OBJECTIVE2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785874980865
+    m_Key: TWOMASSES_OBJECTIVE3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650880
+    m_Key: RANKING_OBJECTIVE1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650881
+    m_Key: RANKING_OBJECTIVE2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650882
+    m_Key: RANKING_OBJECTIVE3
+    m_Metadata:
+      m_Items: []
   - m_Id: 13430563209777163
     m_Key: RANKING_LIGHTEST
     m_Metadata:
       m_Items: []
   - m_Id: 13430563209777164
     m_Key: RANKING_HEAVIEST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120768
+    m_Key: RANKING_TASK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120769
+    m_Key: RANKING_INSTRUCTIONS1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120770
+    m_Key: RANKING_INSTRUCTIONS2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120771
+    m_Key: RANKING_CHECK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120772
+    m_Key: RANKING_NEXTTASK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120773
+    m_Key: RANKING_BIG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120774
+    m_Key: RANKING_SMALL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120775
+    m_Key: RANKING_CORRECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120776
+    m_Key: RANKING_INCORRECT
     m_Metadata:
       m_Items: []
   - m_Id: 13788494816120832

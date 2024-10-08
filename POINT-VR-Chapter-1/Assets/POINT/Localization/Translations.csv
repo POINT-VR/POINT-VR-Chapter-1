@@ -29,6 +29,7 @@ SCENES_TUTORIAL,Tutorial,Tutorial
 SCENES_INTRO_TO_SPACETIME,Intro to Spacetime,Introducción al Espacio-tiempo
 SCENES_MATTER_TELLS_SPACETIME,Matter Tells Spacetime How To Curve,La Materia Dice al Espacio-tiempo Cómo Curvarse
 SCENES_RETURN_HOME,Return to Home,Vuelve al Inicio
+SCENES_RANKING_DIFFERENT_MASSES,Ranking different objects,Clasificando objetos diferentes
 OBJECTIVE_EXPLORE,Explore how matter warps space and time.,Investiga cómo la materia deforma el espacio y el tiempo.
 INSTRUCTIONS_PRESS_FOR,Press for,Pulsa para
 TUTORIAL_TELEPORT,Try pointing at the floor and teleporting to the rings in the distance!,Trata de apuntar al piso y teletransportarte a los anillos en la distancia!
@@ -49,8 +50,23 @@ ARROWS_OBJECTIVE1,Move the sphere through the grid and observe how the grid defo
 ARROWS_OBJECTIVE2,Press the arrows until they point in the direction of gravity and turn blue.,Pulsa las flechas hasta están hacia la dirección de gravedad y se convirten azules.
 ARROWS_OBJECTIVE3,Bring the sphere to the target location to observe how gravity affects time.,Trae la esfera a la ubicación diana para observar cómo afecta el tiempo la gravedad.
 ARROWS_OBJECTIVE4,Continue to next scene.,Continua a la escena próxima.
+TWOMASSES_OBJECTIVE1,"Which of these two spheres will curve the grid more? Test your prediction by moving each sphere onto the grid, one at a time. Take a minute or more.","¿Cuál de las dos esferas deformará la cuadrícula más? Verifica tu predicción por movar cada esfera en la cuadrícula, de una a una. Tarda un minuto o más."
+TWOMASSES_OBJECTIVE2,"Which of the two spheres will slow one clock more relative to the other clock? Bring each mass to the target location close to the clock, one at a time. Take a minute or more.","¿Cuál de las dos esferas retrasará un reloj más con relacion al otro? Trae cada masa a la ubicación diana cerca del reloj, de una a una. Tarda un minuto o más."
+TWOMASSES_OBJECTIVE3,Continue to next scene.,Continua a la escena próxima.
+RANKING_OBJECTIVE1,Place the spheres in order from least massive to most massive. You can check your accuracy by pressing the 'check' button next to the line of spheres.,"Clasifica las esferas en orden de la menos masiva a la más masiva. Puedes verificar tu exactitud por pulsar el botón ""Comprueba"" al lado de la línea de las esferas."
+RANKING_OBJECTIVE2,"Do you think a sphere with a smaller volume or larger volume will curve the grid more? To answer this question, pick up each sphere and place it on the grid one at a time and then select your answer.","¿Piensas que la esfera con el volumen más pequeño o grande deformará la cuadrícula más? Para responder, recoge cada esfera y la pone en la cuadrícula de una a una, y después elegir tu respuesta."
+RANKING_OBJECTIVE3,Congratulations! The simulation is over.,¡Enhorabuena! La simulación ha terminado.
 RANKING_LIGHTEST,Lightest,Más ligero
 RANKING_HEAVIEST,Heaviest,Más pesado
+RANKING_TASK,Task,Tarea
+RANKING_INSTRUCTIONS1,"There are some spheres with different masses. Sort them in the rings in front of you. You can test them by putting into the grid, one at a time. Once you finish, press the ""Check"" button to test your ranking. ","Hay algunas esferas con masas diferentes. Las clasifica en los anillos delate de ti. Puedes examinarlas por ponerlas en la cuadrícula, de una a una. Cuando terminas, pulsa al botón para verificar tu clasificación."
+RANKING_INSTRUCTIONS2,There are two spheres with different radii but the same mass. Make a prediction: Which will curve the grid more?,Hay dos esferas con radios diferentes pero la misma masa. Predice: ¿Cuál deformará la cuadrícula más?
+RANKING_CHECK,Check,Comprueba
+RANKING_NEXTTASK,Next Task,Tarea Próxima
+RANKING_BIG,Bigger one,Lo más grande
+RANKING_SMALL,Smaller one,Lo más pequeño
+RANKING_CORRECT,Correct,Correcto
+RANKING_INCORRECT,Try Again,Vuelve a Intentarlo
 CREDITS_FUNDING,"Kristen Schumacher would like to acknowledge that this material is based upon work supported by the National Science Foundation Graduate Research Fellowship Program under Grant No. DGE – 1746047.
 
 NCSA headsets: Virtual reality headsets were provided in part by Nicolás Yunes through the National Science Foundation (NSF) Grant No. PHY-2207650 and in part by the Dark Energy Survey project. The Dark Energy Survey project is supported by National Science Foundation grant AST- 1536171. Any opinions, findings, conclusions or recommendations expressed in this material are those of the developers and do not necessarily reflect the views of the National Science Foundation.","A Kristen Schumacher le gustaría reconocer que este material se basa en obras apoyadas por el Programa de Becas para la Investigación Graduada de la Fundación Nacional para la Ciencia, bajo la beca número DGE – 1746047.
