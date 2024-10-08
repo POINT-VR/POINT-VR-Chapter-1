@@ -1102,6 +1102,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8485868697897709159, guid: 17be0a47712d0eb42ade2520c33e6508,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1028624118}
+    - target: {fileID: 8485868697897709159, guid: 17be0a47712d0eb42ade2520c33e6508,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_SubtitleLanguage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8485868698067604804, guid: 17be0a47712d0eb42ade2520c33e6508,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8485868698067604804, guid: 17be0a47712d0eb42ade2520c33e6508,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1028624118}
+    - target: {fileID: 8485868698067604804, guid: 17be0a47712d0eb42ade2520c33e6508,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_SubtitleLanguage
+      objectReference: {fileID: 0}
     - target: {fileID: 8485868698333259824, guid: 17be0a47712d0eb42ade2520c33e6508,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1749,6 +1774,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186757220924144453, guid: 9e0e318dfb7275d4cb7eb62ebc83153a,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1028624118}
+    - target: {fileID: 186757220924144453, guid: 9e0e318dfb7275d4cb7eb62ebc83153a,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_SubtitleLanguage
+      objectReference: {fileID: 0}
+    - target: {fileID: 186757221089902694, guid: 9e0e318dfb7275d4cb7eb62ebc83153a,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1028624118}
+    - target: {fileID: 186757221089902694, guid: 9e0e318dfb7275d4cb7eb62ebc83153a,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_SubtitleLanguage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0e318dfb7275d4cb7eb62ebc83153a, type: 3}
