@@ -1,0 +1,3 @@
+1
+00:00:00,000 --> 00:00:03,700
+así que mostraremos sólo una pequeña parte del espacio-tiempo con la cuadrícula.

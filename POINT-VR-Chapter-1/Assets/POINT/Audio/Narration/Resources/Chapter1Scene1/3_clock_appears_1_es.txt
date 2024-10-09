@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:03,200
+No obstante, esta descripción espacial no es suficiente.
+
+2
+00:00:03,200 --> 00:00:05,600
+Supongamos que usted quiere reunirse con un amigo.
+
+3
+00:00:05,600 --> 00:00:09,080
+Es necesario decidir dónde encontrarse pero también cuándo encontrarse.
+
+4
+00:00:09,080 --> 00:00:12,800
+Para tener en cuenta esta información, necesitamos añadir otra dimensión a nuestro 
+
+5
+00:00:12,800 --> 00:00:13,800
+sistema de coordenadas,
+
+6
+00:00:13,800 --> 00:00:14,300
+tiempo.
