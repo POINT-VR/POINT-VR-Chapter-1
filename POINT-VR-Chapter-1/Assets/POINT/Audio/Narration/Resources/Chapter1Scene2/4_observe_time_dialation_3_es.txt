@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:04,940
+¡Buen trabajo! Como podemos ver, una vez que la esfera se encuentra lo suficientemente cerca del reloj,
+
+2
+00:00:04,940 --> 00:00:10,240
+este empieza a moverse más lentamente en comparación al otro reloj. Esto se debe a que el tiempo
+
+3
+00:00:10,240 --> 00:00:15,020
+se ralentiza debido a la gravedad en comparación al flujo del tiempo si no hay gravedad.
+
+4
+00:00:15,020 --> 00:00:20,120
+Este efecto se llama dilatación del tiempo. Mueva la esfera a distintos puntos para explorar cómo el tiempo es afectado
+
+5
+00:00:20,120 --> 00:00:23,800
+por la distancia entre la esfera y el reloj. Después presione el botón de continuar cuando esté  listo.
