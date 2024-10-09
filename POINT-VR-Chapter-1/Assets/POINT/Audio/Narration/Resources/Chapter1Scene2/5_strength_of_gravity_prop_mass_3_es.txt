@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:02,340
+Hagamos otra predicción.
+
+2
+00:00:02,340 --> 00:00:06,240
+Anteriormente aprendimos que el tiempo se ralentiza en la presencia de la gravedad.
+
+3
+00:00:06,240 --> 00:00:10,560
+¿Cuál de las dos esferas usted cree que causará que un reloj se mueva más lento en comparación al otro?
+
+4
+00:00:10,560 --> 00:00:14,960
+Para probar su predicción, trae las esfera una por una a la posición deseada
+
+5
+00:00:14,960 --> 00:00:17,240
+cerca del reloj, y observa qué pasa.

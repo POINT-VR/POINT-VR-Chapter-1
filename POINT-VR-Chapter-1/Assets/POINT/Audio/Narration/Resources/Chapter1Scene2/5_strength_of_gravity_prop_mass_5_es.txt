@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:04,160
+Después de probar nuestras dos predicciones, tomemos un momento para reflexionar.
+
+2
+00:00:04,160 --> 00:00:06,680
+¿Es que sus observaciones coinciden con sus predicciones?
