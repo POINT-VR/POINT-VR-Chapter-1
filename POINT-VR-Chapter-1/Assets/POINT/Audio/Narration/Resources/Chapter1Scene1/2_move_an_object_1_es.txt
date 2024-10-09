@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:06,000
+El objeto en frente de usted se encuentra en el origen, así que su posición es marcada (0,0,0).
+
+2
+00:00:06,000 --> 00:00:11,360
+Ahora tome la esfera y muévala a través de las líneas de la cuadrícula a la posición deseada.
+
+3
+00:00:11,360 --> 00:00:14,060
+Usted puede seguir el camino mostrado o hacer su propio camino.

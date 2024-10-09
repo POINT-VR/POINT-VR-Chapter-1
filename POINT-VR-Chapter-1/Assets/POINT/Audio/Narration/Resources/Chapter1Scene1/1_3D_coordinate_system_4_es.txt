@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:05,020
+Para navegar este espacio, utilizamos una herramienta matemática llamada sistema de coordenadas.
+
+2
+00:00:05,020 --> 00:00:08,240
+No importa de qué manera esté orientado el sistema de coordenadas.
+
+3
+00:00:08,240 --> 00:00:12,720
+En frente de usted se encuentra uno de los muchos posibles sistemas de coordenadas, con los distintos colores representando
+
+4
+00:00:12,720 --> 00:00:14,180
+diferentes direcciones.
+
+5
+00:00:14,180 --> 00:00:18,120
+El punto donde las tres líneas se encuentran se le llama el origen del sistema de
+
+6
+00:00:18,120 --> 00:00:19,120
+coordenadas.
+
+7
+00:00:19,120 --> 00:00:23,400
+Podemos describir la posición de cualquier objeto en el espacio en relación al origen utilizando sólo
+
+8
+00:00:23,400 --> 00:00:24,320
+tres números.
