@@ -136,6 +136,13 @@
                     ]
                 },
                 {
+                    "positionTitle": "POINT Logo Designer / Diseñador del logotipo POINT",
+                    "names":
+                    [
+                        "Annalise Schumacher"
+                    ]
+                },
+                {
                     "positionTitle": "Animator / Animador",
                     "names":
                     [
@@ -174,8 +181,7 @@
                     "positionTitle": "Music / Música",
                     "names":
                     [
-                        "Sonali Joshi (Arranger)",
-                        "ZUN (Original)"
+                        "Sonali Joshi (Arranger) ZUN (Original)"
                     ]
                 },
                 {
@@ -204,7 +210,8 @@
                     "positionTitle": "Spanish Translator / Traductor de Español",
                     "names":
                     [
-                        "Daniel Caballero"
+                        "Daniel Caballero",
+                        "Mireille Tan"
                     ]
                 }
             ]
