@@ -88,8 +88,15 @@ public class EndCreditsManager : MonoBehaviour
     /// </summary>
     private float endScrollY = 0.0f;
 
+    private Camera currentCamera = null;
+    private GameObject player = null;
+
     private IEnumerator Start()
     {
+        yield return WaitForPlayerSpawn();
+
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("temporary_ending_2");
+
         if (fundingAcknowledgements != null)
         {
             TMP_Text[] fundingTexts = fundingAcknowledgements.GetComponentsInChildren<TMP_Text>();
@@ -136,7 +143,8 @@ public class EndCreditsManager : MonoBehaviour
             TMP_Text[] projectTexts = projectLinks.GetComponentsInChildren<TMP_Text>();
             Image[] projectImages = projectLinks.GetComponentsInChildren<Image>();
 
-            // Fade in funding acknowledgements
+            player.GetComponent<NarrationManager>().PlayClipWithSubtitles("temporary_ending_3");
+            // Fade in project links
             foreach (TMP_Text projectText in projectTexts)
             {
                 StartCoroutine(FadeInText(projectText, fadeDuration));
@@ -146,6 +154,16 @@ public class EndCreditsManager : MonoBehaviour
                 StartCoroutine(FadeInImage(projectImage, fadeDuration));
             }
         }
+
+        yield break;
+    }
+
+    private IEnumerator WaitForPlayerSpawn()
+    {
+        yield return new WaitUntil(() => Camera.current != null);
+
+        currentCamera = Camera.current;
+        player = currentCamera.transform.parent.gameObject;
 
         yield break;
     }

@@ -106,7 +106,8 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
         UIManagerScript.UpdateCurrentObjective(objective3); // Congrats, all done
         SceneUIContainer.SetActive(true);
 
-        yield return new WaitForSeconds(10); // Wait 10 seconds before going into Credits
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("temporary_ending_1");
+        yield return new WaitForSeconds(15.2f);
 
         SceneController sceneController = player.GetComponentInChildren<SceneController>(); // Automatically go to Credits
         if (sceneController != null)
