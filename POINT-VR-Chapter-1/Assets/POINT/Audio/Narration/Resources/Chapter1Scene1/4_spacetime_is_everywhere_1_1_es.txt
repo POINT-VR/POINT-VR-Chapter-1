@@ -7,9 +7,5 @@ Juntos, la información de la dimensión del tiempo y las tres dimensiones espac
 cuatro dimensiones del espacio-tiempo.
 
 3
-00:00:08,200 --> 00:00:11,200
+00:00:08,200 --> 00:00:10,970
 El espacio-tiempo es lo que compone la fábrica de nuestro universo.
-
-4
-00:00:11,200 --> 00:00:15,000
-Está siempre alrededor de nosotros en todas las direcciones y hacia el futuro.

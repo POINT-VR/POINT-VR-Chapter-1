@@ -7,10 +7,5 @@ Together, the information of the 1D time and the 3D location of an event is what
 4D spacetime.
 
 3
-00:00:08,200 --> 00:00:11,200
+00:00:08,200 --> 00:00:10,970
 Spacetime is what makes up the very fabric of our universe.
-
-4
-00:00:11,200 --> 00:00:15,000
-It's all around you, stretching out in every direction and forever into the future.
-
