@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:03,160
+La esfera con menor volumen causa una mayor curvatura que la masa con mayor
+
+2
+00:00:03,160 --> 00:00:03,600
+volumen.

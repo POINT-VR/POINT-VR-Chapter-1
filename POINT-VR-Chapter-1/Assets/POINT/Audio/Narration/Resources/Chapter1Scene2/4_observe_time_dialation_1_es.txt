@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:04,080
+Ahora que hemos explorado cómo la curvatura del espacio está relacionada con la gravedad,
+
+2
+00:00:04,080 --> 00:00:07,680
+vamos a investigar cómo la dimensión del tiempo está conectada con la gravedad.

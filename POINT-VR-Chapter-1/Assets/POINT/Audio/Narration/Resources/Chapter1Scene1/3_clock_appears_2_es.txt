@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:04,320
+El tiempo es distinto a las demás dimensiones porque nosotros sólo podemos ir hacia el futuro en el tiempo.
+
+2
+00:00:04,320 --> 00:00:07,360
+Observe cómo el tiempo del reloj siempre incrementa.

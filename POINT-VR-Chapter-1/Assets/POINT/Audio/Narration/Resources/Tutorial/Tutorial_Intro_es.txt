@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:01,380
+¡Bienvenidos al tutorial!
+
+2
+00:00:02,120 --> 00:00:06,060
+Además de girar tu cabeza, también puedes girar tu vista con los joysticks.
+
+3
+00:00:06,600 --> 00:00:07,260
+Inténtalo ahora.

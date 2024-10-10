@@ -1,0 +1,3 @@
+1
+00:00:00,000 --> 00:00:06,920
+¡Buen trabajo! Intentas apuntar al suelo y teletransportarte al anillo en la distancia. Si no ves el anillo, quizás esté detrás de ti.

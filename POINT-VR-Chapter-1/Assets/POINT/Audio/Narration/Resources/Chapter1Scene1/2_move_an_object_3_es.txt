@@ -1,0 +1,4 @@
+1
+00:00:00,000 --> 00:00:03,920
+Ahora intente mover el objeto al mismo punto a través de otro camino.
+

@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:04,160
+Hemos estudiado cómo la masa de un objeto afecta el espacio-tiempo.
+
+2
+00:00:04,160 --> 00:00:06,800
+Ahora hagámonos la siguiente pregunta:
+
+3
+00:00:06,800 --> 00:00:10,320
+¿cómo afecta el tamaño de un objeto a la curvatura del espacio-tiempo?
+
+4
+00:00:10,320 --> 00:00:12,880
+Para responder esta pregunta juguemos un juego rápido.

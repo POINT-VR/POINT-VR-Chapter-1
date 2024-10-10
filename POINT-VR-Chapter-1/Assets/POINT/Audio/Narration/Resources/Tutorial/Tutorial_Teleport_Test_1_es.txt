@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:03,280
+Intentas apuntar al suelo y teletransportarte al anillo en la distancia.
+
+2
+00:00:03,820 --> 00:00:05,940
+Si no ves el anillo, quizás esté detrás de ti.

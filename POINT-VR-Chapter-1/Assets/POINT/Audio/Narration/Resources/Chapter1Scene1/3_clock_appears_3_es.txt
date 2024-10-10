@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:04,760
+Mueva el objeto como usted quiera u observe cómo la descripción de su posición espacial cambia mientras
+
+2
+00:00:04,760 --> 00:00:06,920
+que el tiempo sigue aumentando.
+
+3
+00:00:06,920 --> 00:00:09,280
+Presione el botón de continuar cuando esté listo para continuar.
