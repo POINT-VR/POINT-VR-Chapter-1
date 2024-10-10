@@ -364,9 +364,10 @@ public class Scene1Manager : MonoBehaviour
         floatingObjectivesMenu.SetActive(false); // Hide Objectives as grid grows
         Debug.Log("Together, the information of the 1D time and the 3D location of an event is what we call 4D spacetime. Spacetime is what makes up the very fabric of our universe."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_1_1");
-        // Sum of yield returns should be 16s
+        // Sum of yield returns should be 16s (dynamicAxis.TransitionAxisThickness and RevealGrid)
         StartCoroutine(dynamicAxis.TransitionAxisColor(Color.white, 4.0f));
         yield return dynamicAxis.TransitionAxisThickness(0.02f, 4.0f);
+        yield return new WaitForSeconds(4.0f); // Extra padding time so that last audio finishes playing
         Debug.Log("It's all around you, stretching out in every direction and forever into the future."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_1_2");
         yield return RevealGrid(16.0f, 12.0f);
