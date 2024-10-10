@@ -1,0 +1,11 @@
+1
+00:00:00,020 --> 00:00:03,360
+Puedes teletransportarte con el botón resaltado de cualquier controlador.
+
+2
+00:00:03,940 --> 00:00:06,800
+Manténlo apretado y apunta al suelo hasta que un círculo verde aparece.
+
+3
+00:00:07,200 --> 00:00:09,480
+Cuando lo sueltas, vas a moverte a ese círculo.

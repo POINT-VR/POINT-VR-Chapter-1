@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:04,220
+Lo mejor es que experiencies el juego en orden, pero tienes la opción para elegir
+
+2
+00:00:04,220 --> 00:00:05,320
+las escenas diferentes de este menú.
+
+3
+00:00:05,960 --> 00:00:08,040
+Puedes volver a jugar el tutorial en cualquier punto.
+
+4
+00:00:08,700 --> 00:00:10,080
+Selecciona escena 1 para empezar.

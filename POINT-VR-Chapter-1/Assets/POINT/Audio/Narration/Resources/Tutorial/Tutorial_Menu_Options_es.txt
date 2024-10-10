@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:04,700
+De esta pantalla puedes ajustar el volumen, encender los subtítulos y encender los diagramas de los controles
+
+2
+00:00:04,700 --> 00:00:07,820
+en tiempo real para mostrarte cuáles botones estás pulsando mientras los estás pulsando.
+
+3
+00:00:08,520 --> 00:00:12,220
+Si estás desorientado flotando en el espacio, tienes la opción de encender un suelo.
+
+4
+00:00:13,120 --> 00:00:16,580
+Siempre puedes encontrar el objetivo actual en este menú si te atascas.
