@@ -1,0 +1,8 @@
+1
+00:00:00,000 --> 00:00:03,160
+The sphere with the smaller volume curves the grid more than the sphere with the larger
+
+2
+00:00:03,160 --> 00:00:03,600
+volume.
+

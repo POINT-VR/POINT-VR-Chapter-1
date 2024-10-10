@@ -1,0 +1,28 @@
+1
+00:00:00,000 --> 00:00:04,720
+Primero exploraremos el concepto de que “la materia le indica al espacio cómo curvarse”.
+
+2
+00:00:04,720 --> 00:00:05,720
+Mire a su alrededor.
+
+3
+00:00:05,720 --> 00:00:08,800
+Deberás poder ver al Sol representado por una esfera amarilla. 
+
+4
+00:00:08,800 --> 00:00:12,280
+Aunque usted puede mover esta esfera, imagine que la esfera es del 
+
+5
+00:00:12,280 --> 00:00:15,040
+mismo tamaño y masa que el Sol.
+
+6
+00:00:15,040 --> 00:00:16,840
+Agarre la esfera
+
+7
+00:00:16,840 --> 00:00:20,400
+y muévala dentro de la cuadrícula para observar cómo la cuadrícula se deforma.
+

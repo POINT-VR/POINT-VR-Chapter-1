@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using System.Threading;
 /// <summary>
-/// Script that replaces a MeshFilter mesh with that of a grid built to certain specifications. This grid can then deform in response to the movement of assigned rigidbodies.
+/// Script that replaces a MeshFilter mesh with that of a the ZYX-ordered junction-based grid.
+/// This grid can then deform in response to the movement of assigned rigidbodies.
 /// </summary>
 [RequireComponent(typeof(MeshFilter))]
 public class GridScript : MonoBehaviour
@@ -10,169 +12,180 @@ public class GridScript : MonoBehaviour
     /// </summary>
     public Rigidbody[] rigidbodiesToDeformAround;
     Mesh deformingMesh;
+    /// <summary>
+    /// The thickness of the grid's "bars". 
+    /// </summary>
     readonly float thickness = 0.02f;
-    readonly int size_z = 8;
-    readonly int size_x = 8;
-    readonly int size_y = 5; //Produces a 7 x 7 x 4 grid
-    readonly int divisions = 5;
+
+    // Default values produce a 7 x 7 x 4 grid
+    [SerializeField] private int size_z = 8;
+    [SerializeField] private int size_x = 8;
+    [SerializeField] private int size_y = 5; 
+    public Vector3 gridSize
+    {
+        get
+        {
+            return new Vector3(size_x, size_y, size_z);
+        }
+    }
+
+    /// <summary>
+    /// The number of subjunctions on each "bar".
+    /// </summary>
+    [SerializeField] private int divisions = 5;
+    /// <summary>
+    /// This struct is used to simplify the mass-position calculation and make memory use more compact
+    /// </summary>
+    struct Mass
+    {
+        public Vector3 position;
+        public float mass;
+    }
+    /// <summary>
+    /// Calculates the displacement each FixedUpdate.
+    /// </summary>
     private void FixedUpdate()
     {
         Vector3[] displaced = new Vector3[size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1)]; 
-        Vector3[] massPositions = new Vector3[rigidbodiesToDeformAround.Length];
-        float[] masses = new float[rigidbodiesToDeformAround.Length];
-        for (int j = 0; j < masses.Length; j++) //Prefetches the mass positions and values into one cache block ahead of time
+        Mass[] masses = new Mass[rigidbodiesToDeformAround.Length];
+        for (int j = 0; j < masses.Length; j++) //Prefetches the mass positions and values into one cache block ahead of time and organizes them into structs
         {
-            massPositions[j] = rigidbodiesToDeformAround[j].transform.position;
-            masses[j] = rigidbodiesToDeformAround[j].mass;
+            masses[j] = new Mass
+            {
+                mass = rigidbodiesToDeformAround[j].mass,
+                position = rigidbodiesToDeformAround[j].position
+            };
         }
-        for (int i = 0; i < size_z * size_y * size_x * 8; i+=8)
-        {
-            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
-            float totalDistance = 0f;
-            for (int j = 0; j < masses.Length; j++)
-            {
-                Vector3 direction = IndexToPos(i) - massPositions[j];
-                float doubleMass = 2 * masses[j];
-                float distance = 1f;
-                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
-                {
-                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
-                }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
-                totalDistance += distance;
-            }
-            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
-            if (totalDistance > 1) // Normalizes the final displacement
-            {
-                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
-            }
-            displaced[i] = d;
-            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
-            displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
-            displaced[i + 3] = d + new Vector3(thickness, 0f, thickness);
-            displaced[i + 4] = d + new Vector3(0f, thickness, 0f);
-            displaced[i + 5] = d + new Vector3(0f, thickness, thickness);
-            displaced[i + 6] = d + new Vector3(thickness, thickness, 0f);
-            displaced[i + 7] = d + new Vector3(thickness, thickness, thickness);
-        }
-        for (int i = size_z * size_y * size_x * 8; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i += 4)
-        {
-            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
-            float totalDistance = 0f;
-            for (int j = 0; j < masses.Length; j++)
-            {
-                Vector3 direction = IndexToPos(i) - massPositions[j];
-                float doubleMass = 2 * masses[j];
-                float distance = 1f;
-                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
-                {
-                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
-                }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
-                totalDistance += distance;
-            }
-            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
-            if (totalDistance > 1) // Normalizes the final displacement
-            {
-                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
-            }
-            displaced[i] = d;
-            displaced[i + 1] = d + new Vector3(thickness, 0f, 0f);
-            displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
-            displaced[i + 3] = d + new Vector3(thickness, thickness, 0f);
-        }
-        for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i += 4)
-        {
-            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
-            float totalDistance = 0f;
-            for (int j = 0; j < masses.Length; j++)
-            {
-                Vector3 direction = IndexToPos(i) - massPositions[j];
-                float doubleMass = 2 * masses[j];
-                float distance = 1f;
-                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
-                {
-                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
-                }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
-                totalDistance += distance;
-            }
-            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
-            if (totalDistance > 1) // Normalizes the final displacement
-            {
-                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
-            }
-            displaced[i] = d;
-            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
-            displaced[i + 2] = d + new Vector3(0f, thickness, 0f);
-            displaced[i + 3] = d + new Vector3(0f, thickness, thickness);
-        }
-        for (int i = size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y; i < size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1); i += 4)
-        {
-            Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
-            float totalDistance = 0f;
-            for (int j = 0; j < masses.Length; j++)
-            {
-                Vector3 direction = IndexToPos(i) - massPositions[j];
-                float doubleMass = 2 * masses[j];
-                float distance = 1f;
-                if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
-                {
-                    distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
-                }
-                totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
-                totalDistance += distance;
-            }
-            Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
-            if (totalDistance > 1) // Normalizes the final displacement
-            {
-                d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
-            }
-            displaced[i] = d;
-            displaced[i + 1] = d + new Vector3(0f, 0f, thickness);
-            displaced[i + 2] = d + new Vector3(thickness, 0f, 0f);
-            displaced[i + 3] = d + new Vector3(thickness, 0f, thickness);
-        }
+        int midpoint = ((displaced.Length / 2 - 1) | 7) + 1; //Increments of 8 only
+        Thread t = new Thread(() => ThreadRoutine(displaced, masses, midpoint, displaced.Length));
+        t.Start();
+        ThreadRoutine(displaced, masses, 0, midpoint);
+        t.Join();
         deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
         deformingMesh.RecalculateNormals();
     }
+    /// <summary>
+    /// This parallelizable function writes into the displacement vector for each vertex in response to the masses.
+    /// Ensure the bounds for each thread do not overlap.
+    /// </summary>
+    /// <param name="displaced">The list of vertices to write to</param>
+    /// <param name="masses">The list of masses to deform in response to</param>
+    /// <param name="inclusive">The lower bound of vertex indices</param>
+    /// <param name="exclusive">The upper bound of vertex indices</param>
+    private void ThreadRoutine(Vector3[] displaced, Mass[] masses, int inclusive, int exclusive)
+    {
+        int i = inclusive;
+        int upper = Mathf.Min(size_z * size_y * size_x * 8, exclusive);
+        for (; i < upper; i += 8) //8-Junction case
+        {
+            Vector3 disp = GetDisplacementForVertex(masses, i);
+            float xNew = disp.x + thickness;
+            float yNew = disp.y + thickness;
+            float zNew = disp.z + thickness;
+            displaced[i] = disp;
+            displaced[i + 1] = new Vector3(disp.x, disp.y, zNew);
+            displaced[i + 2] = new Vector3(xNew, disp.y, disp.z);
+            displaced[i + 3] = new Vector3(xNew, disp.y, zNew);
+            displaced[i + 4] = new Vector3(disp.x, yNew, disp.z);
+            displaced[i + 5] = new Vector3(disp.x, yNew, zNew);
+            displaced[i + 6] = new Vector3(xNew, yNew, disp.z);
+            displaced[i + 7] = new Vector3(xNew, yNew, zNew);
+        }
+        upper = Mathf.Min(size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y, exclusive);
+        for (; i < upper; i += 4) //Z-Variant 4-subjunction case
+        {
+            Vector3 disp = GetDisplacementForVertex(masses, i);
+            float xNew = disp.x + thickness;
+            float yNew = disp.y + thickness;
+            displaced[i] = disp;
+            displaced[i + 1] = new Vector3(xNew, disp.y, disp.z);
+            displaced[i + 2] = new Vector3(disp.x, yNew, disp.z);
+            displaced[i + 3] = new Vector3(xNew, yNew, disp.z);
+        }
+        upper = Mathf.Min(size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y, exclusive);
+        for (; i < upper; i += 4) //X-Variant 4-subjunction case
+        {
+            Vector3 disp = GetDisplacementForVertex(masses, i);
+            float yNew = disp.y + thickness;
+            float zNew = disp.z + thickness;
+            displaced[i] = disp;
+            displaced[i + 1] = new Vector3(disp.x, disp.y, zNew);
+            displaced[i + 2] = new Vector3(disp.x, yNew, disp.z);
+            displaced[i + 3] = new Vector3(disp.x, yNew, zNew);
+        }
+        upper = Mathf.Min(size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1), exclusive);
+        for (; i < upper; i += 4) //Y-Variant 4-subjunction case
+        {
+            Vector3 disp = GetDisplacementForVertex(masses, i);
+            float xNew = disp.x + thickness;
+            float zNew = disp.z + thickness;
+            displaced[i] = disp;
+            displaced[i + 1] = new Vector3(disp.x, disp.y, zNew);
+            displaced[i + 2] = new Vector3(xNew, disp.y, disp.z);
+            displaced[i + 3] = new Vector3(xNew, disp.y, zNew);
+        }
+    }
+    /// <summary>
+    /// Calculates the new position of the vertex at index i after it deforms due to masses.
+    /// </summary>
+    /// <param name="masses"> The list of structs detailing each mass and its position </param>
+    /// <param name="i"> The index of the specified vertex </param>
+    /// <returns> The deformed position of the vertex </returns>
+    private Vector3 GetDisplacementForVertex(Mass[] masses, int i)
+    {
+        Vector3 totalDisplacement = new Vector3(0f, 0f, 0f);
+        float totalDistance = 0f;
+        for (int j = 0; j < masses.Length; j++)
+        {
+            Vector3 direction = IndexToPos(i) - masses[j].position;
+            float doubleMass = 2 * masses[j].mass;
+            float distance = 1f;
+            if (doubleMass * doubleMass < direction.sqrMagnitude) //Displacement would not yield a complex number: deform at damped power
+            {
+                distance = (1f - Mathf.Sqrt(1f - doubleMass / direction.magnitude));
+            }
+            totalDisplacement += distance * direction; //Displacement from each mass is calculated independently, but combined by vector addition
+            totalDistance += distance;
+        }
+        Vector3 d = IndexToPos(i) - totalDisplacement; //Store the final displacement calculation for this vertex
+        if (totalDistance > 1) // Normalizes the final displacement
+        {
+            d = IndexToPos(i) - totalDisplacement / totalDistance; //Store the final displacement calculation for this vertex
+        }
+        return d;
+    }
+    /// <summary>
+    /// This replaces the attached mesh with the grid.
+    /// </summary>
     void Start()
     {
-           deformingMesh = GetComponent<MeshFilter>().mesh;
-           deformingMesh.Clear(false);
-           Vector3[] displaced = new Vector3[
-               size_z * size_y * size_x * 8 //2560 with current settings
-               + 4 * divisions * (size_z - 1) * size_x * size_y //2560 + 3360 = 5920
-               + 4 * divisions * size_z * (size_x - 1) * size_y //5920 + 3360 = 9280
-               + 4 * divisions * size_z * size_x * (size_y - 1)]; //9280 + 3072 = 12352
-           for (int i = 0; i < displaced.Length; i++)
-           {
-               Vector3 v = IndexToPos(i);
-              displaced[i] = v;
-             /* Visual Aid for debugging vertices
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube); 
-            cube.transform.position = v;
-            cube.transform.localScale = new Vector3(thickness, thickness, thickness);
-            cube.name = "Cube " + i;
-            MeshRenderer r = cube.GetComponent<MeshRenderer>();
-            r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            r.receiveShadows = false;
-            /*/ // End of test code
-        } 
-            deformingMesh.vertices = displaced;
-        /*    deformingMesh.triangles = new int[] { 
-                1, 2561, 2560,
-                1, 3, 2561,
-                1, 2560, 2562,
-                5, 1, 2562,
-                5, 2562, 2563,
-                7, 5, 2563,
-                3, 2563, 2561,
-                3, 7, 2563
-            }; */
+        deformingMesh = GetComponent<MeshFilter>().mesh;
+        deformingMesh.Clear(false);
+        Vector3[] displaced = new Vector3[
+            size_z * size_y * size_x * 8 //2560 with default settings
+            + 4 * divisions * (size_z - 1) * size_x * size_y //2560 + 3360 = 5920
+            + 4 * divisions * size_z * (size_x - 1) * size_y //5920 + 3360 = 9280
+            + 4 * divisions * size_z * size_x * (size_y - 1)]; //9280 + 3072 = 12352
+        for (int i = 0; i < displaced.Length; i++) {
+            displaced[i] = IndexToPos(i);
+        }
+        deformingMesh.vertices = displaced;
         deformingMesh.triangles = GenerateTriangles();
-    }
-    Vector3 IndexToPos(int i) //Returns the position of vertex i in the "original" grid
+    }   
+    /// <summary>
+    /// Gets the position of the index i in the ZXY enumerated grid point scheme.
+    /// 
+    /// The first size_z * size_y * size_x * 8 grid points are in junctions.
+    /// The next 4 * divisions * (size_z - 1) * size_x * size_y grid points are the subjunctions in the z-variant direction.
+    /// The next 4 * divisions * size_z * (size_x - 1) * size_y grid points are the subjunctions in the x-variant direction.
+    /// The last 4 * divisions * size_z * size_x * (size_y - 1) grid points are the subjunctions in the y-variant direction.
+    /// 
+    /// Within each junction or subjunction, the ZYX ordering is maintained so vertex coordinates are in the same relative order regardless of index.
+    /// 
+    /// </summary>
+    /// <param name="i"> The vertex index </param>
+    /// <returns> The position of vertex i in world space </returns>
+    Vector3 IndexToPos(int i) 
     {
         int numY = 4 * divisions * size_z * size_x * (size_y - 1);
         int numX = 4 * divisions * size_z * (size_x - 1) * size_y;
@@ -182,11 +195,11 @@ public class GridScript : MonoBehaviour
         if (i < numJunction) //Vertex i is in a junction
         {
             int junction = i / 8; //8 Vertices in a junction
-            int xz = junction % (size_x * size_z); //Position on the xz-plane
-            int x = xz / size_z;
             int y = junction / (size_x * size_z);
-            int z = xz % size_z;
-            switch (i % 8) //Axis priority: Z (forward), X (right), Y (up)
+            int xz = junction - y * (size_x * size_z); //Position on the xz-plane
+            int x = xz / size_z;
+            int z = xz - x * size_z;
+            switch (i & 7) //Axis priority: Z (forward), X (right), Y (up)
             {
                 case 0: return new Vector3(x - s, y - s, z - s); 
                 case 1: return new Vector3(x - s, y - s, z + s);
@@ -202,13 +215,13 @@ public class GridScript : MonoBehaviour
         { //Vertex i is in a z-variant direction
             int j = i - numJunction; //Index not accounting for junctions
             int xy = j / (4 * divisions * (size_z - 1)); //Position on the xy-plane
-            int x = xy % size_x;
             int y = xy / size_x;
-            int k = j % (4 * divisions * (size_z - 1)); //Position within the z-bar
+            int x = xy - y * size_x;
+            int k = j - xy * (4 * divisions * (size_z - 1)); //Position within the z-bar
             int g = k / (4 * divisions); //Which "group" the vertex is in
-            int h = k % (4 * divisions); //Position within the "group"
+            int h = k - g * (4 * divisions); //Position within the "group"
             float z = g + ((h / 4) + 1) / (divisions + 1f);
-            switch (j % 4)
+            switch (j & 3)
             {
                 case 0: return new Vector3(x - s, y - s, z);
                 case 1: return new Vector3(x + s, y - s, z);
@@ -220,13 +233,13 @@ public class GridScript : MonoBehaviour
         { //Vertex i is in an x-variant direction
             int j = (i - numJunction) - numZ; //Index not accounting for junctions or direction Z
             int yz = j / (4 * divisions * (size_x - 1)); //Position on the yz-plane
-            int z = yz % size_z;
             int y = yz / size_z;
-            int k = j % (4 * divisions * (size_x - 1)); //Position within the x-bar
+            int z = yz - y * size_z;
+            int k = j - yz * (4 * divisions * (size_x - 1)); //Position within the x-bar
             int g = k / (4 * divisions); //Which "group" the vertex is in
-            int h = k % (4 * divisions); //Position within the "group"
+            int h = k - g * (4 * divisions); //Position within the "group"
             float x = g + ((h / 4) + 1) / (divisions + 1f);
-            switch (j % 4)
+            switch (j & 3)
             {
                 case 0: return new Vector3(x, y - s, z - s);
                 case 1: return new Vector3(x, y - s, z + s);
@@ -238,13 +251,13 @@ public class GridScript : MonoBehaviour
         { //Vertex i is in an x-variant direction
             int j = ((i - numJunction) - numZ) - numX; //Index not accounting for junctions or the other directions
             int xy = j / (4 * divisions * (size_y - 1)); //Position on the xy-plane
-            int z = xy % size_z;
             int x = xy / size_z;
-            int k = j % (4 * divisions * (size_y - 1)); //Position within the y-bar
+            int z = xy - x * size_z;
+            int k = j - xy * (4 * divisions * (size_y - 1)); //Position within the y-bar
             int g = k / (4 * divisions); //Which "group" the vertex is in
-            int h = k % (4 * divisions); //Position within the "group"
+            int h = k - g * (4 * divisions); //Position within the "group"
             float y = g + ((h / 4) + 1) / (divisions + 1f);
-            switch (j % 4)
+            switch (j & 3)
             {
                 case 0: return new Vector3(x - s, y, z - s);
                 case 1: return new Vector3(x - s, y, z + s);
@@ -260,7 +273,7 @@ public class GridScript : MonoBehaviour
             3 * 8 * (divisions + 1) * (
               (size_z - 1) * size_y * size_x
             + (size_x - 1) * size_y * size_z
-            + (size_y - 1) * size_x * size_z)]; //26112 triangles with current settings, becomes 3 * 26112 ints
+            + (size_y - 1) * size_x * size_z)]; //26112 triangles with default settings, becomes 3 * 26112 ints
         int tri = 0;
         for (int i = 0; i < size_x * size_y; i++) //Iterate over each z-bar
         {
@@ -270,42 +283,41 @@ public class GridScript : MonoBehaviour
             {
                 for (int k = 0; k < divisions + 1; k++) //Iterate over each segment
                 {
-                    //Debug.Log(branch + " " + i + " " + j + " " + k + " " + first);
-                    int _1 = branch;
-                    int _3 = branch + 1;
-                    int _5 = branch + 2;
-                    int _7 = branch + 3;
-                    int _2560 = branch + 4;
-                    int _2561 = branch + 5;
-                    int _2562 = branch + 6;
-                    int _2563 = branch + 7;
+                    int z_minor_x_minor_y_minor_vertex = branch;
+                    int z_major_x_minor_y_minor_vertex = branch + 1;
+                    int z_minor_x_major_y_minor_vertex = branch + 2;
+                    int z_major_x_major_y_minor_vertex = branch + 3;
+                    int z_minor_x_minor_y_major_vertex = branch + 4;
+                    int z_major_x_minor_y_major_vertex = branch + 5;
+                    int z_minor_x_major_y_major_vertex = branch + 6;
+                    int z_major_x_major_y_major_vertex = branch + 7;
                     if (k == 0)
                     {
-                        _1 = first + 1;
-                        _3 = first + 3;
-                        _5 = first + 5;
-                        _7 = first + 7;
-                        _2560 = branch;
-                        _2561 = branch + 1;
-                        _2562 = branch + 2;
-                        _2563 = branch + 3;
+                        z_minor_x_minor_y_minor_vertex = first + 1;
+                        z_major_x_minor_y_minor_vertex = first + 3;
+                        z_minor_x_major_y_minor_vertex = first + 5;
+                        z_major_x_major_y_minor_vertex = first + 7;
+                        z_minor_x_minor_y_major_vertex = branch;
+                        z_major_x_minor_y_major_vertex = branch + 1;
+                        z_minor_x_major_y_major_vertex = branch + 2;
+                        z_major_x_major_y_major_vertex = branch + 3;
                         branch -= 4;
                     }
                     if (k == divisions)
                     {
-                        _2560 = first + 8;
-                        _2561 = first + 10;
-                        _2562 = first + 12;
-                        _2563 = first + 14;
+                        z_minor_x_minor_y_major_vertex = first + 8;
+                        z_major_x_minor_y_major_vertex = first + 10;
+                        z_minor_x_major_y_major_vertex = first + 12;
+                        z_major_x_major_y_major_vertex = first + 14;
                     }
-                    tris[tri++] = _1; tris[tri++] = _2561; tris[tri++] = _2560;
-                    tris[tri++] = _1; tris[tri++] = _3; tris[tri++] = _2561;
-                    tris[tri++] = _1; tris[tri++] = _2560; tris[tri++] = _2562;
-                    tris[tri++] = _5; tris[tri++] = _1; tris[tri++] = _2562;
-                    tris[tri++] = _5; tris[tri++] = _2562; tris[tri++] = _2563;
-                    tris[tri++] = _7; tris[tri++] = _5; tris[tri++] = _2563;
-                    tris[tri++] = _3; tris[tri++] = _2563; tris[tri++] = _2561;
-                    tris[tri++] = _3; tris[tri++] = _7; tris[tri++] = _2563;
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_major_x_minor_y_major_vertex; tris[tri++] = z_minor_x_minor_y_major_vertex; //3 Assignments per row correspond to one triangle
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_major_x_minor_y_minor_vertex; tris[tri++] = z_major_x_minor_y_major_vertex;
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_minor_x_minor_y_major_vertex; tris[tri++] = z_minor_x_major_y_major_vertex;
+                    tris[tri++] = z_minor_x_major_y_minor_vertex; tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_minor_x_major_y_major_vertex;
+                    tris[tri++] = z_minor_x_major_y_minor_vertex; tris[tri++] = z_minor_x_major_y_major_vertex; tris[tri++] = z_major_x_major_y_major_vertex;
+                    tris[tri++] = z_major_x_major_y_minor_vertex; tris[tri++] = z_minor_x_major_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex;
+                    tris[tri++] = z_major_x_minor_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex; tris[tri++] = z_major_x_minor_y_major_vertex;
+                    tris[tri++] = z_major_x_minor_y_minor_vertex; tris[tri++] = z_major_x_major_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex;
                     branch += 4;
                 }
                 first += 8;
@@ -319,42 +331,41 @@ public class GridScript : MonoBehaviour
             {
                 for (int k = 0; k < divisions + 1; k++) //Iterate over each segment
                 {
-                    //Debug.Log(branch + " " + i + " " + j + " " + k + " " + first);
-                    int _1 = branch;
-                    int _3 = branch + 1;
-                    int _5 = branch + 2;
-                    int _7 = branch + 3;
-                    int _2560 = branch + 4;
-                    int _2561 = branch + 5;
-                    int _2562 = branch + 6;
-                    int _2563 = branch + 7;
+                    int z_minor_x_minor_y_minor_vertex = branch;
+                    int z_major_x_minor_y_minor_vertex = branch + 1;
+                    int z_minor_x_major_y_minor_vertex = branch + 2;
+                    int z_major_x_major_y_minor_vertex = branch + 3;
+                    int z_minor_x_minor_y_major_vertex = branch + 4;
+                    int z_major_x_minor_y_major_vertex = branch + 5;
+                    int z_minor_x_major_y_major_vertex = branch + 6;
+                    int z_major_x_major_y_major_vertex = branch + 7;
                     if (k == 0)
                     {
-                        _1 = first + 2;
-                        _3 = first + 3;
-                        _5 = first + 6;
-                        _7 = first + 7;
-                        _2560 = branch;
-                        _2561 = branch + 1;
-                        _2562 = branch + 2;
-                        _2563 = branch + 3;
+                        z_minor_x_minor_y_minor_vertex = first + 2;
+                        z_major_x_minor_y_minor_vertex = first + 3;
+                        z_minor_x_major_y_minor_vertex = first + 6;
+                        z_major_x_major_y_minor_vertex = first + 7;
+                        z_minor_x_minor_y_major_vertex = branch;
+                        z_major_x_minor_y_major_vertex = branch + 1;
+                        z_minor_x_major_y_major_vertex = branch + 2;
+                        z_major_x_major_y_major_vertex = branch + 3;
                         branch -= 4;
                     }
                     if (k == divisions)
                     {
-                        _2560 = first + 8 * size_z;
-                        _2561 = first + 1 + 8 * size_z;
-                        _2562 = first + 4 + 8 * size_z;
-                        _2563 = first + 5 + 8 * size_z;
+                        z_minor_x_minor_y_major_vertex = first + 8 * size_z;
+                        z_major_x_minor_y_major_vertex = first + 1 + 8 * size_z;
+                        z_minor_x_major_y_major_vertex = first + 4 + 8 * size_z;
+                        z_major_x_major_y_major_vertex = first + 5 + 8 * size_z;
                     }
-                    tris[tri++] = _1; tris[tri++] = _2560; tris[tri++] = _2561;
-                    tris[tri++] = _1; tris[tri++] = _2561; tris[tri++] = _3;
-                    tris[tri++] = _1; tris[tri++] = _2562; tris[tri++] = _2560;
-                    tris[tri++] = _5; tris[tri++] = _2562; tris[tri++] = _1;
-                    tris[tri++] = _5; tris[tri++] = _2563; tris[tri++] = _2562;
-                    tris[tri++] = _7; tris[tri++] = _2563; tris[tri++] = _5;
-                    tris[tri++] = _3; tris[tri++] = _2561; tris[tri++] = _2563;
-                    tris[tri++] = _3; tris[tri++] = _2563; tris[tri++] = _7;
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_minor_x_minor_y_major_vertex; tris[tri++] = z_major_x_minor_y_major_vertex; //3 Assignments per row correspond to one triangle
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_major_x_minor_y_major_vertex; tris[tri++] = z_major_x_minor_y_minor_vertex;
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_minor_x_major_y_major_vertex; tris[tri++] = z_minor_x_minor_y_major_vertex;
+                    tris[tri++] = z_minor_x_major_y_minor_vertex; tris[tri++] = z_minor_x_major_y_major_vertex; tris[tri++] = z_minor_x_minor_y_minor_vertex;
+                    tris[tri++] = z_minor_x_major_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex; tris[tri++] = z_minor_x_major_y_major_vertex;
+                    tris[tri++] = z_major_x_major_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex; tris[tri++] = z_minor_x_major_y_minor_vertex;
+                    tris[tri++] = z_major_x_minor_y_minor_vertex; tris[tri++] = z_major_x_minor_y_major_vertex; tris[tri++] = z_major_x_major_y_major_vertex;
+                    tris[tri++] = z_major_x_minor_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex; tris[tri++] = z_major_x_major_y_minor_vertex;
                     branch += 4;
                 }
                 first += 8 * size_z;
@@ -368,42 +379,41 @@ public class GridScript : MonoBehaviour
             {
                 for (int k = 0; k < divisions + 1; k++) //Iterate over each segment
                 {
-                    //Debug.Log(branch + " " + i + " " + j + " " + k + " " + first);
-                    int _1 = branch;
-                    int _3 = branch + 1;
-                    int _5 = branch + 2;
-                    int _7 = branch + 3;
-                    int _2560 = branch + 4;
-                    int _2561 = branch + 5;
-                    int _2562 = branch + 6;
-                    int _2563 = branch + 7;
+                    int z_minor_x_minor_y_minor_vertex = branch;
+                    int z_major_x_minor_y_minor_vertex = branch + 1;
+                    int z_minor_x_major_y_minor_vertex = branch + 2;
+                    int z_major_x_major_y_minor_vertex = branch + 3;
+                    int z_minor_x_minor_y_major_vertex = branch + 4;
+                    int z_major_x_minor_y_major_vertex = branch + 5;
+                    int z_minor_x_major_y_major_vertex = branch + 6;
+                    int z_major_x_major_y_major_vertex = branch + 7;
                     if (k == 0)
                     {
-                        _1 = first + 4;
-                        _3 = first + 5;
-                        _5 = first + 6;
-                        _7 = first + 7;
-                        _2560 = branch;
-                        _2561 = branch + 1;
-                        _2562 = branch + 2;
-                        _2563 = branch + 3;
+                        z_minor_x_minor_y_minor_vertex = first + 4;
+                        z_major_x_minor_y_minor_vertex = first + 5;
+                        z_minor_x_major_y_minor_vertex = first + 6;
+                        z_major_x_major_y_minor_vertex = first + 7;
+                        z_minor_x_minor_y_major_vertex = branch;
+                        z_major_x_minor_y_major_vertex = branch + 1;
+                        z_minor_x_major_y_major_vertex = branch + 2;
+                        z_major_x_major_y_major_vertex = branch + 3;
                         branch -= 4;
                     }
                     if (k == divisions)
                     {
-                        _2560 = first + 8 * size_z * size_x;
-                        _2561 = first + 1 + 8 * size_z * size_x;
-                        _2562 = first + 2 + 8 * size_z * size_x;
-                        _2563 = first + 3 + 8 * size_z * size_x;
+                        z_minor_x_minor_y_major_vertex = first + 8 * size_z * size_x;
+                        z_major_x_minor_y_major_vertex = first + 1 + 8 * size_z * size_x;
+                        z_minor_x_major_y_major_vertex = first + 2 + 8 * size_z * size_x;
+                        z_major_x_major_y_major_vertex = first + 3 + 8 * size_z * size_x;
                     }
-                    tris[tri++] = _1; tris[tri++] = _2561; tris[tri++] = _2560;
-                    tris[tri++] = _1; tris[tri++] = _3; tris[tri++] = _2561;
-                    tris[tri++] = _1; tris[tri++] = _2560; tris[tri++] = _2562;
-                    tris[tri++] = _5; tris[tri++] = _1; tris[tri++] = _2562;
-                    tris[tri++] = _5; tris[tri++] = _2562; tris[tri++] = _2563;
-                    tris[tri++] = _7; tris[tri++] = _5; tris[tri++] = _2563;
-                    tris[tri++] = _3; tris[tri++] = _2563; tris[tri++] = _2561;
-                    tris[tri++] = _3; tris[tri++] = _7; tris[tri++] = _2563;
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_major_x_minor_y_major_vertex; tris[tri++] = z_minor_x_minor_y_major_vertex; //3 Assignments per row correspond to one triangle
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_major_x_minor_y_minor_vertex; tris[tri++] = z_major_x_minor_y_major_vertex;
+                    tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_minor_x_minor_y_major_vertex; tris[tri++] = z_minor_x_major_y_major_vertex;
+                    tris[tri++] = z_minor_x_major_y_minor_vertex; tris[tri++] = z_minor_x_minor_y_minor_vertex; tris[tri++] = z_minor_x_major_y_major_vertex;
+                    tris[tri++] = z_minor_x_major_y_minor_vertex; tris[tri++] = z_minor_x_major_y_major_vertex; tris[tri++] = z_major_x_major_y_major_vertex;
+                    tris[tri++] = z_major_x_major_y_minor_vertex; tris[tri++] = z_minor_x_major_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex;
+                    tris[tri++] = z_major_x_minor_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex; tris[tri++] = z_major_x_minor_y_major_vertex;
+                    tris[tri++] = z_major_x_minor_y_minor_vertex; tris[tri++] = z_major_x_major_y_minor_vertex; tris[tri++] = z_major_x_major_y_major_vertex;
                     branch += 4;
                 }
                 first += 8 * size_z * size_x;

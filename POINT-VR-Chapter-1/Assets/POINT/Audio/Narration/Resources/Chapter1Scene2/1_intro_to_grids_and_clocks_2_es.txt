@@ -1,0 +1,8 @@
+1
+00:00:00,000 --> 00:00:04,000
+Usaremos un segundo reloj en una posición espacial distinta para comparar
+
+2
+00:00:04,000 --> 00:00:07,000
+y así poder observar más fácilmente el efecto de la gravedad en el tiempo.
+

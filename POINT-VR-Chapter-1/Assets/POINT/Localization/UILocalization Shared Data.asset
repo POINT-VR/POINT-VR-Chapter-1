@@ -1,0 +1,316 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UILocalization Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UILocalization
+  m_TableCollectionNameGuidString: ea97502b36f6cd149b6a571be6e2583f
+  m_Entries:
+  - m_Id: 1521769025536
+    m_Key: MENU_START
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563188805632
+    m_Key: MENU_OPTIONS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563205582848
+    m_Key: MENU_CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802752
+    m_Key: MENU_VERSION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802753
+    m_Key: MENU_GENERAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521785802754
+    m_Key: MENU_CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997056
+    m_Key: MENU_SCENES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777152
+    m_Key: MENU_CONFIRM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777153
+    m_Key: MENU_RETURN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997057
+    m_Key: SETTINGS_OFF
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997058
+    m_Key: SETTINGS_ON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521789997059
+    m_Key: SETTINGS_NARRATION_VOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191360
+    m_Key: SETTINGS_BACKGROUND_VOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191361
+    m_Key: SETTINGS_LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191362
+    m_Key: SETTINGS_SUBTITLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191363
+    m_Key: SETTINGS_LANGUAGE_DISABLED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191364
+    m_Key: SETTINGS_LANGUAGE_ENGLISH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191365
+    m_Key: SETTINGS_LANGUAGE_SPANISH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191366
+    m_Key: SETTINGS_LIVE_CONTROLLER_DIAGRAMS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191367
+    m_Key: SETTINGS_HAPTICS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191368
+    m_Key: SETTINGS_FLOOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191369
+    m_Key: SETTINGS_FLOOR_DISCLAIMER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191370
+    m_Key: CURRENT_OBJECTIVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191371
+    m_Key: SCENES_CHAPTER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777154
+    m_Key: SCENES_SELECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1521794191372
+    m_Key: SCENES_SCENE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777155
+    m_Key: SCENES_TUTORIAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777156
+    m_Key: SCENES_INTRO_TO_SPACETIME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777157
+    m_Key: SCENES_MATTER_TELLS_SPACETIME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777158
+    m_Key: SCENES_RETURN_HOME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14146155743055872
+    m_Key: SCENES_RANKING_DIFFERENT_MASSES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777159
+    m_Key: OBJECTIVE_EXPLORE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13434977798623232
+    m_Key: INSTRUCTIONS_PRESS_FOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271424
+    m_Key: TUTORIAL_TELEPORT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271425
+    m_Key: TUTORIAL_TURN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271426
+    m_Key: TUTORIAL_GRAB
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271427
+    m_Key: TUTORIAL_PUSH_PULL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271428
+    m_Key: TUTORIAL_OVER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271429
+    m_Key: TUTORIAL_MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13443997431271430
+    m_Key: TUTORIAL_OPEN_MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777161
+    m_Key: UI_TIME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777162
+    m_Key: UI_PRESS_TO_CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13448451257831424
+    m_Key: UI_CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752678322176
+    m_Key: SCENE1_OBJECTIVE1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099392
+    m_Key: SCENE1_OBJECTIVE2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099393
+    m_Key: SCENE1_OBJECTIVE3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13565752695099394
+    m_Key: SCENE1_OBJECTIVE4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122360958976
+    m_Key: ARROWS_OBJECTIVE1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930496
+    m_Key: ARROWS_OBJECTIVE2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930497
+    m_Key: ARROWS_OBJECTIVE3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13576122381930498
+    m_Key: ARROWS_OBJECTIVE4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785858203648
+    m_Key: TWOMASSES_OBJECTIVE1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785874980864
+    m_Key: TWOMASSES_OBJECTIVE2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14144785874980865
+    m_Key: TWOMASSES_OBJECTIVE3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650880
+    m_Key: RANKING_OBJECTIVE1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650881
+    m_Key: RANKING_OBJECTIVE2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14157442518650882
+    m_Key: RANKING_OBJECTIVE3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777163
+    m_Key: RANKING_LIGHTEST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13430563209777164
+    m_Key: RANKING_HEAVIEST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120768
+    m_Key: RANKING_TASK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120769
+    m_Key: RANKING_INSTRUCTIONS1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120770
+    m_Key: RANKING_INSTRUCTIONS2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120771
+    m_Key: RANKING_CHECK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120772
+    m_Key: RANKING_NEXTTASK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120773
+    m_Key: RANKING_BIG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120774
+    m_Key: RANKING_SMALL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120775
+    m_Key: RANKING_CORRECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14152113433120776
+    m_Key: RANKING_INCORRECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494816120832
+    m_Key: CREDITS_FUNDING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675264
+    m_Key: CREDITS_CHECK_OUT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675265
+    m_Key: CREDITS_WEBSITE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13788494849675266
+    m_Key: CREDITS_GITHUB
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1724985592389

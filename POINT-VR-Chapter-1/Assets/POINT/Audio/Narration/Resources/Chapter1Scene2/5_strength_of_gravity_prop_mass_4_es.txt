@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:04,560
+Si las dos esferas tienen el mismo tamaño, la que tiene mayor masa causa una mayor ralentización al reloj cercano
+
+2
+00:00:04,560 --> 00:00:08,640
+(en comparación al reloj lejano) al compararlo con el mismo efecto que causa la esfera de menor masa.
+
+3
+00:00:08,640 --> 00:00:12,400
+Esto nos dice que una magnitud de la fuerza de gravedad más grande hace que el tiempo se ralentice más.

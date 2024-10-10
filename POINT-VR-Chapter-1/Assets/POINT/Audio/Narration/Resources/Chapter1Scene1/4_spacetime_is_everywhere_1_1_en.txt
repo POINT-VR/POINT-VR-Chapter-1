@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:05,600
+Together, the information of the 1D time and the 3D location of an event is what we call
+
+2
+00:00:05,600 --> 00:00:08,200
+4D spacetime.
+
+3
+00:00:08,200 --> 00:00:10,970
+Spacetime is what makes up the very fabric of our universe.

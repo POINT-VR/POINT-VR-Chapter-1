@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:01,284
+Para completar esta actividad, 
+
+2
+00:00:01,284 --> 00:00:03,626
+toque cada flecha para rotarlas 
+
+3
+00:00:03,626 --> 00:00:06,083
+hasta que todas apunten en la dirección de la gravedad.

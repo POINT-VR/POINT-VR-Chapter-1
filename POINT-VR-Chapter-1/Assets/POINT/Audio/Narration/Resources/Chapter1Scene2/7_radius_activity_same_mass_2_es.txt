@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:03,860
+Las esferas frente a usted tienen la misma masa pero distintos tamaños.
+
+2
+00:00:03,860 --> 00:00:06,700
+Esto quiere decir que tienen distintos volúmenes y ocupan distintas cantidades de espacio.
+
+3
+00:00:06,700 --> 00:00:11,300
+¿Cuál de las dos esferas cree usted que causará una mayor curvatura en la cuadrícula?
+
+4
+00:00:11,300 --> 00:00:15,060
+Para responder a esta pregunta, coloque a las esferas una por una dentro de la cuadrícula.

@@ -10,7 +10,7 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 # TextMeshPro should not update anymore
-/Assets/TextMesh Pro/
+/Assets/TextMesh\ Pro/
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
@@ -65,3 +65,19 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Single files that should not be commited
+/[Aa]ssets/[Ss]treamingAssets/SteamVR.meta
+/[Aa]ssets/[Ss]treamingAssets.meta
+/[Aa]ssets/TextMesh\ Pro/Fonts/Font_SpaceGrotesk/SPACEGROTESK-MEDIUM\ SDF.asset
+# Should not be commited, unless intentionally want to update
+/[Pp]rojectSettings/ProjectSettings.asset
+/[Pp]rojectSettings/EditorBuildSettings.asset
+/[Pp]ackages/packages-lock.json
+
+
+# The Emulator items should not be commited to the main project
+/Assets/POINT/InputAssets/EditorTesting/
+/Assets/POINT/InputAssets/EditorTesting.meta
+**/EmulatorComponents/*
+EmulatorComponents.meta

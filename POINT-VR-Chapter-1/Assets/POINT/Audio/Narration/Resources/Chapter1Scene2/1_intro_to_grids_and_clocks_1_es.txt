@@ -1,0 +1,16 @@
+1
+00:00:00,000 --> 00:00:04,000
+Usted debe poder ver una cuadrícula tri-dimensional que representa nuestro espacio.
+
+2
+00:00:04,000 --> 00:00:07,000
+Ahora mire a su alrededor hasta encontrar un reloj.
+
+3
+00:00:07,000 --> 00:00:11,000
+Este reloj nos permite visualizar la cuarta dimensión, el tiempo.
+
+4
+00:00:11,000 --> 00:00:16,000
+Juntos, la cuadrícula y el movimiento del reloj representan el espacio-tiempo.
+

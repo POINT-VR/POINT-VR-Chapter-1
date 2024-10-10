@@ -1,0 +1,5 @@
+1
+00:00:00,000 --> 00:00:01,830
+Press the continue button when you are ready.
+
+

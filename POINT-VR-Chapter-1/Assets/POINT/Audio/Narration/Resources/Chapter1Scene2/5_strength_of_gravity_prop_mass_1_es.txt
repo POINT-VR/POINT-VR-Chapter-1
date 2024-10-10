@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:03,840
+Ya que ya hemos podido explorar un poco, hagamos una predicción.
+
+2
+00:00:03,840 --> 00:00:07,440
+Usted debe ver dos esferas cada una etiquetada con el valor de su masa.
+
+3
+00:00:07,440 --> 00:00:10,120
+¿Cuál de las dos esferas usted cree que causará una mayor curvatura de la cuadrícula?
+
+4
+00:00:10,120 --> 00:00:13,760
+Pruebe su predicción colocando cada esfera por sí sola dentro de la cuadrícula.

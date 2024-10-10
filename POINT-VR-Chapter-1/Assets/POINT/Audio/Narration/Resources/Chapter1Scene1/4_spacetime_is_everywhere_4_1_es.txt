@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:03,480
+Ahora miraremos cómo el espacio-tiempo se curva.
+
+2
+00:00:03,480 --> 00:00:06,460
+Mirar una cuadrícula tan grande es mucha información a la vez, 

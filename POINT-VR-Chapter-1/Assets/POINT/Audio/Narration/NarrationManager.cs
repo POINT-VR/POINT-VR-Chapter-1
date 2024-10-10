@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class NarrationManager : MonoBehaviour
 {
     // Constants
-    private const string DEFAULT_SUBTITLE_LANGUAGE = "English";
     private static readonly string[] ACCEPTED_COLORS = { "black", "blue", "green", "orange", "purple", "red", "white", "yellow" };
 
     /// <summary>
@@ -31,8 +30,8 @@ public class NarrationManager : MonoBehaviour
     [SerializeField] private TMP_FontAsset russianFont;
     [SerializeField] private TMP_FontAsset teluguFont;
 
-    private string subtitlesLanguage;
-    public string SubtitlesLanguage
+    private GameManager.Language subtitlesLanguage;
+    public GameManager.Language SubtitlesLanguage
     {
         set
         {
@@ -50,12 +49,6 @@ public class NarrationManager : MonoBehaviour
     private int currentLine = 0;
     private TMP_FontAsset currentFont = null;
     private Coroutine coroutine = null;
-
-    private void OnEnable()
-    {
-        subtitlesLanguage = DEFAULT_SUBTITLE_LANGUAGE;
-        currentFont = latinFont;
-    }
 
     /// <summary>
     /// This function plays an audio clip (whose name WITHOUT the file type is the parameter) and activates
@@ -113,7 +106,7 @@ public class NarrationManager : MonoBehaviour
 
     private void UpdateSubtitleUI()
     {
-        if (!subtitlesLanguage.Equals("Disabled"))
+        if (subtitlesLanguage != GameManager.Language.Disabled)
         {
             string output = ParseStyleTags(subtitleLines[currentLine + 1]);
             // Update UI
@@ -181,46 +174,46 @@ public class NarrationManager : MonoBehaviour
     {
         switch (subtitlesLanguage) // more languages to be added here as required
         {
-            case "English":
+            case GameManager.Language.English:
                 currentFont = latinFont;
                 return "en";
-            case "Español":
+            case GameManager.Language.Spanish:
                 currentFont = latinFont;
                 return "es";
-            case "Français":
+            case GameManager.Language.French:
                 currentFont = latinFont;
                 return "fr";
-            case "中文":
+            case GameManager.Language.Mandarin:
                 currentFont = chineseFont;
                 return "zh";
-            case "日本語":
+            case GameManager.Language.Japanese:
                 currentFont = japaneseFont;
                 return "ja";
-            case "हिन्दी":
+            case GameManager.Language.Hindi:
                 currentFont = hindiFont;
                 return "hi";
-            case "العربية":
+            case GameManager.Language.Arabic:
                 currentFont = arabicFont;
                 return "ar";
-            case "বাংলা":
+            case GameManager.Language.Bengali:
                 currentFont = bengaliFont;
                 return "bn";
-            case "русский язык":
+            case GameManager.Language.Russian:
                 currentFont = russianFont;
                 return "ru";
-            case "Português":
+            case GameManager.Language.Portuguese:
                 currentFont = latinFont;
                 return "pt";
-            case "Bahasa Melayu":
+            case GameManager.Language.Malay:
                 currentFont = latinFont;
                 return "ms";
-            case "اردو":
+            case GameManager.Language.Urdu:
                 currentFont = arabicFont;
                 return "ur";
-            case "తెలుగు":
+            case GameManager.Language.Telugu:
                 currentFont = teluguFont;
                 return "te";
-            case "한국어":
+            case GameManager.Language.Korean:
                 currentFont = koreanFont;
                 return "ko";
             default:

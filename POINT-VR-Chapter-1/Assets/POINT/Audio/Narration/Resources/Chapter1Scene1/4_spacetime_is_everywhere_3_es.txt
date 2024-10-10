@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:04,560
+De hecho, Einstein describe la gravedad como la curvatura del espacio-tiempo.
+
+2
+00:00:04,560 --> 00:00:08,680
+Cerca de un objeto macizo, la gravedad es fuerte y ocasiona que la duración de un evento
+
+3
+00:00:08,680 --> 00:00:11,560
+y la distancia entre dos eventos se alarguen.
+
+4
+00:00:11,560 --> 00:00:14,160
+El físico John Wheeler describió este efecto en una sola oración:
+
+5
+00:00:14,160 --> 00:00:17,060
+'El espacio-tiempo le dice a la materia cómo moverse;
+
+6
+00:00:17,060 --> 00:00:18,880
+la materia le indica al espacio-tiempo cómo curvarse.'

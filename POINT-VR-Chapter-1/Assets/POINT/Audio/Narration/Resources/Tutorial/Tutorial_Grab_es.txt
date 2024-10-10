@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:02,400
+Mira a su alrededor hasta que ves una pelota amarilla.
+
+2
+00:00:02,960 --> 00:00:06,120
+Intentas mantener apretado el botón en el lado de cualquier controlador para recogerla.
