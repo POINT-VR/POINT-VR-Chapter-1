@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:03,766
+As we heard earlier, 'Spacetime tells matter how to move;
+
+2
+00:00:03,766 --> 00:00:06,650
+matter tells spacetime how to curve.'
+
+3
+00:00:06,650 --> 00:00:10,783
+In this experience, we investigated how matter tells spacetime to curve 
+
+4
+00:00:10,783 --> 00:00:15,136
+and saw how an object's mass and radius influence the curvature of spacetime.

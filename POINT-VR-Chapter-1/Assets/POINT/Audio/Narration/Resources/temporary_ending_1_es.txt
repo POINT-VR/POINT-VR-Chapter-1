@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:03,766
+Cómo hemos oído antes, 'El espacio-tiempo le dice a la materia cómo moverse;
+
+2
+00:00:03,766 --> 00:00:06,650
+la materia le indica al espacio-tiempo cómo curvarse.'
+
+3
+00:00:06,650 --> 00:00:10,783
+En esta experiencia, investigamos cómo le dice al espacio-tiempo a curvarse
+
+4
+00:00:10,783 --> 00:00:15,136
+la materia y vimos cómo influyen la curvatura del espacio-tiempo la masa y el radio de un objeto.
