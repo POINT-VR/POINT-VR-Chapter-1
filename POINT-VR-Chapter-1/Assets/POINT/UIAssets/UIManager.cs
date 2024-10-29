@@ -23,6 +23,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] Transform languageParent = null;
     [Header("Subtitles")]
     [SerializeField] NarrationManager narrationManager = null;
+    [SerializeField] private RectTransform subtitlesContainer = null;
+    [Tooltip("The range of y-positions for the subtitles; centered at value in Prefab")]
+    [SerializeField] private float subtitlesHeightRange = 10.0f;
+    [Tooltip("The range of font sizes for the subtitles; centered at value in Prefab")]
+    [SerializeField] private float subtitlesSizeRange = 5.0f;
+    [Tooltip("The range of widths for the subtitles container; centered at value in Prefab")]
+    [SerializeField] private float subtitlesWidthRange = 10.0f;
     [Header("Subtitles Toggle Parent")]
     [SerializeField] Transform subtitleParent = null;
     [Header("Floor Toggle Parent")]
@@ -32,6 +39,24 @@ public class UIManager : MonoBehaviour
 
     private LocalizedString currentObjective = null;
     private string objectiveText;
+    private float defaultSubtitlesHeight = float.NegativeInfinity;
+    private float defaultSubtitlesSize = float.NegativeInfinity;
+    private float defaultSubtitlesWidth = float.NegativeInfinity;
+
+    private void Awake()
+    {
+        if (subtitlesContainer != null)
+        {
+            defaultSubtitlesHeight = subtitlesContainer.anchoredPosition.y;
+            defaultSubtitlesSize = subtitlesContainer.GetComponentInChildren<TMP_Text>(true).fontSize;
+            defaultSubtitlesWidth = subtitlesContainer.sizeDelta.x;
+
+            if (narrationManager != null)
+            {
+                narrationManager.MaxSubtitleWidth = defaultSubtitlesWidth;
+            }
+        }
+    }
 
     public void UpdateCurrentObjective(string newObjective)
     {
@@ -222,6 +247,84 @@ public class UIManager : MonoBehaviour
         get
         {
             return (int)subtitleLanguage;
+        }
+    }
+
+    /// <summary>
+    /// The value of the slider controlling the subtitle height; between 0 and 1 (inclusive)
+    /// </summary>
+    private float subtitleHeightValue = 0.5f;
+    public float SubtitleHeightValue
+    {
+        get
+        {
+            return subtitleHeightValue;
+        }
+
+        set
+        {
+            if (float.IsNegativeInfinity(defaultSubtitlesHeight))
+            {
+                defaultSubtitlesHeight = subtitlesContainer.anchoredPosition.y;
+            }
+            subtitleHeightValue = value;
+            subtitlesContainer.anchoredPosition = new Vector2(subtitlesContainer.anchoredPosition.x,
+                            defaultSubtitlesHeight + ((value - 0.5f) * subtitlesHeightRange));
+        }
+    }
+
+    /// <summary>
+    /// The value of the slider controlling the subtitle font size; between 0 and 1 (inclusive)
+    /// </summary>
+    private float subtitleSizeValue = 0.5f;
+    public float SubtitleSizeValue
+    {
+        get
+        {
+            return subtitleSizeValue;
+        }
+
+        set
+        {
+            if (float.IsNegativeInfinity(defaultSubtitlesSize))
+            {
+                defaultSubtitlesSize = subtitlesContainer.GetComponentInChildren<TMP_Text>(true).fontSize;
+            }
+            subtitleSizeValue = value;
+            if (subtitlesContainer.GetComponentInChildren<TMP_Text>(true) != null)
+            {
+                subtitlesContainer.GetComponentInChildren<TMP_Text>(true).fontSize =
+                    defaultSubtitlesSize + ((value - 0.5f) * subtitlesSizeRange);
+            }
+        }
+    }
+
+    /// <summary>
+    /// The value of the slider controlling the subtitle width; between 0 and 1 (inclusive)
+    /// </summary>
+    private float subtitleWidthValue = 0.5f;
+    public float SubtitleWidthValue
+    {
+        get
+        {
+            return subtitleWidthValue;
+        }
+
+        set
+        {
+            if (float.IsNegativeInfinity(defaultSubtitlesWidth))
+            {
+                defaultSubtitlesWidth = subtitlesContainer.sizeDelta.x;
+            }
+            subtitleWidthValue = value;
+
+            if (narrationManager != null)
+            {
+                narrationManager.MaxSubtitleWidth = defaultSubtitlesWidth + ((value - 0.5f) * subtitlesWidthRange);
+                subtitlesContainer.sizeDelta = new Vector2(
+                    defaultSubtitlesWidth + ((value - 0.5f) * subtitlesWidthRange),
+                    subtitlesContainer.sizeDelta.y);
+            }
         }
     }
 

@@ -335,6 +335,18 @@ MonoBehaviour:
     m_Localized: Congratulations! The simulation is over.
     m_Metadata:
       m_Items: []
+  - m_Id: 21243244859920384
+    m_Localized: Subtitles Height
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21243244876697600
+    m_Localized: Subtitles Font Size
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21243244876697601
+    m_Localized: Subtitles Width
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

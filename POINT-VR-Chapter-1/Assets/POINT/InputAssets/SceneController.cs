@@ -19,6 +19,18 @@ public class SceneController : MonoBehaviour
     /// </summary>
     [SerializeField] Slider aesthetic;
     /// <summary>
+    /// The UI slider for subtitle height
+    /// </summary>
+    [SerializeField] Slider subtitleHeight;
+    /// <summary>
+    /// The UI slider for subtitle height
+    /// </summary>
+    [SerializeField] Slider subtitleSize;
+    /// <summary>
+    /// The UI slider for subtitle height
+    /// </summary>
+    [SerializeField] Slider subtitleWidth;
+    /// <summary>
     /// The class responsible for the player prefab's UI controls
     /// </summary>
     [SerializeField] UIManager uiManager;
@@ -57,6 +69,9 @@ public class SceneController : MonoBehaviour
         gripNotice.IsOn = data.gripNoticeEnabled;
         functional.value = data.functionalVolume;
         aesthetic.value = data.aestheticVolume;
+        subtitleHeight.value = uiManager.SubtitleHeightValue = data.subtitleHeightValue;
+        subtitleSize.value = uiManager.SubtitleSizeValue = data.subtitleSizeValue;
+        subtitleWidth.value = uiManager.SubtitleWidthValue = data.subtitleWidthValue;
         uiManager.Language = (int)data.language;
         uiManager.SubtitleLanguage = (int) data.subtitleLanguage;
         music.mute = false;
@@ -81,7 +96,10 @@ public class SceneController : MonoBehaviour
             isHapticsEnabled = hapticToggle.IsOn,
             isControllerHighlighted = highlightsToggle.IsOn,
             language = (GameManager.Language)uiManager.Language,
-            subtitleLanguage = (GameManager.Language) uiManager.SubtitleLanguage
+            subtitleLanguage = (GameManager.Language) uiManager.SubtitleLanguage,
+            subtitleHeightValue = uiManager.SubtitleHeightValue,
+            subtitleSizeValue = uiManager.SubtitleSizeValue,
+            subtitleWidthValue = uiManager.SubtitleWidthValue
         };
         GameManager.Instance.SetData(data);
         pause.Unpause();
