@@ -365,7 +365,9 @@ GameObject:
   - component: {fileID: 1147556415}
   - component: {fileID: 1147556414}
   - component: {fileID: 1147556418}
-  m_Layer: 0
+  - component: {fileID: 1147556419}
+  - component: {fileID: 1147556420}
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,6 +464,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1147556419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147556413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 118547b5f7c6b384da806c35f395b26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Selected: 0
+--- !u!114 &1147556420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147556413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5bc56c16cfc2c42a3edf968d96aa32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material_unselected: {fileID: 2100000, guid: ac41a258404fcf245b6f7f0ba2d7e93f, type: 2}
+  material_selected: {fileID: 2100000, guid: 2d25be878c540cc439cbecbdc6ef9167, type: 2}
 --- !u!1 &1226068541
 GameObject:
   m_ObjectHideFlags: 0
