@@ -3529,7 +3529,7 @@ MonoBehaviour:
   subtitlesContainer: {fileID: 685732247222427487}
   subtitlesHeightRange: 200
   subtitlesSizeRange: 40
-  subtitlesWidthRange: 200
+  subtitlesWidthRange: 250
   subtitleParent: {fileID: 685732245593169504}
   floorToggles: {fileID: 7993946801353570303}
   currentObjectiveTMP: {fileID: 685732246870028102}
@@ -8975,7 +8975,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -175}
-  m_SizeDelta: {x: 700, y: 75}
+  m_SizeDelta: {x: 640, y: 75}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &685732247222427484
 CanvasRenderer:
