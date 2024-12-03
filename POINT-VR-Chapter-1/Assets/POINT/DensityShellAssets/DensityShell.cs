@@ -8,6 +8,8 @@ public class DensityShell : MonoBehaviour
     SelectObject selected;
     // Reference to the Renderer component of the gameObject
     private Renderer objectRenderer;
+    // Reference to the Collider component of the gameObject
+    private Collider objectCollider;
     // Rigid body of the gameObject
      private Rigidbody rb;
     // The materials to switch between
@@ -20,6 +22,7 @@ public class DensityShell : MonoBehaviour
     {
         selected = GetComponent<SelectObject>();
         objectRenderer = GetComponent<Renderer>();
+        objectCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         UpdateMaterial();
     }
@@ -28,6 +31,7 @@ public class DensityShell : MonoBehaviour
     void Update()
     {
         UpdateMaterial();
+        UpdateCollider();
     }
     private void UpdateMaterial()
     {
@@ -36,6 +40,24 @@ public class DensityShell : MonoBehaviour
         {
             // Change the material based on the Selected state
             objectRenderer.material = selectval ? material_selected : material_unselected;
+        }
+    }
+    private void UpdateCollider()
+    {
+        bool selectval = selected.GetSelected();
+        if (selectval)
+        {
+            if (!objectCollider.isTrigger)
+            {
+                objectCollider.isTrigger = true;
+            }
+        }
+        else
+        {
+            if (objectCollider.isTrigger)
+            {
+                objectCollider.isTrigger = false;
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
