@@ -169,6 +169,8 @@ public class TutorialManager : MonoBehaviour
         instructions.text = turnString;
         
         player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+
+        player.GetComponent<NarrationManager>().SkipNarration(leftPushingReference, rightPushingReference);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
 
         StartCoroutine(WaitForTurn());

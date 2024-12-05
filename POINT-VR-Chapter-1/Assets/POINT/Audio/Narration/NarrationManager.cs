@@ -3,6 +3,8 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.Localization;
 
 public class NarrationManager : MonoBehaviour
 {
@@ -49,6 +51,7 @@ public class NarrationManager : MonoBehaviour
     private int currentLine = 0;
     private TMP_FontAsset currentFont = null;
     private Coroutine coroutine = null;
+    private bool developerOptions = true;
 
     /// <summary>
     /// This function plays an audio clip (whose name WITHOUT the file type is the parameter) and activates
@@ -308,5 +311,35 @@ public class NarrationManager : MonoBehaviour
 
         output += input.Substring(substrStart, input.Length - substrStart);
         return output;
+    }
+
+    public void SkipNarration(InputActionReference input1, InputActionReference input2) 
+    {
+        StartCoroutine(CheckForSkipButtons(input1, input2));
+    }
+
+    IEnumerator CheckForSkipButtons(InputActionReference input1, InputActionReference input2) 
+    {
+        AudioSource audioSource = this.GetComponent<AudioSource>(); 
+        yield return new WaitUntil(() => audioSource.isPlaying);
+
+        // yield return new WaitUntil(() => input1 && menus.activeInHierarchy == true);
+        while(audioSource.isPlaying) //If skip buttons are pressed, skip
+        {
+            if(developerOptions && (input1.action.ReadValue<float>() > 0.5f && input2.action.ReadValue<float>() > 0.5f)) { //Stops audio clip/subtitles
+                audioSource.Stop();
+                yield return new WaitUntil(() => isSubtitlePlaying == true);
+
+                subtitleObject.SetActive(false);
+                PlayClipWithSubtitles(null); //prevents future subtitles that are associated with the same audio clip from appearing
+                // Debug.Log("skipped");
+                break;
+            }
+
+            yield return null;
+        }
+
+        // Debug.Log("Done");
+        yield break;
     }
 }
