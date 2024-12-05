@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
+using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 
 public class StartMenuManager : MonoBehaviour
 {
@@ -20,6 +22,21 @@ public class StartMenuManager : MonoBehaviour
 
     [Tooltip("Transform containing the subtitles toggles")]
     [SerializeField] private Transform subtitlesParent = null;
+
+    [Tooltip("Tutorial Scene Name")]
+    [SerializeField] private string tutorialSceneName = null;
+    
+    [Tooltip("Credits Scene Name")]
+    [SerializeField] private string creditsSceneName = null;
+
+    // [Tooltip("Dummy scene")]
+    // [SerializeField] private Scene tutorialScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single); // cannot do = null because Scene objects cannot be null
+
+    // [Tooltip("Credits scene")]
+    // [SerializeField] private Scene creditsScene = SceneManager.CreateScene("dummy_scene");
+
+    // [Tooltip("Test Scene")]
+    // [SerializeField] private Scene testScene;
 
     [Tooltip("Default localized string that appears under current objective in the UI menu")]
     [SerializeField] private LocalizedString defaultObjective;
@@ -240,9 +257,12 @@ public class StartMenuManager : MonoBehaviour
         if (player != null)
         {
             SceneController sceneController = player.GetComponentInChildren<SceneController>();
-            if (sceneController != null)
+            if (sceneController != null && tutorialSceneName != null) 
             {
-                sceneController.ChangeScene(1);
+                Scene tutorial_scene = SceneManager.GetSceneByName(tutorialSceneName);
+                if (tutorial_scene.IsValid()) {
+                    sceneController.ChangeScene(tutorial_scene.buildIndex);
+                }
             }
         }
     }
@@ -269,9 +289,12 @@ public class StartMenuManager : MonoBehaviour
         if (player != null)
         {
             SceneController sceneController = player.GetComponentInChildren<SceneController>();
-            if (sceneController != null)
+            if (sceneController != null && tutorialSceneName != null) 
             {
-                sceneController.ChangeScene(6);
+                Scene credits_scene = SceneManager.GetSceneByName(creditsSceneName);
+                if (credits_scene.IsValid()) {
+                    sceneController.ChangeScene(credits_scene.buildIndex);
+                }
             }
         }
     }

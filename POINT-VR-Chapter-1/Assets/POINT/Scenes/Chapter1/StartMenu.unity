@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.0068988674, g: 0.006751718, b: 0.0071911463, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1350,9 +1350,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointLogo: {fileID: 1827066475}
   fullMenu: {fileID: 264075179}
-  versionText: {fileID: 1224902910}
+  versionText: {fileID: 0}
   languageParent: {fileID: 712371807}
   subtitlesParent: {fileID: 1697544913}
+  tutorialSceneName: Tutorial
+  creditsSceneName: EndCredits
   defaultObjective:
     m_TableReference:
       m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
