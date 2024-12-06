@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
 
 public class StartMenuManager : MonoBehaviour
 {
@@ -30,10 +29,11 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField] private string creditsSceneName = null;
 
     // [Tooltip("Dummy scene")]
-    // [SerializeField] private Scene tutorialScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single); // cannot do = null because Scene objects cannot be null
+    // [SerializeField] private Scene tutorialScene = EditorSceneManagement.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single); // cannot do = null because Scene objects cannot be null
+    // editor's scene management (not the engine's)
 
     // [Tooltip("Credits scene")]
-    // [SerializeField] private Scene creditsScene = SceneManager.CreateScene("dummy_scene");
+    // [SerializeField] private Scene creditsScene = SceneManagement.CreateScene("dummy_scene");
 
     // [Tooltip("Test Scene")]
     // [SerializeField] private Scene testScene;
