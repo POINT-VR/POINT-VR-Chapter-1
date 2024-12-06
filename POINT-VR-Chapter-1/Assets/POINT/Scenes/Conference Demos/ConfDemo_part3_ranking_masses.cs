@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Localization;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class ConfDemo_part3_ranking_masses : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     [SerializeField] private LocalizedString objective2;
     [SerializeField] private LocalizedString objective3;
 
+    [Tooltip("Credits Scene Name")]
+    [SerializeField] private string creditsSceneName = null;
     // Cache
     private TMP_Text instructions = null;
     private Camera currentCamera = null;
@@ -110,9 +113,12 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
         yield return new WaitForSeconds(15.2f);
 
         SceneController sceneController = player.GetComponentInChildren<SceneController>(); // Automatically go to Credits
-        if (sceneController != null)
+        if (sceneController != null && creditsSceneName != null) 
             {
-                sceneController.ChangeScene(6);
+                Scene credits_scene = SceneManager.GetSceneByName(creditsSceneName);
+                if (credits_scene.IsValid()) {
+                    sceneController.ChangeScene(credits_scene.buildIndex);
+                }
             }
         yield break;
     }

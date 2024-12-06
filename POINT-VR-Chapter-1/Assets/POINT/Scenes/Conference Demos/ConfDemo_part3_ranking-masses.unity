@@ -4539,6 +4539,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  creditsSceneName: EndCredits
   references:
     version: 1
 --- !u!1 &2118528859

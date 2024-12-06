@@ -289,7 +289,7 @@ public class StartMenuManager : MonoBehaviour
         if (player != null)
         {
             SceneController sceneController = player.GetComponentInChildren<SceneController>();
-            if (sceneController != null && tutorialSceneName != null) 
+            if (sceneController != null && creditsSceneName != null) 
             {
                 Scene credits_scene = SceneManager.GetSceneByName(creditsSceneName);
                 if (credits_scene.IsValid()) {
