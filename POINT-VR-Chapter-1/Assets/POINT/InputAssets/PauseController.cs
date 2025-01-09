@@ -50,15 +50,28 @@ public class PauseController : MonoBehaviour
     /// Set to reduce the visibility of the laser clipping through the menu
     /// </summary>
     [SerializeField] float reducedLaserSize;
+
     private bool gamePaused;
+    public bool GamePaused
+    {
+        get
+        {
+            return gamePaused;
+        }
+    }
+
     private float laserSize;
     private GameObject[] disabledObjects;
+
     private void OnEnable()
     {
         toggleReference.action.Enable();
         toggleReference.action.started += Toggle;
         laserSize = laserLeft.localScale.y;
         gamePaused = false;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        Cursor.lockState = CursorLockMode.Locked;
+#endif
     }
 
     private void Toggle(InputAction.CallbackContext ctx)
@@ -93,11 +106,17 @@ public class PauseController : MonoBehaviour
         if (gamePaused)
         {
             uiContainer.transform.SetParent(transform.parent);
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+            Cursor.lockState = CursorLockMode.None;
+#endif
         }
         else
         {
             uiContainer.transform.SetParent(mainCamera);
             uiContainer.transform.SetPositionAndRotation(mainCamera.position + mainCamera.forward * distanceFromCamera, mainCamera.rotation);
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+            Cursor.lockState = CursorLockMode.Locked;
+#endif
         }
     }
     private void OnDisable()

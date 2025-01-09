@@ -166,8 +166,15 @@ public class HandController : MonoBehaviour
             transform.GetComponent<Animator>().SetBool("isPointing", false);
         }
         //Searches for UI or grabbable
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        Camera camera = this.transform.parent.parent.GetComponentInChildren<Camera>();
+        Ray uiRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(uiRay, out hit, 10f, UIMask)) // UI was detected: interact with it
+        {
+#else
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI found: turn this green
         {
+#endif
             if (hit.collider != lastColliderHit) //did not hit the same collider as in the previous frame: haptic feedback
             {
                 hardwareController.VibrateHand();
@@ -323,15 +330,26 @@ public class HandController : MonoBehaviour
     /// </summary>
     /// <param name="ctx"></param>
     private void Select(InputAction.CallbackContext ctx)
-    { 
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) //UI was detected: interact with it
+    {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        Camera camera = this.transform.parent.parent.GetComponentInChildren<Camera>();
+        Ray uiRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(uiRay, out RaycastHit hit, 10f, UIMask)) // UI was detected: interact with it
         {
+#else
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f, UIMask)) // UI was detected: interact with it
+        {
+#endif
             // Check if detected item is within a ScrollRect; if so, make sure ScrollRect is also hit
             // This is a workaround for colliders not disappearing even when a UI element is hidden by a mask, as in a ScrollRect
             ScrollRect scrollRect = hit.collider.GetComponentInParent<ScrollRect>();
             if (scrollRect != null)
             {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+                RaycastHit[] raycastHits = Physics.RaycastAll(uiRay, 10f, UIMask);
+#else
                 RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, transform.forward, 10f, UIMask);
+#endif
                 bool containsScrollRect = false;
                 foreach (RaycastHit raycastHit in raycastHits)
                 {

@@ -241,11 +241,33 @@
                 },
                 {
                     "name": "",
+                    "id": "b1dc89c6-ab0b-4e76-8ce2-a9687b557471",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "93ace763-3501-4c25-be7f-5ee6748c5225",
                     "path": "<OculusTouchController>{LeftHand}/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
+                    "action": "Toggle Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "651812e0-84ce-4005-9225-9c66d5751607",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "Toggle Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -279,6 +301,17 @@
                     "interactions": "",
                     "processors": "ScaleVector2(x=0)",
                     "groups": "Generic XR Controller",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e484b2c-86db-4d8f-891f-2d408b080f27",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -507,6 +540,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e8ac95f4-9aa2-4fba-98fc-3b42c333050e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "62fb875a-f0c8-4e3c-a815-c48a56f7a46d",
                     "path": "<XRController>{RightHand}/primaryButton",
                     "interactions": "",
@@ -534,6 +578,17 @@
                     "interactions": "",
                     "processors": "ScaleVector2(x=0)",
                     "groups": "Generic XR Controller",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3c167d0-4b2b-4429-82b7-e4d5b5b4e4b1",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -661,6 +716,22 @@
                 },
                 {
                     "devicePath": "<XRController>{RightHand}",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
