@@ -60,6 +60,7 @@ public class PauseController : MonoBehaviour
         }
     }
 
+    private PCPortManager pcPortManager = null;
     private float laserSize;
     private GameObject[] disabledObjects;
 
@@ -71,6 +72,7 @@ public class PauseController : MonoBehaviour
         gamePaused = false;
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
         Cursor.lockState = CursorLockMode.Locked;
+        pcPortManager = this.GetComponent<PCPortManager>();
 #endif
     }
 
@@ -108,6 +110,10 @@ public class PauseController : MonoBehaviour
             uiContainer.transform.SetParent(transform.parent);
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
             Cursor.lockState = CursorLockMode.None;
+            if (pcPortManager != null)
+            {
+                pcPortManager.SetCrossHairVisible(false);
+            }
 #endif
         }
         else
@@ -116,6 +122,10 @@ public class PauseController : MonoBehaviour
             uiContainer.transform.SetPositionAndRotation(mainCamera.position + mainCamera.forward * distanceFromCamera, mainCamera.rotation);
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
             Cursor.lockState = CursorLockMode.Locked;
+            if (pcPortManager != null)
+            {
+                pcPortManager.SetCrossHairVisible(true);
+            }
 #endif
         }
     }

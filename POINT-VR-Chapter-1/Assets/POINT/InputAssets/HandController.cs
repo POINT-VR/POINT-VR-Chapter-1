@@ -94,6 +94,9 @@ public class HandController : MonoBehaviour
     private Color laserColor;
     private Collider lastColliderHit;
     private Vector3 grabbingTransformVelocity, grabbingTransformPositionPrev, velocityPrev;
+    private Camera playerCamera = null;
+    private PCPortManager pcPortManager = null;
+
     private void OnEnable()
     {
         selectReference.action.Enable();
@@ -113,6 +116,8 @@ public class HandController : MonoBehaviour
         pushing = false;
         previousParentTransform = null;
         laserColor = laser.material.color;
+        playerCamera = this.transform.parent.parent.GetComponentInChildren<Camera>();
+        pcPortManager = this.transform.parent.parent.GetComponent<PCPortManager>();
     }
     private void OnDisable()
     {
@@ -133,13 +138,18 @@ public class HandController : MonoBehaviour
     }
     private void Update()
     {
-        if (pulling && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude > squaredMinPullDistance) // object being pulled: pull
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        Transform grabParentTransform = playerCamera.transform;
+#else
+        Transform grabParentTransform = this.transform;
+#endif
+        if (pulling && grabbingTransform != null && (grabParentTransform.position - grabbingTransform.position).sqrMagnitude > squaredMinPullDistance) // object being pulled: pull
         {
-            grabbingTransform.position -= pullSpeed * transform.forward;
+            grabbingTransform.position -= pullSpeed * grabParentTransform.forward;
         }
-        else if (pushing && grabbingTransform != null && (transform.position - grabbingTransform.position).sqrMagnitude < squaredMaxPushDistance) // object being pushed: push
+        else if (pushing && grabbingTransform != null && (grabParentTransform.position - grabbingTransform.position).sqrMagnitude < squaredMaxPushDistance) // object being pushed: push
         {
-            grabbingTransform.position += pullSpeed * transform.forward;
+            grabbingTransform.position += pullSpeed * grabParentTransform.forward;
         }
         if (grabbingTransform != null) // Holding an object
         {
@@ -152,7 +162,12 @@ public class HandController : MonoBehaviour
             grabbingTransformPositionPrev = grabbingTransform.position;
         }
         // Fires a raycast that places the reticle
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        Ray camRay = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Physics.Raycast(camRay, out RaycastHit hit, teleportationDistance, floorMask);
+#else
         Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask);
+#endif
         if (teleportMode && hit.point != Vector3.zero) //In teleport mode and raycast found the floor: place reticle
         { 
             reticle.SetActive(true);
@@ -167,9 +182,7 @@ public class HandController : MonoBehaviour
         }
         //Searches for UI or grabbable
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
-        Camera camera = this.transform.parent.parent.GetComponentInChildren<Camera>();
-        Ray uiRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(uiRay, out hit, 10f, UIMask)) // UI was detected: interact with it
+        if (Physics.Raycast(camRay, out hit, 10f, UIMask)) // UI was detected: interact with it
         {
 #else
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI found: turn this green
@@ -186,7 +199,11 @@ public class HandController : MonoBehaviour
                 ScrollRect scrollRect = hit.collider.GetComponentInParent<ScrollRect>();
                 if (scrollRect != null)
                 {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+                    RaycastHit[] raycastHits = Physics.RaycastAll(camRay, 10f, UIMask);
+#else
                     RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, transform.forward, 10f, UIMask);
+#endif
                     bool containsScrollRect = false;
                     foreach (RaycastHit raycastHit in raycastHits)
                     {
@@ -198,18 +215,33 @@ public class HandController : MonoBehaviour
                     }
                     if (containsScrollRect)
                     {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+                        pcPortManager.SetCrossHairFocused(true);
+                        pcPortManager.SetCrossHairColor(Color.green);
+#else
                         laser.material.color = Color.green;
+#endif
                         transform.GetComponent<Animator>().SetBool("isPointing", true);
                     }
                 } else
                 {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+                    pcPortManager.SetCrossHairFocused(true);
+                    pcPortManager.SetCrossHairColor(Color.green);
+#else
                     laser.material.color = Color.green;
+#endif
                     transform.GetComponent<Animator>().SetBool("isPointing", true);
                 }
             }
             else
             {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+                pcPortManager.SetCrossHairFocused(false);
+                pcPortManager.SetCrossHairColor(Color.white);
+#else
                 laser.material.color = laserColor;
+#endif
                 transform.GetComponent<Animator>().SetBool("isPointing", false);
             }
             lastColliderHit = hit.collider;
@@ -222,13 +254,23 @@ public class HandController : MonoBehaviour
                 CheckScrollbar(hit);
             }
         }
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        else if (grabbingTransform != null || Physics.Raycast(camRay, out hit, grabDistance, grabMask)) //grabbable found or is holding something: turn this cyan
+        {
+#else
         else if (grabbingTransform != null || Physics.Raycast(transform.position, transform.forward, out hit, grabDistance, grabMask)) //grabbable found or is holding something: turn this cyan
         {
+#endif
             if (hit.transform != lastGrabHit && grabbingTransform == null) //did not hit the same collider as in the previous frame: haptic feedback
             {
                 hardwareController.VibrateHand();
             }
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+            pcPortManager.SetCrossHairFocused(true);
+            pcPortManager.SetCrossHairColor(Color.magenta);
+#else
             laser.material.color = Color.magenta;
+#endif
             if (grabbingTransform != null)
             {
                 lastGrabHit = grabbingTransform;
@@ -240,7 +282,12 @@ public class HandController : MonoBehaviour
         }
         else // UI or grabbable not found: return the laser to its normal color
         {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+            pcPortManager.SetCrossHairFocused(false);
+            pcPortManager.SetCrossHairColor(Color.white);
+#else
             laser.material.color = laserColor;
+#endif
             lastColliderHit = null;
             lastGrabHit = null;
         }
@@ -286,7 +333,14 @@ public class HandController : MonoBehaviour
             grav.enabled = gravEnabled;
         }
         // Add velocity to grabbed object.
-        if (!snapped) grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f*hardwareController.Velocity; //2.5f*(grabbingTransformVelocity + velocityPrev);
+        if (!snapped)
+        {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+            grabbingTransform.GetComponent<Rigidbody>().velocity = 30.0f * (grabbingTransformVelocity + velocityPrev);
+#else
+            grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f * hardwareController.Velocity;
+#endif
+        }
         grabbingTransform = null;
         transform.GetComponent<Animator>().SetBool("isGrabbing", false);
     }
@@ -296,7 +350,12 @@ public class HandController : MonoBehaviour
     }
     private void Grab(InputAction.CallbackContext ctx)
     {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        Ray camRay = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Physics.Raycast(camRay, out RaycastHit hit, grabDistance, grabMask);
+#else
         Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, grabDistance, grabMask);
+#endif
         if (hit.point == Vector3.zero) //Raycast did not find something to grab: nothing happens
         {
             return;
@@ -312,7 +371,11 @@ public class HandController : MonoBehaviour
         {
             previousParentTransform.GetComponent<SnapAnchor>().heldObject = null;
         }
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        grabbingTransform.SetParent(playerCamera.transform);
+#else
         grabbingTransform.SetParent(transform);
+#endif
         grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed object's velocity to zero
         velocityPrev = Vector3.zero;
         grabbingTransformVelocity = Vector3.zero;
@@ -332,8 +395,7 @@ public class HandController : MonoBehaviour
     private void Select(InputAction.CallbackContext ctx)
     {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
-        Camera camera = this.transform.parent.parent.GetComponentInChildren<Camera>();
-        Ray uiRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray uiRay = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(uiRay, out RaycastHit hit, 10f, UIMask)) // UI was detected: interact with it
         {
 #else
@@ -382,8 +444,13 @@ public class HandController : MonoBehaviour
     private void Unselect(InputAction.CallbackContext ctx)
     {
         holdingSlider = false;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        if (teleportMode && Physics.Raycast(playerCamera.ViewportPointToRay(0.5f * Vector2.one), out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
+        {
+#else
         if (teleportMode && Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
         {
+#endif
             GetComponent<AudioSource>().PlayOneShot(teleportAudio);
             playerTransform.parent.position = hit.point;
         }

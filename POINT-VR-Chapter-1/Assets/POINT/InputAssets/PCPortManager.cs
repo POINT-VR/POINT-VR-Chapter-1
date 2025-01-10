@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PCPortManager : MonoBehaviour
 {
@@ -22,11 +24,27 @@ public class PCPortManager : MonoBehaviour
             return cameraSens;
         }
     }
+    /// <summary>
+    /// Crosshair sprite when focused
+    /// </summary>
+    [SerializeField] private Sprite crosshairFocused = null;
+    /// <summary>
+    /// Crosshair sprite when not focused (i.e. default)
+    /// </summary>
+    [SerializeField] private Sprite crosshairUnfocused = null;
     [Header("References")]
     /// <summary>
-    /// All UI Canvases to be scaled and offset
+    /// UI Container (Contains pause menu)
     /// </summary>
-    [SerializeField] private Canvas[] uiCanvas;
+    [SerializeField] private Canvas uiContainer;
+    /// <summary>
+    /// Overlay Container
+    /// </summary>
+    [SerializeField] private Canvas overlayContainer;
+    /// <summary>
+    /// Image containing crosshair; visible only in PC Port
+    /// </summary>
+    [SerializeField] private Image crosshair;
     /// <summary>
     /// Player camera
     /// </summary>
@@ -39,16 +57,19 @@ public class PCPortManager : MonoBehaviour
     /// Right hand controller
     /// </summary>
     [SerializeField] private XRHardwareController rightHandController;
+    /// <summary>
+    /// InputActionReference for player movement in PC Port
+    /// </summary>
+    [SerializeField] private InputActionReference playerMoveReference;
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
     private void Start()
     {
         // UI adjustments
-        foreach (Canvas canvas in uiCanvas)
-        {
-            canvas.transform.localScale = uiScale * Vector3.one;
-            (canvas.transform as RectTransform).position += uiOffset;
-        }
+        uiContainer.transform.localScale = uiScale * Vector3.one;
+        (uiContainer.transform as RectTransform).position += uiOffset;
+        overlayContainer.renderMode = RenderMode.ScreenSpaceOverlay;
+        SetCrossHairVisible(true);
 
         // Hand controller adjustments
         if (leftHandController)
@@ -62,4 +83,19 @@ public class PCPortManager : MonoBehaviour
         }
     }
 #endif
+
+    public void SetCrossHairColor(Color color)
+    {
+        crosshair.color = color;
+    }
+
+    public void SetCrossHairFocused(bool focused)
+    {
+        crosshair.sprite = focused ? crosshairFocused : crosshairUnfocused;
+    }
+
+    public void SetCrossHairVisible(bool visible)
+    {
+        crosshair.gameObject.SetActive(visible);
+    }
 }
