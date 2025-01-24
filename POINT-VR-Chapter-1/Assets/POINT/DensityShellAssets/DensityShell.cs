@@ -51,6 +51,8 @@ public class DensityShell : MonoBehaviour
             {
                 objectCollider.isTrigger = true;
             }
+            // change layer to make it selectable
+            gameObject.layer = 12;
         }
         else
         {
@@ -58,6 +60,8 @@ public class DensityShell : MonoBehaviour
             {
                 objectCollider.isTrigger = false;
             }
+            // change layer to make it grabbable
+            gameObject.layer = 9;
         }
     }
     private void OnTriggerEnter(Collider other)

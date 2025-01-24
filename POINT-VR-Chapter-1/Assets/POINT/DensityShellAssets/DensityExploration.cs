@@ -105,6 +105,7 @@ public class DensityExploration : MonoBehaviour
     {
         // Debug.Log(numSnapped);
         snapChecker();
+        updateMass();
     }
     IEnumerator StartScene()
     {
@@ -127,6 +128,9 @@ public class DensityExploration : MonoBehaviour
         
         yield break;
     }
+    private void updateMass() {
+        shell.GetComponent<Rigidbody>().mass = 0.2f * numSnapped;
+    }
     private void snapChecker() {
         // check the position of each mass
         int count = 0;
@@ -134,12 +138,12 @@ public class DensityExploration : MonoBehaviour
             if (massList[i] != null) {
                 // if the mass is marked as snapped, check if it has moved from its expected position
                 if (snapArray[i] == true) {
-                    if ((massList[i].transform.position != positionArray[numSnapped - 1, count]) && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
-                        if ((massList[i].transform.position.magnitude < 2)  && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
+                    if ((massList[i].transform.position - shell.transform.position - positionArray[numSnapped - 1, count]).magnitude > 0.001 && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
+                        if (((massList[i].transform.position - shell.transform.position).magnitude < 2)  && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
                            int count2 = 0;
                            for (int j = 0; j < 8; j++) {
                                 if (snapArray[j] == true) {
-                                    massList[j].transform.position = positionArray[numSnapped - 1, count2];
+                                    massList[j].transform.position = shell.transform.position + positionArray[numSnapped - 1, count2];
                                     massList[j].GetComponent<Rigidbody>().isKinematic = true;
                                     count2 = count2 + 1;
                                 }
@@ -151,24 +155,25 @@ public class DensityExploration : MonoBehaviour
                             int count2 = 0;
                             for (int j = 0; j < 8; j++) {
                                 if (snapArray[j] == true) {
-                                    massList[j].transform.position = positionArray[numSnapped -1, count2];
+                                    massList[j].transform.position = shell.transform.position + positionArray[numSnapped -1, count2];
                                     massList[j].GetComponent<Rigidbody>().isKinematic = false;
                                     count2 = count2 + 1;
                                 }
                             }
                         }
+                        Debug.Log("hi");
                     }
                     count = count + 1;
                 } else {
                     // check if mass is inside range
-                    if ((massList[i].transform.position.magnitude < 2)  && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
+                    if (((massList[i].transform.position - shell.transform.position).magnitude  < 2)  && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
                         numSnapped = numSnapped + 1;
                         snapArray[i] = true;
                         massList[i].transform.SetParent(shell.transform);
                         int count2 = 0;
                         for (int j = 0; j < 8; j++) {
                             if (snapArray[j] == true) {
-                                massList[j].transform.position = positionArray[numSnapped - 1, count2];
+                                massList[j].transform.position = shell.transform.position + positionArray[numSnapped - 1, count2];
                                 massList[j].GetComponent<Rigidbody>().isKinematic = true;
                                 count2 = count2 + 1;
                             }
@@ -178,5 +183,8 @@ public class DensityExploration : MonoBehaviour
             }
             
         }
+    }
+    int getSnapNumber() {
+        return numSnapped;
     }
 }

@@ -235,6 +235,13 @@ public class HandController : MonoBehaviour
                 hardwareController.VibrateHand();
             }
             laser.material.color = Color.magenta;
+            /////////////
+            SelectObject selectable = hit.collider.gameObject.GetComponent<SelectObject>();
+            if (selectable != null && selectable.GetSelected() == true)
+            {
+                laser.material.color = Color.green;
+            }
+            /////////////
             if (grabbingTransform != null)
             {
                 lastGrabHit = grabbingTransform;
@@ -365,12 +372,11 @@ public class HandController : MonoBehaviour
             CheckSlider(hit);
             CheckScrollbar(hit);
         }
-        else if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, LayerMask.GetMask("Select"))) // Selectable Object was detected
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, 10f)) // Checking Selectable
         {
             SelectObject selectable = hit.collider.gameObject.GetComponent<SelectObject>();
             if (selectable != null)
             {
-                // Change the selected value
                 selectable.SetSelected(!selectable.GetSelected());
             }
         }
