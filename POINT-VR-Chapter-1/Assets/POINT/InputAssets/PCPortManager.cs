@@ -32,6 +32,10 @@ public class PCPortManager : MonoBehaviour
         }
     }
     /// <summary>
+    /// Movement speed of the player (using WASD)
+    /// </summary>
+    [SerializeField] private float movementSpeed = 2.0f;
+    /// <summary>
     /// Crosshair sprite when focused
     /// </summary>
     [SerializeField] private Sprite crosshairFocused = null;
@@ -96,6 +100,22 @@ public class PCPortManager : MonoBehaviour
             rightHandController.enabled = false;
             rightHandController.GetComponent<SkinnedMeshRenderer>().enabled = false;
         }
+    }
+
+    private void OnEnable()
+    {
+        playerMoveReference.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerMoveReference.action.Disable();
+    }
+
+    private void Update()
+    {
+        Vector2 xyMovement = playerMoveReference.action.ReadValue<Vector2>();
+        this.transform.parent.position += movementSpeed * Time.deltaTime * ((xyMovement.x * this.transform.parent.right) + (xyMovement.y * this.transform.forward));
     }
 #endif
 
