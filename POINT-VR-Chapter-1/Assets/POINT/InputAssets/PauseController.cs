@@ -121,6 +121,7 @@ public class PauseController : MonoBehaviour
             uiContainer.transform.SetParent(mainCamera);
             uiContainer.transform.SetPositionAndRotation(mainCamera.position + mainCamera.forward * distanceFromCamera, mainCamera.rotation);
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
+            uiContainer.transform.SetPositionAndRotation((mainCamera.position + mainCamera.forward * distanceFromCamera) + pcPortManager.UiOffset, mainCamera.rotation);
             Cursor.lockState = CursorLockMode.Locked;
             if (pcPortManager != null)
             {

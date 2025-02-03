@@ -13,6 +13,13 @@ public class PCPortManager : MonoBehaviour
     /// Position offset of UI Canvas in the PC port
     /// </summary>
     [SerializeField] private Vector3 uiOffset = Vector3.zero;
+    public Vector3 UiOffset
+    {
+        get
+        {
+            return uiOffset;
+        }
+    }
     /// <summary>
     /// Mouse sensitivity for camera rotation
     /// </summary>
@@ -42,6 +49,10 @@ public class PCPortManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Canvas overlayContainer;
     /// <summary>
+    /// Highlighted controls (on button input); deactivated in PC Port
+    /// </summary>
+    [SerializeField] private HighlightManager highlightControls;
+    /// <summary>
     /// Image containing crosshair; visible only in PC Port
     /// </summary>
     [SerializeField] private Image crosshair;
@@ -70,6 +81,10 @@ public class PCPortManager : MonoBehaviour
         (uiContainer.transform as RectTransform).position += uiOffset;
         overlayContainer.renderMode = RenderMode.ScreenSpaceOverlay;
         SetCrossHairVisible(true);
+        if (highlightControls != null)
+        {
+            highlightControls.enabled = false;
+        }
 
         // Hand controller adjustments
         if (leftHandController)
