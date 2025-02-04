@@ -11,7 +11,8 @@
                     "id": "1a9029f8-7a46-46b9-9eff-e9ae8365f611",
                     "expectedControlType": "Vector3",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Rotation",
@@ -19,7 +20,8 @@
                     "id": "aed87fe6-2b01-4dd2-a8fa-195578fd8158",
                     "expectedControlType": "Quaternion",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Turn",
@@ -27,14 +29,15 @@
                     "id": "6185cca5-3be5-4308-8d8c-d089cd3fbede",
                     "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "cff1f981-6e1f-4e2c-a90c-715a0ea2e80e",
-                    "path": "<XRHMD>/centerEyePosition",
+                    "path": "<OpenXRHmd>/centerEyePosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -45,7 +48,7 @@
                 {
                     "name": "",
                     "id": "e2017383-a3f6-4c46-acb1-012b8eece9cc",
-                    "path": "<XRHMD>/centerEyeRotation",
+                    "path": "<OpenXRHmd>/centerEyeRotation",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -87,7 +90,8 @@
                     "id": "83a7af0b-87e3-42c3-a909-95fbf8091e4f",
                     "expectedControlType": "Vector3",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Rotation",
@@ -95,7 +99,8 @@
                     "id": "cb6b7130-2bac-4ef7-abe4-6991ae7d419d",
                     "expectedControlType": "Quaternion",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Grab",
@@ -103,7 +108,8 @@
                     "id": "bdf0f9cd-4fa2-47be-9bf6-105a8ff7c5d8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Select",
@@ -111,23 +117,26 @@
                     "id": "891c3249-e84c-4e46-aa4f-7a1ee9d52c68",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Toggle Menu",
                     "type": "Button",
                     "id": "cc0485de-11e1-4135-86cf-610e24c3413a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pull",
                     "type": "Button",
                     "id": "adb5538e-ed43-45a6-9fde-e8c65df2ce98",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Push",
@@ -135,7 +144,8 @@
                     "id": "0e511220-7865-41a2-a70c-653595094e6d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Scroll",
@@ -143,7 +153,8 @@
                     "id": "a8add19a-efff-4781-9a14-347b29624871",
                     "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "HighlightThumbstick",
@@ -151,7 +162,8 @@
                     "id": "62ee0e96-bd14-4eba-ad7e-27c491263b66",
                     "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "HighlightPrimary",
@@ -159,7 +171,8 @@
                     "id": "9106abbc-c956-4a76-a2cd-1dae09606568",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HighlightSecondary",
@@ -167,7 +180,8 @@
                     "id": "790cffa0-b727-4dc8-a761-aa602c61b4df",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HighlightStart",
@@ -175,7 +189,8 @@
                     "id": "a819a435-55b5-4753-96c3-c9467fcd5862",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HighlightTrigger",
@@ -183,7 +198,8 @@
                     "id": "5211d94a-cb85-4959-821f-e00b9f3e312e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HighlightGrip",
@@ -191,7 +207,8 @@
                     "id": "bee38beb-f348-4b47-97a0-55f7fb2b8afd",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -242,7 +259,7 @@
                 {
                     "name": "",
                     "id": "93ace763-3501-4c25-be7f-5ee6748c5225",
-                    "path": "<OculusTouchController>{LeftHand}/start",
+                    "path": "<OculusTouchController>{LeftHand}/{MenuButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -308,7 +325,7 @@
                 {
                     "name": "",
                     "id": "00d73066-49b0-4b94-9869-a6c286bd4d0c",
-                    "path": "<XRController>{LeftHand}/start",
+                    "path": "<OculusTouchController>{LeftHand}/{MenuButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -361,7 +378,8 @@
                     "id": "c4990d70-7b8a-4ce1-b03c-da86716b8352",
                     "expectedControlType": "Vector3",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Rotation",
@@ -369,7 +387,8 @@
                     "id": "ee6bf5bf-bb0a-4a50-8327-cb654b19e298",
                     "expectedControlType": "Quaternion",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Grab",
@@ -377,7 +396,8 @@
                     "id": "709d13eb-a60d-4dcd-8613-8ef1be96b610",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Select",
@@ -385,7 +405,8 @@
                     "id": "f86de189-8f75-46c5-a05e-248819f14a06",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pull",
@@ -393,7 +414,8 @@
                     "id": "b725cd7d-25cc-437f-ba23-334068454e37",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Push",
@@ -401,7 +423,8 @@
                     "id": "9d3de6d2-c573-43dd-97f0-d293eb3d3e0d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Scroll",
@@ -409,7 +432,8 @@
                     "id": "cf3af79f-47f6-4def-9d39-413134a03c0e",
                     "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "HighlightThumbstick",
@@ -417,7 +441,8 @@
                     "id": "d34029bc-7170-4550-9206-f3b9285c28aa",
                     "expectedControlType": "Vector2",
                     "processors": "StickDeadzone",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "HighlightPrimary",
@@ -425,7 +450,8 @@
                     "id": "acea5cf0-4e0e-42f4-aeec-88a823ec9b58",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HighlightSecondary",
@@ -433,7 +459,8 @@
                     "id": "2c89cd49-3e8f-44fb-8c0b-6d85cf2154e3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HighlightStart",
@@ -441,7 +468,8 @@
                     "id": "ce6ce250-e486-457a-bf5a-86a9f1447311",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HighlightTrigger",
@@ -449,7 +477,8 @@
                     "id": "957ac90b-271f-46eb-9468-42ea0d42122c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HighlightGrip",
@@ -457,7 +486,8 @@
                     "id": "90810746-1477-4757-90be-1b98ec9a2669",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
