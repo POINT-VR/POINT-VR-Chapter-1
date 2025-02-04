@@ -39,5 +39,9 @@ EditorBuildSettings:
       type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 4dd5ea5325ca26a4cbf5b83149f74bec,
       type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 0421040a0779d704891bf1f9c170b1a0,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7c600385b2e0246499112b5f537d1007,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 845e0c93743b4564cb5a0276c8b5ad04,
       type: 2}
