@@ -37,7 +37,7 @@
                 {
                     "name": "",
                     "id": "cff1f981-6e1f-4e2c-a90c-715a0ea2e80e",
-                    "path": "<OpenXRHmd>/centerEyePosition",
+                    "path": "<XRHMD>/devicePosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -48,7 +48,7 @@
                 {
                     "name": "",
                     "id": "e2017383-a3f6-4c46-acb1-012b8eece9cc",
-                    "path": "<OpenXRHmd>/centerEyeRotation",
+                    "path": "<XRHMD>/deviceRotation",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -215,7 +215,7 @@
                 {
                     "name": "",
                     "id": "79634234-07c9-488b-98bd-7d83eb6895c5",
-                    "path": "<XRController>{LeftHand}/deviceRotation",
+                    "path": "<XRController>/pointerRotation",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -226,7 +226,7 @@
                 {
                     "name": "",
                     "id": "3bf4fccb-bf42-4ec5-b215-c967f1d71642",
-                    "path": "<XRController>{LeftHand}/devicePosition",
+                    "path": "<XRController>{LeftHand}/pointerPosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -494,7 +494,7 @@
                 {
                     "name": "",
                     "id": "8d2a5710-51f9-4e4b-a592-021821e5caa7",
-                    "path": "<XRController>{RightHand}/deviceRotation",
+                    "path": "<XRController>/pointerRotation",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -505,7 +505,7 @@
                 {
                     "name": "",
                     "id": "274078b0-62e5-4730-bcc2-6896b9ad9f0c",
-                    "path": "<XRController>{RightHand}/devicePosition",
+                    "path": "<XRController>/pointerPosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
