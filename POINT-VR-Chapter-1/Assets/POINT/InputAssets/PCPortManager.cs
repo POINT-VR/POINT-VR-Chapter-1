@@ -21,6 +21,10 @@ public class PCPortManager : MonoBehaviour
         }
     }
     /// <summary>
+    /// Anchored y-coordinate for subtitles (position from bottom of screen)
+    /// </summary>
+    [SerializeField] private float subtitlesYPosition = 250.0f;
+    /// <summary>
     /// Mouse sensitivity for camera rotation
     /// </summary>
     [SerializeField] private float cameraSens = 5.0f;
@@ -53,6 +57,10 @@ public class PCPortManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Canvas overlayContainer;
     /// <summary>
+    /// Subtitles UI
+    /// </summary>
+    [SerializeField] private RectTransform subtitles;
+    /// <summary>
     /// Highlighted controls (on button input); deactivated in PC Port
     /// </summary>
     [SerializeField] private HighlightManager highlightControls;
@@ -84,6 +92,9 @@ public class PCPortManager : MonoBehaviour
         uiContainer.transform.localScale = uiScale * Vector3.one;
         (uiContainer.transform as RectTransform).position += uiOffset;
         overlayContainer.renderMode = RenderMode.ScreenSpaceOverlay;
+        subtitles.anchorMin = 0.5f * Vector2.right;
+        subtitles.anchorMax = 0.5f * Vector2.right;
+        subtitles.anchoredPosition = subtitlesYPosition * Vector2.up;
         SetCrossHairVisible(true);
         if (highlightControls != null)
         {
@@ -132,5 +143,6 @@ public class PCPortManager : MonoBehaviour
     public void SetCrossHairVisible(bool visible)
     {
         crosshair.gameObject.SetActive(visible);
+        Cursor.visible = !visible; // If crosshair is not visible, cursor shows up, and vice versa
     }
 }

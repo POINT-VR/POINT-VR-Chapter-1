@@ -187,11 +187,11 @@ public class HandController : MonoBehaviour
 #else
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, UIMask)) //UI found: turn this green
         {
-#endif
             if (hit.collider != lastColliderHit) //did not hit the same collider as in the previous frame: haptic feedback
             {
                 hardwareController.VibrateHand();
             }
+#endif
             if (hit.collider.GetComponent<ScrollRect>() == null)
             {
                 // Check if detected item is within a ScrollRect; if so, make sure ScrollRect is also hit
@@ -260,11 +260,11 @@ public class HandController : MonoBehaviour
 #else
         else if (grabbingTransform != null || Physics.Raycast(transform.position, transform.forward, out hit, grabDistance, grabMask)) //grabbable found or is holding something: turn this cyan
         {
-#endif
             if (hit.transform != lastGrabHit && grabbingTransform == null) //did not hit the same collider as in the previous frame: haptic feedback
             {
                 hardwareController.VibrateHand();
             }
+#endif
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
             pcPortManager.SetCrossHairFocused(true);
             pcPortManager.SetCrossHairColor(Color.magenta);
