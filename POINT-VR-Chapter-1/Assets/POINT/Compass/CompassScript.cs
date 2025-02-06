@@ -12,7 +12,7 @@ public class CompassScript : MonoBehaviour
     private Camera cameraObject;
 
     /// <summary>
-    /// Stores tags, gameobjects, and angles
+    /// angles
     /// </summary>
     private List<double> angles = new List<double>();
 
@@ -20,9 +20,6 @@ public class CompassScript : MonoBehaviour
     /// Stores all ticks
     /// </summary>
     private List<RectTransform> ticks = new List<RectTransform>();
-
-    [SerializeField]
-    private Vector3 position;
 
     /// <summary>
     /// Initial list which takes gameobjects to be attached
@@ -46,8 +43,6 @@ public class CompassScript : MonoBehaviour
     void Start()
     {
         cameraObject = Camera.allCameras[0];
-        this.transform.SetParent(cameraObject.transform);
-        this.transform.localPosition = position;
         foreach (var obj in gameObjects)
         {
             angles.Add(0.0);
@@ -58,11 +53,11 @@ public class CompassScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdatePosition();
+        UpdateAngles();
         UpdateTicks();
     }
 
-    void UpdatePosition()
+    void UpdateAngles()
     {
         int i = 0;
         foreach (var obj in gameObjects)
@@ -79,7 +74,7 @@ public class CompassScript : MonoBehaviour
             {
                 difference += 360;
             }
-            angles[i] = (difference);
+            angles[i] = difference;
             i++;
         }
     }
@@ -89,7 +84,7 @@ public class CompassScript : MonoBehaviour
         int i = 0;
         foreach (var Tick in ticks)
         {
-            Tick.anchoredPosition3D = new Vector3((float)angles[i]*10/9, 500, 0);
+            Tick.anchoredPosition3D = new Vector3((float)angles[i]*10/9, 400, 0);
             i++;
         }
     }
@@ -97,7 +92,7 @@ public class CompassScript : MonoBehaviour
     void CreateTick()
     {
         var Tick = Instantiate(tick,this.transform);
-        Tick.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 500, 0);
+        Tick.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 400, 0);
         ticks.Add(Tick.GetComponent<RectTransform>());
     }
 }
