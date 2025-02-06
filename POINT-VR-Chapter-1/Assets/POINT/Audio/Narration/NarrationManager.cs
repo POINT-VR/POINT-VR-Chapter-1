@@ -21,6 +21,10 @@ public class NarrationManager : MonoBehaviour
     /// </summary>
     [SerializeField] private float volumeScale = 3.0f;
 
+    //For Skipping Narration
+    [SerializeField] private InputActionReference leftPushingReference;
+    [SerializeField] private InputActionReference rightPushingReference;
+
     [Header("Font Assets")]
     [SerializeField] private TMP_FontAsset latinFont;
     [SerializeField] private TMP_FontAsset arabicFont;
@@ -52,6 +56,7 @@ public class NarrationManager : MonoBehaviour
     private TMP_FontAsset currentFont = null;
     private Coroutine coroutine = null;
     private bool developerOptions = true;
+    private bool canPlay = true;
 
     /// <summary>
     /// This function plays an audio clip (whose name WITHOUT the file type is the parameter) and activates
@@ -80,6 +85,7 @@ public class NarrationManager : MonoBehaviour
         {
             this.GetComponent<AudioSource>().PlayOneShot(audioClip, volumeScale);
         }
+        SkipNarration(leftPushingReference, rightPushingReference);
 
         DisplaySubtitles();
     }
@@ -321,12 +327,13 @@ public class NarrationManager : MonoBehaviour
     IEnumerator CheckForSkipButtons(InputActionReference input1, InputActionReference input2) 
     {
         AudioSource audioSource = this.GetComponent<AudioSource>(); 
+        yield return new WaitUntil(() => canPlay == true);
         yield return new WaitUntil(() => audioSource.isPlaying);
 
-        // yield return new WaitUntil(() => input1 && menus.activeInHierarchy == true);
+        canPlay = false;
         while(audioSource.isPlaying) //If skip buttons are pressed, skip
         {
-            if(developerOptions && (input1.action.ReadValue<float>() > 0.5f && input2.action.ReadValue<float>() > 0.5f)) { //Stops audio clip/subtitles
+            if(developerOptions && input1.action.ReadValue<float>() > 0.5f && input2.action.ReadValue<float>() > 0.5f) { //Stops audio clip/subtitles
                 audioSource.Stop();
                 yield return new WaitUntil(() => isSubtitlePlaying == true);
 
@@ -339,7 +346,9 @@ public class NarrationManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitUntil(() => (input1.action.ReadValue<float>() == 0.0f && input2.action.ReadValue<float>() == 0.0f));
         // Debug.Log("Done");
+        canPlay = true;
         yield break;
     }
 }

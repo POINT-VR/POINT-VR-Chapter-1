@@ -168,24 +168,30 @@ public class Scene1Manager : MonoBehaviour
 
         Debug.Log("We live in a 3 - dimensional space. Every day we interact with this 3D space. For example we can move up and down(that’s the first dimension)");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_1_1");
-        yield return new WaitForSecondsRealtime(6);
+        // yield return new WaitForSecondsRealtime(6);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_1_2");
         dynamicAxis.ShowAxes(1);
-        yield return new WaitForSecondsRealtime(3);
+        // yield return new WaitForSecondsRealtime(3);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         Debug.Log("left and right (that’s the second dimension)");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_2");
         dynamicAxis.ShowAxes(0);
-        yield return new WaitForSecondsRealtime(3);
+        // yield return new WaitForSecondsRealtime(3);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         Debug.Log("and forward and backward (that’s the third dimension).");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_3");
         dynamicAxis.ShowAxes(2);
-        yield return new WaitForSecondsRealtime(4);
+        // yield return new WaitForSecondsRealtime(4);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         Debug.Log("To help ourselves navigate this space, we use a mathematical tool called a coordinate system. It does not matter how the coordinate system is oriented. In front of you is one potential coordinate system, where the different colors represent different directions. Where the three lines meet is called the origin of the system. We can describe the location of any object in space relative to the origin with just 3 numbers.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\1_3D_coordinate_system_4");
-        yield return new WaitForSecondsRealtime(8.3f);
+        // yield return new WaitForSecondsRealtime(8.3f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         StartCoroutine(dynamicAxis.ExtendAxes(1, 35, 1));
-        yield return new WaitForSecondsRealtime(16.7f);
+        // yield return new WaitForSecondsRealtime(16.7f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         yield break;
     }
