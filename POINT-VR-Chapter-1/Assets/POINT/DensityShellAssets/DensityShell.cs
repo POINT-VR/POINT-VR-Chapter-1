@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Attached to the Density Shell objects in the DensityExploration Scene
+/// Handles material switching (will be replaced with animation), and collider updating to allow for both grabbing and selection
+/// Snapping behavior and mass behavior is handled in DensityExploration.cs (can be moved here if necessary)
+/// </summary>
 public class DensityShell : MonoBehaviour
 {
-    // The Selected checkbox
+    // The Selected checkbox (when selected the shell is "open")
     SelectObject selected;
     // Reference to the Renderer component of the gameObject
     private Renderer objectRenderer;
@@ -17,7 +22,6 @@ public class DensityShell : MonoBehaviour
     public Material material_selected; // The selected material
 
 
-    // Start is called before the first frame update
     void Start()
     {
         selected = GetComponent<SelectObject>();
@@ -62,25 +66,6 @@ public class DensityShell : MonoBehaviour
             }
             // change layer to make it grabbable
             gameObject.layer = 9;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if the entering object has a Rigidbody and a mass
-        Rigidbody otherRb = other.GetComponent<Rigidbody>();
-        if (otherRb != null)
-        {
-            // Increase the mass of the current object's Rigidbody by the mass of the other object's Rigidbody
-            rb.mass += otherRb.mass;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        Rigidbody otherRb = other.GetComponent<Rigidbody>();
-        if (otherRb != null)
-        {
-            // Decrease the mass of the current object by the mass of the other object
-            rb.mass -= otherRb.mass;
         }
     }
 }
