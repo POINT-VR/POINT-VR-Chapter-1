@@ -8,7 +8,11 @@ using UnityEngine;
 /// </summary>
 public class ShellCollision : MonoBehaviour
 {
-    public float detectionRadius = 2f;  // Radius of the shell
+    public float detectionRadius = 0.5f;
+    void start() {
+        Vector3 scale = transform.localScale;
+        detectionRadius = 0.5f * scale.x;  // Radius of the shell
+    }
 
     void Update()
     {
