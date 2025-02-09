@@ -8,7 +8,6 @@ public class DensityExploration : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject floor;
     [SerializeField] private InputActionReference openMenuReference;
-    // Cache
     private Camera currentCamera = null;
     private GameObject player = null;
     private GameObject menus = null;
@@ -16,32 +15,43 @@ public class DensityExploration : MonoBehaviour
     private UIManager UIManagerScript = null;
     // Masses
     private GameObject shell = null;
-    private GameObject mass1 = null;
-    private GameObject mass2 = null;
-    private GameObject mass3 = null;
-    // Array of Snap Locations
+    private GameObject shell2 = null;
+
+    /// <summary>
+    /// 2D Array of Snap Locations
+    /// </summary>
     Vector3[,] positionArray = new Vector3[8, 8];
 
-    // Number of snapped masses
-    private int numSnapped = 0;
-    // List of what masses are snapped
+    /// <summary>
+    /// Number of snapped masses (first index corresponds to first shell (larger) and second corresponds to second shell)
+    /// </summary>
+    private int[] numSnapped = new int[2];
+
+    /// <summary>
+    /// Lists of what masses are snapped to each shell
+    /// </summary>
     bool[] snapArray = new bool[8];
+    bool[] snapArray2 = new bool[8];
+
+    /// <summary>
+    /// List holding all mass GameObjects
+    /// </summary>
     GameObject[] massList = new GameObject[8];
-    private
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(WaitForPlayerSpawn());
     }
-    // When using emulator do the following change:
-    // !mass1.GetComponentInParent<HandController>() -> (mass1.transform.parent == null || mass1.transform.parent.gameObject.name != "Hand")
     private IEnumerator WaitForPlayerSpawn()
     {
         yield return new WaitUntil(() => Camera.current != null);
 
-        // Start menu initialization
+        // Initializing camera and player
         currentCamera = Camera.current;
         player = currentCamera.transform.parent.gameObject;
+
+        // Initializing mass list and shell references
         massList[0] = GameObject.Find("UnitMassOne");
         massList[1] = GameObject.Find("UnitMassTwo");
         massList[2] = GameObject.Find("UnitMassThree");
@@ -51,7 +61,9 @@ public class DensityExploration : MonoBehaviour
         massList[6] = GameObject.Find("UnitMassSeven");
         massList[7] = GameObject.Find("UnitMassEight");
         shell = GameObject.Find("Sphere");
-        // Fill Snap List
+        shell2 = GameObject.Find("Sphere2");
+
+        // Filling Snap List
         positionArray[0, 0] = new Vector3(0f, 0f, 0f);
         positionArray[1, 0] = new Vector3(-0.75f, 0f, 0f);
         positionArray[1, 1] = new Vector3(0.75f, 0f, 0f);
@@ -88,7 +100,8 @@ public class DensityExploration : MonoBehaviour
         positionArray[7, 5] = new Vector3(-0.7f, 0.7f, 0.75f);
         positionArray[7, 6] = new Vector3(0.7f, -0.7f, 0.75f);
         positionArray[7, 7] = new Vector3(0.7f, 0.7f, 0.75f);
-        //
+
+        // Filling Snap Arrays
         snapArray[0] = false;
         snapArray[1] = false;
         snapArray[2] = false;
@@ -97,15 +110,26 @@ public class DensityExploration : MonoBehaviour
         snapArray[5] = false;
         snapArray[6] = false;
         snapArray[7] = false;
-        //
-        numSnapped = 0;
+        snapArray2[0] = false;
+        snapArray2[1] = false;
+        snapArray2[2] = false;
+        snapArray2[3] = false;
+        snapArray2[4] = false;
+        snapArray2[5] = false;
+        snapArray2[6] = false;
+        snapArray2[7] = false;
+        
+        // Setting number of snapped masses for each shell to 0
+        numSnapped[0] = 0;
+        numSnapped[1] = 0;
         StartCoroutine(StartScene());
     }
     void Update()
     {
-        // Debug.Log(numSnapped);
-        snapChecker();
-        updateMass();
+        snapChecker(shell, 1, snapArray); // handles snapping behavior for larger shell
+        snapChecker(shell2, 2, snapArray2); // handles snapping behavior for smaller shell
+        updateMass(shell, 1); // updates mass of larger shell
+        updateMass(shell2, 2); // updates mass of smaller shell
     }
     IEnumerator StartScene()
     {
@@ -113,12 +137,9 @@ public class DensityExploration : MonoBehaviour
         GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
         GameObject UIContainer = mainCamera.transform.Find("UI Container").gameObject;
         GameObject Menu = UIContainer.transform.Find("Menu").gameObject;
-        // GameObject HeaderButtons = Menu.transform.Find("HeaderButtons").gameObject;
-        // GameObject HeaderButtons = Menu.transform.Find("Buttons").gameObject; //if testing with emulator use this
         GameObject menuScreens = Menu.transform.Find("MenuScreens").gameObject;
 
         menus = menuScreens;
-        // buttons = HeaderButtons;
 
         // Get UI Manager UIManagerScript
         UIManagerScript = Menu.GetComponent<UIManager>();
@@ -128,63 +149,83 @@ public class DensityExploration : MonoBehaviour
         
         yield break;
     }
-    private void updateMass() {
-        shell.GetComponent<Rigidbody>().mass = 0.2f * numSnapped;
+    private void updateMass(GameObject shell, int factor) {
+        if (shell != null)  {
+            shell.GetComponent<Rigidbody>().mass = 0.2f * numSnapped[factor - 1]; // adds 0.2 in mass for each unit mass snapped to the shell
+        }
     }
-    private void snapChecker() {
-        // check the position of each mass
+    /// <summary>
+    /// Handles the snapping and unsnapping of masses from the density shells
+    /// 
+    /// s - the reference to the shell
+    /// factor - the size factor of the shell (larger shell is 1, smaller shell 2), used to divide by 2 on snap placements/radius/etc. for smaller shell
+    /// snapArray - list of what masses are snapped to the current shell
+    /// 
+    /// 
+    /// If the mass is marked as snapped, check if it has moved from its expected position and is not currently being held
+    /// If the mass is within the snapping range and is not being held, snap it back into position
+    ///     otherwise, subtract one from numSnapped, set its parent to null, and rearrange the other masses
+    /// Else (the mass is not marked as snapped), check if it has no parent and is within radius
+    ///     if so, add one to numSnapped, set its parent to the shell, and rearrange all the masses
+    /// </summary>
+    private void snapChecker(GameObject s, int factor, bool[] snapArray) {
+        /*****************IMPORTANT*****************/
+        // When using Emulator, make the following change at all places applicable:
+        // !massList[i].GetComponentInParent<HandController>() -> (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")
         int count = 0;
+        // iterating through each mass
         for (int i = 0; i < 8; i++) {
-            if (massList[i] != null) {
-                // if the mass is marked as snapped, check if it has moved from its expected position
-                if (snapArray[i] == true) {
-                    if ((massList[i].transform.position - shell.transform.position - positionArray[numSnapped - 1, count]).magnitude > 0.001 && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
-                        if (((massList[i].transform.position - shell.transform.position).magnitude < 2)  && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
+            if (massList[i] != null) { 
+                if ((massList[i].transform.parent == null || (massList[i].GetComponentInParent<HandController>() && shell.transform.parent == null & shell2.transform.parent == null))) { // necessary changes of isKinematic for masses to stay in place
+                    
+                    massList[i].GetComponent<Rigidbody>().isKinematic = false;
+                } else {
+                    massList[i].GetComponent<Rigidbody>().isKinematic = true;
+                }
+                if (snapArray[i] == true) { // if mass is marked as snapped
+                    if ((massList[i].transform.position - s.transform.position - positionArray[numSnapped[factor - 1] - 1, count] / factor).magnitude > 0.001 && !massList[i].GetComponentInParent<HandController>()) {
+                        // if mass is within snapping range and is not being held, snap it back into position
+                        if (((massList[i].transform.position - s.transform.position).magnitude < 2 / factor)  && !massList[i].GetComponentInParent<HandController>()) {
                            int count2 = 0;
+                           // rearranges the masses
                            for (int j = 0; j < 8; j++) {
                                 if (snapArray[j] == true) {
-                                    massList[j].transform.position = shell.transform.position + positionArray[numSnapped - 1, count2];
-                                    massList[j].GetComponent<Rigidbody>().isKinematic = true;
+                                    massList[j].transform.position = s.transform.position + positionArray[numSnapped[factor - 1] - 1, count2] / factor;
                                     count2 = count2 + 1;
                                 }
                             } 
-                        } else {
-                            numSnapped = numSnapped - 1;
-                            snapArray[i] = false;
-                            massList[i].transform.SetParent(null);
+                        } else { // if mass is not within snapping range
+                            numSnapped[factor - 1] = numSnapped[factor - 1] - 1; // decrement numSnapped
+                            snapArray[i] = false; // set snapArray value to false for this mass
+                            massList[i].transform.SetParent(null); // set parent to null for this mass
                             int count2 = 0;
+                            // rearranges the masses
                             for (int j = 0; j < 8; j++) {
                                 if (snapArray[j] == true) {
-                                    massList[j].transform.position = shell.transform.position + positionArray[numSnapped -1, count2];
-                                    massList[j].GetComponent<Rigidbody>().isKinematic = false;
+                                    massList[j].transform.position = s.transform.position + positionArray[numSnapped[factor - 1] -1, count2] / factor;
                                     count2 = count2 + 1;
                                 }
                             }
                         }
-                        Debug.Log("hi");
                     }
-                    count = count + 1;
+                    count = count + 1; // increments count so that we can count only through snapped masses
                 } else {
-                    // check if mass is inside range
-                    if (((massList[i].transform.position - shell.transform.position).magnitude  < 2)  && (massList[i].transform.parent == null || massList[i].transform.parent.gameObject.name != "Hand")) {
-                        numSnapped = numSnapped + 1;
-                        snapArray[i] = true;
-                        massList[i].transform.SetParent(shell.transform);
+                    // check if mass is inside range and is not being held
+                    if (((massList[i].transform.position - s.transform.position).magnitude  < 2 / factor)  && !massList[i].GetComponentInParent<HandController>() && (s.transform.parent == null)) {
+                        numSnapped[factor - 1] = numSnapped[factor - 1] + 1; // increment numSnapped
+                        snapArray[i] = true; // set snapArray value to true for this mass
+                        massList[i].transform.SetParent(s.transform); // set the shell to be the parent of the mass
                         int count2 = 0;
+                        // rearranges the masses
                         for (int j = 0; j < 8; j++) {
                             if (snapArray[j] == true) {
-                                massList[j].transform.position = shell.transform.position + positionArray[numSnapped - 1, count2];
-                                massList[j].GetComponent<Rigidbody>().isKinematic = true;
+                                massList[j].transform.position = s.transform.position + positionArray[numSnapped[factor - 1] - 1, count2] / factor;
                                 count2 = count2 + 1;
                             }
                         }
                     }
                 }
-            }
-            
+            } 
         }
-    }
-    int getSnapNumber() {
-        return numSnapped;
     }
 }
