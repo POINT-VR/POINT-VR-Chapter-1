@@ -209,7 +209,8 @@ public class Scene1Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         Debug.Log("This object is currently located at the origin, so its position is (0, 0, 0). Now, reach out and drag the object along the grid lines to get to the desired location. You may follow the example path or make your own path.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_1");
-        yield return new WaitForSecondsRealtime(15);
+        // yield return new WaitForSecondsRealtime(15);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         //EndPoint stuff goes here
         massObject.transform.position = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
@@ -228,10 +229,12 @@ public class Scene1Manager : MonoBehaviour
         massObject.transform.position = new Vector3(0, 0, 0);
         Debug.Log("Nice job.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_2");
-        yield return new WaitForSecondsRealtime(2);
+        // yield return new WaitForSecondsRealtime(2);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         Debug.Log("Now, try getting the object to the same point by taking a different path.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_3");
-        yield return new WaitForSecondsRealtime(4);
+        // yield return new WaitForSecondsRealtime(4);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         // Endpoint manager activated again, retrieved endpoint path given as example path to 
         massObject.transform.position = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
@@ -306,7 +309,8 @@ public class Scene1Manager : MonoBehaviour
         massObject.transform.position = new Vector3(0, 0, 0);
         Debug.Log("Nice job.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_2");
-        yield return new WaitForSecondsRealtime(2);
+        // yield return new WaitForSecondsRealtime(2);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         yield break;
     }
 
@@ -319,17 +323,20 @@ public class Scene1Manager : MonoBehaviour
         //Update graphic from previous objective to include 4 cords, add a clock from scene 2 with increasing time, t cord increases with increasing clock time
         Debug.Log("However, this spatial description is not enough. Let's say you want to meet up with a friend. You will have to choose where to meet, and also when to meet. To account for this new information, we need to add one more dimension to our coordinate system, time.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\3_clock_appears_1");
-        yield return new WaitForSecondsRealtime(15);
+        // yield return new WaitForSecondsRealtime(15);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         massObject.ShowTime();
         massObject.SetTime(0);
         objectiveClock.SetActive(true);
 
         Debug.Log("Time is different from the other dimensions because we can only move forward in time. Notice how the time on the clock only ever increases."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\3_clock_appears_2");
-        yield return new WaitForSecondsRealtime(8);
+        // yield return new WaitForSecondsRealtime(8);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         Debug.Log("Move the object as you like and observe how the description of its spatial location changes while time keeps moving forward. Press the 'continue' button when you are ready to move on."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\3_clock_appears_3");
-        yield return new WaitForSecondsRealtime(10);
+        // yield return new WaitForSecondsRealtime(10);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         massObject.transform.position = new Vector3(0, 0, 0);
         // Player can move around the object and see how the coordinates change (time increases continuously)
         // Continue button appears to continue when ready
@@ -373,11 +380,12 @@ public class Scene1Manager : MonoBehaviour
         // Sum of yield returns should be 16s (dynamicAxis.TransitionAxisThickness and RevealGrid)
         StartCoroutine(dynamicAxis.TransitionAxisColor(Color.white, 4.0f));
         yield return dynamicAxis.TransitionAxisThickness(0.02f, 4.0f);
-        yield return new WaitForSeconds(4.0f); // Extra padding time so that last audio finishes playing
+        // yield return new WaitForSeconds(4.0f); // Extra padding time so that last audio finishes playing
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         Debug.Log("It's all around you, stretching out in every direction and forever into the future."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_1_2");
         yield return RevealGrid(16.0f, 12.0f);
-
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         Debug.Log("Spacetime is not a rigid or fixed object. It can curve.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_2");
         // Sum of yield returns should be 5s
@@ -385,7 +393,8 @@ public class Scene1Manager : MonoBehaviour
 
         Debug.Log("Now, let's look at how spacetime curves. Looking at this large grid is too much information at once"); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4_1");
-        yield return new WaitForSeconds(6.5f);
+        // yield return new WaitForSeconds(6.5f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         Debug.Log(", so we are going to show you only a small portion of the spacetime.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_4_2");
@@ -414,7 +423,8 @@ public class Scene1Manager : MonoBehaviour
         
         Debug.Log("In fact, Einstein described gravity as the curvature of spacetime. Close to a very massive object, where gravity is strong, the duration of an event and the distance between two events can stretch. John Wheeler described this effect by saying 'Spacetime tells matter how to move; matter tells spacetime how to curve.'"); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\4_spacetime_is_everywhere_3");
-        yield return new WaitForSecondsRealtime(20);
+        // yield return new WaitForSecondsRealtime(20);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         nextSceneButton.SetActive(true); // End of Scene, tell player to continue
         
         Debug.Log("Press the 'continue' button when you are ready to move on."); 
