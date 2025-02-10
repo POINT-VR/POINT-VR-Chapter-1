@@ -177,7 +177,6 @@ public class DensityExploration : MonoBehaviour
         for (int i = 0; i < 8; i++) {
             if (massList[i] != null) { 
                 if ((massList[i].transform.parent == null || (massList[i].GetComponentInParent<HandController>() && shell.transform.parent == null & shell2.transform.parent == null))) { // necessary changes of isKinematic for masses to stay in place
-                    
                     massList[i].GetComponent<Rigidbody>().isKinematic = false;
                 } else {
                     massList[i].GetComponent<Rigidbody>().isKinematic = true;
@@ -197,8 +196,10 @@ public class DensityExploration : MonoBehaviour
                         } else { // if mass is not within snapping range
                             numSnapped[factor - 1] = numSnapped[factor - 1] - 1; // decrement numSnapped
                             snapArray[i] = false; // set snapArray value to false for this mass
-                            massList[i].transform.SetParent(null); // set parent to null for this mass
                             int count2 = 0;
+                            if (massList[i].transform.parent == s.transform) {
+                                massList[i].transform.SetParent(null); 
+                            }
                             // rearranges the masses
                             for (int j = 0; j < 8; j++) {
                                 if (snapArray[j] == true) {
