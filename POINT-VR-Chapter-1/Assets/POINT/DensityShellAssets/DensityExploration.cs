@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+/// <summary>
+/// Attached to the Player in the DensityExploration Scene
+/// Takes care of updating the shell masses and mass-shell snapping interactions
+/// </summary>
 public class DensityExploration : MonoBehaviour
 {
     // Serialized fields
@@ -156,17 +160,9 @@ public class DensityExploration : MonoBehaviour
     }
     /// <summary>
     /// Handles the snapping and unsnapping of masses from the density shells
-    /// 
     /// s - the reference to the shell
     /// factor - the size factor of the shell (larger shell is 1, smaller shell 2), used to divide by 2 on snap placements/radius/etc. for smaller shell
     /// snapArray - list of what masses are snapped to the current shell
-    /// 
-    /// 
-    /// If the mass is marked as snapped, check if it has moved from its expected position and is not currently being held
-    /// If the mass is within the snapping range and is not being held, snap it back into position
-    ///     otherwise, subtract one from numSnapped, set its parent to null, and rearrange the other masses
-    /// Else (the mass is not marked as snapped), check if it has no parent and is within radius
-    ///     if so, add one to numSnapped, set its parent to the shell, and rearrange all the masses
     /// </summary>
     private void snapChecker(GameObject s, int factor, bool[] snapArray) {
         /*****************IMPORTANT*****************/
@@ -175,8 +171,8 @@ public class DensityExploration : MonoBehaviour
         int count = 0;
         // iterating through each mass
         for (int i = 0; i < 8; i++) {
-            if (massList[i] != null) { 
-                if ((massList[i].transform.parent == null || (massList[i].GetComponentInParent<HandController>() && shell.transform.parent == null & shell2.transform.parent == null))) { // necessary changes of isKinematic for masses to stay in place
+            if (massList[i] != null) { // necessary changes of isKinematic for masses to stay in place
+                if ((massList[i].transform.parent == null || (massList[i].GetComponentInParent<HandController>() && shell.transform.parent == null & shell2.transform.parent == null))) { 
                     massList[i].GetComponent<Rigidbody>().isKinematic = false;
                 } else {
                     massList[i].GetComponent<Rigidbody>().isKinematic = true;
@@ -193,7 +189,7 @@ public class DensityExploration : MonoBehaviour
                                     count2 = count2 + 1;
                                 }
                             } 
-                        } else { // if mass is not within snapping range
+                        } else { // if mass is marked as snapped but is not within snapping range
                             numSnapped[factor - 1] = numSnapped[factor - 1] - 1; // decrement numSnapped
                             snapArray[i] = false; // set snapArray value to false for this mass
                             int count2 = 0;
@@ -211,7 +207,7 @@ public class DensityExploration : MonoBehaviour
                     }
                     count = count + 1; // increments count so that we can count only through snapped masses
                 } else {
-                    // check if mass is inside range and is not being held
+                    // mass is not currently marked as snapped, check if mass is inside range and is not being held
                     if (((massList[i].transform.position - s.transform.position).magnitude  < 2 / factor)  && !massList[i].GetComponentInParent<HandController>() && (s.transform.parent == null)) {
                         numSnapped[factor - 1] = numSnapped[factor - 1] + 1; // increment numSnapped
                         snapArray[i] = true; // set snapArray value to true for this mass
