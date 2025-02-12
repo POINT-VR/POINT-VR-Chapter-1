@@ -57,6 +57,7 @@ public class Scene1Manager : MonoBehaviour
     private GameObject secondPath = null;
     private GameObject continueButton = null;
     private GameObject floatingObjectivesMenu = null;
+    private GameObject massSphereParent = null;
     private static bool objectiveContinue = false;
 
     /// <summary>
@@ -355,10 +356,14 @@ public class Scene1Manager : MonoBehaviour
         staticGrid.transform.position = originPosition + (new Vector3(0.5f, -0.5f, 0.5f) * (int)staticGridBounds.size.x);
         staticGrid.SetActive(true);
 
+        massSphereParent = new GameObject("MassSphereParent");
+        massSphereParent.transform.position = originPosition;
         for (int i = 0; i < massSpheres.Length; ++i)
         {
             Rigidbody massSphere = massSpheres[i];
-            massSphere.transform.position = originPosition + (massSpawnOffset * Mathf.Pow(-1, i));
+            massSphere.transform.parent = massSphereParent.transform;
+            massSphere.transform.localPosition = massSpawnOffset * Mathf.Pow(-1, i);
+            massSphere.GetComponent<Rigidbody>().isKinematic = true;
         }
 
         floatingObjectivesMenu.SetActive(false); // Hide Objectives as grid grows
@@ -402,8 +407,9 @@ public class Scene1Manager : MonoBehaviour
             Color massColor = massSphere.GetComponent<MeshRenderer>().material.color;
             massSphere.mass = mass;
             massSphere.GetComponent<MeshRenderer>().material.color = new Color(massColor.r, massColor.g, massColor.b, 1.0f);
-            StartCoroutine(AnimateSphereCycle(massSphere, originPosition, orbitSpeed));
         }
+        StartCoroutine(AnimateSphereCycle());
+
         yield return new WaitForSecondsRealtime(3);
         
         Debug.Log("In fact, Einstein described gravity as the curvature of spacetime. Close to a very massive object, where gravity is strong, the duration of an event and the distance between two events can stretch. John Wheeler described this effect by saying 'Spacetime tells matter how to move; matter tells spacetime how to curve.'"); 
@@ -463,12 +469,15 @@ public class Scene1Manager : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator AnimateSphereCycle(Rigidbody massSphere, Vector3 originPosition, float speed)
+    private IEnumerator AnimateSphereCycle()
     {
-        while (true)
+        if (massSphereParent != null)
         {
-            massSphere.transform.RotateAround(originPosition, Vector3.up, speed * Time.deltaTime);
-            yield return null;
+            while (true)
+            {
+                massSphereParent.transform.Rotate(orbitSpeed * Time.deltaTime * Vector3.up);
+                yield return null;
+            }
         }
     }
     #endregion
