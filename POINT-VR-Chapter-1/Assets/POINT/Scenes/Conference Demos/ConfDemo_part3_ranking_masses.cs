@@ -82,7 +82,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     public IEnumerator RadiiTaskAudio()
     {
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_1");
-        yield return new WaitForSecondsRealtime(13);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_2");
         yield break;
     }
@@ -107,7 +107,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
         SceneUIContainer.SetActive(true);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("temporary_ending_1");
-        yield return new WaitForSeconds(15.2f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         SceneController sceneController = player.GetComponentInChildren<SceneController>(); // Automatically go to Credits
         if (sceneController != null)

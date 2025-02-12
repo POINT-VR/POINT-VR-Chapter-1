@@ -288,7 +288,6 @@ public class TutorialManager : MonoBehaviour
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Forget_Controls");
 
-        // yield return new WaitForSecondsRealtime(4); // Set to the audio file above's duration in seconds 
         yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         StartCoroutine(WaitForGeneralMenu());
         yield break;
@@ -305,8 +304,7 @@ public class TutorialManager : MonoBehaviour
         AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Options");
-
-        // yield return new WaitForSecondsRealtime(17); // Set to the audio file above's duration in seconds 
+        
         yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         StartCoroutine(WaitForSceneSelection());
         yield break;
@@ -323,8 +321,6 @@ public class TutorialManager : MonoBehaviour
         AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Scene_Select");
-
-        // yield return new WaitForSecondsRealtime(11); // Set to the audio file above's duration in seconds 
         yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         overText.RefreshString();
