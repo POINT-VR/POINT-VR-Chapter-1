@@ -157,7 +157,7 @@ public class HandController : MonoBehaviour
         { 
             reticle.SetActive(true);
             reticle.transform.position = hit.point;
-            reticle.transform.LookAt(new Vector3(playerTransform.parent.position.x, 0f, playerTransform.parent.position.z));
+            reticle.transform.LookAt(new Vector3(playerTransform.parent.position.x, hit.point.y, playerTransform.parent.position.z));
             transform.GetComponent<Animator>().SetBool("isPointing", true);
         }
         else //Not in teleport mode or raycast was not able to find the floor: hides the reticle
