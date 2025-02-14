@@ -6972,9 +6972,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subtitleObject: {fileID: 685732247222427480}
   volumeScale: 3
-  leftPushingReference: {fileID: -6034992073922347324, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+  leftPushingReference: {fileID: 5492603852644030702, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
-  rightPushingReference: {fileID: 6274207502737436746, guid: a54d6349e0e4d404fa09e1c0531de6d0,
+  rightPushingReference: {fileID: 7109928901819384079, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
   latinFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
   arabicFont: {fileID: 11400000, guid: cccebb56e08497443ae4756fc5c84445, type: 2}
