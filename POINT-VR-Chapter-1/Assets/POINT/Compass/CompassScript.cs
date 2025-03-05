@@ -84,7 +84,7 @@ public class CompassScript : MonoBehaviour
         int i = 0;
         foreach (var Tick in ticks)
         {
-            Tick.anchoredPosition3D = new Vector3((float)angles[i]*10/9, 400, 0);
+            Tick.anchoredPosition3D = new Vector3((float)angles[i]*10/9, 0, 0);
             i++;
         }
     }
@@ -92,7 +92,7 @@ public class CompassScript : MonoBehaviour
     void CreateTick()
     {
         var Tick = Instantiate(tick,this.transform);
-        Tick.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 400, 0);
+        Tick.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 0, 0);
         ticks.Add(Tick.GetComponent<RectTransform>());
     }
 }
