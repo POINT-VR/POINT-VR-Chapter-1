@@ -85,12 +85,43 @@ public class PCPortManager : MonoBehaviour
     /// </summary>
     [SerializeField] private InputActionReference playerMoveReference;
 
+    [Header("UI Menu Changes")]
+    /// <summary>
+    /// UI Image for the diagram in the Controls tab of the UI menu
+    /// </summary>
+    [SerializeField] private Image controlsDiagram;
+    /// <summary>
+    /// Sprite showing the default controls for the PC Port
+    /// </summary>
+    [SerializeField] private Sprite controlsSprite;
+    /// <summary>
+    /// UI setting for live controller diagrams; deactivated in PC Port
+    /// </summary>
+    [SerializeField] private GameObject controllerDiagramsToggle;
+    /// <summary>
+    /// UI setting for haptics; deactivated in PC Port
+    /// </summary>
+    [SerializeField] private GameObject hapticsToggle;
+
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
     private void Start()
     {
         // UI adjustments
         uiContainer.transform.localScale = uiScale * Vector3.one;
         (uiContainer.transform as RectTransform).position += uiOffset;
+        if (controllerDiagramsToggle)
+        {
+            controllerDiagramsToggle.SetActive(false);
+        }
+        if (hapticsToggle)
+        {
+            hapticsToggle.SetActive(false);
+        }
+        if (controlsDiagram && controlsSprite)
+        {
+            controlsDiagram.sprite = controlsSprite;
+        }
+
         overlayContainer.renderMode = RenderMode.ScreenSpaceOverlay;
         subtitles.anchorMin = 0.5f * Vector2.right;
         subtitles.anchorMax = 0.5f * Vector2.right;
