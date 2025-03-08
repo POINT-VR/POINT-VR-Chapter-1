@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.0068988674, g: 0.006751718, b: 0.0071911463, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1301,6 +1301,8 @@ MonoBehaviour:
   pushPullSprite: {fileID: 21300000, guid: 2794dcc9276180f458bd4f06cb95a104, type: 3}
   overSprite: {fileID: 0}
   menuSprite: {fileID: 21300000, guid: 5bce63427ab351e4e9b962dfbe84291f, type: 3}
+  tutorialIntro: {fileID: 8300000, guid: 45b6bdc8a10260a40a6c95f3d4e1d129, type: 3}
+  audioSubtitlePath: Tutorial//
   teleportationText:
     m_TableReference:
       m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
