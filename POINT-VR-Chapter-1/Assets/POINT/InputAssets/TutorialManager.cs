@@ -32,6 +32,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Sprite pushPullSprite;
     [SerializeField] private Sprite overSprite;
     [SerializeField] private Sprite menuSprite;
+    [Header("Audio Files and Subtitle files")]
+    [SerializeField] private string audioSubtitlePath;
+    [SerializeField] private AudioClip tutorialIntro;
     [Header("Instructions Text")]
     [SerializeField] private LocalizedString teleportationText;
     [SerializeField] private LocalizedString turnText;
@@ -169,7 +172,7 @@ public class TutorialManager : MonoBehaviour
         instructions.text = turnString;
         
         player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
+        player.GetComponent<NarrationManager>().PlayClipWithSubtitles_AudioReference(tutorialIntro, audioSubtitlePath); // Testing New Implementation
 
         StartCoroutine(WaitForTurn());
     }

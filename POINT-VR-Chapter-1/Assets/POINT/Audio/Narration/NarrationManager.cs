@@ -51,6 +51,7 @@ public class NarrationManager : MonoBehaviour
     private Coroutine coroutine = null;
 
     /// <summary>
+    /// Old Implementation still used in TutorialManager.cs, ConfDemo_part1_one_mass_y_manager.cs, ..., ...,
     /// This function plays an audio clip (whose name WITHOUT the file type is the parameter) and activates
     /// the corresponding subtitles in a .txt file (but with .vtt formatting) with the SAME name (minus file extension).
     /// </summary>
@@ -67,6 +68,39 @@ public class NarrationManager : MonoBehaviour
 
         audioName = audioClipName;
         AudioClip audioClip = Resources.Load<AudioClip>(audioName);
+
+        // Play narration audio
+        if (audioClip == null)
+        {
+            Debug.LogWarning("Audio clip could not be loaded. Ensure that the name has been entered without the file extension.");
+        }
+        else
+        {
+
+
+            this.GetComponent<AudioSource>().PlayOneShot(audioClip, volumeScale);
+        }
+
+        DisplaySubtitles();
+    }
+
+    /// <summary>
+    /// New Implementation
+    /// This function plays an audio clip from an AudioClip reference passed to it and activates
+    /// the corresponding subtitles in a .txt file (but with .vtt formatting) with the SAME name (minus file extension).
+    /// </summary>
+    public void PlayClipWithSubtitles_AudioReference(AudioClip audioClip, string audioSubtitlePath)
+    {
+        // Reset
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            isSubtitlePlaying = false;
+        }
+        this.GetComponent<AudioSource>().Stop();
+
+        audioName = audioSubtitlePath+audioClip.name;
+        Debug.Log("Playing new Audio...."+audioName);
 
         // Play narration audio
         if (audioClip == null)
