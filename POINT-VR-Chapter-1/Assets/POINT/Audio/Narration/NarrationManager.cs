@@ -100,7 +100,6 @@ public class NarrationManager : MonoBehaviour
         this.GetComponent<AudioSource>().Stop();
 
         audioName = audioSubtitlePath+audioClip.name;
-        Debug.Log("Playing new Audio...."+audioName);
 
         // Play narration audio
         if (audioClip == null)
