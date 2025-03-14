@@ -35,6 +35,9 @@ public class GravityScript : MonoBehaviour
             force += mag * direction; //Displacement from each mass is calculated independently, but combined by vector addition   
         }
         // Move Mass Object
-        massObject.AddForce(force / rigidbodiesThatAttract.Length, ForceMode.Force);
+        if (rigidbodiesThatAttract.Length > 0)
+        {
+            massObject.AddForce(force / rigidbodiesThatAttract.Length, ForceMode.Force);
+        }
     }
 }
