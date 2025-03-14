@@ -227,7 +227,11 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForGrab()
     {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        yield return new WaitUntil(() => massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null);
+#else
         yield return new WaitUntil(() => massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null);
+#endif
 
         // Push and pull tutorial
         controlsImage.sprite = pushPullSprite;
@@ -333,21 +337,31 @@ public class TutorialManager : MonoBehaviour
 
     private void Pushed(InputAction.CallbackContext obj)
     {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null)
+        {
+#else
         if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null)
         {
+#endif
             pushed = true;
         }
     }
 
     private void Pulled(InputAction.CallbackContext obj)
     {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null)
+        {
+#else
         if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null)
         {
+#endif
             pulled = true;
         }
     }
 
-    #region Localization helper methods
+#region Localization helper methods
     // TODO: Investigate if there is a way for only one function to be made that can be applied to all
     private void UpdateTeleportationString(string s)
     {
@@ -460,5 +474,5 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
-    #endregion
+#endregion
 }
