@@ -7,12 +7,12 @@ using UnityEngine.UIElements;
 public class CompassScript : MonoBehaviour
 {
     /// <summary>
-    /// Stores the camera which the floating objectives attaches itself too
+    /// Stores the camera which the compass objectives attaches itself too
     /// </summary>
     private Camera cameraObject;
 
     /// <summary>
-    /// angles
+    /// Stores all angles
     /// </summary>
     private List<double> angles = new List<double>();
 
@@ -22,16 +22,14 @@ public class CompassScript : MonoBehaviour
     private List<RectTransform> ticks = new List<RectTransform>();
 
     /// <summary>
-    /// Initial list which takes gameobjects to be attached
+    /// /// Stores all objects
     /// </summary>
-    [SerializeField]
-    private List<GameObject> gameObjects;
+    private List<GameObject> gameObjects = new List<GameObject>();
 
     /// <summary>
-    /// Initial list which takes tages to be attached
+    /// Stores tags for objects
     /// </summary>
-    [SerializeField]
-    private List<string> gameLabels;
+    private List<string> gameLabels = new List<string>();
 
     /// <summary>
     /// Tick Prefab
@@ -43,11 +41,8 @@ public class CompassScript : MonoBehaviour
     void Start()
     {
         cameraObject = Camera.allCameras[0];
-        foreach (var obj in gameObjects)
-        {
-            angles.Add(0.0);
-            CreateTick();
-        }
+        transform.SetParent(cameraObject.transform);
+        transform.localPosition = new Vector3(0, 0, 3);
     }
 
     // Update is called once per frame
@@ -57,7 +52,7 @@ public class CompassScript : MonoBehaviour
         UpdateTicks();
     }
 
-    void UpdateAngles()
+    private void UpdateAngles()
     {
         int i = 0;
         foreach (var obj in gameObjects)
@@ -70,7 +65,8 @@ public class CompassScript : MonoBehaviour
             if (difference > 180)
             {
                 difference -= 360;
-            } else if (difference < -180)
+            }
+            else if (difference < -180)
             {
                 difference += 360;
             }
@@ -79,20 +75,47 @@ public class CompassScript : MonoBehaviour
         }
     }
 
-    void UpdateTicks()
+    private void UpdateTicks()
     {
         int i = 0;
         foreach (var Tick in ticks)
         {
-            Tick.anchoredPosition3D = new Vector3((float)angles[i]*10/9, 0, 0);
+            Tick.anchoredPosition3D = new Vector3((float)angles[i] / 72, 0, 0); //10/9 takes 360 degrees to 400 pixels
             i++;
         }
     }
 
-    void CreateTick()
+    private void CreateTick()
     {
-        var Tick = Instantiate(tick,this.transform);
+        var Tick = Instantiate(tick, this.transform);
         Tick.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 0, 0);
         ticks.Add(Tick.GetComponent<RectTransform>());
+    }
+
+    public void AddCompassObject(GameObject gameObject, string label = "")
+    {
+        gameObjects.Add(gameObject);
+        gameLabels.Add(label);
+        CreateTick();
+        angles.Add(0.0);
+    }
+
+    public void RemoveCompassObject(GameObject gameObject)
+    {
+        int i = 0;
+        foreach (GameObject obj in gameObjects)
+        {
+            if (obj == gameObject)
+            {
+                gameObjects.Remove(obj);
+                gameLabels.RemoveRange(i, 1);
+                angles.RemoveRange(i, 1);
+                GameObject oldtick = ticks[i].gameObject;
+                ticks.RemoveRange(i, 1);
+                Destroy(oldtick);
+                break;
+            }
+            i++;
+        }
     }
 }

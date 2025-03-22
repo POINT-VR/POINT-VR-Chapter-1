@@ -124,10 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb0ad16c7b63b749b628a4293ae3595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjects:
-  - {fileID: 0}
-  gameLabels:
-  - Mass
   tick: {fileID: 7857862069684131719, guid: ba988e8182ca7a84eb531aa5db6ec0e9, type: 3}
 --- !u!223 &6707269213877209349
 Canvas:
@@ -138,7 +134,7 @@ Canvas:
   m_GameObject: {fileID: 6707269213877209348}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
