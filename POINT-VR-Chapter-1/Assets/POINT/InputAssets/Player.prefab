@@ -3864,7 +3864,7 @@ GameObject:
   - component: {fileID: 685732246017077719}
   m_Layer: 5
   m_Name: SubtitlesText
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8630,7 +8630,7 @@ GameObject:
   - component: {fileID: 685732247222427486}
   m_Layer: 5
   m_Name: Subtitles
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
