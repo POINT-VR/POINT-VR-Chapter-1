@@ -241,6 +241,17 @@
                 },
                 {
                     "name": "",
+                    "id": "ebc4298c-f951-4533-a0bb-1085e46fa335",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "516d7578-9fa7-4ff4-a97c-1f15e09d8d41",
                     "path": "<XRController>{LeftHand}/triggerPressed",
                     "interactions": "",
@@ -564,6 +575,17 @@
                     "name": "",
                     "id": "591bf3fa-c2d5-4690-b53e-44419b22faca",
                     "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aba3809c-aad0-4a81-b175-4272a68c6dd3",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
