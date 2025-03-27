@@ -32,6 +32,12 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Sprite pushPullSprite;
     [SerializeField] private Sprite overSprite;
     [SerializeField] private Sprite menuSprite;
+    [Header("PC Port Controls Graphics")]
+    [SerializeField] private Sprite pcTeleportationSprite;
+    [SerializeField] private Sprite pcTurnSprite;
+    [SerializeField] private Sprite pcGrabSprite;
+    [SerializeField] private Sprite pcPushPullSprite;
+    [SerializeField] private Sprite pcMenuSprite;
     [Header("Instructions Text")]
     [SerializeField] private LocalizedString teleportationText;
     [SerializeField] private LocalizedString turnText;
@@ -99,6 +105,15 @@ public class TutorialManager : MonoBehaviour
         teleportZone2.SetActive(false);
         teleportZone3.SetActive(false);
         SceneUIContainer.SetActive(false);
+
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        // Replace controller images
+        teleportationSprite = pcTeleportationSprite;
+        turnSprite = pcTurnSprite;
+        grabSprite = pcGrabSprite;
+        pushPullSprite = pcPushPullSprite;
+        menuSprite = pcMenuSprite;
+#endif
 
         yield return WaitForPlayerSpawn();
         StartTutorial();
