@@ -288,6 +288,17 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForMenuPopup()
     {
+        // To ensure subtitles show up during the corresponding tutorial segment
+        GameObject subtitleObject = player.GetComponent<NarrationManager>().SubtitleObject;
+        if (subtitleObject != null)
+        {
+            subtitleObject.tag = "Player";
+            foreach (Transform child in subtitleObject.transform)
+            {
+                child.tag = "Player";
+            }
+        }
+
         StartCoroutine(WaitForControlsScreenSelection());
         yield break;
     }
@@ -346,6 +357,17 @@ public class TutorialManager : MonoBehaviour
         overText.RefreshString();
         instructions.text = overString;
         SceneUIContainer.SetActive(true);
+
+        // To ensure subtitles no longer show up when the simulation is paused
+        GameObject subtitleObject = player.GetComponent<NarrationManager>().SubtitleObject;
+        if (subtitleObject != null)
+        {
+            subtitleObject.tag = "Untagged";
+            foreach (Transform child in subtitleObject.transform)
+            {
+                child.tag = "Untagged";
+            }
+        }
 
         yield break;
     }
