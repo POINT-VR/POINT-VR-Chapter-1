@@ -53,7 +53,8 @@ public class TutorialManager : MonoBehaviour
     private string overString;
     private string menuString;
     private string openMenuString;
-
+    [Header("PC Port Instructions Text")]
+    [SerializeField] private LocalizedString pcTurnText;
 
     // Cache
     private TMP_Text instructions = null;
@@ -66,6 +67,10 @@ public class TutorialManager : MonoBehaviour
 
     private void OnEnable()
     {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        // Replace instruction text
+        turnText = pcTurnText;
+#endif
         teleportationText.StringChanged += UpdateTeleportationString;
         turnText.StringChanged += UpdateTurnString;
         grabText.StringChanged += UpdateGrabString;
