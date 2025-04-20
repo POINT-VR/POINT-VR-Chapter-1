@@ -129,6 +129,7 @@ public class UIManager : MonoBehaviour
     /// <param name="newVolume"></param>
     public void AdjustFunctionalAudioVolume(float newVolume)
     {
+        GameManager.Instance.FunctionalVolume = newVolume;
         foreach (AudioSource audioSource in functionalAudio)
         {
             audioSource.volume = newVolume;
@@ -141,6 +142,7 @@ public class UIManager : MonoBehaviour
     /// <param name="newVolume"></param>
     public void AdjustAestheticAudioVolume(float newVolume)
     {
+        GameManager.Instance.AestheticVolume = newVolume;
         foreach (AudioSource audioSource in aestheticAudio)
         {
             audioSource.volume = newVolume;
@@ -152,7 +154,7 @@ public class UIManager : MonoBehaviour
     {
         set
         {
-            language = (GameManager.Language)value;
+            GameManager.Instance.GameLanguage = language = (GameManager.Language)value;
             if (subtitleLanguage != 0)
             {
                 subtitleLanguage = language;
@@ -193,12 +195,12 @@ public class UIManager : MonoBehaviour
         {
             if (value == 0)
             {
-                subtitleLanguage = (GameManager.Language)value;
+                GameManager.Instance.SubtitleLanguage = subtitleLanguage = (GameManager.Language)value;
                 narrationManager.SubtitlesLanguage = subtitleLanguage;
             }
             else
             {
-                subtitleLanguage = language;
+                GameManager.Instance.SubtitleLanguage = subtitleLanguage = language;
                 narrationManager.SubtitlesLanguage = language;
             }
 
@@ -231,6 +233,7 @@ public class UIManager : MonoBehaviour
     /// <param name="enabled"></param>
     public void ActivateFloorToggle(bool enabled)
     {
+        GameManager.Instance.IsFloorVisible = enabled;
         (Resources.FindObjectsOfTypeAll(typeof(MeshCollider))[0] as MeshCollider).gameObject.GetComponent<MeshRenderer>().enabled = enabled;
         // only known method to find Floor after it is inactive; would be preferable to use Layer or Tag to isolate, but this does not seem to be possible if the floor is inactive
     }

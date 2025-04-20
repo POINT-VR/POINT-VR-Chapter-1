@@ -47,7 +47,17 @@ public class XRHardwareController : MonoBehaviour
     /// <summary>
     /// Public property that exposes flag for haptics to UI events.
     /// </summary>
-    public bool HapticsEnabled { get { return hapticsEnabled; } set { hapticsEnabled = value; } }
+    public bool HapticsEnabled {
+        get
+        {
+            return hapticsEnabled;
+        }
+        
+        set
+        {
+            GameManager.Instance.IsHapticsEnabled = hapticsEnabled = value;
+        }
+    }
     /// <summary>
     /// Assigns input actions and locates the connected hardware device associated with this instance
     /// </summary>

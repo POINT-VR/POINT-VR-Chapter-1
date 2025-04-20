@@ -24,7 +24,7 @@ public class HighlightManager : MonoBehaviour
     {
         set
         {
-            isActive = value;
+            GameManager.Instance.IsControllerHighlighted = isActive = value;
         }
     }
     private Transform cameraTransform;
