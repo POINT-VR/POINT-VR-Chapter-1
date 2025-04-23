@@ -137,7 +137,6 @@ public class GameManager : MonoBehaviour
                 // Create JSON file
                 string jsonString = JsonUtility.ToJson(data);
                 File.WriteAllText(settingsFilePath, jsonString);
-                Debug.Log("Test");
             }
         } else
         {
