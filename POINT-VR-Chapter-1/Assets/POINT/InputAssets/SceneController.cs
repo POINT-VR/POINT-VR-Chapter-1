@@ -52,9 +52,9 @@ public class SceneController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        GameManager.PlayerData data = GameManager.Instance.GetData();
-        music.time = data.musicTime;
-        gripNotice.IsOn = data.gripNoticeEnabled;
+        music.time = GameManager.Instance.MusicTime;
+
+        GameManager.PlayerData data = GameManager.Instance.Data;
         functional.value = data.functionalVolume;
         aesthetic.value = data.aestheticVolume;
         uiManager.Language = (int)data.language;
@@ -66,24 +66,12 @@ public class SceneController : MonoBehaviour
         uiManager.gameObject.SetActive(false);
     }
     /// <summary>
-    /// Saves the player data to the GameManager and loads a new scene
+    /// Saves the music time to the GameManager and loads a new scene
     /// </summary>
     /// <param name="scene">The scene index as assigned in the build settings</param>
     public void ChangeScene(int scene)
     {
-        GameManager.PlayerData data = new GameManager.PlayerData
-        {
-            musicTime = music.time,
-            gripNoticeEnabled = gripNotice.IsOn,
-            functionalVolume = functional.value,
-            aestheticVolume = aesthetic.value,
-            isFloorVisible = floorToggle.IsOn,
-            isHapticsEnabled = hapticToggle.IsOn,
-            isControllerHighlighted = highlightsToggle.IsOn,
-            language = (GameManager.Language)uiManager.Language,
-            subtitleLanguage = (GameManager.Language) uiManager.SubtitleLanguage
-        };
-        GameManager.Instance.SetData(data);
+        GameManager.Instance.MusicTime = music.time;
         pause.Unpause();
         SceneManager.LoadScene(scene);
     }

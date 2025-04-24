@@ -35,10 +35,6 @@ public class PauseController : MonoBehaviour
     /// </summary>
     [SerializeField] GameObject uiContainer;
     /// <summary>
-    /// The Gripnotice
-    /// </summary>
-    [SerializeField] GameObject gripNotice;
-    /// <summary>
     /// Necessary for dropping objects on game pause
     /// </summary>
     [SerializeField] HandController leftHand, rightHand;
@@ -63,7 +59,6 @@ public class PauseController : MonoBehaviour
 
     private void Toggle(InputAction.CallbackContext ctx)
     {
-        gripNotice.SetActive(false);
         rightHand.Release();
         leftHand.Release();
         laserLeft.localScale = new Vector3(laserLeft.localScale.x, gamePaused ? laserSize : reducedLaserSize, laserLeft.localScale.z);
