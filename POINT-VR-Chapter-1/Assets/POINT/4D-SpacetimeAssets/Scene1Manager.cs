@@ -7,6 +7,10 @@ using TMPro;
 
 public class Scene1Manager : MonoBehaviour
 {
+
+    //Edited for testing - 3/22/24
+    private CompassScript compass;
+
     [SerializeField] private DynamicAxis dynamicAxis;
     [SerializeField] private EndPointManager endPointManager;
     [SerializeField] private CoordinateDisplay massObject;
@@ -159,6 +163,8 @@ public class Scene1Manager : MonoBehaviour
         player = currentCamera.transform.parent.gameObject;
         uiManager = player.GetComponentInChildren<UIManager>(true);
 
+        compass = player.GetComponentInChildren<CompassScript>(true);
+
         yield break;
     }
     private IEnumerator ObjectiveOne()
@@ -200,6 +206,23 @@ public class Scene1Manager : MonoBehaviour
         massObject.ShowText();
         massObject.HideTime();
         Debug.Log("Look! A mass just appeared in space.");
+
+        //Edited for testing - 3/22/24
+        compass.ShowCompass();
+        compass.transform.gameObject.SetActive(true);
+
+        yield return new WaitForSecondsRealtime(1);
+
+        compass.AddCompassObject(massObject.gameObject);
+
+        yield return new WaitForSecondsRealtime(1);
+
+        compass.RemoveCompassObject(massObject.gameObject);
+
+        yield return new WaitForSecondsRealtime(1);
+
+        compass.HideCompass();
+
         yield return new WaitForSecondsRealtime(1);
         Debug.Log("This object is currently located at the origin, so its position is (0, 0, 0). Now, reach out and drag the object along the grid lines to get to the desired location. You may follow the example path or make your own path.");
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene1\\2_move_an_object_1");

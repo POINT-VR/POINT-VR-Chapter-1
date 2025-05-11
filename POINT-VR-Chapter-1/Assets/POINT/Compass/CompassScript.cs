@@ -37,12 +37,15 @@ public class CompassScript : MonoBehaviour
     [SerializeField]
     private GameObject tick;
 
+    /// <summary>
+    /// Whether or not the compass is showing, prevents unnecessary computations when off
+    /// </summary>
+    private bool isShowing;
+
     // Start is called before the first frame update
     void Start()
     {
         cameraObject = Camera.allCameras[0];
-        transform.SetParent(cameraObject.transform);
-        transform.localPosition = new Vector3(0, 0, 3);
     }
 
     // Update is called once per frame
@@ -50,6 +53,7 @@ public class CompassScript : MonoBehaviour
     {
         UpdateAngles();
         UpdateTicks();
+
     }
 
     private void UpdateAngles()
@@ -80,7 +84,7 @@ public class CompassScript : MonoBehaviour
         int i = 0;
         foreach (var Tick in ticks)
         {
-            Tick.anchoredPosition3D = new Vector3((float)angles[i] / 72, 0, 0); //10/9 takes 360 degrees to 400 pixels
+            Tick.anchoredPosition3D = new Vector3((float)angles[i] *10 /9, 0, 0); // 10/9 takes 360 degrees to length 400
             i++;
         }
     }
@@ -90,6 +94,10 @@ public class CompassScript : MonoBehaviour
         var Tick = Instantiate(tick, this.transform);
         Tick.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 0, 0);
         ticks.Add(Tick.GetComponent<RectTransform>());
+        if (!isShowing)
+        {
+            Tick.transform.gameObject.SetActive(false);
+        }
     }
 
     public void AddCompassObject(GameObject gameObject, string label = "")
@@ -116,6 +124,27 @@ public class CompassScript : MonoBehaviour
                 break;
             }
             i++;
+        }
+    }
+
+    //This function does not work properly
+    public void ShowCompass()
+    {
+        isShowing = true;
+        gameObject.SetActive(true);
+        foreach (var tick in ticks)
+        {
+            tick.transform.gameObject.SetActive(true);
+        }
+    }
+
+    public void HideCompass()
+    {
+        isShowing = false;
+        gameObject.SetActive(false);
+        foreach (var tick in ticks)
+        {
+            tick.transform.gameObject.SetActive(false);
         }
     }
 }
