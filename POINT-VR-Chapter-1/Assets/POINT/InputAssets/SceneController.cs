@@ -10,13 +10,13 @@ using System.Collections.Generic;
 /// </summary>
 public enum SceneNumEnum
 {
-    StartMenu = 900,
-    Tutorial = 901,
-    Ch1_Scene1 = 902,
-    Conf_Demo_P1 = 903,
-    Conf_Demo_P2 = 904,
-    Conf_Demo_P3 = 905,
-    EndCredits = 906
+    StartMenu = 114,
+    Tutorial = 97,
+    Ch1_Scene1 = 115,
+    Conf_Demo_P1 = 116,
+    Conf_Demo_P2 = 108,
+    Conf_Demo_P3 = 101,
+    EndCredits = 121
 }
 
 /// <summary>
