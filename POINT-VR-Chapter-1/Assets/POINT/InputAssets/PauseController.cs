@@ -9,6 +9,10 @@ public class PauseController : MonoBehaviour
     /// The input reference for turning the menu on and off
     /// </summary>
     [SerializeField] InputActionReference toggleReference;
+    /// <summary>
+    /// If true, pausing will not affect time scale or audio
+    /// </summary>
+    public bool ignorePauseEffects = false;
     public InputActionReference ToggleReference
     {
         get
@@ -87,8 +91,11 @@ public class PauseController : MonoBehaviour
             }
         }
         gamePaused = !gamePaused;
-        Time.timeScale = gamePaused ? 0.0f : 1.0f;
-        AudioListener.pause = gamePaused;
+        if (!ignorePauseEffects)
+        {
+           Time.timeScale = gamePaused ? 0.0f : 1.0f;
+            AudioListener.pause = gamePaused; 
+        }
         menu.SetActive(gamePaused);
         if (gamePaused)
         {

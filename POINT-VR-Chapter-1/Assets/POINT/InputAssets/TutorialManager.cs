@@ -275,6 +275,9 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForControlsScreenSelection() 
     {
+        //tells PauseController to not change the timeScale or audio
+        player.GetComponent<PauseController>().ignorePauseEffects = true;
+
         //Waiting until player opens menu + explicit press of left menu control
         yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
 
@@ -283,8 +286,6 @@ public class TutorialManager : MonoBehaviour
 
         UIManagerScript.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
-
-        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Forget_Controls");
 
@@ -301,8 +302,6 @@ public class TutorialManager : MonoBehaviour
         UIManagerScript.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
 
-        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
-
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Options");
         
         yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
@@ -318,10 +317,11 @@ public class TutorialManager : MonoBehaviour
         UIManagerScript.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
         UIManagerScript.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
 
-        AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
-
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Scene_Select");
         yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
+
+        // tells PauseController to go back to normal pausing effects
+        player.GetComponent<PauseController>().ignorePauseEffects = false;
 
         overText.RefreshString();
         instructions.text = overString;
