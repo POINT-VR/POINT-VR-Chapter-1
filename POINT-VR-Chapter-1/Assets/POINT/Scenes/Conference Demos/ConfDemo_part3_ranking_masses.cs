@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Localization;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class ConfDemo_part3_ranking_masses : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     [SerializeField] private GameObject TaskUIContainer;
     [SerializeField] private GameObject Task2UIContainer;
     [SerializeField] private InputActionReference openMenuReference;
+    [SerializeField] private List<GameObject> sortedMassSpheres = new List<GameObject>(5);
+
 
     [Header("Instructions Text")]
     [SerializeField] private LocalizedString objective1;
@@ -91,6 +94,10 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     {
         // Called in the OnCast() in the Task1 UI -> Next Task Button, once they click to continue to Task 2
         UIManagerScript.UpdateCurrentObjective(objective2); // Rank different radii, same mass
+        foreach (GameObject sphere in sortedMassSpheres)
+        {
+            sphere.SetActive(false);
+        }
         StartCoroutine(RadiiTaskAudio());
     }
 
