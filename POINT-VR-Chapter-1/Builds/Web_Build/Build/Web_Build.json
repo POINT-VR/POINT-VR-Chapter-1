@@ -1,0 +1,16 @@
+{
+"companyName": "POINT VR UIUC",
+"productName": "Einstein's Spacetime",
+"productVersion": "1.0",
+"dataUrl": "Web_Build.data.unityweb",
+"wasmCodeUrl": "Web_Build.wasm.code.unityweb",
+"wasmFrameworkUrl": "Web_Build.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.20f1"
+}
