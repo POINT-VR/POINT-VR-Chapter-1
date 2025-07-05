@@ -67,7 +67,7 @@ public class TutorialManager : MonoBehaviour
 
     private void OnEnable()
     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         // Replace instruction text
         turnText = pcTurnText;
 #endif
@@ -111,7 +111,7 @@ public class TutorialManager : MonoBehaviour
         teleportZone3.SetActive(false);
         SceneUIContainer.SetActive(false);
 
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         // Replace controller images
         teleportationSprite = pcTeleportationSprite;
         turnSprite = pcTurnSprite;
@@ -247,7 +247,7 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForGrab()
     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         yield return new WaitUntil(() => massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null);
 #else
         yield return new WaitUntil(() => massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null);
@@ -379,7 +379,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Pushed(InputAction.CallbackContext obj)
     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null)
         {
 #else
@@ -392,7 +392,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Pulled(InputAction.CallbackContext obj)
     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null)
         {
 #else

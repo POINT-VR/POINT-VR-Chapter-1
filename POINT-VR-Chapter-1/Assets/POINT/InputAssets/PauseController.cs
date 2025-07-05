@@ -70,7 +70,7 @@ public class PauseController : MonoBehaviour
         toggleReference.action.started += Toggle;
         laserSize = laserLeft.localScale.y;
         gamePaused = false;
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         Cursor.lockState = CursorLockMode.Locked;
         pcPortManager = this.GetComponent<PCPortManager>();
 #endif
@@ -108,7 +108,7 @@ public class PauseController : MonoBehaviour
         if (gamePaused)
         {
             uiContainer.transform.SetParent(transform.parent);
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
             Cursor.lockState = CursorLockMode.None;
             if (pcPortManager != null)
             {
@@ -120,7 +120,7 @@ public class PauseController : MonoBehaviour
         {
             uiContainer.transform.SetParent(mainCamera);
             uiContainer.transform.SetPositionAndRotation(mainCamera.position + mainCamera.forward * distanceFromCamera, mainCamera.rotation);
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
             uiContainer.transform.SetPositionAndRotation((mainCamera.position + mainCamera.forward * distanceFromCamera) + pcPortManager.UiOffset, mainCamera.rotation);
             Cursor.lockState = CursorLockMode.Locked;
             if (pcPortManager != null)
