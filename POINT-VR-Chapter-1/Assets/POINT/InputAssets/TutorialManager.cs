@@ -58,7 +58,7 @@ public class TutorialManager : MonoBehaviour
 
     // Cache
     private TMP_Text instructions = null;
-    private Camera currentCamera = null;
+    private Camera mainCamera = null;
     private GameObject player = null;
     private bool pushed = false, pulled = false;
     private GameObject menus = null;
@@ -126,21 +126,21 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentCamera != null)
+        if (mainCamera != null)
         {
-            this.transform.LookAt(currentCamera.transform);
+            this.transform.LookAt(mainCamera.transform);
             this.transform.Rotate(0, 180, 0);
         }
     }
 
     IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
+        yield return new WaitUntil(() => Camera.main != null);
 
         // Start menu initialization
-        currentCamera = Camera.current;
-        this.GetComponent<Canvas>().worldCamera = currentCamera;
-        player = currentCamera.transform.parent.gameObject;
+        mainCamera = Camera.main;
+        this.GetComponent<Canvas>().worldCamera = mainCamera;
+        player = mainCamera.transform.parent.gameObject;
 
         // player.GetComponent<PauseController>().enabled = false; // This should disable pausing, but it currently soft locks the player from continueing
                                                                // TODO: Disable the Oculus pause to bring up the UI menu

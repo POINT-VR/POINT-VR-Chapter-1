@@ -96,7 +96,7 @@ public class PauseController : MonoBehaviour
         }
         foreach (GameObject g in gameObjects)
         {
-            if (!g.CompareTag("Player"))
+            if (!g.CompareTag("Player") && !g.CompareTag("MainCamera"))
             {
                 g.SetActive(gamePaused);
             }
