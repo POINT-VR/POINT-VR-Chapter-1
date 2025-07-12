@@ -74,6 +74,8 @@ public class StartMenuManager : MonoBehaviour
                         }
                     }
                 }
+
+                uiManager.Language = value;
             }
             
             language = value;
@@ -93,8 +95,7 @@ public class StartMenuManager : MonoBehaviour
                 }
             }
 
-            if (value > 0) value = 1;
-
+            int toggleIdx = (value == 0) ? 0 : 1;
             if (uiManager != null && subtitlesParent != null)
             {
                 for (int i = 0; i < subtitlesParent.childCount; i++)
@@ -102,7 +103,7 @@ public class StartMenuManager : MonoBehaviour
                     Image imageComponent = subtitlesParent.GetChild(i).GetComponentInChildren<Image>();
                     if (imageComponent != null)
                     {
-                        if (i == value) // selected toggle
+                        if (i == toggleIdx) // selected toggle
                         {
                             imageComponent.sprite = uiManager.toggleSelected;
                         }
@@ -112,6 +113,8 @@ public class StartMenuManager : MonoBehaviour
                         }
                     }
                 }
+
+                uiManager.SubtitleLanguage = value;
             }
 
             subtitleLanguage = value;
@@ -171,7 +174,7 @@ public class StartMenuManager : MonoBehaviour
         yield return new WaitUntil(() => Camera.main != null);
 
         player = Camera.main.transform.parent.gameObject;
-        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(defaultObjective);
+        player.transform.parent.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(defaultObjective);
         player.GetComponent<PauseController>().ToggleReference.action.Disable();
     }
 

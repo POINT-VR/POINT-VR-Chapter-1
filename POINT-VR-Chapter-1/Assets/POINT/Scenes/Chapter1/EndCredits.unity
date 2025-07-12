@@ -298,6 +298,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8730d809b4759534fa8731325c636774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultObjective:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 13430563209777159
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   fundingAcknowledgements: {fileID: 1180836758}
   projectLinks: {fileID: 831191579}
   fadeDuration: 2
@@ -309,6 +318,8 @@ MonoBehaviour:
   endY: 5
   fadeDistance: 1
   scrollSpeed: 0.3
+  references:
+    version: 1
 --- !u!1 &635651177
 GameObject:
   m_ObjectHideFlags: 0

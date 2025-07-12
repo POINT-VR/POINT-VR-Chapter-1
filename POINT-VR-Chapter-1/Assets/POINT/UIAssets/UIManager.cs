@@ -203,12 +203,13 @@ public class UIManager : MonoBehaviour
             }
 
 
+            int toggleIdx = (value == 0) ? 0 : 1;
             for (int i = 0; i < subtitleParent.childCount; i++)
             {
                 Image imageComponent = subtitleParent.GetChild(i).GetComponentInChildren<Image>();
                 if (imageComponent != null)
                 {
-                    if (i == value) // selected toggle
+                    if (i == toggleIdx) // selected toggle; note: should change to i == value if subtitles has language options instead of on/off
                     {
                         imageComponent.sprite = toggleSelected;
                     }

@@ -44,7 +44,7 @@ public class FloatingObjectives : MonoBehaviour
 
     public void UpdateObjectiveLanguage(int idx, string s)
     {
-        if (idx >= 0 && idx < objectives.Count)
+        if (objectives != null && idx >= 0 && idx < objectives.Count)
         {
             objectives[idx] = s;
             ReloadObjectives();

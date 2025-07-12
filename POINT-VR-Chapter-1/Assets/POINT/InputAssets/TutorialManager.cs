@@ -184,11 +184,12 @@ public class TutorialManager : MonoBehaviour
         // Turn tutorial
         controlsImage.sprite = turnSprite;
         turnText.RefreshString();
+        UpdateTurnString(turnText.GetLocalizedString());
         instructions.text = turnString;
 
         if (uiManager != null)
         {
-            uiManager.UpdateCurrentObjective(instructions.text);
+            uiManager.UpdateCurrentObjective(turnText);
         }
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
 
@@ -202,15 +203,15 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => player.transform.rotation.y != initialRotation);
 
         // Teleportation tutorial
-
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport");
         controlsImage.sprite = teleportationSprite;
         teleportationText.RefreshString();
+        UpdateTeleportationString(teleportationText.GetLocalizedString());
         instructions.text = teleportationString;
 
         if (uiManager != null)
         {
-            uiManager.UpdateCurrentObjective(instructions.text);
+            uiManager.UpdateCurrentObjective(teleportationText);
         }
 
         StartCoroutine(WaitForTeleport()); 
@@ -239,12 +240,14 @@ public class TutorialManager : MonoBehaviour
         // Grab tutorial
         controlsImage.sprite = grabSprite;
         grabText.RefreshString();
+        UpdateGrabString(grabText.GetLocalizedString());
         instructions.text = grabString;
 
         if (uiManager != null)
         {
-            uiManager.UpdateCurrentObjective(instructions.text);
+            uiManager.UpdateCurrentObjective(grabText);
         }
+
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Grab");
 
         StartCoroutine(WaitForGrab());
@@ -263,12 +266,14 @@ public class TutorialManager : MonoBehaviour
         // Push and pull tutorial
         controlsImage.sprite = pushPullSprite;
         pushPullText.RefreshString();
+        UpdatePushPullString(pushPullText.GetLocalizedString());
         instructions.text = pushPullString;
 
         if (uiManager != null)
         {
-            uiManager.UpdateCurrentObjective(instructions.text);
+            uiManager.UpdateCurrentObjective(pushPullText);
         }
+
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Push&Pull");
 
         StartCoroutine(WaitForPushPull());
@@ -291,12 +296,14 @@ public class TutorialManager : MonoBehaviour
         // Activate Menu
         controlsImage.sprite = menuSprite;
         openMenuText.RefreshString();
+        UpdateOpenMenuString(openMenuText.GetLocalizedString());
         instructions.text = openMenuString;
 
         if (uiManager != null)
         {
-            uiManager.UpdateCurrentObjective(instructions.text);
+            uiManager.UpdateCurrentObjective(openMenuText);
         }
+
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Open");
 
         StartCoroutine(WaitForMenuPopup());
@@ -373,6 +380,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(11); // Set to the audio file above's duration in seconds 
 
         overText.RefreshString();
+        UpdateOverString(overText.GetLocalizedString());
         instructions.text = overString;
         SceneUIContainer.SetActive(true);
 
