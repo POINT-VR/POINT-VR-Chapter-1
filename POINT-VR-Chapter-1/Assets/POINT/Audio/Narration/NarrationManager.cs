@@ -48,6 +48,7 @@ public class NarrationManager : MonoBehaviour
     }
 
     // Cache
+    private PauseController pauseController = null;
     private TMP_Text subtitleText = null;
     private Image subtitleBackground = null;
     private string[] subtitleLines = null;
@@ -56,6 +57,11 @@ public class NarrationManager : MonoBehaviour
     private int currentLine = 0;
     private TMP_FontAsset currentFont = null;
     private Coroutine coroutine = null;
+
+    private void Start()
+    {
+        pauseController = this.GetComponent<PauseController>();
+    }
 
     /// <summary>
     /// This function plays an audio clip (whose name WITHOUT the file type is the parameter) and activates
@@ -118,7 +124,9 @@ public class NarrationManager : MonoBehaviour
             string output = ParseStyleTags(subtitleLines[currentLine + 1]);
             // Update UI
             subtitleText.font = currentFont;
-            subtitleObject.SetActive(true);
+            // If paused, do not display the subtitles. The exception is in the menu section of the tutorial, where
+            // the subtitleObject's tag will be set temporarily to "Player" so that it does not despawn during the pause.
+            subtitleObject.SetActive(!pauseController.GamePaused || subtitleObject.CompareTag("Player"));
             subtitleText.text = output;
             subtitleBackground.rectTransform.sizeDelta = new Vector2(subtitleText.preferredWidth, subtitleText.preferredHeight);
         }
