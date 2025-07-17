@@ -1207,6 +1207,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene UI Container
       objectReference: {fileID: 0}
+    - target: {fileID: 1108360122663542153, guid: d4a07f2bb152da641bd2c890187ea18d,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 550622637}
+    - target: {fileID: 1108360122663542153, guid: d4a07f2bb152da641bd2c890187ea18d,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UIChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1108360122663542153, guid: d4a07f2bb152da641bd2c890187ea18d,
+        type: 3}
+      propertyPath: onCast.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1108360123250483434, guid: d4a07f2bb152da641bd2c890187ea18d,
         type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId

@@ -335,6 +335,10 @@ MonoBehaviour:
     m_Localized: Congratulations! The simulation is over.
     m_Metadata:
       m_Items: []
+  - m_Id: 114460531303956480
+    m_Localized: Sandbox
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:
