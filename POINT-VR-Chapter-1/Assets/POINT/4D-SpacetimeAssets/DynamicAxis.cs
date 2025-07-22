@@ -9,230 +9,111 @@ public class DynamicAxis : MonoBehaviour
     [Tooltip("Radius of cylinders representing the axes")]
     [SerializeField] private float axisWidth;
 
+    [Tooltip("Cylinder prefab for spawning axes")]
+    [SerializeField] private GameObject axisObject;
+
     [Tooltip("Cone prefab for spawning arrow tips")]
     [SerializeField] private GameObject cone;
 
     [Tooltip("Cone prefab for spawning arrow tips")]
     [SerializeField] private Material axisMaterial;
 
-    //Axes
-    private GameObject xAxis;
-    private GameObject yAxis;
-    private GameObject zAxis;
+    const int NUM_DIMENSIONS = 3;
 
-    //Positive arrow tips
-    private GameObject xArrow;
-    private GameObject yArrow;
-    private GameObject zArrow;
-
-    //Negative arrow tips (hidden when in single sided mode)
-    private GameObject xArrowTwo;
-    private GameObject yArrowTwo;
-    private GameObject zArrowTwo;
+    private readonly GameObject[] axes = new GameObject[NUM_DIMENSIONS];
+    private readonly GameObject[] positiveArrows = new GameObject[NUM_DIMENSIONS];
+    private readonly GameObject[] negativeArrows = new GameObject[NUM_DIMENSIONS];
 
     //Axis and arrow renderers, used to more easily hide objects 
-    private MeshRenderer xAxisRenderer;
-    private MeshRenderer yAxisRenderer;
-    private MeshRenderer zAxisRenderer;
+    private readonly MeshRenderer[] axesAndArrowRenderers = new MeshRenderer[3 * NUM_DIMENSIONS];
 
-    private MeshRenderer xArrowRenderer;
-    private MeshRenderer yArrowRenderer;
-    private MeshRenderer zArrowRenderer;
-
-    private MeshRenderer xArrowTwoRenderer;
-    private MeshRenderer yArrowTwoRenderer;
-    private MeshRenderer zArrowTwoRenderer;
-
-    /// <summary>
-    /// Bool determines whether or not the axis lines emanate from the origin in one or two directions
-    /// </summary>
-    private bool doubleSided = true; 
+    private readonly Color[] axesColors = { Color.red, Color.blue, Color.green };
     
     //Calls awake rather than start so that set up is performed instantly
     void Awake()
     {
-        //Creates axes
-        xAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        yAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        zAxis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        xAxis.transform.SetParent(this.transform);
-        yAxis.transform.SetParent(this.transform);
-        zAxis.transform.SetParent(this.transform);
+        Vector3 axisScale = new Vector3(axisWidth, 1, axisWidth);
 
-        //Creates positive arrows
-        xArrow = Instantiate(cone, this.transform);
-        yArrow = Instantiate(cone, this.transform);
-        zArrow = Instantiate(cone, this.transform);
+        // Iterate through the dimensions in order: x, y, z
+        for (int i = 0; i < NUM_DIMENSIONS; i++)
+        {
+            // Creates axis
+            axes[i] = Instantiate(axisObject);
+            axes[i].transform.SetParent(this.transform);
 
-        //Creates negative arrows
-        xArrowTwo = Instantiate(cone, this.transform);
-        yArrowTwo = Instantiate(cone, this.transform);
-        zArrowTwo = Instantiate(cone, this.transform);
+            // Create arrows
+            positiveArrows[i] = Instantiate(cone, this.transform);
+            negativeArrows[i] = Instantiate(cone, this.transform);
 
+            // Scale elements
+            axes[i].transform.localScale = axisScale;
+            positiveArrows[i].transform.localScale = axisWidth * Vector3.one;
+            negativeArrows[i].transform.localScale = axisWidth * Vector3.one;
 
+            // Position elements
+            axes[i].transform.localPosition = Vector3.zero;
+            Vector3 positiveArrowPosition = Vector3.zero;
+            positiveArrowPosition[i] = 1.0f;
+            positiveArrows[i].transform.localPosition = positiveArrowPosition;
+            negativeArrows[i].transform.localPosition = -positiveArrowPosition;
 
-        //Scales axes
-        xAxis.transform.localScale = new Vector3(axisWidth, 1, axisWidth);
-        yAxis.transform.localScale = new Vector3(axisWidth, 1, axisWidth);
-        zAxis.transform.localScale = new Vector3(axisWidth, 1, axisWidth);
+            // Rotate elements
+            switch (i)
+            {
+                case 0:
+                    axes[i].transform.localEulerAngles = new Vector3(0, 180, 90);
+                    positiveArrows[i].transform.localEulerAngles = new Vector3(0, 180, 90);
+                    negativeArrows[i].transform.localEulerAngles = new Vector3(0, 0, 90);
+                    break;
+                case 1:
+                    negativeArrows[i].transform.localEulerAngles = new Vector3(0, 0, 180);
+                    break;
+                case 2:
+                    axes[i].transform.localEulerAngles = new Vector3(90, 0, 0);
+                    positiveArrows[i].transform.localEulerAngles = new Vector3(90, 0, 0);
+                    negativeArrows[i].transform.localEulerAngles = new Vector3(90, 180, 0);
+                    break;
+                default:
+                    Debug.LogError("More than 3 spatial dimensions detected.");
+                    break;
+            }
 
-        //Scales positive arrows
-        xArrow.transform.localScale = axisWidth * Vector3.one;
-        yArrow.transform.localScale = axisWidth * Vector3.one;
-        zArrow.transform.localScale = axisWidth * Vector3.one;
-
-        //Scales negative arrows
-        xArrowTwo.transform.localScale = axisWidth * Vector3.one;
-        yArrowTwo.transform.localScale = axisWidth * Vector3.one;
-        zArrowTwo.transform.localScale = axisWidth * Vector3.one;
-
-
-
-        //Positions axes
-        xAxis.transform.localPosition = Vector3.zero;
-        yAxis.transform.localPosition = Vector3.zero;
-        zAxis.transform.localPosition = Vector3.zero;
-
-        //Positions positive arrows
-        xArrow.transform.localPosition = new Vector3(1, 0, 0);
-        yArrow.transform.localPosition = new Vector3(0, 1, 0);
-        zArrow.transform.localPosition = new Vector3(0, 0, 1);
-
-        //Positions negative arrows
-        xArrowTwo.transform.localPosition = new Vector3(-1, 0, 0);
-        yArrowTwo.transform.localPosition = new Vector3(0, -1, 0);
-        zArrowTwo.transform.localPosition = new Vector3(0, 0, -1);
-
-
-
-        //Orients axes, y axis is already properly orientated
-        xAxis.transform.localEulerAngles = new Vector3(0, 180, 90);
-        zAxis.transform.localEulerAngles = new Vector3(90, 0, 0);
-
-        //Orients positive arrows
-        xArrow.transform.localEulerAngles = new Vector3(0, 180, 90);
-        zArrow.transform.localEulerAngles = new Vector3(90, 0, 0);
-
-        //Orients negative arrows
-        xArrowTwo.transform.localEulerAngles = new Vector3(0, 0, 90);
-        yArrowTwo.transform.localEulerAngles = new Vector3(0, 0, 180);
-        zArrowTwo.transform.localEulerAngles = new Vector3(90, 180, 0);
-
-        //Saves refrence to axis renderers 
-        xAxisRenderer = xAxis.GetComponent<MeshRenderer>();
-        yAxisRenderer = yAxis.GetComponent<MeshRenderer>();
-        zAxisRenderer = zAxis.GetComponent<MeshRenderer>();
-
-        //Positive arrow renderes
-        xArrowRenderer = xArrow.GetComponent<MeshRenderer>();
-        yArrowRenderer = yArrow.GetComponent<MeshRenderer>();
-        zArrowRenderer = zArrow.GetComponent<MeshRenderer>();
-
-        //Negative arrow renderes
-        xArrowTwoRenderer = xArrowTwo.GetComponent<MeshRenderer>();
-        yArrowTwoRenderer = yArrowTwo.GetComponent<MeshRenderer>();
-        zArrowTwoRenderer = zArrowTwo.GetComponent<MeshRenderer>();
+            // Save references to renderers
+            axesAndArrowRenderers[NUM_DIMENSIONS * i] = axes[i].GetComponent<MeshRenderer>();
+            axesAndArrowRenderers[(NUM_DIMENSIONS * i) + 1] = positiveArrows[i].GetComponent<MeshRenderer>();
+            axesAndArrowRenderers[(NUM_DIMENSIONS * i) + 2] = negativeArrows[i].GetComponent<MeshRenderer>();
+        }
 
         SetAxisMaterial(axisMaterial);
-
-        // Set render queue axes
-        xAxisRenderer.material.renderQueue--;
-        yAxisRenderer.material.renderQueue--;
-        zAxisRenderer.material.renderQueue--;
-
-        // Set render queue positive arrows 
-        xArrowRenderer.material.renderQueue--;
-        yArrowRenderer.material.renderQueue--;
-        zArrowRenderer.material.renderQueue--;
-
-        // Set render queue negative arrows 
-        xArrowTwoRenderer.material.renderQueue--;
-        yArrowTwoRenderer.material.renderQueue--;
-        zArrowTwoRenderer.material.renderQueue--;
-
-        //Colors axes 
-        xAxisRenderer.material.color = Color.red;
-        yAxisRenderer.material.color = Color.green;
-        zAxisRenderer.material.color = Color.blue;
-
-        //Colors positive arrows 
-        xArrowRenderer.material.color = Color.red;
-        yArrowRenderer.material.color = Color.green;
-        zArrowRenderer.material.color = Color.blue;
-
-        //Colors negative arrows 
-        xArrowTwoRenderer.material.color = Color.red;
-        yArrowTwoRenderer.material.color = Color.green;
-        zArrowTwoRenderer.material.color = Color.blue;
+        for (int i = 0; i < 3 * NUM_DIMENSIONS; i++)
+        {
+            axesAndArrowRenderers[i].material.renderQueue--;
+            axesAndArrowRenderers[i].material.color = axesColors[i / NUM_DIMENSIONS];
+        }
 
         //Shows dynamic axis by default
         ShowAxes();
     }
 
-    //Public member functions
+    // Public member functions
     private void SetAxesLength(float length, int axisNumber = -1) //set to all axes by default
     {
         if (axisNumber == -1) //all axes
         {
-            xAxis.transform.localScale = new Vector3(xAxis.transform.localScale.x, length, xAxis.transform.localScale.z);
-            yAxis.transform.localScale = new Vector3(yAxis.transform.localScale.x, length, yAxis.transform.localScale.z);
-            zAxis.transform.localScale = new Vector3(zAxis.transform.localScale.x, length, zAxis.transform.localScale.z);
-            if (!doubleSided)
+            for (int i = 0; i < NUM_DIMENSIONS; i++)
             {
-                xAxis.transform.localPosition = length * xAxis.transform.up;
-                yAxis.transform.localPosition = length * yAxis.transform.up;
-                zAxis.transform.localPosition = length * zAxis.transform.up;
-
-                xArrow.transform.localPosition = 2*length * xAxis.transform.up;
-                yArrow.transform.localPosition = 2*length * yAxis.transform.up;
-                zArrow.transform.localPosition = 2*length * zAxis.transform.up;
-            } else
-            {
-                xAxis.transform.localPosition = new Vector3(0, 0, 0);
-                yAxis.transform.localPosition = new Vector3(0, 0, 0);
-                zAxis.transform.localPosition = new Vector3(0, 0, 0);
-
-                xArrow.transform.localPosition = (length) * xAxis.transform.up;
-                yArrow.transform.localPosition = (length) * yAxis.transform.up;
-                zArrow.transform.localPosition = (length) * zAxis.transform.up;
-
-                xArrowTwo.transform.localPosition = -(length) * xAxis.transform.up;
-                yArrowTwo.transform.localPosition = -(length) * yAxis.transform.up;
-                zArrowTwo.transform.localPosition = -(length) * zAxis.transform.up;
+                axes[i].transform.localScale = new Vector3(axes[i].transform.localScale.x, length, axes[i].transform.localScale.z);
+                axes[i].transform.localPosition = Vector3.zero;
+                positiveArrows[i].transform.localPosition = length * axes[i].transform.up;
+                negativeArrows[i].transform.localPosition = -length * axes[i].transform.up;
             }
         }
-        else if (axisNumber == 0) //x axis
+        else
         {
-            xAxis.transform.localScale = new Vector3(xAxis.transform.localScale.x, length, xAxis.transform.localScale.z);
-            if (!doubleSided)
-            {
-                xAxis.transform.localPosition = length * xAxis.transform.up;
-            } else
-            {
-                xAxis.transform.localPosition = new Vector3(0, 0, 0);
-            }
-        }
-        else if (axisNumber == 1) //y axis
-        {
-            yAxis.transform.localScale = new Vector3(yAxis.transform.localScale.x, length, yAxis.transform.localScale.z);
-            if (!doubleSided)
-            {
-                yAxis.transform.localPosition = length * yAxis.transform.up;
-            } else
-            {
-                yAxis.transform.localPosition = new Vector3(0, 0, 0);
-            }
-        }
-        else if (axisNumber == 2) //z axis
-        {
-            zAxis.transform.localScale = new Vector3(zAxis.transform.localScale.x, length, zAxis.transform.localScale.z);
-            if (!doubleSided)
-            {
-                zAxis.transform.localPosition = length * zAxis.transform.up;
-            } else
-            {
-                zAxis.transform.localPosition = new Vector3(0, 0, 0);
-            }
+            axes[axisNumber].transform.localScale = new Vector3(axes[axisNumber].transform.localScale.x, length, axes[axisNumber].transform.localScale.z);
+            axes[axisNumber].transform.localPosition = Vector3.zero;
+            positiveArrows[axisNumber].transform.localPosition = length * axes[axisNumber].transform.up;
+            negativeArrows[axisNumber].transform.localPosition = -length * axes[axisNumber].transform.up;
         }
     }
 
@@ -266,43 +147,30 @@ public class DynamicAxis : MonoBehaviour
     public IEnumerator TransitionAxisColor(Color endColor, float duration)
     {
         float timeElapsed = 0;
+        Color[] currentAxesColors = new Color[NUM_DIMENSIONS];
+        for (int i = 0; i < NUM_DIMENSIONS; i++)
+        {
+            currentAxesColors[i] = axesAndArrowRenderers[NUM_DIMENSIONS * i].material.color;
+        }
 
-        Color xColor = xAxisRenderer.material.color;
-        Color yColor = yAxisRenderer.material.color;
-        Color zColor = zAxisRenderer.material.color;
-
-        while (timeElapsed < duration) //textbook lerp
+        while (timeElapsed < duration)
         {
             yield return null;
             float t = timeElapsed / duration;
 
-            xAxisRenderer.material.color = Color.Lerp(xColor, endColor, t);
-            xArrowRenderer.material.color = Color.Lerp(xColor, endColor, t);
-            xArrowTwoRenderer.material.color = Color.Lerp(xColor, endColor, t);
-
-            yAxisRenderer.material.color = Color.Lerp(yColor, endColor, t);
-            yArrowRenderer.material.color = Color.Lerp(yColor, endColor, t);
-            yArrowTwoRenderer.material.color = Color.Lerp(yColor, endColor, t);
-
-            zAxisRenderer.material.color = Color.Lerp(zColor, endColor, t);
-            zArrowRenderer.material.color = Color.Lerp(zColor, endColor, t);
-            zArrowTwoRenderer.material.color = Color.Lerp(zColor, endColor, t);
+            for (int i = 0; i < 3 * NUM_DIMENSIONS; i++)
+            {
+                axesAndArrowRenderers[i].material.color = Color.Lerp(currentAxesColors[i / NUM_DIMENSIONS], endColor, t);
+            }
 
             timeElapsed += Time.deltaTime;
         }
 
         // Set to final color after last loop
-        xAxisRenderer.material.color = endColor;
-        xArrowRenderer.material.color = endColor;
-        xArrowTwoRenderer.material.color = endColor;
-
-        yAxisRenderer.material.color = endColor;
-        yArrowRenderer.material.color = endColor;
-        yArrowTwoRenderer.material.color = endColor;
-
-        zAxisRenderer.material.color = endColor;
-        zArrowRenderer.material.color = endColor;
-        zArrowTwoRenderer.material.color = endColor;
+        foreach (MeshRenderer meshRenderer in axesAndArrowRenderers)
+        {
+            meshRenderer.material.color = endColor;
+        }
 
         yield break;
     }
@@ -314,149 +182,57 @@ public class DynamicAxis : MonoBehaviour
     public IEnumerator TransitionAxisThickness(float endThickness, float duration)
     {
         float timeElapsed = 0;
-        float startThickness = xAxis.transform.localScale.x;
+        float startThickness = axes[0].transform.localScale.x;
         while (timeElapsed < duration) //textbook lerp
         {
             yield return null;
             float t = timeElapsed / duration;
             float lerpPoint = Mathf.Lerp(startThickness, endThickness, t);
 
-            xAxis.transform.localScale = new Vector3(lerpPoint, xAxis.transform.localScale.y, lerpPoint);
-            yAxis.transform.localScale = new Vector3(lerpPoint, yAxis.transform.localScale.y, lerpPoint);
-            zAxis.transform.localScale = new Vector3(lerpPoint, zAxis.transform.localScale.y, lerpPoint);
+            for (int i = 0; i < NUM_DIMENSIONS; i++)
+            {
+                axes[i].transform.localScale = new Vector3(lerpPoint, axes[i].transform.localScale.y, lerpPoint);
+            }
 
             timeElapsed += Time.deltaTime;
         }
 
-        xAxis.transform.localScale = new Vector3(endThickness, xAxis.transform.localScale.y, endThickness);
-        yAxis.transform.localScale = new Vector3(endThickness, yAxis.transform.localScale.y, endThickness);
-        zAxis.transform.localScale = new Vector3(endThickness, zAxis.transform.localScale.y, endThickness);
+        for (int i = 0; i < NUM_DIMENSIONS; i++)
+        {
+            axes[i].transform.localScale = new Vector3(endThickness, axes[i].transform.localScale.y, endThickness);
+        }
+
         yield break;
     }
 
     /// <summary>
-    /// Shows the entire dynamic axis (Axes and arrows)
+    /// Shows or hides the entire dynamic axis (Axes and arrows)
     /// </summary>
-    public void ShowAxes(int axisNumber = -1)
+    /// <param name="axisNumber"></param>
+    /// <param name="shouldShow"></param>
+    public void ShowAxes(int axisNumber = -1, bool shouldShow = true)
     { 
         if (axisNumber == -1)
         {
-            xAxisRenderer.enabled = true;
-            xArrowRenderer.enabled = true;
-            xArrowTwoRenderer.enabled = true;
-            yAxisRenderer.enabled = true;
-            yArrowRenderer.enabled = true;
-            yArrowTwoRenderer.enabled = true;
-            zAxisRenderer.enabled = true;
-            zArrowRenderer.enabled = true;
-            zArrowTwoRenderer.enabled = true;
-        } 
-        else if (axisNumber == 0) 
-        {
-            xAxisRenderer.enabled = true;
-            xArrowRenderer.enabled = true;
-            xArrowTwoRenderer.enabled = true;
+            foreach (MeshRenderer meshRenderer in axesAndArrowRenderers)
+            {
+                meshRenderer.enabled = shouldShow;
+            }
         }
-        else if (axisNumber == 1)
+        else
         {
-            yAxisRenderer.enabled = true;
-            yArrowRenderer.enabled = true;
-            yArrowTwoRenderer.enabled = true;
-        }
-        else if (axisNumber == 2)
-        {
-            zAxisRenderer.enabled = true;
-            zArrowRenderer.enabled = true;
-            zArrowTwoRenderer.enabled = true;
-        }
-    }
-
-    /// <summary>
-    /// Hides the entire dynamic axis (Axes and arrows)
-    /// </summary>
-    public void HideAxes(int axisNumber = -1)
-    {
-        if (axisNumber == -1)
-        {
-            xAxisRenderer.enabled = false;
-            xArrowRenderer.enabled = false;
-            xArrowTwoRenderer.enabled = false;
-            yAxisRenderer.enabled = false;
-            yArrowRenderer.enabled = false;
-            yArrowTwoRenderer.enabled = false;
-            zAxisRenderer.enabled = false;
-            zArrowRenderer.enabled = false;
-            zArrowTwoRenderer.enabled = false;
-
-        }
-        else if (axisNumber == 0)
-        {
-            xAxisRenderer.enabled = false;
-            xArrowRenderer.enabled = false;
-            xArrowTwoRenderer.enabled = false;
-        }
-        else if (axisNumber == 1) 
-        {
-            yAxisRenderer.enabled = false;
-            yArrowRenderer.enabled = false;
-            yArrowTwoRenderer.enabled = false;
-        }
-        else if (axisNumber == 2) 
-        {
-            zAxisRenderer.enabled = false;
-            zArrowRenderer.enabled = false;
-            zArrowTwoRenderer.enabled = false;
-        }
-    }
-
-    /// <summary>
-    /// Sets the axis to be double sided (true) or single sided (false)
-    /// </summary>
-    public void SetAxisMode(bool mode)
-    {
-        doubleSided = mode;
-        SetAxesLength(xAxis.transform.localScale.y, 0);
-        SetAxesLength(yAxis.transform.localScale.y, 1);
-        SetAxesLength(zAxis.transform.localScale.y, 2);
-        if (doubleSided)
-        {
-           if (xAxisRenderer.enabled)
-            { 
-               xArrowTwoRenderer.enabled = true;
-           }
-           if (yAxisRenderer.enabled)
-           {
-               yArrowTwoRenderer.enabled = true;
-           }
-           if (zAxisRenderer.enabled)
-           {
-               zArrowTwoRenderer.enabled = true;
-           }
-
-        } else
-        {
-            xArrowTwoRenderer.enabled = false;
-            yArrowTwoRenderer.enabled = false;
-            zArrowTwoRenderer.enabled = false;
+            axesAndArrowRenderers[axisNumber * NUM_DIMENSIONS].enabled = shouldShow;
+            axesAndArrowRenderers[(axisNumber * NUM_DIMENSIONS) + 1].enabled = shouldShow;
+            axesAndArrowRenderers[(axisNumber * NUM_DIMENSIONS) + 2].enabled = shouldShow;
         }
     }
 
     public void SetAxisMaterial(Material material)
     {
-        // Set material axes
-        xAxisRenderer.material = material;
-        yAxisRenderer.material = material;
-        zAxisRenderer.material = material;
-
-        // Set material positive arrows 
-        xArrowRenderer.material = material;
-        yArrowRenderer.material = material;
-        zArrowRenderer.material = material;
-
-        // Set material negative arrows 
-        xArrowTwoRenderer.material = material;
-        yArrowTwoRenderer.material = material;
-        zArrowTwoRenderer.material = material;
+        foreach (MeshRenderer meshRenderer in axesAndArrowRenderers)
+        {
+            meshRenderer.material = material;
+        }
     }
 
     public void AxisLength(float length)
@@ -464,4 +240,3 @@ public class DynamicAxis : MonoBehaviour
         SetAxesLength(length);
     }
 }
-

@@ -106,7 +106,7 @@ public class Scene1Manager : MonoBehaviour
     private IEnumerator Setup()
     {
         // Hide all objects we do not want
-        dynamicAxis.HideAxes(); 
+        dynamicAxis.ShowAxes(-1, false); 
         massObject.HideMass();
 
         examplePath = GameObject.Find("ExamplePathObj");
