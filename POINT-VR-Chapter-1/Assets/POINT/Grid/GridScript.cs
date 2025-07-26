@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+#if !UNITY_WEBGL || UNITY_EDITOR
 using System.Threading;
+#endif
+
 /// <summary>
 /// Script that replaces a MeshFilter mesh with that of a the ZYX-ordered junction-based grid.
 /// This grid can then deform in response to the movement of assigned rigidbodies.
@@ -56,11 +59,16 @@ public class GridScript : MonoBehaviour
                 position = rigidbodiesToDeformAround[j].position
             };
         }
+#if !UNITY_WEBGL  || UNITY_EDITOR
+        // Since C# threading is currently not supported in WebGL, we perform threading only on non-WebGL platforms
         int midpoint = ((displaced.Length / 2 - 1) | 7) + 1; //Increments of 8 only
         Thread t = new Thread(() => ThreadRoutine(displaced, masses, midpoint, displaced.Length));
         t.Start();
         ThreadRoutine(displaced, masses, 0, midpoint);
         t.Join();
+#else
+        ThreadRoutine(displaced, masses, 0, displaced.Length);
+#endif
         deformingMesh.vertices = displaced; //This is where the grid actually applies all of the calculations
         deformingMesh.RecalculateNormals();
     }
