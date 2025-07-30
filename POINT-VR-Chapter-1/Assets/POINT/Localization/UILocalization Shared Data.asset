@@ -307,6 +307,22 @@ MonoBehaviour:
     m_Key: SCENES_SANDBOX
     m_Metadata:
       m_Items: []
+  - m_Id: 120615334279168000
+    m_Key: MENU_GRIDTOGGLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120616997882740736
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120637133415038976
+    m_Key: SETTINGS_ONE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120637218341306368
+    m_Key: SETTINGS_TWO
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

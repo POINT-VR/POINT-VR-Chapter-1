@@ -344,6 +344,19 @@ MonoBehaviour:
     m_Localized: Sandbox
     m_Metadata:
       m_Items: []
+  - m_Id: 120615334279168000
+    m_Localized: "Deshabilitar esta opci\xF3n para permitir que masas desde cualquier
+      distancia deformen la cuadr\xEDcula."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120637133415038976
+    m_Localized: Uno
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120637218341306368
+    m_Localized: Dos
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

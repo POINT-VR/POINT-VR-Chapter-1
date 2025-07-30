@@ -339,6 +339,19 @@ MonoBehaviour:
     m_Localized: Sandbox
     m_Metadata:
       m_Items: []
+  - m_Id: 120615334279168000
+    m_Localized: Disabling this option allows masses from any distance to deform
+      the grid.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120637133415038976
+    m_Localized: One
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120637218341306368
+    m_Localized: Two
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:
