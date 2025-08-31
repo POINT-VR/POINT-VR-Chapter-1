@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0068988674, g: 0.006751718, b: 0.0071911463, a: 1}
+  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1353,8 +1353,14 @@ MonoBehaviour:
   versionText: {fileID: 0}
   languageParent: {fileID: 712371807}
   subtitlesParent: {fileID: 1697544913}
-  tutorialSceneName: Tutorial
-  creditsSceneName: EndCredits
+  tutorialSceneName:
+    m_SceneAsset: {fileID: 102900000, guid: ad557d7729cb1e94486b73729194a995, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/POINT/Scenes/Chapter1/Tutorial.unity
+  creditsSceneName:
+    m_SceneAsset: {fileID: 102900000, guid: 34853c8ba87e90c49b75acc2840e97b7, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/POINT/Scenes/Chapter1/EndCredits.unity
   defaultObjective:
     m_TableReference:
       m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f

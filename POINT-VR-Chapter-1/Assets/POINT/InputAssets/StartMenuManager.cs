@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
+using DevLocker.Utils;
 
 public class StartMenuManager : MonoBehaviour
 {
@@ -23,10 +24,10 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField] private Transform subtitlesParent = null;
 
     [Tooltip("Tutorial Scene Name")]
-    [SerializeField] private string tutorialSceneName = null;
+    [SerializeField] private SceneReference tutorialSceneName;
     
     [Tooltip("Credits Scene Name")]
-    [SerializeField] private string creditsSceneName = null;
+    [SerializeField] private SceneReference creditsSceneName;
 
     // [Tooltip("Dummy scene")]
     // [SerializeField] private Scene tutorialScene = EditorSceneManagement.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single); // cannot do = null because Scene objects cannot be null
@@ -259,10 +260,7 @@ public class StartMenuManager : MonoBehaviour
             SceneController sceneController = player.GetComponentInChildren<SceneController>();
             if (sceneController != null && tutorialSceneName != null) 
             {
-                Scene tutorial_scene = SceneManager.GetSceneByName(tutorialSceneName);
-                if (tutorial_scene.IsValid()) {
-                    sceneController.ChangeScene(tutorial_scene.buildIndex);
-                }
+                SceneManager.LoadScene(tutorialSceneName.SceneName);
             }
         }
     }
@@ -291,10 +289,7 @@ public class StartMenuManager : MonoBehaviour
             SceneController sceneController = player.GetComponentInChildren<SceneController>();
             if (sceneController != null && creditsSceneName != null) 
             {
-                Scene credits_scene = SceneManager.GetSceneByName(creditsSceneName);
-                if (credits_scene.IsValid()) {
-                    sceneController.ChangeScene(credits_scene.buildIndex);
-                }
+                SceneManager.LoadScene(creditsSceneName.SceneName);
             }
         }
     }
