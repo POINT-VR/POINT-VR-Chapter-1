@@ -44,6 +44,12 @@ public class GridScript : MonoBehaviour
     /// <summary>
     /// Calculates the displacement each FixedUpdate.
     /// </summary>
+    
+    private void Update()
+    {
+        DrawDebugGrid();
+    }
+
     private void FixedUpdate()
     {
         Vector3[] displaced = new Vector3[size_z * size_y * size_x * 8 + 4 * divisions * (size_z - 1) * size_x * size_y + 4 * divisions * size_z * (size_x - 1) * size_y + 4 * divisions * size_z * size_x * (size_y - 1)]; 
@@ -421,4 +427,25 @@ public class GridScript : MonoBehaviour
         }
         return tris;
     }
+
+    private void DrawDebugGrid()
+    {
+        if (deformingMesh == null || deformingMesh.vertexCount == 0)
+            return;
+
+        Vector3[] verts = deformingMesh.vertices;
+        Color c = Color.red;
+
+        for (int i = 0; i < verts.Length; i++)
+        {
+            Vector3 worldPos = transform.TransformPoint(verts[i]);
+            Vector3 original = IndexToPos(i);
+            Vector3 worldOriginal = transform.TransformPoint(original);
+
+            Vector3 displacement = worldPos - worldOriginal;
+
+            Debug.DrawRay(worldOriginal, displacement, c);
+        }
+    }
+
 }
