@@ -79,12 +79,29 @@ public class PauseController : MonoBehaviour
     private void Toggle(InputAction.CallbackContext ctx)
     {
         gripNotice.SetActive(false);
-        rightHand.Release();
-        leftHand.Release();
-        laserLeft.localScale = new Vector3(laserLeft.localScale.x, gamePaused ? laserSize : reducedLaserSize, laserLeft.localScale.z);
-        laserRight.localScale = laserLeft.localScale;
-        laserLeft.localPosition = new Vector3(laserLeft.localPosition.x, laserLeft.localPosition.y, gamePaused ? laserSize : reducedLaserSize);
-        laserRight.localPosition = laserLeft.localPosition;
+
+        if (rightHand != null)
+        {
+            rightHand.Release();
+        }
+
+        if (leftHand != null)
+        {
+            leftHand.Release();
+        }
+
+        if (laserRight != null)
+        {
+            laserRight.localScale = new Vector3(laserRight.localScale.x, gamePaused ? laserSize : reducedLaserSize, laserRight.localScale.z);
+            laserRight.localPosition = new Vector3(laserRight.localPosition.x, laserRight.localPosition.y, gamePaused ? laserSize : reducedLaserSize);
+        }
+
+        if (laserLeft != null)
+        {
+            laserLeft.localScale = new Vector3(laserLeft.localScale.x, gamePaused ? laserSize : reducedLaserSize, laserLeft.localScale.z);
+            laserLeft.localPosition = new Vector3(laserLeft.localPosition.x, laserLeft.localPosition.y, gamePaused ? laserSize : reducedLaserSize);
+        }
+
         GameObject[] gameObjects = (GameObject[]) FindObjectsOfType(typeof(GameObject));
         if (gamePaused)
         {

@@ -59,7 +59,7 @@ public class GridScript : MonoBehaviour
                 position = rigidbodiesToDeformAround[j].position
             };
         }
-#if !UNITY_WEBGL  || UNITY_EDITOR
+#if !UNITY_WEBGL || UNITY_EDITOR
         // Since C# threading is currently not supported in WebGL, we perform threading only on non-WebGL platforms
         int midpoint = ((displaced.Length / 2 - 1) | 7) + 1; //Increments of 8 only
         Thread t = new Thread(() => ThreadRoutine(displaced, masses, midpoint, displaced.Length));

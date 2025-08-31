@@ -135,10 +135,8 @@ public class Scene1Manager : MonoBehaviour
         Shader.SetGlobalFloat("Grid_ExponentialConstant", 0.2f);
         Shader.SetGlobalFloat("Grid_Player_HideRadius", 0.5f);
         Shader.SetGlobalFloat("Grid_Player_FadeRadius", 1.0f);
-
-        deformationGrid.transform.position = gridCubeSpawnPoint;
-        deformationGrid.GetComponent<MeshRenderer>().material = gridMaterial;
-        deformationGrid.gameObject.SetActive(true);
+        
+        deformationGrid.gameObject.SetActive(false);
 
         for (int i = 0; i < massSpheres.Length; ++i)
         {
@@ -393,7 +391,9 @@ public class Scene1Manager : MonoBehaviour
         {
             massSphere.gameObject.SetActive(true);
         }
+        deformationGrid.gameObject.SetActive(true);
         deformationGrid.transform.position = Vector3.zero;
+        deformationGrid.GetComponent<MeshRenderer>().material = gridMaterial;
 
         foreach (Rigidbody massSphere in massSpheres)
         {
