@@ -169,14 +169,14 @@ public class StartMenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (Camera.current != null && lastCameraPosition != Camera.current.transform.position)
+        if (Camera.main != null && lastCameraPosition != Camera.main.transform.position)
         {
-            lastCameraPosition = Camera.current.transform.position;
+            lastCameraPosition = Camera.main.transform.position;
             foreach (Transform menuComponent in menuComponents)
             {
                 if (menuComponent != fullMenu.transform)
                 {
-                    menuComponent.LookAt(Camera.current.transform.position);
+                    menuComponent.LookAt(Camera.main.transform.position);
                     menuComponent.Rotate(Vector3.up * 180.0f);
                 }
                 
@@ -186,9 +186,9 @@ public class StartMenuManager : MonoBehaviour
 
     private IEnumerator DisablePause()
     {
-        yield return new WaitUntil(() => Camera.current != null);
+        yield return new WaitUntil(() => Camera.main != null);
 
-        player = Camera.current.transform.parent.gameObject;
+        player = Camera.main.transform.parent.gameObject;
         player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(defaultObjective);
         player.GetComponent<PauseController>().ToggleReference.action.Disable();
     }

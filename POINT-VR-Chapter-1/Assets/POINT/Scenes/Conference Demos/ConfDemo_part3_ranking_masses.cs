@@ -25,7 +25,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     [SerializeField] private string creditsSceneName = null;
     // Cache
     private TMP_Text instructions = null;
-    private Camera currentCamera = null;
+    private Camera mainCamera = null;
     private GameObject player = null;
     private GameObject menus = null;
     private GameObject buttons = null;
@@ -43,12 +43,12 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
 
     IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
+        yield return new WaitUntil(() => Camera.main != null);
 
         // Start menu initialization
-        currentCamera = Camera.current;
-        //this.GetComponent<Canvas>().worldCamera = currentCamera;
-        player = currentCamera.transform.parent.gameObject;
+        mainCamera = Camera.main;
+        //this.GetComponent<Canvas>().worldCamera = mainCamera;
+        player = mainCamera.transform.parent.gameObject;
 
         StartCoroutine(StartScene());
         yield break;
