@@ -146,8 +146,8 @@ public class TutorialManager : MonoBehaviour
         teleportZone1.SetActive(true);
         float teleportRingScale = (2 * thresholdDistanceToTeleportZone) / teleportZone1.GetComponent<SpriteRenderer>().size.x;
         teleportZone1.transform.localScale = new Vector3(teleportRingScale, teleportRingScale, teleportRingScale);
-        teleportZone2.transform.localScale = new Vector3(teleportRingScale/2, teleportRingScale/2, teleportRingScale/2);
-        teleportZone3.transform.localScale = new Vector3(teleportRingScale/3, teleportRingScale/3, teleportRingScale/3);
+        teleportZone2.transform.localScale = new Vector3(teleportRingScale / 2, teleportRingScale / 2, teleportRingScale / 2);
+        teleportZone3.transform.localScale = new Vector3(teleportRingScale / 3, teleportRingScale / 3, teleportRingScale / 3);
 
         //Instantiate menus from player prefab and buttons from player prefab as well
         GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
@@ -167,7 +167,6 @@ public class TutorialManager : MonoBehaviour
         controlsImage.sprite = turnSprite;
         turnText.RefreshString();
         instructions.text = turnString;
-        
         player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
 
@@ -190,7 +189,6 @@ public class TutorialManager : MonoBehaviour
         player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
 
         StartCoroutine(WaitForTeleport()); 
-
         yield break;
     }
 
@@ -269,6 +267,16 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForMenuPopup()
     {
+        // To ensure subtitles show up during the corresponding tutorial segment
+        GameObject subtitleObject = player.GetComponent<NarrationManager>().SubtitleObject;
+        if (subtitleObject != null)
+        {
+            subtitleObject.tag = "Player";
+            foreach (Transform child in subtitleObject.transform)
+            {
+                child.tag = "Player";
+            }
+        }
         StartCoroutine(WaitForControlsScreenSelection());
         yield break;
     }
@@ -322,6 +330,16 @@ public class TutorialManager : MonoBehaviour
 
         // tells PauseController to go back to normal pausing effects
         player.GetComponent<PauseController>().ignorePauseEffects = false;
+        // To ensure subtitles no longer show up when the simulation is paused
+        GameObject subtitleObject = player.GetComponent<NarrationManager>().SubtitleObject;
+        if (subtitleObject != null)
+        {
+            subtitleObject.tag = "Untagged";
+            foreach (Transform child in subtitleObject.transform)
+            {
+                child.tag = "Untagged";
+            }
+        }
 
         overText.RefreshString();
         instructions.text = overString;

@@ -15,6 +15,13 @@ public class NarrationManager : MonoBehaviour
     /// The GameObject with a TextMeshPro component to display the subtitles
     /// </summary>
     [SerializeField] private GameObject subtitleObject = null;
+    public GameObject SubtitleObject
+    {
+        get
+        {
+            return subtitleObject;
+        }
+    }
 
     /// <summary>
     /// Volume multiplier for narration volume
