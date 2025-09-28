@@ -48,6 +48,14 @@ public class TutorialManager : MonoBehaviour
     private string menuString;
     private string openMenuString;
 
+    /// <summary>
+    /// Holds the initial order in the sorting layer for the OverlayContainer (Canvas component), which is used to revert the temporary changes made for the menu subtitle section.
+    /// </summary>
+    private int overlaySortingOrder;
+    /// <summary>
+    /// In the menu section, the subtitle background becomes opaque to make the subtitles more readable. This value is used to store the initial color so it can be reverted after the corresponding section.
+    /// </summary>
+    private Color subtitleBackgroundColor;
 
     // Cache
     private TMP_Text instructions = null;
@@ -289,6 +297,22 @@ public class TutorialManager : MonoBehaviour
         //Waiting until player opens menu + explicit press of left menu control
         yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
 
+        // To ensure subtitles can be seen during the menu section
+        GameObject subtitleObject = player.GetComponent<NarrationManager>().SubtitleObject;
+        GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
+        GameObject overlayContainer = mainCamera.transform.Find("Overlay Container").gameObject;
+        Canvas overlayCanvas = overlayContainer.GetComponent<Canvas>();
+        Image subtitleBackground = subtitleObject.GetComponentInChildren<Image>();
+
+        // Saving original values
+        subtitleBackgroundColor = subtitleBackground.color;
+        overlaySortingOrder = overlayCanvas.sortingOrder;
+
+        overlayCanvas.sortingOrder = 1;
+        Color newColor = subtitleBackground.color;
+        newColor.a = 1f;
+        subtitleBackground.color = newColor;
+
         //controlsImage.sprite = overSprite;
         //controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
 
@@ -340,6 +364,15 @@ public class TutorialManager : MonoBehaviour
                 child.tag = "Untagged";
             }
         }
+        // Changing the opacity of the subtitle background and its order in the sorting layer back to normal
+        GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
+        GameObject overlayContainer = mainCamera.transform.Find("Overlay Container").gameObject;
+        Canvas overlayCanvas = overlayContainer.GetComponent<Canvas>();
+        Image subtitleBackground = subtitleObject.GetComponentInChildren<Image>();
+
+        overlayCanvas.sortingOrder = overlaySortingOrder;
+        subtitleBackground.color = subtitleBackgroundColor;
+
 
         overText.RefreshString();
         instructions.text = overString;
