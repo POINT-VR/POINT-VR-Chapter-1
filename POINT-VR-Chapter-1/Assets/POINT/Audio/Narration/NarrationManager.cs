@@ -40,6 +40,15 @@ public class NarrationManager : MonoBehaviour
         }
     }
 
+    private float maxSubtitleWidth;
+    public float MaxSubtitleWidth
+    {
+        set
+        {
+            maxSubtitleWidth = value;
+        }
+    }
+
     // Cache
     private TMP_Text subtitleText = null;
     private Image subtitleBackground = null;
@@ -113,7 +122,7 @@ public class NarrationManager : MonoBehaviour
             subtitleText.font = currentFont;
             subtitleObject.SetActive(true);
             subtitleText.text = output;
-            subtitleBackground.rectTransform.sizeDelta = new Vector2(subtitleText.preferredWidth, subtitleText.preferredHeight);
+            subtitleBackground.rectTransform.sizeDelta = new Vector2(Mathf.Min(subtitleText.preferredWidth, maxSubtitleWidth), subtitleText.preferredHeight);
         }
         else
         {

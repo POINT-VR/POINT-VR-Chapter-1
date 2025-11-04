@@ -340,6 +340,18 @@ MonoBehaviour:
     m_Localized: "\xA1Enhorabuena! La simulaci\xF3n ha terminado."
     m_Metadata:
       m_Items: []
+  - m_Id: 21243244859920384
+    m_Localized: "Altura de Subt\xEDtulos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21243244876697600
+    m_Localized: "Tama\xF1o de Fuente Subt\xEDtulos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21243244876697601
+    m_Localized: "Ancho de Subt\xEDtulos"
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

@@ -13,6 +13,9 @@ SETTINGS_ON,On,Encendido
 SETTINGS_NARRATION_VOL,Narration Volume,Volumen de Narración
 SETTINGS_BACKGROUND_VOL,Background Volume,Volumen de Fondo
 SETTINGS_LANGUAGE,Language,Lengua
+SETTINGS_SUBTITLES_HEIGHT,Subtitles Height,Altura de Subtítulos
+SETTINGS_SUBTITLES_FONT_SIZE,Subtitles Font Size,Tamaño de Fuente Subtítulos
+SETTINGS_SUBTITLES_WIDTH,Subtitles Width,Ancho de Subtítulos
 SETTINGS_SUBTITLES,Subtitles,Subtítulos
 SETTINGS_LANGUAGE_DISABLED,Disabled,Apagados
 SETTINGS_LANGUAGE_ENGLISH,English,Inglés

@@ -71,6 +71,18 @@ MonoBehaviour:
     m_Key: SETTINGS_LANGUAGE
     m_Metadata:
       m_Items: []
+  - m_Id: 21243244859920384
+    m_Key: SETTINGS_SUBTITLES_HEIGHT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21243244876697600
+    m_Key: SETTINGS_SUBTITLES_FONT_SIZE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21243244876697601
+    m_Key: SETTINGS_SUBTITLES_WIDTH
+    m_Metadata:
+      m_Items: []
   - m_Id: 1521794191362
     m_Key: SETTINGS_SUBTITLES
     m_Metadata:
