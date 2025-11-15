@@ -2114,6 +2114,10 @@ MonoBehaviour:
   pullSpeed: 0.015
   squaredMinPullDistance: 3
   squaredMaxPushDistance: 48
+  snapRingSnappedMaterial: {fileID: 2100000, guid: 909acd5ff84bf424e8f6f20bf4466b56,
+    type: 2}
+  snapRingUnsnappedMaterial: {fileID: 2100000, guid: d421d856dd2848d499f3d09a2178c89d,
+    type: 2}
 --- !u!82 &685732245587941450
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11028,6 +11032,10 @@ MonoBehaviour:
   pullSpeed: 0.015
   squaredMinPullDistance: 3
   squaredMaxPushDistance: 48
+  snapRingSnappedMaterial: {fileID: 2100000, guid: 909acd5ff84bf424e8f6f20bf4466b56,
+    type: 2}
+  snapRingUnsnappedMaterial: {fileID: 2100000, guid: d421d856dd2848d499f3d09a2178c89d,
+    type: 2}
 --- !u!82 &1016775821658908692
 AudioSource:
   m_ObjectHideFlags: 0

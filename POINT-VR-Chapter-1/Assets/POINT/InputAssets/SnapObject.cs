@@ -14,19 +14,19 @@ public class SnapObject : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         SnapAnchor anchor = other.GetComponent<SnapAnchor>();
-        if (anchor && !currentAnchor && anchor.snapTag == snapTag)
+        if (anchor && !currentAnchor && anchor.snapTag == snapTag && anchor.heldObject == null)
         {
             currentAnchor = other;
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<SnapAnchor>() && other == currentAnchor)
+        SnapAnchor anchor = other.GetComponent<SnapAnchor>();
+        if (anchor && other == currentAnchor)
         {
-            if (other.GetComponent<SnapAnchor>().heldObject == this.gameObject)
+            if (anchor.heldObject == this.gameObject)
             {
-                other.GetComponent<SnapAnchor>().heldObject = null;
+                anchor.heldObject = null;
             }
             currentAnchor = null;
         }

@@ -89,6 +89,8 @@ public class HandController : MonoBehaviour
     /// The square of the maximum distance maintained between a pushed object and the hand
     /// </summary>
     [SerializeField] float squaredMaxPushDistance;
+    [SerializeField] private Material snapRingSnappedMaterial;
+    [SerializeField] private Material snapRingUnsnappedMaterial;
     private bool pushing, holdingSlider, holdingScrollbar, pulling, gravEnabled, teleportMode;
     private Transform previousParentTransform, grabbingTransform, lastGrabHit;
     private Color laserColor;
@@ -144,7 +146,7 @@ public class HandController : MonoBehaviour
         if (grabbingTransform != null) // Holding an object
         {
             // Prevents the GrabbedTransform from being pushed by other objects
-            grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; 
+            grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
             // Stores the velocity of the grabbing transform while its grabbed
             velocityPrev = grabbingTransformVelocity;
@@ -154,7 +156,7 @@ public class HandController : MonoBehaviour
         // Fires a raycast that places the reticle
         Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, teleportationDistance, floorMask);
         if (teleportMode && hit.point != Vector3.zero) //In teleport mode and raycast found the floor: place reticle
-        { 
+        {
             reticle.SetActive(true);
             reticle.transform.position = hit.point;
             reticle.transform.LookAt(new Vector3(playerTransform.parent.position.x, 0f, playerTransform.parent.position.z));
@@ -194,7 +196,8 @@ public class HandController : MonoBehaviour
                         laser.material.color = Color.green;
                         transform.GetComponent<Animator>().SetBool("isPointing", true);
                     }
-                } else
+                }
+                else
                 {
                     laser.material.color = Color.green;
                     transform.GetComponent<Animator>().SetBool("isPointing", true);
@@ -261,6 +264,11 @@ public class HandController : MonoBehaviour
                 grabbingTransform.localPosition = snapObject.currentAnchor.GetComponent<BoxCollider>().center;
                 snapObject.currentAnchor.GetComponent<SnapAnchor>().heldObject = snapObject;
                 //snapObject.currentAnchor = null;
+                Renderer anchorRenderer = snapObject.currentAnchor.GetComponent<Renderer>(); //When released object is snapped, changes snap anchor to snapped material
+                if (anchorRenderer)
+                {
+                    anchorRenderer.material = snapRingSnappedMaterial;
+                }
 
             }
             else
@@ -304,6 +312,12 @@ public class HandController : MonoBehaviour
                 && previousParentTransform && previousParentTransform.GetComponent<SnapAnchor>())
         {
             previousParentTransform.GetComponent<SnapAnchor>().heldObject = null;
+            Renderer anchorRenderer = previousParentTransform.GetComponent<Renderer>(); //When a player grabs a snapped object, reverts snap anchor to unsnapped material 
+            if (anchorRenderer)
+            {
+                anchorRenderer.material = snapRingUnsnappedMaterial;
+            }
+
         }
         grabbingTransform.SetParent(transform);
         grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed object's velocity to zero
