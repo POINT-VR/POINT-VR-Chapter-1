@@ -36,7 +36,7 @@ public class NarrationManager : MonoBehaviour
         set
         {
             subtitlesLanguage = value;
-            DisplaySubtitles();
+            if (isSubtitlePlaying) DisplaySubtitles();
         }
     }
 
