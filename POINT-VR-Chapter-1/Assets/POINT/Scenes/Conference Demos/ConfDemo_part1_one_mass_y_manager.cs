@@ -116,6 +116,9 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         yield return new WaitForSeconds(2);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_5");
         yield return new WaitForSeconds(6.1f);
+        // wait for player to reach correct arrow orientation
+        yield return new WaitUntil(() => CheckArrowTask());
+        StartCoroutine(StartScenePart2());
     }
 
     private void ArrowTask()
@@ -123,14 +126,16 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         setOfDirectionalArrows.SetActive(true);  // spawn six directional arrows
     }
 
-    public void CheckArrowTask()
+    public bool CheckArrowTask()
     {
         foreach (DirectionalArrow directionalArrow in directionalArrows)
         {
-            if (!directionalArrow.IsCorrect) return;
+            if (!directionalArrow.IsCorrect) {
+                return false;
+            }
         }
 
-        StartCoroutine(StartScenePart2());
+        return true;
     }
 
     private IEnumerator StartScenePart2()
