@@ -76,12 +76,12 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         yield return new WaitForSeconds(1);
         UIManagerScript.UpdateCurrentObjective(objective1Text); // Grid/Space Deformation
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\1_intro_to_grids_and_clocks_1");
-        yield return new WaitForSeconds(16);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\1_intro_to_grids_and_clocks_2");
-        yield return new WaitForSeconds(7);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\2_observe_grid_curve_1");
-        yield return new WaitForSeconds(20.4f); // Continue Button
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         continue1.SetActive(true);
         Debug.Log("Press the 'continue' button when you are ready to move on."); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("continue");
@@ -89,7 +89,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         continue1.SetActive(false);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\2_observe_grid_curve_2");
-        yield return new WaitForSeconds(5.9f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         task3Location.SetActive(true);
         yield return new WaitUntil(() => task3Location.transform.GetChild(1).gameObject.GetComponentInChildren<Rigidbody>() != null); // Reach SnapRing
@@ -101,21 +101,21 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         task3Location.SetActive(false);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_1");
-        yield return new WaitForSeconds(7.6f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         // Question Time for Player: What does that say about Gravity
 
         UIManagerScript.UpdateCurrentObjective(objective2Text); 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_2");
-        yield return new WaitForSeconds(7.1f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         ArrowTask();
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_3");
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_4");
-        yield return new WaitForSeconds(2);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_5");
-        yield return new WaitForSeconds(6.1f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
     }
 
     private void ArrowTask()
@@ -136,12 +136,12 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
     private IEnumerator StartScenePart2()
     {
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_6");
-        yield return new WaitForSeconds(1); // Nice Job
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_7");
-        yield return new WaitForSeconds(22);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\3_direction_of_curvature_arrow_8");
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         setOfDirectionalArrows.SetActive(false);
         massSphere.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None; // End of Task, set sphere back to movable
         massSphere.layer = LayerMask.NameToLayer("Grip"); // End of Task, set sphere back to interactable
@@ -151,7 +151,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
         UIManagerScript.UpdateCurrentObjective(objective3Text); // Time Deformation
         snapRing.SetActive(true);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\4_observe_time_dialation_1");
-        yield return new WaitForSeconds(8);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\4_observe_time_dialation_2");
 
         yield return new WaitUntil(() => snapRing.GetComponentInChildren<Rigidbody>() != null);

@@ -75,7 +75,7 @@ public class ConfDemo_part2_two_masses : MonoBehaviour
         
         UIManagerScript.UpdateCurrentObjective(objective1); // Grid/Space Deformation Two Masses
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_1");
-        yield return new WaitForSecondsRealtime(13.8f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         continue1.SetActive(true);
         Debug.Log("Press the 'continue' button when you are ready to move on."); 
@@ -85,9 +85,9 @@ public class ConfDemo_part2_two_masses : MonoBehaviour
 
         UIManagerScript.UpdateCurrentObjective(objective2); // Time Deformation Two Masses
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_2");
-        yield return new WaitForSecondsRealtime(12);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_3");
-        yield return new WaitForSecondsRealtime(17.3f);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         continue2.SetActive(true);
         Debug.Log("Press the 'continue' button when you are ready to move on."); 
@@ -96,11 +96,11 @@ public class ConfDemo_part2_two_masses : MonoBehaviour
         continue2.SetActive(false);
 
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_4");
-        yield return new WaitForSecondsRealtime(13);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_5");
-        yield return new WaitForSecondsRealtime(7);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\5_strength_of_gravity_prop_mass_6");
-        yield return new WaitForSecondsRealtime(16);
+        yield return new WaitUntil(() => player.GetComponent<AudioSource>().isPlaying == false);
 
         UIManagerScript.UpdateCurrentObjective(objective3); // Continue to next scene
         SceneUIContainer.SetActive(true); // Continue to next scene 
