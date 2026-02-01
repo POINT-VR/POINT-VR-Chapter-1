@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2531,6 +2531,7 @@ GameObject:
   - component: {fileID: 1171308774}
   - component: {fileID: 1171308773}
   - component: {fileID: 1171308772}
+  - component: {fileID: 1171308776}
   m_Layer: 5
   m_Name: Scene 2
   m_TagString: Untagged
@@ -2603,9 +2604,9 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1804311719}
+      - m_Target: {fileID: 1171308776}
         m_MethodName: UIChangeScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2635,6 +2636,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171308770}
   m_CullTransparentMesh: 0
+--- !u!114 &1171308776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171308770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d24a8bb075f8d48809a724379efad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene:
+    m_SceneAsset: {fileID: 102900000, guid: 152450adfd3469443b8a770205f31b3b, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/POINT/Scenes/Conference Demos/ConfDemo_part1_one-mass-y.unity
+  player: {fileID: 685732246913176612, guid: 3e621e1784105af44b29dabc4b72168d, type: 3}
 --- !u!1 &1216784201
 GameObject:
   m_ObjectHideFlags: 0

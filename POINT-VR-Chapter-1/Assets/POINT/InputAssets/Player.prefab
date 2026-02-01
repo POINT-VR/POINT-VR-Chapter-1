@@ -1929,6 +1929,7 @@ GameObject:
   - component: {fileID: 685732245553000179}
   - component: {fileID: 535885132691088089}
   - component: {fileID: 8959712053981015989}
+  - component: {fileID: 7698133482156829403}
   m_Layer: 5
   m_Name: ImagePreview
   m_TagString: Untagged
@@ -2007,9 +2008,9 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 685732246532709863}
-        m_MethodName: ChangeScene
-        m_Mode: 3
+      - m_Target: {fileID: 7698133482156829403}
+        m_MethodName: UIChangeScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2031,6 +2032,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 324.99997, y: 380, z: 1}
   m_Center: {x: 0, y: -100, z: 0}
+--- !u!114 &7698133482156829403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685732245553000173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d24a8bb075f8d48809a724379efad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene:
+    m_SceneAsset: {fileID: 102900000, guid: ad557d7729cb1e94486b73729194a995, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/POINT/Scenes/Chapter1/Tutorial.unity
+  player: {fileID: 685732246913176612}
 --- !u!1 &685732245587941445
 GameObject:
   m_ObjectHideFlags: 0
@@ -4509,6 +4527,7 @@ GameObject:
   - component: {fileID: 685732246188154454}
   - component: {fileID: 5944317315494273272}
   - component: {fileID: 5432345954397591495}
+  - component: {fileID: 8656660072327310021}
   m_Layer: 5
   m_Name: ImagePreview
   m_TagString: Untagged
@@ -4587,13 +4606,13 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 685732246532709863}
-        m_MethodName: ChangeScene
-        m_Mode: 3
+      - m_Target: {fileID: 8656660072327310021}
+        m_MethodName: UIChangeScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4611,6 +4630,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 325, y: 380, z: 1}
   m_Center: {x: 0, y: -100, z: 0}
+--- !u!114 &8656660072327310021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685732246188154448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d24a8bb075f8d48809a724379efad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene:
+    m_SceneAsset: {fileID: 102900000, guid: 45649d26e2b00294e9f40fb36e550e6c, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/POINT/Scenes/Chapter1/Ch1_scene1.unity
+  player: {fileID: 685732246913176612}
 --- !u!1 &685732246206030503
 GameObject:
   m_ObjectHideFlags: 0
@@ -7154,6 +7190,7 @@ GameObject:
   - component: {fileID: 685732246930800333}
   - component: {fileID: 9157467430922052750}
   - component: {fileID: 1161510620147259858}
+  - component: {fileID: 1723553145793294927}
   m_Layer: 5
   m_Name: ImagePreview
   m_TagString: Untagged
@@ -7232,13 +7269,13 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 685732246532709863}
-        m_MethodName: ChangeScene
-        m_Mode: 3
+      - m_Target: {fileID: 1723553145793294927}
+        m_MethodName: UIChangeScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7256,6 +7293,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 325, y: 380, z: 1}
   m_Center: {x: 0, y: -100, z: 0}
+--- !u!114 &1723553145793294927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685732246930800335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d24a8bb075f8d48809a724379efad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene:
+    m_SceneAsset: {fileID: 102900000, guid: 152450adfd3469443b8a770205f31b3b, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/POINT/Scenes/Conference Demos/ConfDemo_part1_one-mass-y.unity
+  player: {fileID: 685732246913176612}
 --- !u!1 &685732246972546621
 GameObject:
   m_ObjectHideFlags: 0
@@ -12455,15 +12509,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecd0ed4efc22bf4a81db7ef1cf69eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &745901670220845776 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 653244539434892004, guid: 8933a80abf3d47840bf74b55e5cb8440,
-    type: 3}
-  m_PrefabInstance: {fileID: 236777558859360308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8727804351465435840 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8815321555235773172, guid: 8933a80abf3d47840bf74b55e5cb8440,
+    type: 3}
+  m_PrefabInstance: {fileID: 236777558859360308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &745901670220845776 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 653244539434892004, guid: 8933a80abf3d47840bf74b55e5cb8440,
     type: 3}
   m_PrefabInstance: {fileID: 236777558859360308}
   m_PrefabAsset: {fileID: 0}
@@ -12947,12 +13001,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8933a80abf3d47840bf74b55e5cb8440, type: 3}
---- !u!1 &7993946801353570303 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9109531743546758956, guid: 8933a80abf3d47840bf74b55e5cb8440,
-    type: 3}
-  m_PrefabInstance: {fileID: 1196755288602140883}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5447097636077338202 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6560690124553789065, guid: 8933a80abf3d47840bf74b55e5cb8440,
@@ -12968,6 +13016,12 @@ MonoBehaviour:
 --- !u!224 &1840689025993251383 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 653244539434892004, guid: 8933a80abf3d47840bf74b55e5cb8440,
+    type: 3}
+  m_PrefabInstance: {fileID: 1196755288602140883}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7993946801353570303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9109531743546758956, guid: 8933a80abf3d47840bf74b55e5cb8440,
     type: 3}
   m_PrefabInstance: {fileID: 1196755288602140883}
   m_PrefabAsset: {fileID: 0}
@@ -13390,12 +13444,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8933a80abf3d47840bf74b55e5cb8440, type: 3}
---- !u!224 &2162967367236797263 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 653244539434892004, guid: 8933a80abf3d47840bf74b55e5cb8440,
-    type: 3}
-  m_PrefabInstance: {fileID: 1663144578784672171}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5483393982188922658 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6560690124553789065, guid: 8933a80abf3d47840bf74b55e5cb8440,
@@ -13408,6 +13456,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecd0ed4efc22bf4a81db7ef1cf69eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2162967367236797263 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 653244539434892004, guid: 8933a80abf3d47840bf74b55e5cb8440,
+    type: 3}
+  m_PrefabInstance: {fileID: 1663144578784672171}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7873133350137865055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8815321555235773172, guid: 8933a80abf3d47840bf74b55e5cb8440,

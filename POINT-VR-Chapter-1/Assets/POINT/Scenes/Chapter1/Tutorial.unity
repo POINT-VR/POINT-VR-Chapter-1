@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.006960895, g: 0.0068234773, b: 0.0073094447, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 347936251}
   - component: {fileID: 347936250}
   - component: {fileID: 347936249}
+  - component: {fileID: 347936253}
   m_Layer: 5
   m_Name: Scene 1
   m_TagString: Untagged
@@ -498,13 +499,13 @@ MonoBehaviour:
   onCast:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 550622637}
+      - m_Target: {fileID: 347936253}
         m_MethodName: UIChangeScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -530,6 +531,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347936247}
   m_CullTransparentMesh: 0
+--- !u!114 &347936253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347936247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d24a8bb075f8d48809a724379efad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene:
+    m_SceneAsset: {fileID: 102900000, guid: 45649d26e2b00294e9f40fb36e550e6c, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/POINT/Scenes/Chapter1/Ch1_scene1.unity
+  player: {fileID: 685732246913176612, guid: 3e621e1784105af44b29dabc4b72168d, type: 3}
 --- !u!1 &444755461
 GameObject:
   m_ObjectHideFlags: 0
