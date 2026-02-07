@@ -32,6 +32,12 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Sprite pushPullSprite;
     [SerializeField] private Sprite overSprite;
     [SerializeField] private Sprite menuSprite;
+    [Header("PC Port Controls Graphics")]
+    [SerializeField] private Sprite pcTeleportationSprite;
+    [SerializeField] private Sprite pcTurnSprite;
+    [SerializeField] private Sprite pcGrabSprite;
+    [SerializeField] private Sprite pcPushPullSprite;
+    [SerializeField] private Sprite pcMenuSprite;
     [Header("Instructions Text")]
     [SerializeField] private LocalizedString teleportationText;
     [SerializeField] private LocalizedString turnText;
@@ -47,11 +53,12 @@ public class TutorialManager : MonoBehaviour
     private string overString;
     private string menuString;
     private string openMenuString;
-
+    [Header("PC Port Instructions Text")]
+    [SerializeField] private LocalizedString pcTurnText;
 
     // Cache
     private TMP_Text instructions = null;
-    private Camera currentCamera = null;
+    private Camera mainCamera = null;
     private GameObject player = null;
     private bool pushed = false, pulled = false;
     private GameObject menus = null;
@@ -60,6 +67,10 @@ public class TutorialManager : MonoBehaviour
 
     private void OnEnable()
     {
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+        // Replace instruction text
+        turnText = pcTurnText;
+#endif
         teleportationText.StringChanged += UpdateTeleportationString;
         turnText.StringChanged += UpdateTurnString;
         grabText.StringChanged += UpdateGrabString;
@@ -100,27 +111,36 @@ public class TutorialManager : MonoBehaviour
         teleportZone3.SetActive(false);
         SceneUIContainer.SetActive(false);
 
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+        // Replace controller images
+        teleportationSprite = pcTeleportationSprite;
+        turnSprite = pcTurnSprite;
+        grabSprite = pcGrabSprite;
+        pushPullSprite = pcPushPullSprite;
+        menuSprite = pcMenuSprite;
+#endif
+
         yield return WaitForPlayerSpawn();
         StartTutorial();
     }
 
     private void Update()
     {
-        if (currentCamera != null)
+        if (mainCamera != null)
         {
-            this.transform.LookAt(currentCamera.transform);
+            this.transform.LookAt(mainCamera.transform);
             this.transform.Rotate(0, 180, 0);
         }
     }
 
     IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
+        yield return new WaitUntil(() => Camera.main != null);
 
         // Start menu initialization
-        currentCamera = Camera.current;
-        this.GetComponent<Canvas>().worldCamera = currentCamera;
-        player = currentCamera.transform.parent.gameObject;
+        mainCamera = Camera.main;
+        this.GetComponent<Canvas>().worldCamera = mainCamera;
+        player = mainCamera.transform.parent.gameObject;
 
         // player.GetComponent<PauseController>().enabled = false; // This should disable pausing, but it currently soft locks the player from continueing
                                                                // TODO: Disable the Oculus pause to bring up the UI menu
@@ -227,7 +247,7 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForGrab()
     {
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
         yield return new WaitUntil(() => massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null);
 #else
         yield return new WaitUntil(() => massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<HandController>() != null);
@@ -273,6 +293,17 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForMenuPopup()
     {
+        // To ensure subtitles show up during the corresponding tutorial segment
+        GameObject subtitleObject = player.GetComponent<NarrationManager>().SubtitleObject;
+        if (subtitleObject != null)
+        {
+            subtitleObject.tag = "Player";
+            foreach (Transform child in subtitleObject.transform)
+            {
+                child.tag = "Player";
+            }
+        }
+
         StartCoroutine(WaitForControlsScreenSelection());
         yield break;
     }
@@ -332,12 +363,23 @@ public class TutorialManager : MonoBehaviour
         instructions.text = overString;
         SceneUIContainer.SetActive(true);
 
+        // To ensure subtitles no longer show up when the simulation is paused
+        GameObject subtitleObject = player.GetComponent<NarrationManager>().SubtitleObject;
+        if (subtitleObject != null)
+        {
+            subtitleObject.tag = "Untagged";
+            foreach (Transform child in subtitleObject.transform)
+            {
+                child.tag = "Untagged";
+            }
+        }
+
         yield break;
     }
 
     private void Pushed(InputAction.CallbackContext obj)
     {
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
         if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null)
         {
 #else
@@ -350,7 +392,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Pulled(InputAction.CallbackContext obj)
     {
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
         if (massSphere.activeInHierarchy && massSphere.transform.parent != null && massSphere.transform.parent.GetComponent<Camera>() != null)
         {
 #else

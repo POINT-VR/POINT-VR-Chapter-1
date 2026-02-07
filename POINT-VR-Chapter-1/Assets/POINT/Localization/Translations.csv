@@ -34,6 +34,7 @@ OBJECTIVE_EXPLORE,Explore how matter warps space and time.,Investiga cómo la ma
 INSTRUCTIONS_PRESS_FOR,Press for,Pulsa para
 TUTORIAL_TELEPORT,Try pointing at the floor and teleporting to the rings in the distance!,Trata de apuntar al piso y teletransportarte a los anillos en la distancia!
 TUTORIAL_TURN,"In addition to turning your head, you can rotate your view by using the joysticks. Try it now.","Además de girar tu cabeza, puedes girar tu mirada con los joysticks. Lo trata ahora."
+TUTORIAL_TURN_PC,You can rotate your view by using the mouse. Try it now.,Puedes girar tu mirada con el mouse. Lo trata ahora.
 TUTORIAL_GRAB,"This sphere is a grabbable object, try picking it up.","Esta esfera es algo que puedes coger, trata de recogerla. "
 TUTORIAL_PUSH_PULL,You can also pull and push objects when grabbing them.,También puedes tirar y empujar cosas cuando los estás cogiendo.
 TUTORIAL_OVER,"The tutorial is now over, please tell the instructor. ","El tutorial ha terminado, por favor informa el instructor."

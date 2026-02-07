@@ -14,7 +14,7 @@ public class SortHolder : MonoBehaviour
     [SerializeField] private GameObject NextTaskButton;
 
     private GameObject[] snapRings = null;
-    private Camera currentCamera = null;
+    private Camera mainCamera = null;
     private GameObject player = null;
 
     public void Start()
@@ -35,12 +35,12 @@ public class SortHolder : MonoBehaviour
 
     IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
+        yield return new WaitUntil(() => Camera.main != null);
 
         // Start menu initialization
-        currentCamera = Camera.current;
-        //this.GetComponent<Canvas>().worldCamera = currentCamera;
-        player = currentCamera.transform.parent.gameObject;
+        mainCamera = Camera.main;
+        //this.GetComponent<Canvas>().worldCamera = mainCamera;
+        player = mainCamera.transform.parent.gameObject;
         
         yield break;
     }

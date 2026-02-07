@@ -103,7 +103,7 @@ public class PCPortManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject hapticsToggle;
 
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
     private void Start()
     {
         // UI adjustments
