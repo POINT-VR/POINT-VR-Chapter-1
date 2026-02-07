@@ -21,12 +21,11 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     [SerializeField] private LocalizedString objective3;
 
     // Cache
-    private TMP_Text instructions = null;
     private Camera currentCamera = null;
     private GameObject player = null;
-    private GameObject menus = null;
-    private GameObject buttons = null;
     private UIManager UIManagerScript = null;
+
+    private bool isTask2Answered = false;
 
     private void Start()
     {
@@ -57,12 +56,6 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
         GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
         GameObject UIContainer = mainCamera.transform.Find("UI Container").gameObject;
         GameObject Menu = UIContainer.transform.Find("Menu").gameObject;
-        GameObject HeaderButtons = Menu.transform.Find("HeaderButtons").gameObject;
-        // GameObject HeaderButtons = Menu.transform.Find("Buttons").gameObject; //if testing with emulator use this
-        GameObject menuScreens = Menu.transform.Find("MenuScreens").gameObject;
-
-        menus = menuScreens;
-        buttons = HeaderButtons;
 
         // Get UI Manager UIManagerScript
         UIManagerScript = Menu.GetComponent<UIManager>();
@@ -83,7 +76,10 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     {
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_1");
         yield return new WaitForSecondsRealtime(13);
-        player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_2");
+        if (!isTask2Answered)
+        {
+            player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\7_radius_activity_same_mass_2");
+        }
         yield break;
     }
 
@@ -97,6 +93,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     public void PlayEndRadiiTaskWrong()
     {
         // Called in the OnCast() of Task2 UI -> Big, wrong answer try again
+        isTask2Answered = true;
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Chapter1Scene2\\6_put_masses_in_order_3");
     }
 
@@ -120,6 +117,7 @@ public class ConfDemo_part3_ranking_masses : MonoBehaviour
     public void PlayEndRadiiTask()
     {
         // Called in the OnCast() of Task2 UI -> Small, Right answer
+        isTask2Answered = true;
         StartCoroutine(EndRadiiAudio());        
     }
 }
