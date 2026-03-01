@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 
 public class EndCreditsManager : MonoBehaviour
@@ -72,6 +73,19 @@ public class EndCreditsManager : MonoBehaviour
 
     [Tooltip("The speed (units per second) that the credits are scrolling")]
     [SerializeField] private float scrollSpeed = 5.0f;
+
+    [Tooltip("Base Scene UI Container for button continuing to Post-Credits Sandbox")]
+    [SerializeField] private GameObject SceneUIContainer;
+
+    [Tooltip("Title Text for button continuing to Post-Credits Sandbox")]
+    [SerializeField] private TMP_Text continueButtonTitleText;
+
+    [Tooltip("Description of button continuing to Post-Credits Sandbox")]
+    [SerializeField] private TMP_Text continueButtonDescription;
+
+    [Tooltip("Background image for button continuing to Post-Credits Sandbox")]
+    [SerializeField] private Image continueButtonImage;
+
 
     /// <summary>
     ///  Canvas containing canvasText
@@ -154,6 +168,14 @@ public class EndCreditsManager : MonoBehaviour
                 StartCoroutine(FadeInImage(projectImage, fadeDuration));
             }
         }
+
+        // Enable. I think we can make this code more professional
+        yield return new WaitForSeconds(5);
+
+        SceneUIContainer.SetActive(true);
+        StartCoroutine(FadeInText(continueButtonTitleText, fadeDuration));
+        StartCoroutine(FadeInText(continueButtonDescription, fadeDuration));
+        StartCoroutine(FadeInImage(continueButtonImage, fadeDuration));
 
         yield break;
     }
