@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00695631, g: 0.006819715, b: 0.0073051304, a: 1}
+  m_IndirectSpecularColor: {r: 0.0068936315, g: 0.0067525106, b: 0.0071824407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4512,6 +4512,12 @@ MonoBehaviour:
   Task2UIContainer: {fileID: 1170312373}
   openMenuReference: {fileID: 1753721387454739837, guid: a54d6349e0e4d404fa09e1c0531de6d0,
     type: 3}
+  sortedMassSpheres:
+  - {fileID: 520505893}
+  - {fileID: 438627078}
+  - {fileID: 1447806103}
+  - {fileID: 2118528859}
+  - {fileID: 665559182}
   objective1:
     m_TableReference:
       m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
