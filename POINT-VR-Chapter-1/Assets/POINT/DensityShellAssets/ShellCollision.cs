@@ -9,7 +9,7 @@ using UnityEngine;
 public class ShellCollision : MonoBehaviour
 {
     public float detectionRadius = 0.5f;
-    void start() {
+    void Start() {
         Vector3 scale = transform.localScale;
         detectionRadius = 0.5f * scale.x;  // Radius of the shell
     }
