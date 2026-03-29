@@ -116,8 +116,15 @@ public class HandController : MonoBehaviour
         pushing = false;
         previousParentTransform = null;
         laserColor = laser.material.color;
-        playerCamera = this.transform.parent.parent.GetComponentInChildren<Camera>();
         pcPortManager = this.transform.parent.parent.GetComponent<PCPortManager>();
+        playerCamera = this.transform.parent.parent.GetComponentInChildren<Camera>();
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+        if (playerCamera != null)
+        {
+            this.transform.parent.parent = playerCamera.transform; // Parent hands to camera
+            this.transform.parent.localPosition = Vector3.zero;
+        }
+#endif
     }
     private void OnDisable()
     {
@@ -138,11 +145,7 @@ public class HandController : MonoBehaviour
     }
     private void Update()
     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
-        Transform grabParentTransform = playerCamera.transform;
-#else
         Transform grabParentTransform = this.transform;
-#endif
         if (pulling && grabbingTransform != null && (grabParentTransform.position - grabbingTransform.position).sqrMagnitude > squaredMinPullDistance) // object being pulled: pull
         {
             grabbingTransform.position -= pullSpeed * grabParentTransform.forward;
@@ -371,11 +374,8 @@ public class HandController : MonoBehaviour
         {
             previousParentTransform.GetComponent<SnapAnchor>().heldObject = null;
         }
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
-        grabbingTransform.SetParent(playerCamera.transform);
-#else
+
         grabbingTransform.SetParent(transform);
-#endif
         grabbingTransform.GetComponent<Rigidbody>().velocity = Vector3.zero; // Also set the grabbed object's velocity to zero
         velocityPrev = Vector3.zero;
         grabbingTransformVelocity = Vector3.zero;
