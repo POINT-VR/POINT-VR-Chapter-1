@@ -215,6 +215,19 @@ public class HandController : MonoBehaviour
                 CheckScrollbar(hit);
             }
         }
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, LayerMask.GetMask("Select"))) // Selectable found: turn this green (FOR NOW)
+        {
+            if (hit.collider != lastColliderHit) //did not hit the same collider as in the previous frame: haptic feedback
+            {
+                hardwareController.VibrateHand();
+            }
+            SelectObject selectable = hit.collider.gameObject.GetComponent<SelectObject>();
+            if (selectable != null)
+            {
+                laser.material.color = Color.green;
+            }
+            lastColliderHit = hit.collider;
+        }
         else if (grabbingTransform != null || Physics.Raycast(transform.position, transform.forward, out hit, grabDistance, grabMask)) //grabbable found or is holding something: turn this cyan
         {
             if (hit.transform != lastGrabHit && grabbingTransform == null) //did not hit the same collider as in the previous frame: haptic feedback
@@ -222,6 +235,12 @@ public class HandController : MonoBehaviour
                 hardwareController.VibrateHand();
             }
             laser.material.color = Color.magenta;
+            // If the object has a Grab Mask but is a Selectable Object (ex. Density Shells)
+            // SelectObject selectable = hit.collider.gameObject.GetComponent<SelectObject>();
+            // if (selectable != null && selectable.GetSelected() == true)
+            // {
+            //     laser.material.color = Color.green;
+            // }
             if (grabbingTransform != null)
             {
                 lastGrabHit = grabbingTransform;
@@ -351,6 +370,15 @@ public class HandController : MonoBehaviour
             }
             CheckSlider(hit);
             CheckScrollbar(hit);
+        }
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, 10f)) // Checking Selectable
+        {
+            SelectObject selectable = hit.collider.gameObject.GetComponent<SelectObject>();
+            if (selectable != null && !hit.collider.gameObject.GetComponentInParent<HandController>())
+            {
+                // Flipping value of Selectable Checkbox
+                selectable.SetSelected(!selectable.GetSelected());
+            }
         }
         else
         {
