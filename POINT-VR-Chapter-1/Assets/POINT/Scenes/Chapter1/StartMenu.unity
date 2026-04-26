@@ -2948,6 +2948,25 @@ MonoBehaviour:
         m_CallState: 2
   references:
     version: 1
+--- !u!1 &2102693238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2865874311278631238, guid: 822ffdd93f36c7e4dad912077473f8de,
+    type: 3}
+  m_PrefabInstance: {fileID: 7785275901832762395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2102693239
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102693238}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11, y: 2, z: 0.1}
+  m_Center: {x: 0, y: 0, z: -2.2}
 --- !u!1001 &7785275901832762395
 PrefabInstance:
   m_ObjectHideFlags: 0
