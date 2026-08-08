@@ -155,6 +155,10 @@ MonoBehaviour:
     m_Key: TUTORIAL_TURN
     m_Metadata:
       m_Items: []
+  - m_Id: 81435950286147584
+    m_Key: TUTORIAL_TURN_PC
+    m_Metadata:
+      m_Items: []
   - m_Id: 13443997431271426
     m_Key: TUTORIAL_GRAB
     m_Metadata:

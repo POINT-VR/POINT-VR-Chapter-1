@@ -88,7 +88,7 @@ public class EndCreditsManager : MonoBehaviour
     /// </summary>
     private float endScrollY = 0.0f;
 
-    private Camera currentCamera = null;
+    private Camera mainCamera = null;
     private GameObject player = null;
 
     private IEnumerator Start()
@@ -160,10 +160,10 @@ public class EndCreditsManager : MonoBehaviour
 
     private IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
+        yield return new WaitUntil(() => Camera.main != null);
 
-        currentCamera = Camera.current;
-        player = currentCamera.transform.parent.gameObject;
+        mainCamera = Camera.main;
+        player = mainCamera.transform.parent.gameObject;
 
         yield break;
     }
