@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,11 @@ public class StartMenuManager : MonoBehaviour
 
     [Tooltip("Default localized string that appears under current objective in the UI menu")]
     [SerializeField] private LocalizedString defaultObjective;
+
+    [SerializeField] SceneNumEnum Tutorial_Enum;
+
+    [SerializeField] SceneNumEnum End_Credits_Enum;
+
 
     /// <summary>
     /// A reference to the player GameObject
@@ -242,7 +248,7 @@ public class StartMenuManager : MonoBehaviour
             SceneController sceneController = player.GetComponentInChildren<SceneController>();
             if (sceneController != null)
             {
-                sceneController.ChangeScene(1);
+                sceneController.ChangeScene(sceneController.OperateSceneDict((int) Tutorial_Enum));
             }
         }
     }
@@ -271,7 +277,7 @@ public class StartMenuManager : MonoBehaviour
             SceneController sceneController = player.GetComponentInChildren<SceneController>();
             if (sceneController != null)
             {
-                sceneController.ChangeScene(6);
+                sceneController.ChangeScene(sceneController.OperateSceneDict((int) End_Credits_Enum));
             }
         }
     }
