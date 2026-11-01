@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EndPoint : MonoBehaviour //This script is built so that an endpoint can be reused and be fully controlled by another script
 {
