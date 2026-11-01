@@ -16,8 +16,7 @@ public class EndPointManager : MonoBehaviour
 
     [Header("Endpoint guiding arrow")]
     [SerializeField] private GameObject examplePathEndpointContainer = null;
-    [SerializeField] private SpriteRenderer arrowSpriteRenderer = null;
-    [SerializeField] private Vector3 arrowPosOffset = Vector3.zero;
+    [SerializeField] private EndpointGuideArrow guideArrow = null;
     [SerializeField] private float distanceThreshold = 0.001f;
 
     /// <summary>
@@ -93,16 +92,15 @@ public class EndPointManager : MonoBehaviour
                     if (Vector3.Distance(endPoint.transform.position, examplePathEndpointContainer.transform.GetChild(currentExamplePathIndex).position) < distanceThreshold)
                     {
                         currentExamplePathIndex += 1;
-                        if (arrowSpriteRenderer != null && currentExamplePathIndex < examplePathEndpointContainer.transform.childCount)
+                        if (guideArrow != null && currentExamplePathIndex < examplePathEndpointContainer.transform.childCount)
                         {
-                            arrowSpriteRenderer.transform.position = examplePathEndpointContainer.transform.GetChild(currentExamplePathIndex).transform.position;
-                            arrowSpriteRenderer.transform.position += arrowPosOffset;
+                            guideArrow.CurrentEndpointPos = examplePathEndpointContainer.transform.GetChild(currentExamplePathIndex).transform.position;
                         }
                     }
                     else
                     {
                         currentExamplePathIndex = -1;
-                        arrowSpriteRenderer.gameObject.SetActive(false);
+                        guideArrow.gameObject.SetActive(false);
                     }
                 }
                 if (comparePoints.Count >= 1 && endPath.Count >= 1 && moveLimit == false) // Makes sure comparison is only done on the second go-through, and when
@@ -205,11 +203,10 @@ public class EndPointManager : MonoBehaviour
         Spawn();
         isActive = true;
 
-        if (comparePoints.Count < 1 && examplePathEndpointContainer != null && arrowSpriteRenderer != null)
+        if (comparePoints.Count < 1 && examplePathEndpointContainer != null && guideArrow != null)
         {
-            arrowSpriteRenderer.gameObject.SetActive(true);
-            arrowSpriteRenderer.transform.position = examplePathEndpointContainer.transform.GetChild(currentExamplePathIndex).transform.position;
-            arrowSpriteRenderer.transform.position += arrowPosOffset;
+            guideArrow.gameObject.SetActive(true);
+            guideArrow.CurrentEndpointPos = examplePathEndpointContainer.transform.GetChild(currentExamplePathIndex).transform.position;
         }
     }
 
@@ -217,9 +214,9 @@ public class EndPointManager : MonoBehaviour
     {
         Destroy();
         isActive = false;
-        if (arrowSpriteRenderer != null)
+        if (guideArrow != null)
         {
-            arrowSpriteRenderer.gameObject.SetActive(false);
+            guideArrow.gameObject.SetActive(false);
         }
     }
 

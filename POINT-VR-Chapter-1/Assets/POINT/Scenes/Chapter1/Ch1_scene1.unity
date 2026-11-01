@@ -2537,8 +2537,7 @@ MonoBehaviour:
   dynamicAxisPrefab: {fileID: 4589141578911581333, guid: 49ad64caf4156064c8569c5af3a720ea,
     type: 3}
   examplePathEndpointContainer: {fileID: 1015672846}
-  arrowSpriteRenderer: {fileID: 1363763095}
-  arrowPosOffset: {x: 0.3, y: 0.3, z: 0}
+  guideArrow: {fileID: 1363763096}
   distanceThreshold: 0.001
 --- !u!4 &1162779722
 Transform:
@@ -2964,9 +2963,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363763094}
+  - component: {fileID: 1363763096}
   - component: {fileID: 1363763095}
   m_Layer: 0
-  m_Name: NextSpriteArrow
+  m_Name: GuideArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3036,6 +3036,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1363763096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363763093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d495f4028d3f7da4f83350eb7344ac3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPosOffset: 0.3
 --- !u!1001 &1401604032
 PrefabInstance:
   m_ObjectHideFlags: 0
