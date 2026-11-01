@@ -12,6 +12,8 @@ public class Scene1Manager : MonoBehaviour
     [SerializeField] private CoordinateDisplay massObject;
     [SerializeField] private FloatingObjectives floatingObjectives;
     [SerializeField] private GameObject nextSceneButton;
+    [SerializeField] private GameObject examplePath;
+    [SerializeField] private TMP_Text finalCoordsText;
 
     [Header("Grid Animation references")]
     [Tooltip("The floor of the simulation")]
@@ -52,7 +54,6 @@ public class Scene1Manager : MonoBehaviour
     private Camera currentCamera = null;
     private GameObject player = null;
     private UIManager uiManager = null;
-    private GameObject examplePath = null;
     private GameObject objectiveClock = null;
     private GameObject secondPath = null;
     private GameObject continueButton = null;
@@ -109,10 +110,9 @@ public class Scene1Manager : MonoBehaviour
         dynamicAxis.HideAxes(); 
         massObject.HideMass();
 
-        examplePath = GameObject.Find("ExamplePathObj");
         // setting outline for final coords
-        examplePath.transform.GetChild(6).GetComponent<TMP_Text>().outlineWidth = 0.1f;
-        examplePath.transform.GetChild(6).GetComponent<TMP_Text>().outlineColor = new Color32(255, 220, 220, 220); //light grey
+        finalCoordsText.outlineWidth = 0.1f;
+        finalCoordsText.outlineColor = new Color32(255, 220, 220, 220); //light grey
         examplePath.SetActive(false);
 
         secondPath = GameObject.Find("SecondPathManager");
