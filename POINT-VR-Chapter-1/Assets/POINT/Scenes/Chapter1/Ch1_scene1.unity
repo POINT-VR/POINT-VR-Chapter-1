@@ -2538,7 +2538,7 @@ MonoBehaviour:
     type: 3}
   examplePathEndpointContainer: {fileID: 1015672846}
   arrowSpriteRenderer: {fileID: 1363763095}
-  arrowPosOffset: {x: 0.1, y: 0.45, z: 0}
+  arrowPosOffset: {x: 0.3, y: 0.3, z: 0}
   distanceThreshold: 0.001
 --- !u!4 &1162779722
 Transform:
