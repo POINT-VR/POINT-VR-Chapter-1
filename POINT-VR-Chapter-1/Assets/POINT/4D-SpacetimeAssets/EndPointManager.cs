@@ -14,6 +14,12 @@ public class EndPointManager : MonoBehaviour
     [SerializeField]
     private DynamicAxis dynamicAxisPrefab;
 
+    [Header("Endpoint guiding arrow")]
+    [SerializeField] private GameObject examplePathEndpointContainer = null;
+    [SerializeField] private SpriteRenderer arrowSpriteRenderer = null;
+    [SerializeField] private Vector3 arrowPosOffset = Vector3.zero;
+    [SerializeField] private float distanceThreshold = 0.001f;
+
     /// <summary>
     /// The mass object which snaps to endpoints
     /// </summary>
@@ -43,10 +49,13 @@ public class EndPointManager : MonoBehaviour
     /// </summary>
     private float dist = 1.0f;
 
+    /// <summary>
+    /// The current index of the endpoint that the player is at, if they are following the example path (set to -1 otherwise)
+    /// </summary>
+    private int currentExamplePathIndex = 0;
+
     private bool isActive = false;
-
     private bool pathDone = false;
-
     private bool moveLimit = false;
     private bool inRange = true;
 
@@ -78,6 +87,23 @@ public class EndPointManager : MonoBehaviour
                 if (pos != new Vector3(0,0,0) || endPath.Count > 0) // Adds endpoint to endPath list if it is triggered and is not the origin in the beginning
                 {
                     endPath.Add(new Vector3((int) (M.Round(pos.x)), (int) (M.Round(pos.y)), (int) (M.Round(pos.z))));
+                }                
+                if (comparePoints.Count < 1 && currentExamplePathIndex >= 0 && examplePathEndpointContainer != null && currentExamplePathIndex < examplePathEndpointContainer.transform.childCount) // Check if endpoint is next in example path on first iteration (for arrow display)
+                {
+                    if (Vector3.Distance(endPoint.transform.position, examplePathEndpointContainer.transform.GetChild(currentExamplePathIndex).position) < distanceThreshold)
+                    {
+                        currentExamplePathIndex += 1;
+                        if (arrowSpriteRenderer != null && currentExamplePathIndex < examplePathEndpointContainer.transform.childCount)
+                        {
+                            arrowSpriteRenderer.transform.position = examplePathEndpointContainer.transform.GetChild(currentExamplePathIndex).transform.position;
+                            arrowSpriteRenderer.transform.position += arrowPosOffset;
+                        }
+                    }
+                    else
+                    {
+                        currentExamplePathIndex = -1;
+                        arrowSpriteRenderer.gameObject.SetActive(false);
+                    }
                 }
                 if (comparePoints.Count >= 1 && endPath.Count >= 1 && moveLimit == false) // Makes sure comparison is only done on the second go-through, and when
                 {                                                                        // the player has not had their previous run go over 12 moves, if it has
@@ -178,12 +204,23 @@ public class EndPointManager : MonoBehaviour
         endPath = new List<Vector3>();
         Spawn();
         isActive = true;
+
+        if (comparePoints.Count < 1 && examplePathEndpointContainer != null && arrowSpriteRenderer != null)
+        {
+            arrowSpriteRenderer.gameObject.SetActive(true);
+            arrowSpriteRenderer.transform.position = examplePathEndpointContainer.transform.GetChild(currentExamplePathIndex).transform.position;
+            arrowSpriteRenderer.transform.position += arrowPosOffset;
+        }
     }
 
     public void Deactivate()
     {
         Destroy();
         isActive = false;
+        if (arrowSpriteRenderer != null)
+        {
+            arrowSpriteRenderer.gameObject.SetActive(false);
+        }
     }
 
     public void SetMass(GameObject obj)
