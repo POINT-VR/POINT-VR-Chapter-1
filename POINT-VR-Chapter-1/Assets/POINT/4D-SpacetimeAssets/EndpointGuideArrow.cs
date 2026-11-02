@@ -38,7 +38,6 @@ public class EndpointGuideArrow : MonoBehaviour
                 Vector3 right = Vector3.Cross(Vector3.up, back).normalized;
 
                 Vector3 refPos = currentEndpointPos + arrowPosOffset * (right + Vector3.up);
-                Debug.Log(refPos);
                 this.transform.position = refPos;
                 this.transform.LookAt(cameraContainer.transform, Vector3.Cross(cameraPos - refPos, currentEndpointPos - refPos));
 
