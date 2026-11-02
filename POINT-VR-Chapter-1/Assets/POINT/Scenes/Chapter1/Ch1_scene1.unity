@@ -3926,6 +3926,7 @@ MonoBehaviour:
   nextSceneButton: {fileID: 487090087}
   examplePath: {fileID: 982477343}
   finalCoordsText: {fileID: 605576150}
+  endpointContainer: {fileID: 1015672846}
   floor: {fileID: 1337579472}
   staticGrid: {fileID: 528649007}
   deformationGrid: {fileID: 1048417518}

@@ -14,6 +14,7 @@ public class Scene1Manager : MonoBehaviour
     [SerializeField] private GameObject nextSceneButton;
     [SerializeField] private GameObject examplePath;
     [SerializeField] private TMP_Text finalCoordsText;
+    [SerializeField] private GameObject endpointContainer;
 
     [Header("Grid Animation references")]
     [Tooltip("The floor of the simulation")]
@@ -278,18 +279,27 @@ public class Scene1Manager : MonoBehaviour
         if (endPointManager.limitReached() == false) {
             secondPath.SetActive(true);
         }
-        for (int i = 0; i < 13; i++) 
+        for (int i = 0; i < examplePath.transform.childCount; i++) 
         {
             // Diverting back to normal path if the player takes more than 12 steps
             if (endPointManager.limitReached() == true) {
                 break;
             }
-            if (i != 5 && i != 6) 
+
+            // Disables everything but the final endpoint and final coordinates
+            examplePath.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        finalCoordsText.gameObject.SetActive(true);
+        if (endpointContainer != null)
+        {
+            endpointContainer.SetActive(true);
+            for (int i = 0; i < endpointContainer.transform.childCount; ++i)
             {
-                // disables everything but the final endpoint and final coordinates
-                examplePath.transform.GetChild(i).gameObject.SetActive(false);
+                endpointContainer.transform.GetChild(i).gameObject.SetActive(i == endpointContainer.transform.childCount - 1);
             }
         }
+
         // Waits for the desired location to be reached again
         yield return new WaitForSecondsRealtime(1);
         yield return new WaitUntil(() => endPointManager.Status() == false);
