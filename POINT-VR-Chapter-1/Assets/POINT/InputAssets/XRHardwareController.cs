@@ -48,6 +48,8 @@ public class XRHardwareController : MonoBehaviour
     /// Public property that exposes flag for haptics to UI events.
     /// </summary>
     public bool HapticsEnabled { get { return hapticsEnabled; } set { hapticsEnabled = value; } }
+    private PCPortManager pcPortManager = null;
+    private PauseController pauseController = null;
     /// <summary>
     /// Assigns input actions and locates the connected hardware device associated with this instance
     /// </summary>
@@ -121,7 +123,32 @@ public class XRHardwareController : MonoBehaviour
     {
         if (hardwareType == Hardware.Headset) //Only the headset will update in LateUpdate()
         {
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+            if (pauseController == null)
+            {
+                pauseController = this.transform.GetComponentInParent<PauseController>();
+            }
+
+            if (!pauseController.GamePaused)
+            {
+                if (pcPortManager == null)
+                {
+                    pcPortManager = this.transform.GetComponentInParent<PCPortManager>();
+                }
+
+                Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+                float rotationX = mouseDelta.y * Time.deltaTime * pcPortManager.CameraSens;
+                float rotationY = mouseDelta.x * Time.deltaTime * pcPortManager.CameraSens;
+                this.transform.Rotate(Vector3.left, rotationX); // "looking up and down"
+
+                if (pcPortManager.transform.parent)
+                {
+                    pcPortManager.transform.parent.Rotate(Vector3.up, rotationY); // "looking left and right"
+                }
+            }
+#else
             UpdateHardware();
+#endif
         }
     }
     /// <summary>

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PointGridGenerator : MonoBehaviour
 {
-    private Camera currentCamera = null;
     public int radius;
     public int density;
     public float size;
@@ -19,12 +18,7 @@ public class PointGridGenerator : MonoBehaviour
 
     IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
-
-        // Start camera initialization
-        currentCamera = Camera.current;
-        //player = currentCamera.transform.parent.gameObject;
-
+        yield return new WaitUntil(() => Camera.main != null);
         yield break;
     }
 
@@ -52,7 +46,7 @@ public class PointGridGenerator : MonoBehaviour
                     
                     obj.transform.parent = transform;
                     obj.transform.localScale = obj.transform.localScale * size;
-                    //obj.transform.position = currentCamera.transform.position + new Vector3(1, 0, 0) * (d + 1) * density
+                    //obj.transform.position = mainCamera.transform.position + new Vector3(1, 0, 0) * (d + 1) * density
                     //    + new Vector3(0, 1, 0) * (i + 1) * density + new Vector3(0, 0, 1) * (j + 1) * density;
 
                     // First vector3 is starting position
@@ -84,7 +78,7 @@ public class PointGridGenerator : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaitForPlayerSpawn()); // Fix camera spawning, currently currentCamera does not set
+        StartCoroutine(WaitForPlayerSpawn());
         is_show = false;
         objs = new List<GameObject>();
 
@@ -114,7 +108,7 @@ public class PointGridGenerator : MonoBehaviour
             int dd = (int)(i / (2 * radius * 2 * radius));
             int ii = (int)((i - dd * (2 * radius * 2 * radius)) / (2 * radius));
             int jj = (int)(i - dd * (2 * radius * 2 * radius) - ii * (2 * radius));
-            //org_pos = currentCamera.transform.position + new Vector3(1, 0, 0) * (dd + 1 - radius) * density
+            //org_pos = mainCamera.transform.position + new Vector3(1, 0, 0) * (dd + 1 - radius) * density
             //            + new Vector3(0, 1, 0) * (ii + 1 - radius) * density + new Vector3(0, 0, 1) * (jj + 1 - radius) * density;
             org_pos = new Vector3(0, 0, 0) + new Vector3(1, 0, 0) * (dd + 1 - radius) * density + new Vector3(0, 1, 0) * (ii + 1 - radius) * density + new Vector3(0, 0, 1) * (jj + 1 - radius) * density;
 

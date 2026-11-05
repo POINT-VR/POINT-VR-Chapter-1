@@ -27,7 +27,7 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
     private string objective4string;
 
     // Cache
-    private Camera currentCamera = null;
+    private Camera mainCamera = null;
     private GameObject player = null;
     private GameObject menus = null;
     private GameObject buttons = null;
@@ -48,11 +48,11 @@ public class ConfDemo_part1_one_mass_y_manager : MonoBehaviour
 
     private IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
+        yield return new WaitUntil(() => Camera.main != null);
 
         // Start menu initialization
-        currentCamera = Camera.current;
-        player = currentCamera.transform.parent.gameObject;
+        mainCamera = Camera.main;
+        player = mainCamera.transform.parent.gameObject;
 
         StartCoroutine(StartScene());
     }

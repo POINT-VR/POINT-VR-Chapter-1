@@ -49,7 +49,7 @@ public class Scene1Manager : MonoBehaviour
     private string objectiveThreeString;
     private string objectiveFourString;
 
-    private Camera currentCamera = null;
+    private Camera mainCamera = null;
     private GameObject player = null;
     private UIManager uiManager = null;
     private GameObject examplePath = null;
@@ -87,9 +87,9 @@ public class Scene1Manager : MonoBehaviour
 
     private void Update()
     {
-        if (currentCamera != null)
+        if (mainCamera != null)
         {
-            Shader.SetGlobalVector("Grid_Player_Position", currentCamera.transform.position);
+            Shader.SetGlobalVector("Grid_Player_Position", mainCamera.transform.position);
         }
     }
 
@@ -153,10 +153,10 @@ public class Scene1Manager : MonoBehaviour
     }
     private IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
+        yield return new WaitUntil(() => Camera.main != null);
 
-        currentCamera = Camera.current;
-        player = currentCamera.transform.parent.gameObject;
+        mainCamera = Camera.main;
+        player = mainCamera.transform.parent.gameObject;
         uiManager = player.GetComponentInChildren<UIManager>(true);
 
         yield break;

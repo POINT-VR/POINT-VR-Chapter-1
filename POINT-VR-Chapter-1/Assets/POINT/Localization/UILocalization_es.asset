@@ -242,7 +242,7 @@ MonoBehaviour:
     m_Localized: "A Kristen Schumacher le gustar\xEDa reconocer que este material
       se basa en obras apoyadas por el Programa de Becas para la Investigaci\xF3n
       Graduada de la Fundaci\xF3n Nacional para la Ciencia, bajo la beca n\xFAmero
-      DGE \u2013 1746047.\n\nLos auriculares de NCSA: Los auriculares de realidad
+      DGE \u2013 1746047.\r\n\r\nLos auriculares de NCSA: Los auriculares de realidad
       virtual fueron prove\xEDdos en parte por Nicol\xE1s Yunes a trav\xE9s de la
       beca de la Fundaci\xF3n Nacional para la Ciencia n\xFAmero PHY-2207650 y en
       parte por el proyecto El Mapeado para la Energ\xEDa Oscura. El Mapeado para
@@ -338,6 +338,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14157442518650882
     m_Localized: "\xA1Enhorabuena! La simulaci\xF3n ha terminado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81435950286147584
+    m_Localized: Puedes girar tu mirada con el mouse. Lo trata ahora.
     m_Metadata:
       m_Items: []
   references:

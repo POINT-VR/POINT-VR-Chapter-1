@@ -73,9 +73,9 @@ public class HighlightManager : MonoBehaviour
         if (cameraTransform != null)
         {
             this.transform.LookAt(cameraTransform);
-        } else if (Camera.current != null)
+        } else if (Camera.main != null)
         {
-            cameraTransform = Camera.current.transform;
+            cameraTransform = Camera.main.transform;
         }
 
         // Note: thumbstick input has to be read manually due to thumbstickTouched and thumbstickClicked

@@ -239,13 +239,14 @@ MonoBehaviour:
   - m_Id: 13788494816120832
     m_Localized: "Kristen Schumacher would like to acknowledge that this material
       is based upon work supported by the National Science Foundation Graduate Research
-      Fellowship Program under Grant No. DGE \u2013 1746047.\n\nNCSA headsets: Virtual
-      reality headsets were provided in part by Nicol\xE1s Yunes through the National
-      Science Foundation (NSF) Grant No. PHY-2207650 and in part by the Dark Energy
-      Survey project. The Dark Energy Survey project is supported by National Science
-      Foundation grant AST- 1536171. Any opinions, findings, conclusions or recommendations
-      expressed in this material are those of the developers and do not necessarily
-      reflect the views of the National Science Foundation."
+      Fellowship Program under Grant No. DGE \u2013 1746047.\r\n\r\nNCSA headsets:
+      Virtual reality headsets were provided in part by Nicol\xE1s Yunes through
+      the National Science Foundation (NSF) Grant No. PHY-2207650 and in part by
+      the Dark Energy Survey project. The Dark Energy Survey project is supported
+      by National Science Foundation grant AST- 1536171. Any opinions, findings,
+      conclusions or recommendations expressed in this material are those of the
+      developers and do not necessarily reflect the views of the National Science
+      Foundation."
     m_Metadata:
       m_Items: []
   - m_Id: 13788494849675264
@@ -333,6 +334,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14157442518650882
     m_Localized: Congratulations! The simulation is over.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81435950286147584
+    m_Localized: You can rotate your view by using the mouse. Try it now.
     m_Metadata:
       m_Items: []
   references:

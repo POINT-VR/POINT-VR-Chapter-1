@@ -50,15 +50,30 @@ public class PauseController : MonoBehaviour
     /// Set to reduce the visibility of the laser clipping through the menu
     /// </summary>
     [SerializeField] float reducedLaserSize;
+
     private bool gamePaused;
+    public bool GamePaused
+    {
+        get
+        {
+            return gamePaused;
+        }
+    }
+
+    private PCPortManager pcPortManager = null;
     private float laserSize;
     private GameObject[] disabledObjects;
+
     private void OnEnable()
     {
         toggleReference.action.Enable();
         toggleReference.action.started += Toggle;
         laserSize = laserLeft.localScale.y;
         gamePaused = false;
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+        Cursor.lockState = CursorLockMode.Locked;
+        pcPortManager = this.GetComponent<PCPortManager>();
+#endif
     }
 
     private void Toggle(InputAction.CallbackContext ctx)
@@ -81,7 +96,7 @@ public class PauseController : MonoBehaviour
         }
         foreach (GameObject g in gameObjects)
         {
-            if (!g.CompareTag("Player"))
+            if (!g.CompareTag("Player") && !g.CompareTag("MainCamera"))
             {
                 g.SetActive(gamePaused);
             }
@@ -93,11 +108,26 @@ public class PauseController : MonoBehaviour
         if (gamePaused)
         {
             uiContainer.transform.SetParent(transform.parent);
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+            Cursor.lockState = CursorLockMode.None;
+            if (pcPortManager != null)
+            {
+                pcPortManager.SetCrossHairVisible(false);
+            }
+#endif
         }
         else
         {
             uiContainer.transform.SetParent(mainCamera);
             uiContainer.transform.SetPositionAndRotation(mainCamera.position + mainCamera.forward * distanceFromCamera, mainCamera.rotation);
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+            uiContainer.transform.SetPositionAndRotation((mainCamera.position + mainCamera.forward * distanceFromCamera) + pcPortManager.UiOffset, mainCamera.rotation);
+            Cursor.lockState = CursorLockMode.Locked;
+            if (pcPortManager != null)
+            {
+                pcPortManager.SetCrossHairVisible(true);
+            }
+#endif
         }
     }
     private void OnDisable()

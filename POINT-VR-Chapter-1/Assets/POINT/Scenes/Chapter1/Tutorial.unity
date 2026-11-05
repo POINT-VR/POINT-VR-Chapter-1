@@ -1301,6 +1301,12 @@ MonoBehaviour:
   pushPullSprite: {fileID: 21300000, guid: 2794dcc9276180f458bd4f06cb95a104, type: 3}
   overSprite: {fileID: 0}
   menuSprite: {fileID: 21300000, guid: 5bce63427ab351e4e9b962dfbe84291f, type: 3}
+  pcTeleportationSprite: {fileID: 21300000, guid: b2e063dfe2b69fb4893ed3017c0f6fc8,
+    type: 3}
+  pcTurnSprite: {fileID: 21300000, guid: 5a61af3d08cea6446a95acb44a009d24, type: 3}
+  pcGrabSprite: {fileID: 21300000, guid: 5cc0ec55a5281584287de01f5e475294, type: 3}
+  pcPushPullSprite: {fileID: 21300000, guid: 855f2f320bf56c347a67b1809b3923b4, type: 3}
+  pcMenuSprite: {fileID: 21300000, guid: 0ae9fe23a38e39f4fa6fd02e00d8d49c, type: 3}
   teleportationText:
     m_TableReference:
       m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
@@ -1360,6 +1366,15 @@ MonoBehaviour:
       m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
     m_TableEntryReference:
       m_KeyId: 13443997431271430
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  pcTurnText:
+    m_TableReference:
+      m_TableCollectionName: GUID:ea97502b36f6cd149b6a571be6e2583f
+    m_TableEntryReference:
+      m_KeyId: 81435950286147584
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

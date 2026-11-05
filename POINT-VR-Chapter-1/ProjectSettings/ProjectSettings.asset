@@ -866,7 +866,9 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLWasmStreaming: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: IS_NOT_USING_OCULUS_LINK
+    7: IS_NOT_USING_OCULUS_LINK
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

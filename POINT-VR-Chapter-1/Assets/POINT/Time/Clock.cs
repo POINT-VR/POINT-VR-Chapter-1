@@ -97,8 +97,8 @@ public class Clock : MonoBehaviour
 
     IEnumerator WaitForPlayerSpawn()
     {
-        yield return new WaitUntil(() => Camera.current != null);
-        Camera.current.transform.GetComponentInChildren<UIManager>(true).AddToFunctionalAudio(audioSource); // add clock audio to functional audio for sliders
+        yield return new WaitUntil(() => Camera.main != null);
+        Camera.main.transform.GetComponentInChildren<UIManager>(true).AddToFunctionalAudio(audioSource); // add clock audio to functional audio for sliders
         yield break;
     }
 }
