@@ -118,7 +118,7 @@ public class HandController : MonoBehaviour
         laserColor = laser.material.color;
         pcPortManager = this.transform.parent.parent.GetComponent<PCPortManager>();
         playerCamera = this.transform.parent.parent.GetComponentInChildren<Camera>();
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         if (playerCamera != null)
         {
             this.transform.parent.parent = playerCamera.transform; // Parent hands to camera
