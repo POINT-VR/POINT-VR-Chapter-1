@@ -123,7 +123,7 @@ public class XRHardwareController : MonoBehaviour
     {
         if (hardwareType == Hardware.Headset) //Only the headset will update in LateUpdate()
         {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
             if (pauseController == null)
             {
                 pauseController = this.transform.GetComponentInParent<PauseController>();

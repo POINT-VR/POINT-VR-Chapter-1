@@ -286,7 +286,7 @@
                 {
                     "name": "",
                     "id": "651812e0-84ce-4005-9225-9c66d5751607",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
