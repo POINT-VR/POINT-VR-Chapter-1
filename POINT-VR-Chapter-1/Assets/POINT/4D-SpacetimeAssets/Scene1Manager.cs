@@ -207,6 +207,7 @@ public class Scene1Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(15);
         //EndPoint stuff goes here
         massObject.transform.position = new Vector3(0, 0, 0);
+        massObject.transform.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.Activate();
         examplePath.SetActive(true);
@@ -229,6 +230,7 @@ public class Scene1Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(4);
         // Endpoint manager activated again, retrieved endpoint path given as example path to 
         massObject.transform.position = new Vector3(0, 0, 0);
+        massObject.transform.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         endPointManager.SetMass(massObject.gameObject);
         endPointManager.setComparisonPath(savedPath);
         endPointManager.Activate();
