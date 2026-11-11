@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class EndCreditsManager : MonoBehaviour
 {
     // Rich text tags for different classes of text
@@ -37,6 +36,9 @@ public class EndCreditsManager : MonoBehaviour
         public string[] names;
     }
     #endregion
+
+    [Tooltip("Default localized string that appears under current objective in the UI menu")]
+    [SerializeField] private UnityEngine.Localization.LocalizedString defaultObjective;
 
     [Header("Credits Segments")]
     [Tooltip("The GameObject containing all components for the funding acknowledgements section")]
@@ -95,6 +97,7 @@ public class EndCreditsManager : MonoBehaviour
     {
         yield return WaitForPlayerSpawn();
 
+        player.transform.parent.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(defaultObjective);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("temporary_ending_2");
 
         if (fundingAcknowledgements != null)

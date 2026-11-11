@@ -118,7 +118,7 @@ public class HandController : MonoBehaviour
         laserColor = laser.material.color;
         pcPortManager = this.transform.parent.parent.GetComponent<PCPortManager>();
         playerCamera = this.transform.parent.parent.GetComponentInChildren<Camera>();
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         if (playerCamera != null)
         {
             this.transform.parent.parent = playerCamera.transform; // Parent hands to camera
@@ -165,7 +165,7 @@ public class HandController : MonoBehaviour
             grabbingTransformPositionPrev = grabbingTransform.position;
         }
         // Fires a raycast that places the reticle
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         Ray camRay = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         Physics.Raycast(camRay, out RaycastHit hit, teleportationDistance, floorMask);
 #else
@@ -184,7 +184,7 @@ public class HandController : MonoBehaviour
             transform.GetComponent<Animator>().SetBool("isPointing", false);
         }
         //Searches for UI or grabbable
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         if (Physics.Raycast(camRay, out hit, 10f, UIMask)) // UI was detected: interact with it
         {
 #else
@@ -202,7 +202,7 @@ public class HandController : MonoBehaviour
                 ScrollRect scrollRect = hit.collider.GetComponentInParent<ScrollRect>();
                 if (scrollRect != null)
                 {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
                     RaycastHit[] raycastHits = Physics.RaycastAll(camRay, 10f, UIMask);
 #else
                     RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, transform.forward, 10f, UIMask);
@@ -218,7 +218,7 @@ public class HandController : MonoBehaviour
                     }
                     if (containsScrollRect)
                     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
                         pcPortManager.SetCrossHairFocused(true);
                         pcPortManager.SetCrossHairColor(Color.green);
 #else
@@ -228,7 +228,7 @@ public class HandController : MonoBehaviour
                     }
                 } else
                 {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
                     pcPortManager.SetCrossHairFocused(true);
                     pcPortManager.SetCrossHairColor(Color.green);
 #else
@@ -239,7 +239,7 @@ public class HandController : MonoBehaviour
             }
             else
             {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
                 pcPortManager.SetCrossHairFocused(false);
                 pcPortManager.SetCrossHairColor(Color.white);
 #else
@@ -257,7 +257,7 @@ public class HandController : MonoBehaviour
                 CheckScrollbar(hit);
             }
         }
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         else if (grabbingTransform != null || Physics.Raycast(camRay, out hit, grabDistance, grabMask)) //grabbable found or is holding something: turn this cyan
         {
 #else
@@ -268,7 +268,7 @@ public class HandController : MonoBehaviour
                 hardwareController.VibrateHand();
             }
 #endif
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
             pcPortManager.SetCrossHairFocused(true);
             pcPortManager.SetCrossHairColor(Color.magenta);
 #else
@@ -285,7 +285,7 @@ public class HandController : MonoBehaviour
         }
         else // UI or grabbable not found: return the laser to its normal color
         {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
             pcPortManager.SetCrossHairFocused(false);
             pcPortManager.SetCrossHairColor(Color.white);
 #else
@@ -338,7 +338,7 @@ public class HandController : MonoBehaviour
         // Add velocity to grabbed object.
         if (!snapped)
         {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
             grabbingTransform.GetComponent<Rigidbody>().velocity = 30.0f * (grabbingTransformVelocity + velocityPrev);
 #else
             grabbingTransform.GetComponent<Rigidbody>().velocity = 2.5f * hardwareController.Velocity;
@@ -353,7 +353,7 @@ public class HandController : MonoBehaviour
     }
     private void Grab(InputAction.CallbackContext ctx)
     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         Ray camRay = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         Physics.Raycast(camRay, out RaycastHit hit, grabDistance, grabMask);
 #else
@@ -394,7 +394,7 @@ public class HandController : MonoBehaviour
     /// <param name="ctx"></param>
     private void Select(InputAction.CallbackContext ctx)
     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         Ray uiRay = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(uiRay, out RaycastHit hit, 10f, UIMask)) // UI was detected: interact with it
         {
@@ -407,7 +407,7 @@ public class HandController : MonoBehaviour
             ScrollRect scrollRect = hit.collider.GetComponentInParent<ScrollRect>();
             if (scrollRect != null)
             {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
                 RaycastHit[] raycastHits = Physics.RaycastAll(uiRay, 10f, UIMask);
 #else
                 RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, transform.forward, 10f, UIMask);
@@ -444,7 +444,7 @@ public class HandController : MonoBehaviour
     private void Unselect(InputAction.CallbackContext ctx)
     {
         holdingSlider = false;
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         if (teleportMode && Physics.Raycast(playerCamera.ViewportPointToRay(0.5f * Vector2.one), out RaycastHit hit, teleportationDistance, floorMask)) //Raycast detected the floor: teleport
         {
 #else

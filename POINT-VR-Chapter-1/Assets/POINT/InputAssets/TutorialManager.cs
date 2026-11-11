@@ -60,14 +60,14 @@ public class TutorialManager : MonoBehaviour
     private TMP_Text instructions = null;
     private Camera mainCamera = null;
     private GameObject player = null;
+    private UIManager uiManager = null;
     private bool pushed = false, pulled = false;
     private GameObject menus = null;
     private GameObject buttons = null;
-    private UIManager UIManagerScript = null;
 
     private void OnEnable()
     {
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         // Replace instruction text
         turnText = pcTurnText;
 #endif
@@ -111,7 +111,7 @@ public class TutorialManager : MonoBehaviour
         teleportZone3.SetActive(false);
         SceneUIContainer.SetActive(false);
 
-#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK)
+#if UNITY_STANDALONE || (UNITY_EDITOR && IS_NOT_USING_OCULUS_LINK) || UNITY_WEBGL
         // Replace controller images
         teleportationSprite = pcTeleportationSprite;
         turnSprite = pcTurnSprite;
@@ -141,6 +141,7 @@ public class TutorialManager : MonoBehaviour
         mainCamera = Camera.main;
         this.GetComponent<Canvas>().worldCamera = mainCamera;
         player = mainCamera.transform.parent.gameObject;
+        uiManager = mainCamera.transform.GetComponentInChildren<UIManager>(true);
 
         // player.GetComponent<PauseController>().enabled = false; // This should disable pausing, but it currently soft locks the player from continueing
                                                                // TODO: Disable the Oculus pause to bring up the UI menu
@@ -171,24 +172,25 @@ public class TutorialManager : MonoBehaviour
 
         //Instantiate menus from player prefab and buttons from player prefab as well
         GameObject mainCamera = player.transform.Find("Main Camera").gameObject;
-        GameObject UIContainer = mainCamera.transform.Find("UI Container").gameObject;
-        GameObject Menu = UIContainer.transform.Find("Menu").gameObject;
-        GameObject HeaderButtons = Menu.transform.Find("HeaderButtons").gameObject;
+        GameObject uiContainer = mainCamera.transform.Find("UI Container").gameObject;
+        GameObject menu = uiContainer.transform.Find("Menu").gameObject;
+        GameObject headerButtons = menu.transform.Find("HeaderButtons").gameObject;
         // GameObject HeaderButtons = Menu.transform.Find("Buttons").gameObject; //if testing with emulator use this
-        GameObject menuScreens = Menu.transform.Find("MenuScreens").gameObject;
+        GameObject menuScreens = menu.transform.Find("MenuScreens").gameObject;
 
         menus = menuScreens;
-        buttons = HeaderButtons;
-
-        // Get UI Manager UIManagerScript
-        UIManagerScript = Menu.GetComponent<UIManager>();
+        buttons = headerButtons;
 
         // Turn tutorial
         controlsImage.sprite = turnSprite;
         turnText.RefreshString();
+        UpdateTurnString(turnText.GetLocalizedString());
         instructions.text = turnString;
-        
-        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+
+        if (uiManager != null)
+        {
+            uiManager.UpdateCurrentObjective(turnText);
+        }
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Intro");
 
         StartCoroutine(WaitForTurn());
@@ -201,13 +203,16 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => player.transform.rotation.y != initialRotation);
 
         // Teleportation tutorial
-
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport");
         controlsImage.sprite = teleportationSprite;
         teleportationText.RefreshString();
+        UpdateTeleportationString(teleportationText.GetLocalizedString());
         instructions.text = teleportationString;
 
-        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+        if (uiManager != null)
+        {
+            uiManager.UpdateCurrentObjective(teleportationText);
+        }
 
         StartCoroutine(WaitForTeleport()); 
 
@@ -229,15 +234,20 @@ public class TutorialManager : MonoBehaviour
         teleportZone2.SetActive(false);
         teleportZone3.SetActive(true);
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Teleport_Test_2");
-        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone3.transform.position) <= thresholdDistanceToTeleportZone/3);
+        yield return new WaitUntil(() => Vector3.Distance(player.transform.position, teleportZone3.transform.position) <= thresholdDistanceToTeleportZone / 3);
         teleportZone3.SetActive(false);
 
         // Grab tutorial
         controlsImage.sprite = grabSprite;
         grabText.RefreshString();
+        UpdateGrabString(grabText.GetLocalizedString());
         instructions.text = grabString;
 
-        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+        if (uiManager != null)
+        {
+            uiManager.UpdateCurrentObjective(grabText);
+        }
+
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Grab");
 
         StartCoroutine(WaitForGrab());
@@ -252,9 +262,14 @@ public class TutorialManager : MonoBehaviour
         // Push and pull tutorial
         controlsImage.sprite = pushPullSprite;
         pushPullText.RefreshString();
+        UpdatePushPullString(pushPullText.GetLocalizedString());
         instructions.text = pushPullString;
 
-        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+        if (uiManager != null)
+        {
+            uiManager.UpdateCurrentObjective(pushPullText);
+        }
+
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Push&Pull");
 
         StartCoroutine(WaitForPushPull());
@@ -277,9 +292,14 @@ public class TutorialManager : MonoBehaviour
         // Activate Menu
         controlsImage.sprite = menuSprite;
         openMenuText.RefreshString();
+        UpdateOpenMenuString(openMenuText.GetLocalizedString());
         instructions.text = openMenuString;
 
-        player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+        if (uiManager != null)
+        {
+            uiManager.UpdateCurrentObjective(openMenuText);
+        }
+
         player.GetComponent<NarrationManager>().PlayClipWithSubtitles("Tutorial\\Tutorial_Menu_Open");
 
         StartCoroutine(WaitForMenuPopup());
@@ -312,8 +332,8 @@ public class TutorialManager : MonoBehaviour
         //controlsImage.sprite = overSprite;
         //controlsImage.GetComponent<Image>().color = new Color32(255,255,255,0); // Makes image transparent, need to undone to controls image later
 
-        UIManagerScript.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
-        UIManagerScript.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
+        uiManager.ActivateMenu(menus.transform.Find("ControlsMenu").gameObject); //Activate Menus and Buttons
+        uiManager.ActivateButton(buttons.transform.Find("ControlsButton").gameObject);
 
         AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
 
@@ -329,8 +349,8 @@ public class TutorialManager : MonoBehaviour
         //Waiting until player opens menu + explicit press of left menu control
         yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
 
-        UIManagerScript.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
-        UIManagerScript.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
+        uiManager.ActivateMenu(menus.transform.Find("GeneralMenu").gameObject); //Activate Menus and Buttons
+        uiManager.ActivateButton(buttons.transform.Find("GeneralButton").gameObject);
 
         AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
 
@@ -346,8 +366,8 @@ public class TutorialManager : MonoBehaviour
         //Waiting until player opens menu + explicit press of left menu control
         yield return new WaitUntil(() => openMenuReference && menus.activeInHierarchy == true);
 
-        UIManagerScript.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
-        UIManagerScript.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
+        uiManager.ActivateMenu(menus.transform.Find("ScenesMenu").gameObject); //Activate Menus and Buttons
+        uiManager.ActivateButton(buttons.transform.Find("ScenesButton").gameObject);
 
         AudioListener.pause = false; // Temporary fix to make the audio play when the game is in a paused state
 
@@ -356,6 +376,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(11); // Set to the audio file above's duration in seconds 
 
         overText.RefreshString();
+        UpdateOverString(overText.GetLocalizedString());
         instructions.text = overString;
         SceneUIContainer.SetActive(true);
 
@@ -395,10 +416,10 @@ public class TutorialManager : MonoBehaviour
     {
         if (instructions != null)
         {
-            if (instructions.text == teleportationString)
+            if (instructions.text == teleportationString && uiManager != null)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+                uiManager.UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -411,10 +432,10 @@ public class TutorialManager : MonoBehaviour
     {
         if (instructions != null)
         {
-            if (instructions.text == turnString)
+            if (instructions.text == turnString && uiManager != null)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+                uiManager.UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -427,10 +448,10 @@ public class TutorialManager : MonoBehaviour
     {
         if (instructions != null)
         {
-            if (instructions.text == grabString)
+            if (instructions.text == grabString && uiManager != null)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+                uiManager.UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -443,10 +464,10 @@ public class TutorialManager : MonoBehaviour
     {
         if (instructions != null)
         {
-            if (instructions.text == pushPullString)
+            if (instructions.text == pushPullString && uiManager != null)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+                uiManager.UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -459,10 +480,10 @@ public class TutorialManager : MonoBehaviour
     {
         if (instructions != null)
         {
-            if (instructions.text == overString)
+            if (instructions.text == overString && uiManager != null)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+                uiManager.UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -475,10 +496,10 @@ public class TutorialManager : MonoBehaviour
     {
         if (instructions != null)
         {
-            if (instructions.text == menuString)
+            if (instructions.text == menuString && uiManager != null)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+                uiManager.UpdateCurrentObjective(instructions.text);
             }
             else
             {
@@ -491,10 +512,10 @@ public class TutorialManager : MonoBehaviour
     {
         if (instructions != null)
         {
-            if (instructions.text == openMenuString)
+            if (instructions.text == openMenuString && uiManager != null)
             {
                 instructions.text = s;
-                player.GetComponentInChildren<UIManager>(true).UpdateCurrentObjective(instructions.text);
+                uiManager.UpdateCurrentObjective(instructions.text);
             }
             else
             {
